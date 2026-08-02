@@ -198,10 +198,17 @@
   .result-info{flex:1;min-width:180px;}
   .result-info h4{font-size:15px;font-weight:800;text-transform:uppercase;}
   .result-info .meta{color:var(--slate-500);font-size:12px;margin-top:2px;}
-  .result-price{text-align:right;min-width:150px;}
-  .result-price .total{font-size:20px;font-weight:800;color:var(--navy);}
-  .result-price .base{font-size:12px;color:var(--slate-400);text-decoration:line-through;}
+  .result-price{text-align:right;min-width:230px;}
+  .result-price .base{font-size:12px;color:var(--slate-400);text-decoration:line-through;margin-bottom:2px;}
   .discount-tag{display:inline-block;background:#dcfce7;color:#166534;font-size:11px;font-weight:700;padding:2px 8px;border-radius:99px;margin-bottom:4px;}
+  .price-box{border-radius:10px;padding:8px 12px;margin-bottom:6px;text-align:right;}
+  .price-box .plabel{font-size:10.5px;font-weight:800;letter-spacing:.3px;display:block;}
+  .price-box .pamount{font-size:17px;font-weight:800;}
+  .price-box.special{background:#f59e0b;color:#fff;}
+  .price-box.special .plabel{color:#fff8e1;}
+  .price-box.normal{background:#fff;border:1px solid var(--slate-200);}
+  .price-box.normal .plabel{color:var(--slate-500);}
+  .price-box.normal .pamount{color:var(--navy);font-size:14px;}
   .btn-pay{margin-top:8px;background:var(--accent);color:var(--navy);font-weight:700;padding:9px 18px;border-radius:99px;font-size:13px;}
   .btn-pay:hover{background:var(--accent-dark);}
 
@@ -762,7 +769,9 @@ function renderResults(data, from, to) {
     return;
   }
   searchResults.innerHTML = `<p class="search-msg" style="margin-bottom:6px;">${data.results.length} vehículo(s) disponible(s) del ${from} al ${to}</p>` +
-    data.results.map(v => `
+    data.results.map(v => {
+      const normalPrice = Math.round(v.totalPrice / 0.9); // referencial, no es un medio de pago real — ver nota
+      return `
       <div class="result-card">
         <img src="${v.image}" alt="${v.name}">
         <div class="result-info">
@@ -770,12 +779,19 @@ function renderResults(data, from, to) {
           <p class="meta">${v.category.toUpperCase()} · ${v.days} día(s) · Garantía referencial $${v.deposit.toLocaleString('es-CL')}</p>
         </div>
         <div class="result-price">
-          ${v.discountPct ? `<span class="discount-tag">-${v.discountPct}% reserva anticipada</span><br>` : ''}
-          ${v.discountPct ? `<span class="base">$${v.basePrice.toLocaleString('es-CL')}</span> ` : ''}
-          <div class="total">$${v.totalPrice.toLocaleString('es-CL')}</div>
+          ${v.discountPct ? `<span class="discount-tag">-${v.discountPct}% reserva anticipada</span>` : ''}
+          <div class="price-box special">
+            <span class="plabel">PRECIO ESPECIAL PAGO ADELANTADO</span>
+            <span class="pamount">$${v.totalPrice.toLocaleString('es-CL')}</span>
+          </div>
+          <div class="price-box normal">
+            <span class="plabel">PRECIO NORMAL CON ABONO MÍNIMO ($50.000)</span>
+            <span class="pamount">$${normalPrice.toLocaleString('es-CL')}</span>
+          </div>
           <button class="btn-pay" onclick='openQuoteModal(${JSON.stringify({ id: v.id, name: v.name, totalPrice: v.totalPrice, days: v.days })}, "${from}", "${to}")'>Reservar y Pagar</button>
         </div>
-      </div>`).join('');
+      </div>`;
+    }).join('');
 }
 
 /* ---------- Cotización: servicios adicionales (silla, seguros, etc.) ---------- */
