@@ -1,0 +1,68 @@
+[
+  {
+    "slug": "viento-lateral",
+    "title": "Viento lateral",
+    "description": "El viento patagónico puede alcanzar ráfagas muy fuertes, especialmente en primavera y verano. Sujeta el volante con firmeza, reduce la velocidad y aumenta la distancia con otros vehículos, sobre todo al cruzarte con camiones.",
+    "icon": "wind"
+  },
+  {
+    "slug": "hielo-escarcha",
+    "title": "Hielo y escarcha",
+    "description": "En otoño, invierno y madrugadas frías pueden formarse placas de hielo en la calzada, especialmente en curvas y puentes. Reduce la velocidad, evita frenadas bruscas y aumenta la distancia de seguridad.",
+    "icon": "snowflake"
+  },
+  {
+    "slug": "ripio",
+    "title": "Caminos de ripio",
+    "description": "Varios tramos turísticos de la región no están pavimentados. Conduce a velocidad moderada, evita frenar en curvas y ten precaución con el polvo que generan otros vehículos al adelantar o cruzarte.",
+    "icon": "road"
+  },
+  {
+    "slug": "animales-en-ruta",
+    "title": "Animales en la ruta",
+    "description": "Es común encontrar guanacos, ñandúes y ganado cruzando la carretera, incluso en rutas principales. Mantén la atención, especialmente al atardecer y de noche.",
+    "icon": "paw"
+  },
+  {
+    "slug": "combustible",
+    "title": "Distancia entre estaciones de combustible",
+    "description": "En varios tramos patagónicos la distancia entre estaciones de servicio puede superar los 100 km. Sal siempre con el estanque lleno y planifica tus paradas de combustible.",
+    "icon": "fuel"
+  },
+  {
+    "slug": "conduccion-nocturna",
+    "title": "Conducción nocturna",
+    "description": "Se recomienda evitar conducir de noche en rutas rurales: hay menor señalización, más fauna silvestre cruzando y menor asistencia disponible en caso de imprevistos.",
+    "icon": "moon"
+  },
+  {
+    "slug": "señal-telefonica",
+    "title": "Pérdida de señal telefónica",
+    "description": "En varios tramos de ruta, especialmente entre pasos fronterizos, no hay cobertura de telefonía móvil. Informa tu itinerario a otra persona antes de salir y lleva agua y abrigo adicional.",
+    "icon": "signal"
+  },
+  {
+    "slug": "clima-cambiante",
+    "title": "Cambio repentino del clima",
+    "description": "El clima patagónico puede cambiar en minutos: sol, lluvia, viento y nieve pueden alternarse en un mismo día. Verifica el pronóstico antes de salir y lleva siempre abrigo adicional en el vehículo.",
+    "icon": "cloud"
+  },
+  {
+    "slug": "caminos-no-autorizados",
+    "title": "Caminos no autorizados",
+    "description": "No circules por caminos privados, predios ganaderos o rutas no autorizadas para el vehículo arrendado. Consulta siempre las condiciones del contrato de arriendo.",
+    "icon": "sign"
+  },
+  {
+    "slug": "condiciones-contrato",
+    "title": "Condiciones del contrato de arriendo",
+    "description": "Respeta los límites de circulación, kilometraje y territorios habilitados que indica tu contrato de arriendo. El cruce a Argentina requiere un permiso adicional solicitado con anticipación.",
+    "icon": "document"
+  },
+  {
+    "slug": "accidente-o-panne",
+    "title": "Procedimiento ante accidente, daño o panne",
+    "description": "Detén el vehículo en un lugar seguro, activa las luces de emergencia, no muevas el vehículo si hubo un accidente con terceros y contacta de inmediato a Glaciares Rent a Car mediante el botón de asistencia.",
+    "icon": "alert"
+  }
+]

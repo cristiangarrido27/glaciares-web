@@ -1,0 +1,323 @@
+[
+  {
+    "slug": "punta-arenas-24h",
+    "name": "Punta Arenas en 24 horas",
+    "summary": "Un recorrido corto por la ciudad y sus alrededores inmediatos: costanera, Plaza Muñoz Gamero, Zona Franca y Reserva Nacional Magallanes.",
+    "durationLabel": "1 día",
+    "distanceKm": 40,
+    "drivingTime": "Aproximadamente 1,5 horas de conducción total",
+    "suggestedDeparture": "09:00 hrs",
+    "bordersInvolved": [],
+    "roadType": "pavimentado",
+    "difficulty": "facil",
+    "waypoints": [
+      { "name": "Punta Arenas centro", "coordinates": [-53.1638, -70.9171] },
+      { "name": "Reserva Nacional Magallanes", "coordinates": [-53.1500, -70.9833] },
+      { "name": "Punta Arenas centro", "coordinates": [-53.1638, -70.9171] }
+    ],
+    "stops": [
+      { "name": "Plaza Muñoz Gamero", "type": "atractivo", "note": "Plaza histórica en el centro de la ciudad.", "km": 0 },
+      { "name": "Costanera del Estrecho de Magallanes", "type": "mirador", "note": "Paseo costero con vista al Estrecho.", "km": 2 },
+      { "name": "Reserva Nacional Magallanes", "type": "atractivo", "note": "Bosque subantártico y miradores.", "km": 8 },
+      { "name": "Zona Franca (Zofri Punta Arenas)", "type": "atractivo", "note": "Área comercial de la ciudad.", "km": 6 }
+    ],
+    "warnings": [
+      "Las calles del centro tienen tránsito reducido en el sector histórico; revisa la señalización.",
+      "El acceso a la Reserva Nacional Magallanes puede tener nieve en invierno."
+    ],
+    "lastReviewed": "2026-08-15"
+  },
+  {
+    "slug": "punta-arenas-48h",
+    "name": "Punta Arenas en 48 horas",
+    "summary": "Dos días para conocer la ciudad, Fuerte Bulnes y disfrutar de la gastronomía local con tiempo sin apuro.",
+    "durationLabel": "2 días",
+    "distanceKm": 130,
+    "drivingTime": "Aproximadamente 3 horas de conducción en total, distribuidas en dos días",
+    "suggestedDeparture": "09:00 hrs cada día",
+    "bordersInvolved": [],
+    "roadType": "mixto",
+    "difficulty": "facil",
+    "waypoints": [
+      { "name": "Punta Arenas centro", "coordinates": [-53.1638, -70.9171] },
+      { "name": "Fuerte Bulnes", "coordinates": [-53.6167, -70.9167] },
+      { "name": "Punta Arenas centro", "coordinates": [-53.1638, -70.9171] }
+    ],
+    "stops": [
+      { "name": "Museo Regional de Magallanes", "type": "atractivo", "note": "Día 1: patrimonio histórico de la región.", "km": 0 },
+      { "name": "Fuerte Bulnes", "type": "atractivo", "note": "Día 2: reconstrucción histórica junto al mar.", "km": 60 },
+      { "name": "Puerto del Hambre", "type": "mirador", "note": "Parada en el camino a Fuerte Bulnes.", "km": 55 },
+      { "name": "Restaurantes del centro", "type": "restaurante", "note": "Cena con productos patagónicos.", "km": 0 }
+    ],
+    "warnings": [
+      "El camino a Fuerte Bulnes es parcialmente de ripio; conduce con precaución.",
+      "El viento puede ser intenso en el sector costero."
+    ],
+    "lastReviewed": "2026-08-15"
+  },
+  {
+    "slug": "punta-arenas-fuerte-bulnes",
+    "name": "Punta Arenas y Fuerte Bulnes",
+    "summary": "Excursión de medio día hacia el sur, siguiendo la costa del Estrecho de Magallanes hasta la reconstrucción histórica de Fuerte Bulnes.",
+    "durationLabel": "Medio día",
+    "distanceKm": 120,
+    "drivingTime": "Aproximadamente 2 horas de conducción (ida y vuelta)",
+    "suggestedDeparture": "10:00 hrs",
+    "bordersInvolved": [],
+    "roadType": "mixto",
+    "difficulty": "facil",
+    "waypoints": [
+      { "name": "Punta Arenas", "coordinates": [-53.1638, -70.9171] },
+      { "name": "Puerto del Hambre", "coordinates": [-53.6167, -70.9333] },
+      { "name": "Fuerte Bulnes", "coordinates": [-53.6167, -70.9167] }
+    ],
+    "stops": [
+      { "name": "Puerto del Hambre", "type": "mirador", "note": "Sitio histórico junto al Estrecho de Magallanes.", "km": 55 },
+      { "name": "Fuerte Bulnes", "type": "atractivo", "note": "Reconstrucción del primer asentamiento chileno en la zona.", "km": 60 },
+      { "name": "Baños y cafetería del centro de visitantes", "type": "baño", "note": "Servicios disponibles en el acceso al fuerte.", "km": 60 }
+    ],
+    "warnings": [
+      "Camino con tramos de ripio; reduce la velocidad.",
+      "Sin estaciones de combustible entre Punta Arenas y Fuerte Bulnes: sal con estanque lleno."
+    ],
+    "lastReviewed": "2026-08-15"
+  },
+  {
+    "slug": "punta-arenas-puerto-natales",
+    "name": "Punta Arenas – Puerto Natales",
+    "summary": "La ruta más transitada de la región, totalmente pavimentada, atravesando la estepa patagónica hasta el Seno Última Esperanza.",
+    "durationLabel": "1 día (ida) o ida y vuelta",
+    "distanceKm": 247,
+    "drivingTime": "Aproximadamente 3 horas",
+    "suggestedDeparture": "09:00 hrs",
+    "bordersInvolved": [],
+    "roadType": "pavimentado",
+    "difficulty": "facil",
+    "waypoints": [
+      { "name": "Punta Arenas", "coordinates": [-53.1638, -70.9171] },
+      { "name": "Villa Tehuelche", "coordinates": [-52.4667, -71.0000] },
+      { "name": "Puerto Natales", "coordinates": [-51.7236, -72.5064] }
+    ],
+    "stops": [
+      { "name": "Villa Tehuelche", "type": "combustible", "note": "Localidad intermedia con servicios básicos.", "km": 100 },
+      { "name": "Morro Chico", "type": "mirador", "note": "Formación geológica visible desde la ruta.", "km": 150 },
+      { "name": "Puerto Natales", "type": "restaurante", "note": "Amplia oferta gastronómica de llegada.", "km": 247 }
+    ],
+    "warnings": [
+      "Ruta 9 con viento lateral fuerte en varios tramos, especialmente en primavera y verano.",
+      "Presencia frecuente de fauna silvestre cruzando la ruta (guanacos, ñandúes)."
+    ],
+    "lastReviewed": "2026-08-15"
+  },
+  {
+    "slug": "punta-arenas-torres-del-paine",
+    "name": "Punta Arenas – Torres del Paine",
+    "summary": "El clásico viaje hacia uno de los parques nacionales más espectaculares del planeta, combinando ruta pavimentada y tramos de ripio dentro del parque.",
+    "durationLabel": "1 día (ida) o excursión de día completo",
+    "distanceKm": 310,
+    "drivingTime": "Aproximadamente 4,5 a 5 horas",
+    "suggestedDeparture": "07:00 hrs",
+    "bordersInvolved": [],
+    "roadType": "mixto",
+    "difficulty": "moderado",
+    "waypoints": [
+      { "name": "Punta Arenas", "coordinates": [-53.1638, -70.9171] },
+      { "name": "Puerto Natales", "coordinates": [-51.7236, -72.5064] },
+      { "name": "Parque Nacional Torres del Paine", "coordinates": [-50.9423, -73.0000] }
+    ],
+    "stops": [
+      { "name": "Puerto Natales", "type": "combustible", "note": "Última estación de servicio confiable antes del parque.", "km": 247 },
+      { "name": "Portería Sarmiento / Laguna Amarga", "type": "frontera", "note": "Control de acceso e ingreso al parque nacional.", "km": 300 },
+      { "name": "Mirador Lago Pehoé", "type": "mirador", "note": "Vista panorámica de las Torres desde el lago.", "km": 320 }
+    ],
+    "warnings": [
+      "Reabastece combustible en Puerto Natales: dentro del parque no hay estaciones de servicio.",
+      "El ingreso al parque requiere pago de entrada y puede tener aforo limitado en temporada alta.",
+      "Ripio y viento fuerte dentro del parque; reduce la velocidad."
+    ],
+    "lastReviewed": "2026-08-15"
+  },
+  {
+    "slug": "punta-arenas-porvenir",
+    "name": "Punta Arenas – Porvenir",
+    "summary": "Cruce del Estrecho de Magallanes en transbordador hacia Tierra del Fuego, con desembarco en Porvenir.",
+    "durationLabel": "1 día (ida) o ida y vuelta",
+    "distanceKm": null,
+    "drivingTime": "Aproximadamente 2,5 horas de navegación más traslados en tierra",
+    "suggestedDeparture": "Según horario del transbordador",
+    "bordersInvolved": [],
+    "roadType": "mixto",
+    "difficulty": "moderado",
+    "waypoints": [
+      { "name": "Punta Arenas (terminal de transbordadores)", "coordinates": [-53.1638, -70.9171] },
+      { "name": "Cruce marítimo del Estrecho de Magallanes", "coordinates": [-53.2000, -70.6500] },
+      { "name": "Porvenir", "coordinates": [-53.2977, -70.3654] }
+    ],
+    "stops": [
+      { "name": "Terminal de transbordadores de Punta Arenas", "type": "frontera", "note": "Embarque de vehículos; se recomienda reservar con anticipación.", "km": 0 },
+      { "name": "Porvenir", "type": "restaurante", "note": "Localidad con arquitectura patrimonial y oferta gastronómica local.", "km": 0 }
+    ],
+    "warnings": [
+      "Los horarios del transbordador dependen de condiciones climáticas y de marea; pueden cambiar sin aviso previo.",
+      "Se recomienda reservar el pasaje del vehículo con anticipación en temporada alta."
+    ],
+    "lastReviewed": "2026-08-15"
+  },
+  {
+    "slug": "punta-arenas-el-calafate",
+    "name": "Punta Arenas – El Calafate (Argentina)",
+    "summary": "Ruta internacional hacia el Glaciar Perito Moreno, cruzando la frontera chileno-argentina por el paso Cerro Castillo / Cancha Carrera.",
+    "durationLabel": "1 día",
+    "distanceKm": 480,
+    "drivingTime": "Aproximadamente 7 a 8 horas, incluyendo el paso fronterizo",
+    "suggestedDeparture": "06:00 hrs",
+    "bordersInvolved": ["Paso fronterizo Cerro Castillo (Chile) – Cancha Carrera (Argentina)"],
+    "roadType": "mixto",
+    "difficulty": "moderado",
+    "waypoints": [
+      { "name": "Punta Arenas", "coordinates": [-53.1638, -70.9171] },
+      { "name": "Puerto Natales", "coordinates": [-51.7236, -72.5064] },
+      { "name": "Paso Cerro Castillo", "coordinates": [-51.2667, -72.2833] },
+      { "name": "El Calafate", "coordinates": [-50.3379, -72.2648] }
+    ],
+    "stops": [
+      { "name": "Puerto Natales", "type": "combustible", "note": "Última estación de servicio chilena antes de la frontera.", "km": 247 },
+      { "name": "Paso Cerro Castillo / Cancha Carrera", "type": "frontera", "note": "Control migratorio y aduanero entre Chile y Argentina.", "km": 320 },
+      { "name": "El Calafate", "type": "restaurante", "note": "Amplia oferta de alojamiento y gastronomía de llegada.", "km": 480 }
+    ],
+    "warnings": [
+      "Necesitas el permiso de circulación en Argentina emitido por la rent a car, con la patente del vehículo.",
+      "El paso fronterizo tiene horario de atención limitado; verifica el horario vigente antes de viajar.",
+      "Lleva documentos originales del vehículo, seguro y de todos los pasajeros."
+    ],
+    "lastReviewed": "2026-08-15"
+  },
+  {
+    "slug": "punta-arenas-ushuaia",
+    "name": "Punta Arenas – Ushuaia (Argentina)",
+    "summary": "El viaje más largo de la guía: cruza dos veces la frontera chileno-argentina y el Estrecho de Magallanes en transbordador hasta llegar a la ciudad más austral del mundo.",
+    "durationLabel": "1 día completo (recomendado con parada intermedia)",
+    "distanceKm": 590,
+    "drivingTime": "Aproximadamente 10 a 12 horas, incluyendo transbordador y dos pasos fronterizos",
+    "suggestedDeparture": "05:00 a 06:00 hrs",
+    "bordersInvolved": [
+      "Paso fronterizo San Sebastián (Chile) – San Sebastián (Argentina)"
+    ],
+    "roadType": "mixto",
+    "difficulty": "exigente",
+    "waypoints": [
+      { "name": "Punta Arenas", "coordinates": [-53.1638, -70.9171] },
+      { "name": "Cruce Primera Angostura (Bahía Azul)", "coordinates": [-52.4167, -70.0833] },
+      { "name": "San Sebastián (frontera)", "coordinates": [-53.2833, -68.6667] },
+      { "name": "Río Grande, Argentina", "coordinates": [-53.7867, -67.7000] },
+      { "name": "Ushuaia, Argentina", "coordinates": [-54.8019, -68.3030] }
+    ],
+    "stops": [
+      { "name": "Cruce Primera Angostura (Bahía Azul)", "type": "frontera", "note": "Transbordador que cruza el Estrecho de Magallanes hacia Tierra del Fuego.", "km": 140 },
+      { "name": "Paso San Sebastián", "type": "frontera", "note": "Control migratorio y aduanero entre Chile y Argentina.", "km": 280 },
+      { "name": "Río Grande", "type": "combustible", "note": "Ciudad intermedia con servicios completos.", "km": 400 },
+      { "name": "Ushuaia", "type": "restaurante", "note": "Llegada a la ciudad más austral del mundo.", "km": 590 }
+    ],
+    "warnings": [
+      "Considera pernoctar en Río Grande si sales tarde: no se recomienda conducir de noche en este trayecto.",
+      "Necesitas el permiso de circulación en Argentina emitido por la rent a car.",
+      "Los horarios del transbordador en Primera Angostura dependen de la marea y el clima.",
+      "Grandes tramos sin cobertura telefónica entre pasos fronterizos."
+    ],
+    "lastReviewed": "2026-08-15"
+  },
+  {
+    "slug": "patagonia-3-dias",
+    "name": "Ruta Patagonia de 3 días",
+    "summary": "Punta Arenas, Puerto Natales y Torres del Paine en un fin de semana largo. Ideal para quienes disponen de poco tiempo pero no quieren perderse lo esencial.",
+    "durationLabel": "3 días / 2 noches",
+    "distanceKm": 560,
+    "drivingTime": "Aproximadamente 8 horas de conducción distribuidas en 3 días",
+    "suggestedDeparture": "Día 1, 09:00 hrs",
+    "bordersInvolved": [],
+    "roadType": "mixto",
+    "difficulty": "moderado",
+    "waypoints": [
+      { "name": "Punta Arenas", "coordinates": [-53.1638, -70.9171] },
+      { "name": "Puerto Natales", "coordinates": [-51.7236, -72.5064] },
+      { "name": "Torres del Paine", "coordinates": [-50.9423, -73.0000] },
+      { "name": "Puerto Natales", "coordinates": [-51.7236, -72.5064] },
+      { "name": "Punta Arenas", "coordinates": [-53.1638, -70.9171] }
+    ],
+    "stops": [
+      { "name": "Día 1: Punta Arenas → Puerto Natales", "type": "atractivo", "note": "Traslado y pernocte en Puerto Natales.", "km": 247 },
+      { "name": "Día 2: Puerto Natales → Torres del Paine → Puerto Natales", "type": "atractivo", "note": "Día completo en el parque nacional.", "km": 140 },
+      { "name": "Día 3: Puerto Natales → Punta Arenas", "type": "atractivo", "note": "Retorno con paradas fotográficas.", "km": 247 }
+    ],
+    "warnings": [
+      "Reserva alojamiento en Puerto Natales con anticipación en temporada alta.",
+      "Confirma el horario de ingreso al parque y lleva el estanque de combustible lleno."
+    ],
+    "lastReviewed": "2026-08-15"
+  },
+  {
+    "slug": "patagonia-5-dias",
+    "name": "Ruta Patagonia de 5 días",
+    "summary": "Punta Arenas, Fuerte Bulnes, Puerto Natales, Torres del Paine y una jornada libre para disfrutar con más calma o cruzar a El Calafate.",
+    "durationLabel": "5 días / 4 noches",
+    "distanceKm": 900,
+    "drivingTime": "Variable según actividades elegidas",
+    "suggestedDeparture": "Día 1, 09:00 hrs",
+    "bordersInvolved": ["Paso fronterizo Cerro Castillo (Chile) – Cancha Carrera (Argentina), si se agrega El Calafate"],
+    "roadType": "mixto",
+    "difficulty": "moderado",
+    "waypoints": [
+      { "name": "Punta Arenas", "coordinates": [-53.1638, -70.9171] },
+      { "name": "Fuerte Bulnes", "coordinates": [-53.6167, -70.9167] },
+      { "name": "Puerto Natales", "coordinates": [-51.7236, -72.5064] },
+      { "name": "Torres del Paine", "coordinates": [-50.9423, -73.0000] },
+      { "name": "El Calafate", "coordinates": [-50.3379, -72.2648] }
+    ],
+    "stops": [
+      { "name": "Día 1: Punta Arenas y Fuerte Bulnes", "type": "atractivo", "note": "Día introductorio en la región.", "km": 120 },
+      { "name": "Día 2: Punta Arenas → Puerto Natales", "type": "atractivo", "note": "Traslado y tarde libre en Puerto Natales.", "km": 247 },
+      { "name": "Día 3: Torres del Paine", "type": "atractivo", "note": "Día completo en el parque nacional.", "km": 140 },
+      { "name": "Día 4: Puerto Natales → El Calafate", "type": "frontera", "note": "Cruce a Argentina para conocer el Glaciar Perito Moreno.", "km": 330 },
+      { "name": "Día 5: Retorno a Punta Arenas", "type": "atractivo", "note": "Regreso vía Puerto Natales.", "km": 480 }
+    ],
+    "warnings": [
+      "Si cruzas a Argentina necesitas el permiso de circulación emitido por la rent a car.",
+      "Planifica con margen: el clima patagónico puede alterar horarios de traslado."
+    ],
+    "lastReviewed": "2026-08-15"
+  },
+  {
+    "slug": "patagonia-7-dias",
+    "name": "Ruta Patagonia de 7 días",
+    "summary": "El recorrido más completo: Punta Arenas, Fuerte Bulnes, Puerto Natales, Torres del Paine, El Calafate y tiempo adicional para naturaleza, fotografía y descanso.",
+    "durationLabel": "7 días / 6 noches",
+    "distanceKm": 1100,
+    "drivingTime": "Variable según actividades elegidas",
+    "suggestedDeparture": "Día 1, 09:00 hrs",
+    "bordersInvolved": ["Paso fronterizo Cerro Castillo (Chile) – Cancha Carrera (Argentina)"],
+    "roadType": "mixto",
+    "difficulty": "exigente",
+    "waypoints": [
+      { "name": "Punta Arenas", "coordinates": [-53.1638, -70.9171] },
+      { "name": "Fuerte Bulnes", "coordinates": [-53.6167, -70.9167] },
+      { "name": "Puerto Natales", "coordinates": [-51.7236, -72.5064] },
+      { "name": "Torres del Paine", "coordinates": [-50.9423, -73.0000] },
+      { "name": "El Calafate", "coordinates": [-50.3379, -72.2648] },
+      { "name": "Puerto Natales", "coordinates": [-51.7236, -72.5064] },
+      { "name": "Punta Arenas", "coordinates": [-53.1638, -70.9171] }
+    ],
+    "stops": [
+      { "name": "Día 1-2: Punta Arenas y alrededores", "type": "atractivo", "note": "Ciudad, Fuerte Bulnes y Reserva Nacional Magallanes.", "km": 180 },
+      { "name": "Día 3: Puerto Natales", "type": "atractivo", "note": "Traslado y exploración de la ciudad.", "km": 247 },
+      { "name": "Día 4-5: Torres del Paine", "type": "atractivo", "note": "Dos días completos para recorrer el parque con calma.", "km": 280 },
+      { "name": "Día 6: El Calafate", "type": "frontera", "note": "Cruce a Argentina y visita al Glaciar Perito Moreno.", "km": 330 },
+      { "name": "Día 7: Retorno a Punta Arenas", "type": "atractivo", "note": "Regreso con paradas fotográficas finales.", "km": 480 }
+    ],
+    "warnings": [
+      "Verifica el estado de los caminos antes de cada etapa: pueden cambiar por clima.",
+      "Reserva alojamiento y excursiones con anticipación, especialmente en temporada alta.",
+      "Lleva siempre el permiso de circulación en Argentina y documentos del vehículo."
+    ],
+    "lastReviewed": "2026-08-15"
+  }
+]

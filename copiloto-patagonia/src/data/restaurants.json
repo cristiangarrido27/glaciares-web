@@ -1,0 +1,110 @@
+[
+  {
+    "slug": "parrilla-cordero-pa",
+    "name": "Parrilla de cordero patagónico (Punta Arenas centro)",
+    "category": "cordero-patagonico",
+    "city": "Punta Arenas",
+    "description": "Cordero al palo asado a la usanza patagónica, la preparación más tradicional de la Región de Magallanes. Búscalo en las parrillas del centro de Punta Arenas.",
+    "googleMapsUrl": "https://www.google.com/maps/search/?api=1&query=cordero+al+palo+Punta+Arenas",
+    "phone": null,
+    "website": null,
+    "sourceNote": "Categoría gastronómica de ejemplo. Verifica el local, horario y disponibilidad antes de tu visita.",
+    "lastReviewed": "2026-08-15"
+  },
+  {
+    "slug": "marisqueria-centolla-pa",
+    "name": "Marisquería especializada en centolla (Punta Arenas)",
+    "category": "centolla",
+    "city": "Punta Arenas",
+    "description": "La centolla magallánica es uno de los productos estrella de la región, disponible en temporada en marisquerías del centro y la costanera.",
+    "googleMapsUrl": "https://www.google.com/maps/search/?api=1&query=restaurante+centolla+Punta+Arenas",
+    "phone": null,
+    "website": null,
+    "sourceNote": "Categoría gastronómica de ejemplo. La disponibilidad de centolla depende de la veda vigente; verifica antes de tu visita.",
+    "lastReviewed": "2026-08-15"
+  },
+  {
+    "slug": "merluza-austral-pn",
+    "name": "Restaurante de merluza austral (Puerto Natales)",
+    "category": "merluza-austral",
+    "city": "Puerto Natales",
+    "description": "Pescado fresco del Seno Última Esperanza, preparado a la plancha, frito o en caldillo. Disponible en restaurantes junto a la costanera de Puerto Natales.",
+    "googleMapsUrl": "https://www.google.com/maps/search/?api=1&query=merluza+austral+Puerto+Natales",
+    "phone": null,
+    "website": null,
+    "sourceNote": "Categoría gastronómica de ejemplo. Verifica el local y horario antes de tu visita.",
+    "lastReviewed": "2026-08-15"
+  },
+  {
+    "slug": "chupe-centolla-pa",
+    "name": "Chupe de centolla tradicional (Punta Arenas)",
+    "category": "chupe-de-centolla",
+    "city": "Punta Arenas",
+    "description": "Preparación gratinada a base de centolla, pan y queso, un clásico de la cocina magallánica que encontrarás en restaurantes tradicionales de la ciudad.",
+    "googleMapsUrl": "https://www.google.com/maps/search/?api=1&query=chupe+de+centolla+Punta+Arenas",
+    "phone": null,
+    "website": null,
+    "sourceNote": "Categoría gastronómica de ejemplo. Verifica el local y horario antes de tu visita.",
+    "lastReviewed": "2026-08-15"
+  },
+  {
+    "slug": "calafate-sour-bar",
+    "name": "Bar con calafate sour (Punta Arenas)",
+    "category": "calafate-sour",
+    "city": "Punta Arenas",
+    "description": "Coctel patagónico preparado con calafate, la baya silvestre típica de la estepa austral. Disponible en bares y restaurantes del centro.",
+    "googleMapsUrl": "https://www.google.com/maps/search/?api=1&query=calafate+sour+Punta+Arenas",
+    "phone": null,
+    "website": null,
+    "sourceNote": "Categoría gastronómica de ejemplo. Consumo de alcohol con responsabilidad; nunca bebas si vas a conducir.",
+    "lastReviewed": "2026-08-15"
+  },
+  {
+    "slug": "cafeteria-centro-pa",
+    "name": "Cafetería de especialidad (Punta Arenas centro)",
+    "category": "cafeteria",
+    "city": "Punta Arenas",
+    "description": "Cafeterías de barrio cerca de la Plaza Muñoz Gamero, ideales para una parada antes de salir de ruta.",
+    "googleMapsUrl": "https://www.google.com/maps/search/?api=1&query=cafeteria+Punta+Arenas+centro",
+    "phone": null,
+    "website": null,
+    "sourceNote": "Categoría gastronómica de ejemplo. Verifica el local y horario antes de tu visita.",
+    "lastReviewed": "2026-08-15"
+  },
+  {
+    "slug": "comida-rapida-pa",
+    "name": "Comida rápida (Punta Arenas)",
+    "category": "comida-rapida",
+    "city": "Punta Arenas",
+    "description": "Opciones rápidas para viajeros con poco tiempo, disponibles en el centro y accesos principales de la ciudad.",
+    "googleMapsUrl": "https://www.google.com/maps/search/?api=1&query=comida+rapida+Punta+Arenas",
+    "phone": null,
+    "website": null,
+    "sourceNote": "Categoría gastronómica de ejemplo. Verifica el local y horario antes de tu visita.",
+    "lastReviewed": "2026-08-15"
+  },
+  {
+    "slug": "familiar-pn",
+    "name": "Restaurante familiar (Puerto Natales)",
+    "category": "restaurante-familiar",
+    "city": "Puerto Natales",
+    "description": "Locales con menú del día y ambiente tranquilo, buena opción para viajar con niños después de una jornada de ruta.",
+    "googleMapsUrl": "https://www.google.com/maps/search/?api=1&query=restaurante+familiar+Puerto+Natales",
+    "phone": null,
+    "website": null,
+    "sourceNote": "Categoría gastronómica de ejemplo. Verifica el local y horario antes de tu visita.",
+    "lastReviewed": "2026-08-15"
+  },
+  {
+    "slug": "premium-pa",
+    "name": "Restaurante premium de cocina patagónica (Punta Arenas)",
+    "category": "restaurante-premium",
+    "city": "Punta Arenas",
+    "description": "Propuestas gastronómicas de autor con ingredientes locales, ideales para una cena especial en la ciudad.",
+    "googleMapsUrl": "https://www.google.com/maps/search/?api=1&query=restaurante+gourmet+Punta+Arenas",
+    "phone": null,
+    "website": null,
+    "sourceNote": "Categoría gastronómica de ejemplo. Se recomienda reservar con anticipación. Verifica horarios antes de tu visita.",
+    "lastReviewed": "2026-08-15"
+  }
+]

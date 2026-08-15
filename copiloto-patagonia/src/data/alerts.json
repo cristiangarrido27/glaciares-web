@@ -1,0 +1,9 @@
+[
+  {
+    "id": "alert-info-general",
+    "active": true,
+    "severity": "info",
+    "message": "Las condiciones de caminos, horarios de transbordadores y requisitos fronterizos pueden cambiar sin aviso previo. Verifica siempre la información oficial antes de iniciar tu viaje.",
+    "date": "2026-08-15"
+  }
+]

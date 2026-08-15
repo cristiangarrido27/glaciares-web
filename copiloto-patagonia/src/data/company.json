@@ -1,0 +1,21 @@
+{
+  "name": "Glaciares Rent a Car",
+  "slogan": "Patagonia a tu alcance",
+  "appName": "Copiloto Patagonia",
+  "appSlogan": "Tu compañero de ruta en el fin del mundo",
+  "website": "https://www.glaciaresrentacar.cl/",
+  "whatsappAsistencia": "[INGRESAR NÚMERO DE GLACIARES RENT A CAR]",
+  "whatsappReservas": "[INGRESAR NÚMERO]",
+  "correoReservas": "[INGRESAR CORREO]",
+  "direccionEmpresa": "[INGRESAR DIRECCIÓN]",
+  "instagramEmpresa": "[INGRESAR INSTAGRAM]",
+  "services": [
+    "Kilometraje libre dentro de la Región de Magallanes, según condiciones del contrato.",
+    "Asistencia durante el arriendo.",
+    "Entrega coordinada en Punta Arenas.",
+    "Entrega en aeropuerto con cargo adicional.",
+    "Permiso para circular en Argentina sujeto a solicitud y pago.",
+    "Vehículos para parejas, familias y grupos.",
+    "Atención personalizada antes y durante el viaje."
+  ]
+}
