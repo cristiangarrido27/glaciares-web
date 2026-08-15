@@ -58,7 +58,7 @@ export default function Home() {
 
       <section className="relative flex min-h-[560px] items-center overflow-hidden bg-glacial-dark text-white">
         <img
-          src="https://images.unsplash.com/photo-1517783999520-f068d7431a60?auto=format&fit=crop&w=1920&q=70"
+          src="/images/hero-patagonia.jpg"
           alt="Estepa y montañas patagónicas al atardecer"
           className="absolute inset-0 h-full w-full object-cover opacity-50"
           loading="eager"
@@ -155,7 +155,7 @@ export default function Home() {
             </div>
           </div>
           <img
-            src="https://images.unsplash.com/photo-1517783999520-f068d7431a60?auto=format&fit=crop&w=900&q=70"
+            src="/images/hero-patagonia.jpg"
             alt="Estepa y montañas patagónicas, paisaje típico de una ruta en la Región de Magallanes"
             className="hidden h-64 w-full rounded-2xl object-cover lg:block"
             loading="lazy"

@@ -73,8 +73,12 @@ componentes:
 
 Mientras no se completen, la interfaz muestra de forma visible `[COMPLETAR]` en vez de simular datos falsos.
 
-**Fotografías**: se usan imágenes libres de derecho (Unsplash) como referencia, marcadas con `placeholderImage: true`
-en `destinations.json`. Debes reemplazarlas por fotografía propia de Glaciares Rent a Car antes de publicar.
+**Fotografías**: los destinos usan placeholders ilustrados generados localmente (`public/images/destinations/`,
+sin dependencia de servicios externos), marcados con `placeholderImage: true` en `destinations.json`. Se optó por
+generarlos localmente en vez de enlazar fotos de stock externas porque varias fotos de Unsplash referenciadas
+inicialmente no cargaban o no correspondían al lugar. Debes reemplazarlos por fotografía propia de Glaciares Rent
+a Car antes de publicar (basta con sobrescribir los archivos `.jpg` en esa carpeta, manteniendo el mismo nombre
+de archivo por destino, o actualizar el campo `image` en `destinations.json`).
 
 **Logotipo**: por defecto se reutiliza el logo ya publicado en `https://glaciaresrentacar.cl/LOGOSINFONDO.png`
 (usado en `src/components/Header.tsx`). Reemplázalo si tienes una versión más reciente.
@@ -147,8 +151,9 @@ Pasos:
 - **Responsive**: capturas verificadas en viewport móvil (390×844) y escritorio (1440×900)
 - **PWA**: manifest válido servido en `/manifest.webmanifest`, service worker generado (`sw.js`)
 
-> Nota: en el entorno de construcción no hay salida a internet hacia dominios externos (Unsplash, OpenStreetMap,
-> glaciaresrentacar.cl), por lo que las fotografías y los tiles del mapa no pudieron verse en las pruebas locales.
-> Esto es una limitación del entorno de pruebas, no del código: en un despliegue real con acceso a internet
-> cargarán con normalidad. Se recomienda una verificación visual final en Netlify o en `npm run preview` con
-> conexión a internet.
+> Nota: en el entorno de construcción no hay salida a internet hacia dominios externos (OpenStreetMap,
+> glaciaresrentacar.cl), por lo que los tiles del mapa y el logotipo externo no pudieron verse en las pruebas
+> locales. Esto es una limitación del entorno de pruebas, no del código: en un despliegue real con acceso a
+> internet cargarán con normalidad. Las fotografías de destinos ya no dependen de ningún servicio externo (ver
+> sección "Fotografías" más arriba), por lo que no tienen este problema. Se recomienda una verificación visual
+> final en Netlify o en `npm run preview` con conexión a internet.
