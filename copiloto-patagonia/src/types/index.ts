@@ -1,3 +1,6 @@
+export type Lang = 'es' | 'en' | 'pt';
+export type LocalizedText = Record<Lang, string>;
+
 export type RoadType = 'pavimentado' | 'ripio' | 'mixto';
 export type Difficulty = 'facil' | 'moderado' | 'exigente';
 export type TripType =
@@ -12,17 +15,17 @@ export type TripType =
 export interface Destination {
   slug: string;
   name: string;
-  shortDescription: string;
+  shortDescription: LocalizedText;
   image: string;
-  imageAlt: string;
+  imageAlt: LocalizedText;
   placeholderImage: boolean;
   distanceFromPuntaArenasKm: number | null;
-  approxDrivingTime: string;
+  approxDrivingTime: LocalizedText;
   roadType: RoadType;
-  bestSeason: string;
+  bestSeason: LocalizedText;
   fuelAvailable: boolean;
   difficulty: Difficulty;
-  recommendedVehicle: string;
+  recommendedVehicle: LocalizedText;
   googleMapsUrl: string;
   routeSlug: string | null;
   tripTypes: TripType[];
@@ -32,7 +35,7 @@ export interface Destination {
 export interface RouteStop {
   name: string;
   type: 'mirador' | 'restaurante' | 'baño' | 'combustible' | 'atractivo' | 'frontera';
-  note: string;
+  note: LocalizedText;
   km: number | null;
   coordinates?: [number, number];
 }
@@ -45,17 +48,17 @@ export interface RouteWaypoint {
 export interface TravelRoute {
   slug: string;
   name: string;
-  summary: string;
-  durationLabel: string;
+  summary: LocalizedText;
+  durationLabel: LocalizedText;
   distanceKm: number | null;
-  drivingTime: string;
-  suggestedDeparture: string;
-  bordersInvolved: string[];
+  drivingTime: LocalizedText;
+  suggestedDeparture: LocalizedText;
+  bordersInvolved: LocalizedText[];
   roadType: RoadType;
   difficulty: Difficulty;
   waypoints: RouteWaypoint[];
   stops: RouteStop[];
-  warnings: string[];
+  warnings: LocalizedText[];
   lastReviewed: string;
 }
 
@@ -73,11 +76,11 @@ export interface Restaurant {
     | 'restaurante-familiar'
     | 'restaurante-premium';
   city: string;
-  description: string;
+  description: LocalizedText;
   googleMapsUrl: string;
   phone: string | null;
   website: string | null;
-  sourceNote: string;
+  sourceNote: LocalizedText;
   lastReviewed: string;
 }
 
@@ -94,13 +97,13 @@ export interface Accommodation {
   petsAllowed: boolean;
   googleMapsUrl: string;
   website: string | null;
-  sourceNote: string;
+  sourceNote: LocalizedText;
   lastReviewed: string;
 }
 
 export interface OfficialLink {
-  title: string;
-  description: string;
+  title: LocalizedText;
+  description: LocalizedText;
   url: string;
   source: string;
   lastReviewed: string;
@@ -108,8 +111,8 @@ export interface OfficialLink {
 
 export interface SafetyTip {
   slug: string;
-  title: string;
-  description: string;
+  title: LocalizedText;
+  description: LocalizedText;
   icon: string;
 }
 
@@ -117,7 +120,7 @@ export interface Alert {
   id: string;
   active: boolean;
   severity: 'info' | 'warning' | 'critical';
-  message: string;
+  message: LocalizedText;
   date: string;
 }
 
@@ -130,7 +133,7 @@ export interface CompanyConfig {
   correoReservas: string;
   direccionEmpresa: string;
   instagramEmpresa: string;
-  services: string[];
+  services: LocalizedText[];
 }
 
 export interface TripPlan {

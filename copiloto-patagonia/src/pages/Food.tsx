@@ -9,17 +9,16 @@ import { useI18n } from '../i18n/I18nContext';
 
 const restaurants = restaurantsData as Restaurant[];
 
-const categories: { value: Restaurant['category'] | 'todos'; label: string }[] = [
-  { value: 'todos', label: 'Todos' },
-  { value: 'cordero-patagonico', label: 'Cordero patagónico' },
-  { value: 'centolla', label: 'Centolla' },
-  { value: 'merluza-austral', label: 'Merluza austral' },
-  { value: 'chupe-de-centolla', label: 'Chupe de centolla' },
-  { value: 'calafate-sour', label: 'Calafate sour' },
-  { value: 'cafeteria', label: 'Cafeterías' },
-  { value: 'comida-rapida', label: 'Comida rápida' },
-  { value: 'restaurante-familiar', label: 'Restaurantes familiares' },
-  { value: 'restaurante-premium', label: 'Restaurantes premium' },
+const categoryValues: Restaurant['category'][] = [
+  'cordero-patagonico',
+  'centolla',
+  'merluza-austral',
+  'chupe-de-centolla',
+  'calafate-sour',
+  'cafeteria',
+  'comida-rapida',
+  'restaurante-familiar',
+  'restaurante-premium',
 ];
 
 export default function Food() {
@@ -41,7 +40,7 @@ export default function Food() {
 
       <header className="mx-auto max-w-7xl px-4 pb-6 pt-6 lg:px-8">
         <h1 className="font-display text-3xl font-extrabold text-glacial-dark">{t('nav.food')}</h1>
-        <p className="mt-2 max-w-2xl text-rock/80">Sabores típicos de la Patagonia, organizados por categoría.</p>
+        <p className="mt-2 max-w-2xl text-rock/80">{t('food.subtitle')}</p>
         <div className="mt-4">
           <WarningBanner message={t('warnings.listings')} variant="info" />
         </div>
@@ -49,15 +48,23 @@ export default function Food() {
 
       <div className="mx-auto max-w-7xl px-4 pb-4 lg:px-8">
         <div className="flex flex-wrap gap-2">
-          {categories.map((c) => (
+          <button
+            onClick={() => setCategory('todos')}
+            className={`rounded-full border px-4 py-1.5 text-sm font-bold ${
+              category === 'todos' ? 'border-glacial bg-glacial text-white' : 'border-slate-200 text-rock hover:border-glacial'
+            }`}
+          >
+            {t('food.all')}
+          </button>
+          {categoryValues.map((value) => (
             <button
-              key={c.value}
-              onClick={() => setCategory(c.value)}
+              key={value}
+              onClick={() => setCategory(value)}
               className={`rounded-full border px-4 py-1.5 text-sm font-bold ${
-                category === c.value ? 'border-glacial bg-glacial text-white' : 'border-slate-200 text-rock hover:border-glacial'
+                category === value ? 'border-glacial bg-glacial text-white' : 'border-slate-200 text-rock hover:border-glacial'
               }`}
             >
-              {c.label}
+              {t(`labels.restaurantCategory.${value}`)}
             </button>
           ))}
         </div>

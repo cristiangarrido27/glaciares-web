@@ -1,68 +1,112 @@
 [
   {
     "slug": "viento-lateral",
-    "title": "Viento lateral",
-    "description": "El viento patagónico puede alcanzar ráfagas muy fuertes, especialmente en primavera y verano. Sujeta el volante con firmeza, reduce la velocidad y aumenta la distancia con otros vehículos, sobre todo al cruzarte con camiones.",
+    "title": { "es": "Viento lateral", "en": "Crosswinds", "pt": "Vento lateral" },
+    "description": {
+      "es": "El viento patagónico puede alcanzar ráfagas muy fuertes, especialmente en primavera y verano. Sujeta el volante con firmeza, reduce la velocidad y aumenta la distancia con otros vehículos, sobre todo al cruzarte con camiones.",
+      "en": "Patagonian wind can produce very strong gusts, especially in spring and summer. Hold the wheel firmly, reduce your speed, and keep extra distance from other vehicles, especially when passing trucks.",
+      "pt": "O vento patagônico pode atingir rajadas muito fortes, especialmente na primavera e no verão. Segure o volante com firmeza, reduza a velocidade e aumente a distância de outros veículos, sobretudo ao cruzar com caminhões."
+    },
     "icon": "wind"
   },
   {
     "slug": "hielo-escarcha",
-    "title": "Hielo y escarcha",
-    "description": "En otoño, invierno y madrugadas frías pueden formarse placas de hielo en la calzada, especialmente en curvas y puentes. Reduce la velocidad, evita frenadas bruscas y aumenta la distancia de seguridad.",
+    "title": { "es": "Hielo y escarcha", "en": "Ice and frost", "pt": "Gelo e geada" },
+    "description": {
+      "es": "En otoño, invierno y madrugadas frías pueden formarse placas de hielo en la calzada, especialmente en curvas y puentes. Reduce la velocidad, evita frenadas bruscas y aumenta la distancia de seguridad.",
+      "en": "In fall, winter and cold early mornings, ice patches can form on the road, especially on curves and bridges. Slow down, avoid sudden braking, and increase your following distance.",
+      "pt": "No outono, inverno e madrugadas frias podem se formar placas de gelo na pista, especialmente em curvas e pontes. Reduza a velocidade, evite freadas bruscas e aumente a distância de segurança."
+    },
     "icon": "snowflake"
   },
   {
     "slug": "ripio",
-    "title": "Caminos de ripio",
-    "description": "Varios tramos turísticos de la región no están pavimentados. Conduce a velocidad moderada, evita frenar en curvas y ten precaución con el polvo que generan otros vehículos al adelantar o cruzarte.",
+    "title": { "es": "Caminos de ripio", "en": "Unpaved roads", "pt": "Estradas de cascalho" },
+    "description": {
+      "es": "Varios tramos turísticos de la región no están pavimentados. Conduce a velocidad moderada, evita frenar en curvas y ten precaución con el polvo que generan otros vehículos al adelantar o cruzarte.",
+      "en": "Several tourist stretches in the region are unpaved. Drive at a moderate speed, avoid braking in curves, and watch out for dust kicked up by other vehicles when overtaking or passing.",
+      "pt": "Vários trechos turísticos da região não são pavimentados. Dirija em velocidade moderada, evite frear em curvas e tenha cuidado com a poeira gerada por outros veículos ao ultrapassar ou cruzar."
+    },
     "icon": "road"
   },
   {
     "slug": "animales-en-ruta",
-    "title": "Animales en la ruta",
-    "description": "Es común encontrar guanacos, ñandúes y ganado cruzando la carretera, incluso en rutas principales. Mantén la atención, especialmente al atardecer y de noche.",
+    "title": { "es": "Animales en la ruta", "en": "Animals on the road", "pt": "Animais na estrada" },
+    "description": {
+      "es": "Es común encontrar guanacos, ñandúes y ganado cruzando la carretera, incluso en rutas principales. Mantén la atención, especialmente al atardecer y de noche.",
+      "en": "It's common to find guanacos, rheas and livestock crossing the road, even on main routes. Stay alert, especially at dusk and at night.",
+      "pt": "É comum encontrar guanacos, emas e gado cruzando a estrada, mesmo em rotas principais. Mantenha atenção, especialmente ao entardecer e à noite."
+    },
     "icon": "paw"
   },
   {
     "slug": "combustible",
-    "title": "Distancia entre estaciones de combustible",
-    "description": "En varios tramos patagónicos la distancia entre estaciones de servicio puede superar los 100 km. Sal siempre con el estanque lleno y planifica tus paradas de combustible.",
+    "title": { "es": "Distancia entre estaciones de combustible", "en": "Distance between fuel stations", "pt": "Distância entre postos de combustível" },
+    "description": {
+      "es": "En varios tramos patagónicos la distancia entre estaciones de servicio puede superar los 100 km. Sal siempre con el estanque lleno y planifica tus paradas de combustible.",
+      "en": "On several Patagonian stretches, the distance between fuel stations can exceed 100 km. Always leave with a full tank and plan your refueling stops.",
+      "pt": "Em vários trechos patagônicos, a distância entre postos de combustível pode superar 100 km. Saia sempre com o tanque cheio e planeje suas paradas para abastecer."
+    },
     "icon": "fuel"
   },
   {
     "slug": "conduccion-nocturna",
-    "title": "Conducción nocturna",
-    "description": "Se recomienda evitar conducir de noche en rutas rurales: hay menor señalización, más fauna silvestre cruzando y menor asistencia disponible en caso de imprevistos.",
+    "title": { "es": "Conducción nocturna", "en": "Night driving", "pt": "Condução noturna" },
+    "description": {
+      "es": "Se recomienda evitar conducir de noche en rutas rurales: hay menor señalización, más fauna silvestre cruzando y menor asistencia disponible en caso de imprevistos.",
+      "en": "It's best to avoid driving at night on rural routes: there's less signage, more wildlife crossing, and less assistance available in case of an emergency.",
+      "pt": "Recomenda-se evitar dirigir à noite em estradas rurais: há menos sinalização, mais fauna silvestre cruzando e menos assistência disponível em caso de imprevistos."
+    },
     "icon": "moon"
   },
   {
     "slug": "señal-telefonica",
-    "title": "Pérdida de señal telefónica",
-    "description": "En varios tramos de ruta, especialmente entre pasos fronterizos, no hay cobertura de telefonía móvil. Informa tu itinerario a otra persona antes de salir y lleva agua y abrigo adicional.",
+    "title": { "es": "Pérdida de señal telefónica", "en": "Loss of phone signal", "pt": "Perda de sinal de telefone" },
+    "description": {
+      "es": "En varios tramos de ruta, especialmente entre pasos fronterizos, no hay cobertura de telefonía móvil. Informa tu itinerario a otra persona antes de salir y lleva agua y abrigo adicional.",
+      "en": "On several stretches, especially between border crossings, there's no mobile phone coverage. Tell someone your itinerary before you leave, and carry water and extra warm clothing.",
+      "pt": "Em vários trechos de rota, especialmente entre passagens de fronteira, não há cobertura de telefonia móvel. Informe seu itinerário a outra pessoa antes de sair e leve água e agasalho extra."
+    },
     "icon": "signal"
   },
   {
     "slug": "clima-cambiante",
-    "title": "Cambio repentino del clima",
-    "description": "El clima patagónico puede cambiar en minutos: sol, lluvia, viento y nieve pueden alternarse en un mismo día. Verifica el pronóstico antes de salir y lleva siempre abrigo adicional en el vehículo.",
+    "title": { "es": "Cambio repentino del clima", "en": "Sudden weather changes", "pt": "Mudança repentina do clima" },
+    "description": {
+      "es": "El clima patagónico puede cambiar en minutos: sol, lluvia, viento y nieve pueden alternarse en un mismo día. Verifica el pronóstico antes de salir y lleva siempre abrigo adicional en el vehículo.",
+      "en": "Patagonian weather can change within minutes: sun, rain, wind and snow can all occur in the same day. Check the forecast before heading out and always carry extra warm clothing in the vehicle.",
+      "pt": "O clima patagônico pode mudar em minutos: sol, chuva, vento e neve podem se alternar no mesmo dia. Verifique a previsão antes de sair e leve sempre agasalho extra no veículo."
+    },
     "icon": "cloud"
   },
   {
     "slug": "caminos-no-autorizados",
-    "title": "Caminos no autorizados",
-    "description": "No circules por caminos privados, predios ganaderos o rutas no autorizadas para el vehículo arrendado. Consulta siempre las condiciones del contrato de arriendo.",
+    "title": { "es": "Caminos no autorizados", "en": "Unauthorized roads", "pt": "Estradas não autorizadas" },
+    "description": {
+      "es": "No circules por caminos privados, predios ganaderos o rutas no autorizadas para el vehículo arrendado. Consulta siempre las condiciones del contrato de arriendo.",
+      "en": "Do not drive on private roads, ranch land, or routes not authorized for the rented vehicle. Always check the terms of your rental contract.",
+      "pt": "Não circule por estradas privadas, propriedades rurais ou rotas não autorizadas para o veículo alugado. Consulte sempre as condições do contrato de aluguel."
+    },
     "icon": "sign"
   },
   {
     "slug": "condiciones-contrato",
-    "title": "Condiciones del contrato de arriendo",
-    "description": "Respeta los límites de circulación, kilometraje y territorios habilitados que indica tu contrato de arriendo. El cruce a Argentina requiere un permiso adicional solicitado con anticipación.",
+    "title": { "es": "Condiciones del contrato de arriendo", "en": "Rental contract conditions", "pt": "Condições do contrato de aluguel" },
+    "description": {
+      "es": "Respeta los límites de circulación, kilometraje y territorios habilitados que indica tu contrato de arriendo. El cruce a Argentina requiere un permiso adicional solicitado con anticipación.",
+      "en": "Respect the circulation limits, mileage and authorized territories stated in your rental contract. Crossing into Argentina requires an additional permit requested in advance.",
+      "pt": "Respeite os limites de circulação, quilometragem e territórios habilitados indicados no seu contrato de aluguel. A travessia para a Argentina requer uma autorização adicional solicitada com antecedência."
+    },
     "icon": "document"
   },
   {
     "slug": "accidente-o-panne",
-    "title": "Procedimiento ante accidente, daño o panne",
-    "description": "Detén el vehículo en un lugar seguro, activa las luces de emergencia, no muevas el vehículo si hubo un accidente con terceros y contacta de inmediato a Glaciares Rent a Car mediante el botón de asistencia.",
+    "title": { "es": "Procedimiento ante accidente, daño o panne", "en": "What to do in case of an accident, damage or breakdown", "pt": "Procedimento em caso de acidente, dano ou pane" },
+    "description": {
+      "es": "Detén el vehículo en un lugar seguro, activa las luces de emergencia, no muevas el vehículo si hubo un accidente con terceros y contacta de inmediato a Glaciares Rent a Car mediante el botón de asistencia.",
+      "en": "Stop the vehicle in a safe place, turn on the hazard lights, do not move the vehicle if the accident involved a third party, and contact Glaciares Rent a Car immediately using the assistance button.",
+      "pt": "Pare o veículo em um local seguro, acione o pisca-alerta, não mova o veículo caso tenha havido acidente com terceiros e entre em contato imediatamente com a Glaciares Rent a Car pelo botão de assistência."
+    },
     "icon": "alert"
   }
 ]

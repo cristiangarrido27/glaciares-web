@@ -9,15 +9,13 @@ import destinationsData from '../data/destinations.json';
 import type { Destination } from '../types';
 import { useI18n } from '../i18n/I18nContext';
 import { useTrip } from '../context/TripContext';
+import { L } from '../utils/localized';
 
 const destinations = destinationsData as Destination[];
 
-const difficultyLabel: Record<string, string> = { facil: 'Fácil', moderado: 'Moderado', exigente: 'Exigente' };
-const roadTypeLabel: Record<string, string> = { pavimentado: 'Pavimentado', ripio: 'Ripio', mixto: 'Mixto' };
-
 export default function DestinationDetail() {
   const { slug } = useParams();
-  const { t } = useI18n();
+  const { t, lang } = useI18n();
   const { addToHistory } = useTrip();
   const destination = destinations.find((d) => d.slug === slug);
 
@@ -30,17 +28,19 @@ export default function DestinationDetail() {
 
   if (!destination) return <Navigate to="/destinos" replace />;
 
+  const description = L(destination.shortDescription, lang);
+
   const jsonLd = {
     '@context': 'https://schema.org',
     '@type': 'TouristDestination',
     name: destination.name,
-    description: destination.shortDescription,
+    description,
     touristType: destination.tripTypes,
   };
 
   return (
     <div>
-      <Seo title={destination.name} description={destination.shortDescription} jsonLd={jsonLd} />
+      <Seo title={destination.name} description={description} jsonLd={jsonLd} />
       <Breadcrumbs
         items={[
           { label: t('nav.home'), to: '/' },
@@ -50,7 +50,7 @@ export default function DestinationDetail() {
       />
 
       <div className="relative mt-4 h-64 w-full overflow-hidden sm:h-96">
-        <img src={destination.image} alt={destination.imageAlt} className="h-full w-full object-cover" />
+        <img src={destination.image} alt={L(destination.imageAlt, lang)} className="h-full w-full object-cover" />
         <div className="absolute inset-0 bg-gradient-to-t from-glacial-dark/70 to-transparent" />
         <div className="absolute bottom-4 left-4 right-4 flex items-end justify-between">
           <h1 className="font-display text-3xl font-extrabold text-white drop-shadow sm:text-4xl">
@@ -62,30 +62,30 @@ export default function DestinationDetail() {
 
       <div className="mx-auto max-w-4xl px-4 py-8 lg:px-8">
         {destination.placeholderImage && (
-          <p className="mb-4 text-xs text-rock/50">
-            Fotografía referencial libre de derechos. Será reemplazada por fotografía propia de Glaciares Rent a Car.
-          </p>
+          <p className="mb-4 text-xs text-rock/50">{t('destinationDetail.photoNotice')}</p>
         )}
-        <p className="text-lg text-rock/80">{destination.shortDescription}</p>
+        <p className="text-lg text-rock/80">{description}</p>
 
         <dl className="mt-6 grid grid-cols-2 gap-4 rounded-2xl border border-slate-200 bg-white p-6 sm:grid-cols-3">
           <div>
             <dt className="text-xs font-bold uppercase text-rock/50">{t('common.approxDistance')}</dt>
             <dd className="mt-1 text-sm font-semibold text-glacial-dark">
-              {destination.distanceFromPuntaArenasKm != null ? `${destination.distanceFromPuntaArenasKm} km` : 'Acceso marítimo'}
+              {destination.distanceFromPuntaArenasKm != null
+                ? `${destination.distanceFromPuntaArenasKm} km`
+                : t('destinationDetail.seaAccess')}
             </dd>
           </div>
           <div>
             <dt className="text-xs font-bold uppercase text-rock/50">{t('common.approxTime')}</dt>
-            <dd className="mt-1 text-sm font-semibold text-glacial-dark">{destination.approxDrivingTime}</dd>
+            <dd className="mt-1 text-sm font-semibold text-glacial-dark">{L(destination.approxDrivingTime, lang)}</dd>
           </div>
           <div>
             <dt className="text-xs font-bold uppercase text-rock/50">{t('common.roadType')}</dt>
-            <dd className="mt-1 text-sm font-semibold text-glacial-dark">{roadTypeLabel[destination.roadType]}</dd>
+            <dd className="mt-1 text-sm font-semibold text-glacial-dark">{t(`labels.roadType.${destination.roadType}`)}</dd>
           </div>
           <div>
             <dt className="text-xs font-bold uppercase text-rock/50">{t('common.season')}</dt>
-            <dd className="mt-1 text-sm font-semibold text-glacial-dark">{destination.bestSeason}</dd>
+            <dd className="mt-1 text-sm font-semibold text-glacial-dark">{L(destination.bestSeason, lang)}</dd>
           </div>
           <div>
             <dt className="text-xs font-bold uppercase text-rock/50">{t('common.fuel')}</dt>
@@ -95,11 +95,11 @@ export default function DestinationDetail() {
           </div>
           <div>
             <dt className="text-xs font-bold uppercase text-rock/50">{t('common.difficulty')}</dt>
-            <dd className="mt-1 text-sm font-semibold text-glacial-dark">{difficultyLabel[destination.difficulty]}</dd>
+            <dd className="mt-1 text-sm font-semibold text-glacial-dark">{t(`labels.difficulty.${destination.difficulty}`)}</dd>
           </div>
           <div className="col-span-2 sm:col-span-3">
             <dt className="text-xs font-bold uppercase text-rock/50">{t('common.recommendedVehicle')}</dt>
-            <dd className="mt-1 text-sm font-semibold text-glacial-dark">{destination.recommendedVehicle}</dd>
+            <dd className="mt-1 text-sm font-semibold text-glacial-dark">{L(destination.recommendedVehicle, lang)}</dd>
           </div>
         </dl>
 

@@ -5,12 +5,13 @@ import routes from '../data/routes.json';
 import restaurants from '../data/restaurants.json';
 import accommodations from '../data/accommodations.json';
 import { useI18n } from '../i18n/I18nContext';
+import { L } from '../utils/localized';
 import type { Destination, TravelRoute, Restaurant, Accommodation } from '../types';
 
 type ResultItem = { label: string; sublabel: string; to: string };
 
 export default function GlobalSearch() {
-  const { t } = useI18n();
+  const { t, lang } = useI18n();
   const [open, setOpen] = useState(false);
   const [query, setQuery] = useState('');
   const navigate = useNavigate();
@@ -20,23 +21,23 @@ export default function GlobalSearch() {
     if (q.length < 2) return [];
 
     const destResults = (destinations as Destination[])
-      .filter((d) => d.name.toLowerCase().includes(q) || d.shortDescription.toLowerCase().includes(q))
-      .map((d) => ({ label: d.name, sublabel: 'Destino', to: `/destinos/${d.slug}` }));
+      .filter((d) => d.name.toLowerCase().includes(q) || L(d.shortDescription, lang).toLowerCase().includes(q))
+      .map((d) => ({ label: d.name, sublabel: t('search.destination'), to: `/destinos/${d.slug}` }));
 
     const routeResults = (routes as TravelRoute[])
-      .filter((r) => r.name.toLowerCase().includes(q) || r.summary.toLowerCase().includes(q))
-      .map((r) => ({ label: r.name, sublabel: 'Ruta', to: `/rutas/${r.slug}` }));
+      .filter((r) => r.name.toLowerCase().includes(q) || L(r.summary, lang).toLowerCase().includes(q))
+      .map((r) => ({ label: r.name, sublabel: t('search.route'), to: `/rutas/${r.slug}` }));
 
     const restaurantResults = (restaurants as Restaurant[])
       .filter((r) => r.name.toLowerCase().includes(q) || r.city.toLowerCase().includes(q))
-      .map((r) => ({ label: r.name, sublabel: `Gastronomía · ${r.city}`, to: '/donde-comer' }));
+      .map((r) => ({ label: r.name, sublabel: `${t('search.food')} · ${r.city}`, to: '/donde-comer' }));
 
     const accommodationResults = (accommodations as Accommodation[])
       .filter((a) => a.name.toLowerCase().includes(q) || a.city.toLowerCase().includes(q))
-      .map((a) => ({ label: a.name, sublabel: `Alojamiento · ${a.city}`, to: '/donde-alojar' }));
+      .map((a) => ({ label: a.name, sublabel: `${t('search.lodging')} · ${a.city}`, to: '/donde-alojar' }));
 
     return [...destResults, ...routeResults, ...restaurantResults, ...accommodationResults].slice(0, 12);
-  }, [query]);
+  }, [query, lang, t]);
 
   const closeAndGo = (to: string) => {
     setOpen(false);
@@ -62,7 +63,7 @@ export default function GlobalSearch() {
           <div
             role="dialog"
             aria-modal="true"
-            aria-label="Buscador"
+            aria-label={t('search.dialogLabel')}
             className="w-full max-w-xl rounded-2xl bg-white p-4 shadow-2xl"
             onClick={(e) => e.stopPropagation()}
           >
@@ -87,7 +88,9 @@ export default function GlobalSearch() {
                 </li>
               ))}
               {query.trim().length >= 2 && results.length === 0 && (
-                <li className="px-3 py-2 text-sm text-rock/60">Sin resultados para "{query}".</li>
+                <li className="px-3 py-2 text-sm text-rock/60">
+                  {t('search.noResults').replace('{query}', query)}
+                </li>
               )}
             </ul>
           </div>

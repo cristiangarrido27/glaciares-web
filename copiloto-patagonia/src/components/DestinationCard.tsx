@@ -1,35 +1,30 @@
 import { Link } from 'react-router-dom';
 import type { Destination } from '../types';
 import { useI18n } from '../i18n/I18nContext';
+import { L } from '../utils/localized';
 import FavoriteButton from './FavoriteButton';
 import TripButton from './TripButton';
 
-const difficultyLabel: Record<string, string> = {
-  facil: 'Fácil',
-  moderado: 'Moderado',
-  exigente: 'Exigente',
-};
-
 export default function DestinationCard({ destination }: { destination: Destination }) {
-  const { t } = useI18n();
+  const { t, lang } = useI18n();
 
   return (
     <article className="flex flex-col overflow-hidden rounded-2xl border border-slate-200 bg-white shadow-sm transition-shadow hover:shadow-lg">
       <div className="relative h-48 w-full overflow-hidden">
         <img
           src={destination.image}
-          alt={destination.imageAlt}
+          alt={L(destination.imageAlt, lang)}
           loading="lazy"
           className="h-full w-full object-cover"
         />
         <FavoriteButton id={`destination:${destination.slug}`} className="absolute right-3 top-3 bg-white/90" />
         <span className="absolute left-3 top-3 rounded-full bg-glacial-dark/90 px-2.5 py-1 text-[11px] font-bold uppercase tracking-wide text-white">
-          {difficultyLabel[destination.difficulty]}
+          {t(`labels.difficulty.${destination.difficulty}`)}
         </span>
       </div>
       <div className="flex flex-1 flex-col gap-3 p-5">
         <h3 className="font-display text-lg font-extrabold text-glacial-dark">{destination.name}</h3>
-        <p className="text-sm text-rock/80">{destination.shortDescription}</p>
+        <p className="text-sm text-rock/80">{L(destination.shortDescription, lang)}</p>
         <dl className="grid grid-cols-2 gap-x-3 gap-y-1 text-xs text-rock/70">
           <div>
             <dt className="font-semibold">{t('common.approxDistance')}</dt>
@@ -37,7 +32,7 @@ export default function DestinationCard({ destination }: { destination: Destinat
           </div>
           <div>
             <dt className="font-semibold">{t('common.approxTime')}</dt>
-            <dd>{destination.approxDrivingTime}</dd>
+            <dd>{L(destination.approxDrivingTime, lang)}</dd>
           </div>
         </dl>
         <div className="mt-auto flex flex-wrap items-center gap-2 pt-2">

@@ -1,98 +1,210 @@
 [
   {
-    "title": "Portal turístico de Punta Arenas",
-    "description": "Portal oficial de información turística de la ciudad de Punta Arenas.",
+    "title": {
+      "es": "Portal turístico de Punta Arenas",
+      "en": "Punta Arenas tourism portal",
+      "pt": "Portal turístico de Punta Arenas"
+    },
+    "description": {
+      "es": "Portal oficial de información turística de la ciudad de Punta Arenas.",
+      "en": "The official tourism information portal for the city of Punta Arenas.",
+      "pt": "Portal oficial de informações turísticas da cidade de Punta Arenas."
+    },
     "url": "https://www.ciudadantartica.cl/",
     "source": "Ciudad Antártica",
     "lastReviewed": "2026-08-15"
   },
   {
-    "title": "Fiestas de Invierno",
-    "description": "Calendario de festividades de invierno en Punta Arenas.",
+    "title": {
+      "es": "Fiestas de Invierno",
+      "en": "Winter Festivities",
+      "pt": "Festas de Inverno"
+    },
+    "description": {
+      "es": "Calendario de festividades de invierno en Punta Arenas.",
+      "en": "Calendar of winter festivities in Punta Arenas.",
+      "pt": "Calendário de festividades de inverno em Punta Arenas."
+    },
     "url": "https://www.ciudadantartica.cl/fiestas-del-invierno",
     "source": "Ciudad Antártica",
     "lastReviewed": "2026-08-15"
   },
   {
-    "title": "Museos y experiencias turísticas",
-    "description": "Museos, centros culturales y experiencias para visitar en la ciudad.",
+    "title": {
+      "es": "Museos y experiencias turísticas",
+      "en": "Museums and tourist experiences",
+      "pt": "Museus e experiências turísticas"
+    },
+    "description": {
+      "es": "Museos, centros culturales y experiencias para visitar en la ciudad.",
+      "en": "Museums, cultural centers and experiences to visit in the city.",
+      "pt": "Museus, centros culturais e experiências para visitar na cidade."
+    },
     "url": "https://www.ciudadantartica.cl/museos",
     "source": "Ciudad Antártica",
     "lastReviewed": "2026-08-15"
   },
   {
-    "title": "Restaurantes y lugares para salir",
-    "description": "Directorio de restaurantes y vida nocturna en Punta Arenas.",
+    "title": {
+      "es": "Restaurantes y lugares para salir",
+      "en": "Restaurants and places to go out",
+      "pt": "Restaurantes e lugares para sair"
+    },
+    "description": {
+      "es": "Directorio de restaurantes y vida nocturna en Punta Arenas.",
+      "en": "Directory of restaurants and nightlife in Punta Arenas.",
+      "pt": "Diretório de restaurantes e vida noturna em Punta Arenas."
+    },
     "url": "https://www.ciudadantartica.cl/comer-y-salir",
     "source": "Ciudad Antártica",
     "lastReviewed": "2026-08-15"
   },
   {
-    "title": "Tarjeta Integración Austral",
-    "description": "Información sobre el beneficio migratorio para el tránsito entre Chile y Argentina en la Patagonia.",
+    "title": {
+      "es": "Tarjeta Integración Austral",
+      "en": "Tarjeta Integración Austral (Southern Integration Card)",
+      "pt": "Tarjeta Integración Austral (Cartão de Integração Austral)"
+    },
+    "description": {
+      "es": "Información sobre el beneficio migratorio para el tránsito entre Chile y Argentina en la Patagonia.",
+      "en": "Information about the immigration benefit for travel between Chile and Argentina in Patagonia.",
+      "pt": "Informações sobre o benefício migratório para o trânsito entre Chile e Argentina na Patagônia."
+    },
     "url": "https://www.ciudadantartica.cl/tarjeta-integracion-austral",
     "source": "Ciudad Antártica",
     "lastReviewed": "2026-08-15"
   },
   {
-    "title": "Alojamientos",
-    "description": "Listado de alojamientos disponibles en Punta Arenas.",
+    "title": {
+      "es": "Alojamientos",
+      "en": "Accommodations",
+      "pt": "Hospedagens"
+    },
+    "description": {
+      "es": "Listado de alojamientos disponibles en Punta Arenas.",
+      "en": "List of accommodations available in Punta Arenas.",
+      "pt": "Lista de hospedagens disponíveis em Punta Arenas."
+    },
     "url": "https://www.ciudadantartica.cl/alojamientos",
     "source": "Ciudad Antártica",
     "lastReviewed": "2026-08-15"
   },
   {
-    "title": "Cómo llegar",
-    "description": "Vías de acceso a Punta Arenas por aire, mar y tierra.",
+    "title": {
+      "es": "Cómo llegar",
+      "en": "How to get there",
+      "pt": "Como chegar"
+    },
+    "description": {
+      "es": "Vías de acceso a Punta Arenas por aire, mar y tierra.",
+      "en": "Ways to reach Punta Arenas by air, sea and land.",
+      "pt": "Vias de acesso a Punta Arenas por ar, mar e terra."
+    },
     "url": "https://www.ciudadantartica.cl/como-llegar",
     "source": "Ciudad Antártica",
     "lastReviewed": "2026-08-15"
   },
   {
-    "title": "Horarios, clima, idioma y moneda",
-    "description": "Información práctica sobre horarios comerciales, clima, idioma y moneda local.",
+    "title": {
+      "es": "Horarios, clima, idioma y moneda",
+      "en": "Hours, weather, language and currency",
+      "pt": "Horários, clima, idioma e moeda"
+    },
+    "description": {
+      "es": "Información práctica sobre horarios comerciales, clima, idioma y moneda local.",
+      "en": "Practical information on business hours, weather, language and local currency.",
+      "pt": "Informações práticas sobre horários comerciais, clima, idioma e moeda local."
+    },
     "url": "https://www.ciudadantartica.cl/horarios-idiomas-y-monedas",
     "source": "Ciudad Antártica",
     "lastReviewed": "2026-08-15"
   },
   {
-    "title": "Guías y rutas turísticas",
-    "description": "Guías y rutas turísticas recomendadas por la ciudad.",
+    "title": {
+      "es": "Guías y rutas turísticas",
+      "en": "Tourist guides and routes",
+      "pt": "Guias e rotas turísticas"
+    },
+    "description": {
+      "es": "Guías y rutas turísticas recomendadas por la ciudad.",
+      "en": "Tourist guides and routes recommended by the city.",
+      "pt": "Guias e rotas turísticas recomendadas pela cidade."
+    },
     "url": "https://www.ciudadantartica.cl/guias-y-rutas-turisticas",
     "source": "Ciudad Antártica",
     "lastReviewed": "2026-08-15"
   },
   {
-    "title": "Agencias de turismo y rent a car",
-    "description": "Directorio de agencias de turismo y arriendo de vehículos.",
+    "title": {
+      "es": "Agencias de turismo y rent a car",
+      "en": "Tour agencies and car rentals",
+      "pt": "Agências de turismo e aluguel de carros"
+    },
+    "description": {
+      "es": "Directorio de agencias de turismo y arriendo de vehículos.",
+      "en": "Directory of tour agencies and vehicle rental companies.",
+      "pt": "Diretório de agências de turismo e locação de veículos."
+    },
     "url": "https://www.ciudadantartica.cl/agencias-de-turismo",
     "source": "Ciudad Antártica",
     "lastReviewed": "2026-08-15"
   },
   {
-    "title": "Pasaportes turísticos",
-    "description": "Información sobre pasaportes y beneficios turísticos disponibles.",
+    "title": {
+      "es": "Pasaportes turísticos",
+      "en": "Tourist passports",
+      "pt": "Passaportes turísticos"
+    },
+    "description": {
+      "es": "Información sobre pasaportes y beneficios turísticos disponibles.",
+      "en": "Information on passports and available tourist benefits.",
+      "pt": "Informações sobre passaportes e benefícios turísticos disponíveis."
+    },
     "url": "https://www.ciudadantartica.cl/pasaportes",
     "source": "Ciudad Antártica",
     "lastReviewed": "2026-08-15"
   },
   {
-    "title": "Parques nacionales y reservas",
-    "description": "Información sobre parques nacionales y reservas de la región.",
+    "title": {
+      "es": "Parques nacionales y reservas",
+      "en": "National parks and reserves",
+      "pt": "Parques nacionais e reservas"
+    },
+    "description": {
+      "es": "Información sobre parques nacionales y reservas de la región.",
+      "en": "Information on national parks and reserves in the region.",
+      "pt": "Informações sobre parques nacionais e reservas da região."
+    },
     "url": "https://www.ciudadantartica.cl/parques-nacionales-y-reservas",
     "source": "Ciudad Antártica",
     "lastReviewed": "2026-08-15"
   },
   {
-    "title": "Monumentos",
-    "description": "Monumentos históricos y patrimoniales de Punta Arenas.",
+    "title": {
+      "es": "Monumentos",
+      "en": "Monuments",
+      "pt": "Monumentos"
+    },
+    "description": {
+      "es": "Monumentos históricos y patrimoniales de Punta Arenas.",
+      "en": "Historical and heritage monuments in Punta Arenas.",
+      "pt": "Monumentos históricos e patrimoniais de Punta Arenas."
+    },
     "url": "https://www.ciudadantartica.cl/monumentos",
     "source": "Ciudad Antártica",
     "lastReviewed": "2026-08-15"
   },
   {
-    "title": "Sabores tradicionales",
-    "description": "Platos y sabores tradicionales de la gastronomía magallánica.",
+    "title": {
+      "es": "Sabores tradicionales",
+      "en": "Traditional flavors",
+      "pt": "Sabores tradicionais"
+    },
+    "description": {
+      "es": "Platos y sabores tradicionales de la gastronomía magallánica.",
+      "en": "Traditional dishes and flavors of Magallanes cuisine.",
+      "pt": "Pratos e sabores tradicionais da gastronomia magalânica."
+    },
     "url": "https://www.ciudadantartica.cl/sabores-tradicionales",
     "source": "Ciudad Antártica",
     "lastReviewed": "2026-08-15"

@@ -5,6 +5,7 @@ import safetyTips from '../data/safety-tips.json';
 import company from '../data/company.json';
 import type { SafetyTip } from '../types';
 import { useI18n } from '../i18n/I18nContext';
+import { L } from '../utils/localized';
 import { buildWhatsappUrl, ASSISTANCE_MESSAGE_TEMPLATE } from '../utils/whatsapp';
 
 const tips = safetyTips as SafetyTip[];
@@ -23,7 +24,7 @@ const iconMap: Record<string, string> = {
 };
 
 export default function SafeDriving() {
-  const { t } = useI18n();
+  const { t, lang } = useI18n();
   const isConfigured = !company.whatsappAsistencia.startsWith('[');
   const assistanceUrl = buildWhatsappUrl(company.whatsappAsistencia, ASSISTANCE_MESSAGE_TEMPLATE);
 
@@ -37,10 +38,7 @@ export default function SafeDriving() {
 
       <header className="mx-auto max-w-7xl px-4 pb-6 pt-6 lg:px-8">
         <h1 className="font-display text-3xl font-extrabold text-glacial-dark">{t('nav.safeDriving')}</h1>
-        <p className="mt-2 max-w-2xl text-rock/80">
-          La Patagonia ofrece paisajes únicos, pero exige atención especial al conducir. Revisa estas recomendaciones
-          antes de salir de ruta.
-        </p>
+        <p className="mt-2 max-w-2xl text-rock/80">{t('safeDrivingPage.subtitle')}</p>
       </header>
 
       <div className="mx-auto max-w-7xl px-4 pb-10 lg:px-8">
@@ -48,8 +46,8 @@ export default function SafeDriving() {
           {tips.map((tip) => (
             <div key={tip.slug} className="rounded-2xl border border-slate-200 bg-white p-5">
               <span aria-hidden="true" className="text-2xl">{iconMap[tip.icon] ?? '⚠️'}</span>
-              <h2 className="mt-2 font-display text-base font-extrabold text-glacial-dark">{tip.title}</h2>
-              <p className="mt-2 text-sm text-rock/80">{tip.description}</p>
+              <h2 className="mt-2 font-display text-base font-extrabold text-glacial-dark">{L(tip.title, lang)}</h2>
+              <p className="mt-2 text-sm text-rock/80">{L(tip.description, lang)}</p>
             </div>
           ))}
         </div>
@@ -57,10 +55,8 @@ export default function SafeDriving() {
 
       <section className="bg-glacial-dark py-12 text-white">
         <div className="mx-auto max-w-3xl px-4 text-center lg:px-8">
-          <h2 className="font-display text-2xl font-extrabold">¿Necesitas ayuda en ruta?</h2>
-          <p className="mt-3 text-white/80">
-            Si tienes un accidente, daño o panne con tu vehículo Glaciares Rent a Car, contáctanos de inmediato.
-          </p>
+          <h2 className="font-display text-2xl font-extrabold">{t('safeDrivingPage.needHelpTitle')}</h2>
+          <p className="mt-3 text-white/80">{t('safeDrivingPage.needHelpText')}</p>
           {isConfigured ? (
             <a
               href={assistanceUrl}
@@ -68,11 +64,11 @@ export default function SafeDriving() {
               rel="noopener noreferrer"
               className="mt-6 inline-block rounded-full bg-nature px-8 py-3 text-sm font-bold text-white shadow-lg hover:brightness-110"
             >
-              Necesito asistencia por WhatsApp
+              {t('safeDrivingPage.cta')}
             </a>
           ) : (
             <p className="mt-6 inline-block rounded-full bg-white/10 px-6 py-3 text-sm font-semibold">
-              [COMPLETAR] Número de asistencia pendiente de configuración.
+              {t('safeDrivingPage.notConfigured')}
             </p>
           )}
           <div className="mt-6 text-left">

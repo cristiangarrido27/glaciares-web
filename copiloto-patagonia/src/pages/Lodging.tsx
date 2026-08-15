@@ -46,9 +46,7 @@ export default function Lodging() {
 
       <header className="mx-auto max-w-7xl px-4 pb-6 pt-6 lg:px-8">
         <h1 className="font-display text-3xl font-extrabold text-glacial-dark">{t('nav.lodging')}</h1>
-        <p className="mt-2 max-w-2xl text-rock/80">
-          Opciones de alojamiento por ciudad y tipo, con filtros para encontrar lo que necesitas.
-        </p>
+        <p className="mt-2 max-w-2xl text-rock/80">{t('lodging.subtitle')}</p>
         <div className="mt-4">
           <WarningBanner message={t('warnings.listings')} variant="info" />
         </div>
@@ -64,16 +62,16 @@ export default function Lodging() {
                 city === c ? 'border-glacial bg-glacial text-white' : 'border-slate-200 text-rock hover:border-glacial'
               }`}
             >
-              {c === 'todas' ? 'Todas las ciudades' : c}
+              {c === 'todas' ? t('lodging.allCities') : c}
             </button>
           ))}
         </div>
         <div className="flex flex-wrap gap-2">
-          <button onClick={() => setParkingOnly((v) => !v)} className={toggleClass(parkingOnly)}>Estacionamiento</button>
-          <button onClick={() => setBreakfastOnly((v) => !v)} className={toggleClass(breakfastOnly)}>Desayuno</button>
-          <button onClick={() => setAccessibleOnly((v) => !v)} className={toggleClass(accessibleOnly)}>Accesibilidad</button>
-          <button onClick={() => setFamilyOnly((v) => !v)} className={toggleClass(familyOnly)}>Apto familias</button>
-          <button onClick={() => setPetsOnly((v) => !v)} className={toggleClass(petsOnly)}>Admite mascotas</button>
+          <button onClick={() => setParkingOnly((v) => !v)} className={toggleClass(parkingOnly)}>{t('labels.lodgingFeatures.parking')}</button>
+          <button onClick={() => setBreakfastOnly((v) => !v)} className={toggleClass(breakfastOnly)}>{t('labels.lodgingFeatures.breakfast')}</button>
+          <button onClick={() => setAccessibleOnly((v) => !v)} className={toggleClass(accessibleOnly)}>{t('labels.lodgingFeatures.accessible')}</button>
+          <button onClick={() => setFamilyOnly((v) => !v)} className={toggleClass(familyOnly)}>{t('labels.lodgingFeatures.familyFriendly')}</button>
+          <button onClick={() => setPetsOnly((v) => !v)} className={toggleClass(petsOnly)}>{t('labels.lodgingFeatures.petsAllowed')}</button>
         </div>
       </div>
 
@@ -83,7 +81,7 @@ export default function Lodging() {
             <AccommodationCard key={a.slug} accommodation={a} />
           ))}
         </div>
-        {filtered.length === 0 && <p className="text-sm text-rock/60">No hay resultados con esos filtros.</p>}
+        {filtered.length === 0 && <p className="text-sm text-rock/60">{t('lodging.noResults')}</p>}
       </div>
     </div>
   );

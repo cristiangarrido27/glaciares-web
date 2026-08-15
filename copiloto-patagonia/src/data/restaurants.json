@@ -4,11 +4,19 @@
     "name": "Parrilla de cordero patagónico (Punta Arenas centro)",
     "category": "cordero-patagonico",
     "city": "Punta Arenas",
-    "description": "Cordero al palo asado a la usanza patagónica, la preparación más tradicional de la Región de Magallanes. Búscalo en las parrillas del centro de Punta Arenas.",
+    "description": {
+      "es": "Cordero al palo asado a la usanza patagónica, la preparación más tradicional de la Región de Magallanes. Búscalo en las parrillas del centro de Punta Arenas.",
+      "en": "Spit-roasted lamb prepared the traditional Patagonian way, the most iconic dish of the Magallanes Region. Look for it at grill houses in downtown Punta Arenas.",
+      "pt": "Cordeiro assado no espeto à moda patagônica, o preparo mais tradicional da Região de Magalhães. Procure nas churrascarias do centro de Punta Arenas."
+    },
     "googleMapsUrl": "https://www.google.com/maps/search/?api=1&query=cordero+al+palo+Punta+Arenas",
     "phone": null,
     "website": null,
-    "sourceNote": "Categoría gastronómica de ejemplo. Verifica el local, horario y disponibilidad antes de tu visita.",
+    "sourceNote": {
+      "es": "Categoría gastronómica de ejemplo. Verifica el local, horario y disponibilidad antes de tu visita.",
+      "en": "Sample food category. Check the venue, hours and availability before your visit.",
+      "pt": "Categoria gastronômica de exemplo. Verifique o local, horário e disponibilidade antes da sua visita."
+    },
     "lastReviewed": "2026-08-15"
   },
   {
@@ -16,11 +24,19 @@
     "name": "Marisquería especializada en centolla (Punta Arenas)",
     "category": "centolla",
     "city": "Punta Arenas",
-    "description": "La centolla magallánica es uno de los productos estrella de la región, disponible en temporada en marisquerías del centro y la costanera.",
+    "description": {
+      "es": "La centolla magallánica es uno de los productos estrella de la región, disponible en temporada en marisquerías del centro y la costanera.",
+      "en": "Magellanic king crab is one of the region's star products, available in season at seafood restaurants downtown and along the waterfront.",
+      "pt": "A centolha magalânica é um dos produtos de destaque da região, disponível na temporada em marisquerias do centro e da orla."
+    },
     "googleMapsUrl": "https://www.google.com/maps/search/?api=1&query=restaurante+centolla+Punta+Arenas",
     "phone": null,
     "website": null,
-    "sourceNote": "Categoría gastronómica de ejemplo. La disponibilidad de centolla depende de la veda vigente; verifica antes de tu visita.",
+    "sourceNote": {
+      "es": "Categoría gastronómica de ejemplo. La disponibilidad de centolla depende de la veda vigente; verifica antes de tu visita.",
+      "en": "Sample food category. King crab availability depends on the current fishing ban; check before your visit.",
+      "pt": "Categoria gastronômica de exemplo. A disponibilidade de centolha depende do defeso vigente; verifique antes da sua visita."
+    },
     "lastReviewed": "2026-08-15"
   },
   {
@@ -28,11 +44,19 @@
     "name": "Restaurante de merluza austral (Puerto Natales)",
     "category": "merluza-austral",
     "city": "Puerto Natales",
-    "description": "Pescado fresco del Seno Última Esperanza, preparado a la plancha, frito o en caldillo. Disponible en restaurantes junto a la costanera de Puerto Natales.",
+    "description": {
+      "es": "Pescado fresco del Seno Última Esperanza, preparado a la plancha, frito o en caldillo. Disponible en restaurantes junto a la costanera de Puerto Natales.",
+      "en": "Fresh fish from the Última Esperanza Sound, served grilled, fried, or in a chowder. Available at restaurants along Puerto Natales' waterfront.",
+      "pt": "Peixe fresco do Seno Última Esperanza, preparado na chapa, frito ou em caldo. Disponível em restaurantes junto à orla de Puerto Natales."
+    },
     "googleMapsUrl": "https://www.google.com/maps/search/?api=1&query=merluza+austral+Puerto+Natales",
     "phone": null,
     "website": null,
-    "sourceNote": "Categoría gastronómica de ejemplo. Verifica el local y horario antes de tu visita.",
+    "sourceNote": {
+      "es": "Categoría gastronómica de ejemplo. Verifica el local y horario antes de tu visita.",
+      "en": "Sample food category. Check the venue and hours before your visit.",
+      "pt": "Categoria gastronômica de exemplo. Verifique o local e o horário antes da sua visita."
+    },
     "lastReviewed": "2026-08-15"
   },
   {
@@ -40,11 +64,19 @@
     "name": "Chupe de centolla tradicional (Punta Arenas)",
     "category": "chupe-de-centolla",
     "city": "Punta Arenas",
-    "description": "Preparación gratinada a base de centolla, pan y queso, un clásico de la cocina magallánica que encontrarás en restaurantes tradicionales de la ciudad.",
+    "description": {
+      "es": "Preparación gratinada a base de centolla, pan y queso, un clásico de la cocina magallánica que encontrarás en restaurantes tradicionales de la ciudad.",
+      "en": "A gratin dish made with king crab, bread and cheese, a classic of Magallanes cuisine found at traditional restaurants in the city.",
+      "pt": "Prato gratinado à base de centolha, pão e queijo, um clássico da culinária magalânica encontrado em restaurantes tradicionais da cidade."
+    },
     "googleMapsUrl": "https://www.google.com/maps/search/?api=1&query=chupe+de+centolla+Punta+Arenas",
     "phone": null,
     "website": null,
-    "sourceNote": "Categoría gastronómica de ejemplo. Verifica el local y horario antes de tu visita.",
+    "sourceNote": {
+      "es": "Categoría gastronómica de ejemplo. Verifica el local y horario antes de tu visita.",
+      "en": "Sample food category. Check the venue and hours before your visit.",
+      "pt": "Categoria gastronômica de exemplo. Verifique o local e o horário antes da sua visita."
+    },
     "lastReviewed": "2026-08-15"
   },
   {
@@ -52,11 +84,19 @@
     "name": "Bar con calafate sour (Punta Arenas)",
     "category": "calafate-sour",
     "city": "Punta Arenas",
-    "description": "Coctel patagónico preparado con calafate, la baya silvestre típica de la estepa austral. Disponible en bares y restaurantes del centro.",
+    "description": {
+      "es": "Coctel patagónico preparado con calafate, la baya silvestre típica de la estepa austral. Disponible en bares y restaurantes del centro.",
+      "en": "A Patagonian cocktail made with calafate, the wild berry typical of the southern steppe. Available at bars and restaurants downtown.",
+      "pt": "Coquetel patagônico preparado com calafate, a fruta silvestre típica da estepe austral. Disponível em bares e restaurantes do centro."
+    },
     "googleMapsUrl": "https://www.google.com/maps/search/?api=1&query=calafate+sour+Punta+Arenas",
     "phone": null,
     "website": null,
-    "sourceNote": "Categoría gastronómica de ejemplo. Consumo de alcohol con responsabilidad; nunca bebas si vas a conducir.",
+    "sourceNote": {
+      "es": "Categoría gastronómica de ejemplo. Consumo de alcohol con responsabilidad; nunca bebas si vas a conducir.",
+      "en": "Sample food category. Drink responsibly; never drink and drive.",
+      "pt": "Categoria gastronômica de exemplo. Consuma álcool com responsabilidade; nunca beba se for dirigir."
+    },
     "lastReviewed": "2026-08-15"
   },
   {
@@ -64,11 +104,19 @@
     "name": "Cafetería de especialidad (Punta Arenas centro)",
     "category": "cafeteria",
     "city": "Punta Arenas",
-    "description": "Cafeterías de barrio cerca de la Plaza Muñoz Gamero, ideales para una parada antes de salir de ruta.",
+    "description": {
+      "es": "Cafeterías de barrio cerca de la Plaza Muñoz Gamero, ideales para una parada antes de salir de ruta.",
+      "en": "Neighborhood cafés near Plaza Muñoz Gamero, ideal for a stop before hitting the road.",
+      "pt": "Cafeterias de bairro perto da Plaza Muñoz Gamero, ideais para uma parada antes de sair para a estrada."
+    },
     "googleMapsUrl": "https://www.google.com/maps/search/?api=1&query=cafeteria+Punta+Arenas+centro",
     "phone": null,
     "website": null,
-    "sourceNote": "Categoría gastronómica de ejemplo. Verifica el local y horario antes de tu visita.",
+    "sourceNote": {
+      "es": "Categoría gastronómica de ejemplo. Verifica el local y horario antes de tu visita.",
+      "en": "Sample food category. Check the venue and hours before your visit.",
+      "pt": "Categoria gastronômica de exemplo. Verifique o local e o horário antes da sua visita."
+    },
     "lastReviewed": "2026-08-15"
   },
   {
@@ -76,11 +124,19 @@
     "name": "Comida rápida (Punta Arenas)",
     "category": "comida-rapida",
     "city": "Punta Arenas",
-    "description": "Opciones rápidas para viajeros con poco tiempo, disponibles en el centro y accesos principales de la ciudad.",
+    "description": {
+      "es": "Opciones rápidas para viajeros con poco tiempo, disponibles en el centro y accesos principales de la ciudad.",
+      "en": "Quick options for travelers short on time, available downtown and at the city's main access points.",
+      "pt": "Opções rápidas para viajantes com pouco tempo, disponíveis no centro e nos principais acessos da cidade."
+    },
     "googleMapsUrl": "https://www.google.com/maps/search/?api=1&query=comida+rapida+Punta+Arenas",
     "phone": null,
     "website": null,
-    "sourceNote": "Categoría gastronómica de ejemplo. Verifica el local y horario antes de tu visita.",
+    "sourceNote": {
+      "es": "Categoría gastronómica de ejemplo. Verifica el local y horario antes de tu visita.",
+      "en": "Sample food category. Check the venue and hours before your visit.",
+      "pt": "Categoria gastronômica de exemplo. Verifique o local e o horário antes da sua visita."
+    },
     "lastReviewed": "2026-08-15"
   },
   {
@@ -88,11 +144,19 @@
     "name": "Restaurante familiar (Puerto Natales)",
     "category": "restaurante-familiar",
     "city": "Puerto Natales",
-    "description": "Locales con menú del día y ambiente tranquilo, buena opción para viajar con niños después de una jornada de ruta.",
+    "description": {
+      "es": "Locales con menú del día y ambiente tranquilo, buena opción para viajar con niños después de una jornada de ruta.",
+      "en": "Places with a daily menu and a relaxed atmosphere, a good option when traveling with children after a day on the road.",
+      "pt": "Locais com menu do dia e ambiente tranquilo, boa opção para viajar com crianças após um dia de estrada."
+    },
     "googleMapsUrl": "https://www.google.com/maps/search/?api=1&query=restaurante+familiar+Puerto+Natales",
     "phone": null,
     "website": null,
-    "sourceNote": "Categoría gastronómica de ejemplo. Verifica el local y horario antes de tu visita.",
+    "sourceNote": {
+      "es": "Categoría gastronómica de ejemplo. Verifica el local y horario antes de tu visita.",
+      "en": "Sample food category. Check the venue and hours before your visit.",
+      "pt": "Categoria gastronômica de exemplo. Verifique o local e o horário antes da sua visita."
+    },
     "lastReviewed": "2026-08-15"
   },
   {
@@ -100,11 +164,19 @@
     "name": "Restaurante premium de cocina patagónica (Punta Arenas)",
     "category": "restaurante-premium",
     "city": "Punta Arenas",
-    "description": "Propuestas gastronómicas de autor con ingredientes locales, ideales para una cena especial en la ciudad.",
+    "description": {
+      "es": "Propuestas gastronómicas de autor con ingredientes locales, ideales para una cena especial en la ciudad.",
+      "en": "Chef-driven menus using local ingredients, ideal for a special dinner in the city.",
+      "pt": "Propostas gastronômicas autorais com ingredientes locais, ideais para um jantar especial na cidade."
+    },
     "googleMapsUrl": "https://www.google.com/maps/search/?api=1&query=restaurante+gourmet+Punta+Arenas",
     "phone": null,
     "website": null,
-    "sourceNote": "Categoría gastronómica de ejemplo. Se recomienda reservar con anticipación. Verifica horarios antes de tu visita.",
+    "sourceNote": {
+      "es": "Categoría gastronómica de ejemplo. Se recomienda reservar con anticipación. Verifica horarios antes de tu visita.",
+      "en": "Sample food category. Advance reservations are recommended. Check hours before your visit.",
+      "pt": "Categoria gastronômica de exemplo. Recomenda-se reservar com antecedência. Verifique os horários antes da sua visita."
+    },
     "lastReviewed": "2026-08-15"
   }
 ]

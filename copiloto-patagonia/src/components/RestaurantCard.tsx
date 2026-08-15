@@ -1,35 +1,24 @@
 import type { Restaurant } from '../types';
 import { useI18n } from '../i18n/I18nContext';
+import { L } from '../utils/localized';
 import FavoriteButton from './FavoriteButton';
 
-const categoryLabel: Record<string, string> = {
-  'cordero-patagonico': 'Cordero patagónico',
-  centolla: 'Centolla',
-  'merluza-austral': 'Merluza austral',
-  'chupe-de-centolla': 'Chupe de centolla',
-  'calafate-sour': 'Calafate sour',
-  cafeteria: 'Cafetería',
-  'comida-rapida': 'Comida rápida',
-  'restaurante-familiar': 'Restaurante familiar',
-  'restaurante-premium': 'Restaurante premium',
-};
-
 export default function RestaurantCard({ restaurant }: { restaurant: Restaurant }) {
-  const { t } = useI18n();
+  const { t, lang } = useI18n();
   const shareText = encodeURIComponent(`${restaurant.name} — ${restaurant.city}. ${restaurant.googleMapsUrl}`);
 
   return (
     <article className="flex flex-col gap-3 rounded-2xl border border-slate-200 bg-white p-5 shadow-sm">
       <div className="flex items-start justify-between gap-2">
         <span className="rounded-full bg-glacial/10 px-2.5 py-1 text-[11px] font-bold uppercase tracking-wide text-glacial-dark">
-          {categoryLabel[restaurant.category]}
+          {t(`labels.restaurantCategory.${restaurant.category}`)}
         </span>
         <FavoriteButton id={`restaurant:${restaurant.slug}`} />
       </div>
       <h3 className="font-display text-base font-extrabold text-glacial-dark">{restaurant.name}</h3>
       <p className="text-xs font-semibold text-rock/60">{restaurant.city}</p>
-      <p className="text-sm text-rock/80">{restaurant.description}</p>
-      <p className="text-[11px] text-rock/50">{restaurant.sourceNote}</p>
+      <p className="text-sm text-rock/80">{L(restaurant.description, lang)}</p>
+      <p className="text-[11px] text-rock/50">{L(restaurant.sourceNote, lang)}</p>
       <div className="mt-auto flex flex-wrap gap-2 pt-2">
         <a
           href={restaurant.googleMapsUrl}

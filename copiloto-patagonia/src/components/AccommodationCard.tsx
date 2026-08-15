@@ -1,31 +1,17 @@
 import type { Accommodation } from '../types';
 import { useI18n } from '../i18n/I18nContext';
+import { L } from '../utils/localized';
 import FavoriteButton from './FavoriteButton';
 
-const typeLabel: Record<string, string> = {
-  hotel: 'Hotel',
-  hostal: 'Hostal',
-  cabana: 'Cabaña',
-  departamento: 'Departamento',
-  camping: 'Camping',
-};
-
-const priceLabel: Record<string, string> = {
-  economico: '$ Económico',
-  medio: '$$ Medio',
-  alto: '$$$ Alto',
-  consultar: 'Consultar',
-};
-
 export default function AccommodationCard({ accommodation }: { accommodation: Accommodation }) {
-  const { t } = useI18n();
+  const { t, lang } = useI18n();
 
   const features = [
-    accommodation.parking && 'Estacionamiento',
-    accommodation.breakfast && 'Desayuno',
-    accommodation.accessible && 'Accesible',
-    accommodation.familyFriendly && 'Apto familias',
-    accommodation.petsAllowed && 'Admite mascotas',
+    accommodation.parking && t('labels.lodgingFeatures.parking'),
+    accommodation.breakfast && t('labels.lodgingFeatures.breakfast'),
+    accommodation.accessible && t('labels.lodgingFeatures.accessible'),
+    accommodation.familyFriendly && t('labels.lodgingFeatures.familyFriendly'),
+    accommodation.petsAllowed && t('labels.lodgingFeatures.petsAllowed'),
   ].filter(Boolean) as string[];
 
   return (
@@ -33,10 +19,10 @@ export default function AccommodationCard({ accommodation }: { accommodation: Ac
       <div className="flex items-start justify-between gap-2">
         <div className="flex gap-2">
           <span className="rounded-full bg-nature/10 px-2.5 py-1 text-[11px] font-bold uppercase tracking-wide text-nature">
-            {typeLabel[accommodation.type]}
+            {t(`labels.accommodationType.${accommodation.type}`)}
           </span>
           <span className="rounded-full bg-slate-100 px-2.5 py-1 text-[11px] font-bold text-rock">
-            {priceLabel[accommodation.priceRange]}
+            {t(`labels.priceRange.${accommodation.priceRange}`)}
           </span>
         </div>
         <FavoriteButton id={`accommodation:${accommodation.slug}`} />
@@ -52,7 +38,7 @@ export default function AccommodationCard({ accommodation }: { accommodation: Ac
           ))}
         </ul>
       )}
-      <p className="text-[11px] text-rock/50">{accommodation.sourceNote}</p>
+      <p className="text-[11px] text-rock/50">{L(accommodation.sourceNote, lang)}</p>
       <div className="mt-auto flex flex-wrap gap-2 pt-2">
         <a
           href={accommodation.googleMapsUrl}

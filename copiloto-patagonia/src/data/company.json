@@ -10,12 +10,40 @@
   "direccionEmpresa": "[INGRESAR DIRECCIÓN]",
   "instagramEmpresa": "[INGRESAR INSTAGRAM]",
   "services": [
-    "Kilometraje libre dentro de la Región de Magallanes, según condiciones del contrato.",
-    "Asistencia durante el arriendo.",
-    "Entrega coordinada en Punta Arenas.",
-    "Entrega en aeropuerto con cargo adicional.",
-    "Permiso para circular en Argentina sujeto a solicitud y pago.",
-    "Vehículos para parejas, familias y grupos.",
-    "Atención personalizada antes y durante el viaje."
+    {
+      "es": "Kilometraje libre dentro de la Región de Magallanes, según condiciones del contrato.",
+      "en": "Unlimited mileage within the Magallanes Region, subject to contract conditions.",
+      "pt": "Quilometragem livre dentro da Região de Magalhães, conforme condições do contrato."
+    },
+    {
+      "es": "Asistencia durante el arriendo.",
+      "en": "Assistance throughout your rental.",
+      "pt": "Assistência durante o aluguel."
+    },
+    {
+      "es": "Entrega coordinada en Punta Arenas.",
+      "en": "Coordinated pickup in Punta Arenas.",
+      "pt": "Entrega coordenada em Punta Arenas."
+    },
+    {
+      "es": "Entrega en aeropuerto con cargo adicional.",
+      "en": "Airport delivery available for an additional fee.",
+      "pt": "Entrega no aeroporto com custo adicional."
+    },
+    {
+      "es": "Permiso para circular en Argentina sujeto a solicitud y pago.",
+      "en": "Permit to drive in Argentina, subject to request and payment.",
+      "pt": "Autorização para circular na Argentina sujeita a solicitação e pagamento."
+    },
+    {
+      "es": "Vehículos para parejas, familias y grupos.",
+      "en": "Vehicles for couples, families and groups.",
+      "pt": "Veículos para casais, famílias e grupos."
+    },
+    {
+      "es": "Atención personalizada antes y durante el viaje.",
+      "en": "Personalized assistance before and during your trip.",
+      "pt": "Atendimento personalizado antes e durante a viagem."
+    }
   ]
 }

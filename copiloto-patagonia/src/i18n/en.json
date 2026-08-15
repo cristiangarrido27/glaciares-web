@@ -47,7 +47,10 @@
     "install": "Install the app",
     "loading": "Loading...",
     "backHome": "Back to home",
-    "reportIssue": "Report incorrect information"
+    "reportIssue": "Report incorrect information",
+    "mileage": "Mileage",
+    "crossesBorder": "Crosses border",
+    "orDependsOnRoute": "Depends on the chosen route"
   },
   "warnings": {
     "general": "Distances, times, schedules, road conditions and border requirements may change. Verify official information before starting your trip.",
@@ -84,6 +87,15 @@
     "fuelStations": "Fuel stations",
     "safetyRecommendations": "Safety recommendations",
     "requiredDocuments": "Required documents",
+    "recommendedRoute": "Recommended route",
+    "dependsOnDestination": "Depends on the chosen destination",
+    "checkRouteOrDestination": "Check the destination or route page for specific stations.",
+    "vehicleTypes": {
+      "sedan": "Sedan",
+      "suv": "SUV",
+      "pickup4x4": "4x4 pickup truck",
+      "van": "Van / Minibus"
+    },
     "tripTypes": {
       "naturaleza": "Nature",
       "fotografia": "Photography",
@@ -100,6 +112,128 @@
     "privacy": "Privacy notice",
     "cookies": "Cookie policy",
     "terms": "Terms of use",
-    "followUs": "Follow us"
+    "followUs": "Follow us",
+    "tagline": "“Your travel companion at the end of the world”"
+  },
+  "labels": {
+    "difficulty": { "facil": "Easy", "moderado": "Moderate", "exigente": "Demanding" },
+    "roadType": { "pavimentado": "Paved", "ripio": "Unpaved", "mixto": "Mixed" },
+    "restaurantCategory": {
+      "cordero-patagonico": "Patagonian lamb",
+      "centolla": "King crab",
+      "merluza-austral": "Southern hake",
+      "chupe-de-centolla": "King crab chowder",
+      "calafate-sour": "Calafate sour",
+      "cafeteria": "Café",
+      "comida-rapida": "Fast food",
+      "restaurante-familiar": "Family restaurant",
+      "restaurante-premium": "Premium restaurant"
+    },
+    "accommodationType": {
+      "hotel": "Hotel",
+      "hostal": "Hostel",
+      "cabana": "Cabin",
+      "departamento": "Apartment",
+      "camping": "Campsite"
+    },
+    "priceRange": {
+      "economico": "$ Budget",
+      "medio": "$$ Mid-range",
+      "alto": "$$$ High-end",
+      "consultar": "On request"
+    },
+    "lodgingFeatures": {
+      "parking": "Parking",
+      "breakfast": "Breakfast",
+      "accessible": "Accessible",
+      "familyFriendly": "Family-friendly",
+      "petsAllowed": "Pets allowed"
+    }
+  },
+  "food": {
+    "title": "Where to eat",
+    "subtitle": "Typical Patagonian flavors, organized by category.",
+    "all": "All"
+  },
+  "lodging": {
+    "title": "Where to stay",
+    "subtitle": "Lodging options by city and type, with filters to find what you need.",
+    "allCities": "All cities",
+    "noResults": "No results with those filters."
+  },
+  "destinationsPage": {
+    "title": "Destinations",
+    "subtitle": "Ten must-see places to explore from Punta Arenas, with approximate distances and driving times.",
+    "all": "All"
+  },
+  "routesPage": {
+    "title": "Driving routes",
+    "subtitle": "Editable itineraries with mileage, stops and warnings, designed for travel by your own vehicle."
+  },
+  "routeDetail": {
+    "stops": "Stops and points of interest",
+    "warnings": "Warnings",
+    "mileage": "Mileage",
+    "departure": "Recommended departure",
+    "borders": "Borders involved",
+    "none": "None",
+    "accordingToRoute": "Depends on the chosen route"
+  },
+  "destinationDetail": {
+    "seaAccess": "Boat access",
+    "photoNotice": "Royalty-free reference photo. It will be replaced with Glaciares Rent a Car's own photography."
+  },
+  "officialPage": {
+    "title": "Official information about Punta Arenas",
+    "subtitle": "A collection of useful links to official tourism sources for the city, to complement this guide."
+  },
+  "safeDrivingPage": {
+    "subtitle": "Patagonia offers unique landscapes, but driving here requires extra attention. Review these recommendations before hitting the road.",
+    "needHelpTitle": "Need help on the road?",
+    "needHelpText": "If you have an accident, damage, or a breakdown with your Glaciares Rent a Car vehicle, contact us right away.",
+    "cta": "I need assistance via WhatsApp",
+    "notConfigured": "[TO COMPLETE] Assistance phone number pending configuration."
+  },
+  "assistanceWidget": {
+    "title": "I need assistance",
+    "ariaLabel": "I need assistance via WhatsApp",
+    "openWhatsapp": "Open WhatsApp"
+  },
+  "beforeTravelPage": {
+    "subtitle": "Practical information to prepare your trip through the Magallanes Region."
+  },
+  "search": {
+    "destination": "Destination",
+    "route": "Route",
+    "food": "Gastronomy",
+    "lodging": "Lodging",
+    "dialogLabel": "Search",
+    "noResults": "No results for \"{query}\"."
+  },
+  "rentacarPage": {
+    "viewVehicles": "View vehicles",
+    "quoteNow": "Get a quote now",
+    "visitCompany": "Visit Glaciares Rent a Car",
+    "quoteMessage": "Hi, I'd like a quote to rent a vehicle from Glaciares Rent a Car.",
+    "whatsappMissing": "[TO COMPLETE] Reservations WhatsApp",
+    "emailLabel": "Reservations email",
+    "emailMissing": "[TO COMPLETE] Reservations email",
+    "addressLabel": "Address",
+    "addressMissing": "[TO COMPLETE] Company address",
+    "pricesNotice": "Rental prices are handled directly with Glaciares Rent a Car and are not published in this guide."
+  },
+  "cookieBanner": {
+    "text": "We use your browser's local storage to remember your favorites, language and itinerary. We do not use advertising tracking cookies. Check our",
+    "linkText": "cookie policy",
+    "reject": "Reject",
+    "accept": "Accept"
+  },
+  "helpPage": {
+    "reportIntro": "Help us keep this guide up to date. Tell us what information you found incorrect or outdated.",
+    "reportSent": "Thanks! Your contact app opened to send the report.",
+    "sectionLabel": "Section or page",
+    "sectionPlaceholder": "E.g.: Punta Arenas - Puerto Natales route",
+    "detailLabel": "Error details",
+    "submit": "Send report"
   }
 }

@@ -6,13 +6,14 @@ import safetyTips from '../data/safety-tips.json';
 import company from '../data/company.json';
 import type { Destination, SafetyTip } from '../types';
 import { useI18n } from '../i18n/I18nContext';
+import { L } from '../utils/localized';
 
 const destinations = destinationsData as Destination[];
 const featured = destinations.slice(0, 6);
 const tips = (safetyTips as SafetyTip[]).slice(0, 4);
 
 export default function Home() {
-  const { t } = useI18n();
+  const { t, lang } = useI18n();
 
   const jsonLd = [
     {
@@ -123,8 +124,8 @@ export default function Home() {
           <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
             {tips.map((tip) => (
               <div key={tip.slug} className="rounded-2xl border border-slate-200 bg-white p-5">
-                <h3 className="font-display text-sm font-extrabold text-glacial-dark">{tip.title}</h3>
-                <p className="mt-2 text-xs text-rock/70">{tip.description}</p>
+                <h3 className="font-display text-sm font-extrabold text-glacial-dark">{L(tip.title, lang)}</h3>
+                <p className="mt-2 text-xs text-rock/70">{L(tip.description, lang)}</p>
               </div>
             ))}
           </div>
@@ -154,8 +155,8 @@ export default function Home() {
             </div>
           </div>
           <img
-            src="https://images.unsplash.com/photo-1533587851505-d119e13fa0d7?auto=format&fit=crop&w=900&q=70"
-            alt="Vehículo recorriendo un camino patagónico"
+            src="https://images.unsplash.com/photo-1517783999520-f068d7431a60?auto=format&fit=crop&w=900&q=70"
+            alt="Estepa y montañas patagónicas, paisaje típico de una ruta en la Región de Magallanes"
             className="hidden h-64 w-full rounded-2xl object-cover lg:block"
             loading="lazy"
           />

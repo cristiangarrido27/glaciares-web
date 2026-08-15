@@ -12,7 +12,11 @@
     "petsAllowed": false,
     "googleMapsUrl": "https://www.google.com/maps/search/?api=1&query=hoteles+centro+Punta+Arenas",
     "website": null,
-    "sourceNote": "Ejemplo de categoría. Confirma disponibilidad, precio y política de mascotas directamente con el alojamiento.",
+    "sourceNote": {
+      "es": "Ejemplo de categoría. Confirma disponibilidad, precio y política de mascotas directamente con el alojamiento.",
+      "en": "Sample category. Confirm availability, price and pet policy directly with the property.",
+      "pt": "Exemplo de categoria. Confirme disponibilidade, preço e política de animais de estimação diretamente com a hospedagem."
+    },
     "lastReviewed": "2026-08-15"
   },
   {
@@ -28,7 +32,11 @@
     "petsAllowed": true,
     "googleMapsUrl": "https://www.google.com/maps/search/?api=1&query=hostales+Punta+Arenas",
     "website": null,
-    "sourceNote": "Ejemplo de categoría. Confirma disponibilidad y precio directamente con el alojamiento.",
+    "sourceNote": {
+      "es": "Ejemplo de categoría. Confirma disponibilidad y precio directamente con el alojamiento.",
+      "en": "Sample category. Confirm availability and price directly with the property.",
+      "pt": "Exemplo de categoria. Confirme disponibilidade e preço diretamente com a hospedagem."
+    },
     "lastReviewed": "2026-08-15"
   },
   {
@@ -44,7 +52,11 @@
     "petsAllowed": true,
     "googleMapsUrl": "https://www.google.com/maps/search/?api=1&query=cabañas+Punta+Arenas",
     "website": null,
-    "sourceNote": "Ejemplo de categoría. Confirma disponibilidad y precio directamente con el alojamiento.",
+    "sourceNote": {
+      "es": "Ejemplo de categoría. Confirma disponibilidad y precio directamente con el alojamiento.",
+      "en": "Sample category. Confirm availability and price directly with the property.",
+      "pt": "Exemplo de categoria. Confirme disponibilidade e preço diretamente com a hospedagem."
+    },
     "lastReviewed": "2026-08-15"
   },
   {
@@ -60,7 +72,11 @@
     "petsAllowed": false,
     "googleMapsUrl": "https://www.google.com/maps/search/?api=1&query=departamentos+amoblados+Punta+Arenas",
     "website": null,
-    "sourceNote": "Ejemplo de categoría. Confirma disponibilidad y precio directamente con el alojamiento.",
+    "sourceNote": {
+      "es": "Ejemplo de categoría. Confirma disponibilidad y precio directamente con el alojamiento.",
+      "en": "Sample category. Confirm availability and price directly with the property.",
+      "pt": "Exemplo de categoria. Confirme disponibilidade e preço diretamente com a hospedagem."
+    },
     "lastReviewed": "2026-08-15"
   },
   {
@@ -76,7 +92,11 @@
     "petsAllowed": false,
     "googleMapsUrl": "https://www.google.com/maps/search/?api=1&query=hoteles+Puerto+Natales",
     "website": null,
-    "sourceNote": "Ejemplo de categoría. Confirma disponibilidad, precio y política de mascotas directamente con el alojamiento.",
+    "sourceNote": {
+      "es": "Ejemplo de categoría. Confirma disponibilidad, precio y política de mascotas directamente con el alojamiento.",
+      "en": "Sample category. Confirm availability, price and pet policy directly with the property.",
+      "pt": "Exemplo de categoria. Confirme disponibilidade, preço e política de animais de estimação diretamente com a hospedagem."
+    },
     "lastReviewed": "2026-08-15"
   },
   {
@@ -92,7 +112,11 @@
     "petsAllowed": false,
     "googleMapsUrl": "https://www.google.com/maps/search/?api=1&query=hostales+Puerto+Natales",
     "website": null,
-    "sourceNote": "Ejemplo de categoría. Confirma disponibilidad y precio directamente con el alojamiento.",
+    "sourceNote": {
+      "es": "Ejemplo de categoría. Confirma disponibilidad y precio directamente con el alojamiento.",
+      "en": "Sample category. Confirm availability and price directly with the property.",
+      "pt": "Exemplo de categoria. Confirme disponibilidade e preço diretamente com a hospedagem."
+    },
     "lastReviewed": "2026-08-15"
   },
   {
@@ -108,7 +132,11 @@
     "petsAllowed": true,
     "googleMapsUrl": "https://www.google.com/maps/search/?api=1&query=camping+Puerto+Natales",
     "website": null,
-    "sourceNote": "Ejemplo de categoría. Confirma disponibilidad y servicios directamente con el camping.",
+    "sourceNote": {
+      "es": "Ejemplo de categoría. Confirma disponibilidad y servicios directamente con el camping.",
+      "en": "Sample category. Confirm availability and services directly with the campground.",
+      "pt": "Exemplo de categoria. Confirme disponibilidade e serviços diretamente com o camping."
+    },
     "lastReviewed": "2026-08-15"
   },
   {
@@ -124,7 +152,11 @@
     "petsAllowed": false,
     "googleMapsUrl": "https://www.google.com/maps/search/?api=1&query=hoteles+Torres+del+Paine",
     "website": null,
-    "sourceNote": "Ejemplo de categoría. La reserva anticipada es muy recomendable en temporada alta. Confirma directamente con el alojamiento.",
+    "sourceNote": {
+      "es": "Ejemplo de categoría. La reserva anticipada es muy recomendable en temporada alta. Confirma directamente con el alojamiento.",
+      "en": "Sample category. Advance booking is strongly recommended in high season. Confirm directly with the property.",
+      "pt": "Exemplo de categoria. A reserva antecipada é muito recomendável na alta temporada. Confirme diretamente com a hospedagem."
+    },
     "lastReviewed": "2026-08-15"
   },
   {
@@ -140,7 +172,11 @@
     "petsAllowed": false,
     "googleMapsUrl": "https://www.google.com/maps/search/?api=1&query=camping+Torres+del+Paine",
     "website": null,
-    "sourceNote": "Ejemplo de categoría. La reserva es obligatoria y el aforo es limitado dentro del parque. Confirma con la administración del parque.",
+    "sourceNote": {
+      "es": "Ejemplo de categoría. La reserva es obligatoria y el aforo es limitado dentro del parque. Confirma con la administración del parque.",
+      "en": "Sample category. Reservations are mandatory and capacity is limited inside the park. Confirm with park administration.",
+      "pt": "Exemplo de categoria. A reserva é obrigatória e a capacidade é limitada dentro do parque. Confirme com a administração do parque."
+    },
     "lastReviewed": "2026-08-15"
   },
   {
@@ -156,7 +192,11 @@
     "petsAllowed": false,
     "googleMapsUrl": "https://www.google.com/maps/search/?api=1&query=cabañas+cerca+Torres+del+Paine",
     "website": null,
-    "sourceNote": "Ejemplo de categoría. Confirma disponibilidad y precio directamente con el alojamiento.",
+    "sourceNote": {
+      "es": "Ejemplo de categoría. Confirma disponibilidad y precio directamente con el alojamiento.",
+      "en": "Sample category. Confirm availability and price directly with the property.",
+      "pt": "Exemplo de categoria. Confirme disponibilidade e preço diretamente com a hospedagem."
+    },
     "lastReviewed": "2026-08-15"
   }
 ]

@@ -2,14 +2,14 @@ import Seo from '../components/Seo';
 import Breadcrumbs from '../components/Breadcrumbs';
 import company from '../data/company.json';
 import { useI18n } from '../i18n/I18nContext';
+import { L } from '../utils/localized';
 import { buildWhatsappUrl } from '../utils/whatsapp';
 
 export default function RentACar() {
-  const { t } = useI18n();
+  const { t, lang } = useI18n();
   const whatsappConfigured = !company.whatsappReservas.startsWith('[');
   const emailConfigured = !company.correoReservas.startsWith('[');
-  const quoteMessage = 'Hola, quiero cotizar el arriendo de un vehículo con Glaciares Rent a Car.';
-  const quoteUrl = buildWhatsappUrl(company.whatsappReservas, quoteMessage);
+  const quoteUrl = buildWhatsappUrl(company.whatsappReservas, t('rentacarPage.quoteMessage'));
 
   const jsonLd = {
     '@context': 'https://schema.org',
@@ -37,9 +37,9 @@ export default function RentACar() {
 
         <ul className="mt-8 grid gap-4 sm:grid-cols-2">
           {company.services.map((service) => (
-            <li key={service} className="flex items-start gap-3 rounded-2xl border border-slate-200 bg-white p-4">
+            <li key={service.es} className="flex items-start gap-3 rounded-2xl border border-slate-200 bg-white p-4">
               <span aria-hidden="true" className="mt-0.5 text-lg text-nature">✓</span>
-              <span className="text-sm text-rock/80">{service}</span>
+              <span className="text-sm text-rock/80">{L(service, lang)}</span>
             </li>
           ))}
         </ul>
@@ -51,7 +51,7 @@ export default function RentACar() {
             rel="noopener noreferrer"
             className="rounded-full bg-glacial px-6 py-3 text-sm font-bold text-white hover:bg-glacial-dark"
           >
-            Ver vehículos
+            {t('rentacarPage.viewVehicles')}
           </a>
           {whatsappConfigured ? (
             <a
@@ -60,11 +60,11 @@ export default function RentACar() {
               rel="noopener noreferrer"
               className="rounded-full bg-adventure px-6 py-3 text-sm font-bold text-white hover:brightness-110"
             >
-              Cotizar ahora
+              {t('rentacarPage.quoteNow')}
             </a>
           ) : (
             <span className="rounded-full bg-amber-50 px-6 py-3 text-sm font-bold text-amber-700">
-              [COMPLETAR] WhatsApp de reservas
+              {t('rentacarPage.whatsappMissing')}
             </span>
           )}
           <a
@@ -73,34 +73,32 @@ export default function RentACar() {
             rel="noopener noreferrer"
             className="rounded-full border-2 border-glacial px-6 py-3 text-sm font-bold text-glacial-dark hover:bg-glacial hover:text-white"
           >
-            Visitar Glaciares Rent a Car
+            {t('rentacarPage.visitCompany')}
           </a>
         </div>
 
         <div className="mt-10 grid gap-4 rounded-2xl border border-slate-200 bg-white p-6 sm:grid-cols-2">
           <div>
-            <p className="text-xs font-bold uppercase text-rock/50">Correo de reservas</p>
+            <p className="text-xs font-bold uppercase text-rock/50">{t('rentacarPage.emailLabel')}</p>
             <p className="mt-1 text-sm font-semibold text-glacial-dark">
               {emailConfigured ? (
                 <a href={`mailto:${company.correoReservas}`} className="hover:underline">
                   {company.correoReservas}
                 </a>
               ) : (
-                '[COMPLETAR] Correo de reservas'
+                t('rentacarPage.emailMissing')
               )}
             </p>
           </div>
           <div>
-            <p className="text-xs font-bold uppercase text-rock/50">Dirección</p>
+            <p className="text-xs font-bold uppercase text-rock/50">{t('rentacarPage.addressLabel')}</p>
             <p className="mt-1 text-sm font-semibold text-glacial-dark">
-              {company.direccionEmpresa.startsWith('[') ? '[COMPLETAR] Dirección de la empresa' : company.direccionEmpresa}
+              {company.direccionEmpresa.startsWith('[') ? t('rentacarPage.addressMissing') : company.direccionEmpresa}
             </p>
           </div>
         </div>
 
-        <p className="mt-6 text-xs text-rock/50">
-          Los precios de arriendo se gestionan directamente con Glaciares Rent a Car y no se publican en esta guía.
-        </p>
+        <p className="mt-6 text-xs text-rock/50">{t('rentacarPage.pricesNotice')}</p>
       </section>
     </div>
   );

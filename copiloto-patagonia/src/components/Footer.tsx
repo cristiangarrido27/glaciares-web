@@ -13,7 +13,7 @@ export default function Footer() {
         <div>
           <p className="font-display text-lg font-extrabold">{t('common.appName')}</p>
           <p className="text-xs uppercase tracking-widest text-snow/60">{t('common.byCompany')}</p>
-          <p className="mt-3 text-sm text-snow/80">“Tu compañero de ruta en el fin del mundo”</p>
+          <p className="mt-3 text-sm text-snow/80">{t('footer.tagline')}</p>
           <p className="mt-4 text-xs leading-relaxed text-snow/60">{t('common.notOfficial')}</p>
         </div>
 

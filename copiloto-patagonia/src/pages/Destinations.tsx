@@ -38,10 +38,7 @@ export default function Destinations() {
 
       <header className="mx-auto max-w-7xl px-4 pb-6 pt-6 lg:px-8">
         <h1 className="font-display text-3xl font-extrabold text-glacial-dark">{t('nav.destinations')}</h1>
-        <p className="mt-2 max-w-2xl text-rock/80">
-          Diez lugares imprescindibles para explorar desde Punta Arenas, con distancias y tiempos aproximados de
-          conducción.
-        </p>
+        <p className="mt-2 max-w-2xl text-rock/80">{t('destinationsPage.subtitle')}</p>
         <div className="mt-4">
           <WarningBanner message={t('warnings.general')} />
         </div>
@@ -55,7 +52,7 @@ export default function Destinations() {
               filter === 'todos' ? 'border-glacial bg-glacial text-white' : 'border-slate-200 text-rock hover:border-glacial'
             }`}
           >
-            Todos
+            {t('destinationsPage.all')}
           </button>
           {tripTypeOptions.map((tt) => (
             <button

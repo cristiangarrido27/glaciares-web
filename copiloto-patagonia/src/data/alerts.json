@@ -3,7 +3,11 @@
     "id": "alert-info-general",
     "active": true,
     "severity": "info",
-    "message": "Las condiciones de caminos, horarios de transbordadores y requisitos fronterizos pueden cambiar sin aviso previo. Verifica siempre la información oficial antes de iniciar tu viaje.",
+    "message": {
+      "es": "Las condiciones de caminos, horarios de transbordadores y requisitos fronterizos pueden cambiar sin aviso previo. Verifica siempre la información oficial antes de iniciar tu viaje.",
+      "en": "Road conditions, ferry schedules and border requirements may change without notice. Always check official information before starting your trip.",
+      "pt": "As condições das estradas, horários de balsas e requisitos de fronteira podem mudar sem aviso prévio. Verifique sempre a informação oficial antes de iniciar sua viagem."
+    },
     "date": "2026-08-15"
   }
 ]

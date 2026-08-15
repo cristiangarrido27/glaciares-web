@@ -15,7 +15,7 @@ const MapView = lazy(() => import('../components/MapView'));
 const routes = routesData as TravelRoute[];
 const destinations = destinationsData as Destination[];
 const tripTypes: TripType[] = ['naturaleza', 'fotografia', 'familia', 'aventura', 'gastronomia', 'historia', 'fauna'];
-const vehicleTypes = ['Sedán', 'SUV', 'Camioneta 4x4', 'Van / Minibús'];
+const vehicleTypeKeys = ['sedan', 'suv', 'pickup4x4', 'van'] as const;
 
 const defaultInput: PlannerInput = {
   origin: 'Punta Arenas',
@@ -25,17 +25,17 @@ const defaultInput: PlannerInput = {
   tripType: 'naturaleza',
   date: '',
   crossingArgentina: false,
-  vehicleType: 'SUV',
+  vehicleType: 'suv',
 };
 
 export default function Planner() {
-  const { t } = useI18n();
+  const { t, lang } = useI18n();
   const [input, setInput] = useState<PlannerInput>(defaultInput);
   const [proposal, setProposal] = useState<PlannerProposal | null>(null);
 
   const handleSubmit = (e: FormEvent) => {
     e.preventDefault();
-    setProposal(buildProposal(input, routes, destinations));
+    setProposal(buildProposal(input, routes, destinations, lang));
   };
 
   const shareText = proposal
@@ -51,7 +51,7 @@ export default function Planner() {
       `Propuesta para ${input.days} días, ${input.passengers} pasajeros, viaje tipo ${t(`planner.tripTypes.${input.tripType as TripType}`)}.`,
       [
         { heading: t('planner.suggestedStops'), lines: proposal.stops },
-        { heading: t('planner.fuelStations'), lines: proposal.fuelStations.length ? proposal.fuelStations : ['Revisa la ficha de ruta o destino para estaciones específicas.'] },
+        { heading: t('planner.fuelStations'), lines: proposal.fuelStations.length ? proposal.fuelStations : [t('planner.checkRouteOrDestination')] },
         { heading: t('planner.safetyRecommendations'), lines: proposal.safetyRecommendations },
         { heading: t('planner.requiredDocuments'), lines: proposal.requiredDocuments },
       ],
@@ -157,9 +157,9 @@ export default function Planner() {
             onChange={(e) => setInput({ ...input, vehicleType: e.target.value })}
             className="mt-1 w-full rounded-lg border border-slate-300 px-3 py-2 text-sm focus:border-glacial focus:outline-none"
           >
-            {vehicleTypes.map((v) => (
+            {vehicleTypeKeys.map((v) => (
               <option key={v} value={v}>
-                {v}
+                {t(`planner.vehicleTypes.${v}`)}
               </option>
             ))}
           </select>
@@ -197,7 +197,7 @@ export default function Planner() {
             <div>
               <dt className="text-xs font-bold uppercase text-rock/50">{t('common.approxDistance')}</dt>
               <dd className="mt-1 text-sm font-semibold text-glacial-dark">
-                {proposal.distanceKm != null ? `${proposal.distanceKm} km` : 'Depende del destino elegido'}
+                {proposal.distanceKm != null ? `${proposal.distanceKm} km` : t('planner.dependsOnDestination')}
               </dd>
             </div>
             <div>
@@ -206,7 +206,7 @@ export default function Planner() {
             </div>
             {proposal.matchedRoute && (
               <div>
-                <dt className="text-xs font-bold uppercase text-rock/50">Ruta recomendada</dt>
+                <dt className="text-xs font-bold uppercase text-rock/50">{t('planner.recommendedRoute')}</dt>
                 <dd className="mt-1 text-sm font-semibold text-glacial-dark">
                   <Link to={`/rutas/${proposal.matchedRoute.slug}`} className="underline">
                     {proposal.matchedRoute.name}
@@ -239,7 +239,7 @@ export default function Planner() {
                 {proposal.fuelStations.length ? (
                   proposal.fuelStations.map((f) => <li key={f}>• {f}</li>)
                 ) : (
-                  <li>Consulta la ficha del destino o ruta para estaciones específicas.</li>
+                  <li>{t('planner.checkRouteOrDestination')}</li>
                 )}
               </ul>
             </div>

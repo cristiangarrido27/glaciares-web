@@ -2,8 +2,9 @@ import { createContext, useContext, useMemo, useState, type ReactNode } from 're
 import es from './es.json';
 import en from './en.json';
 import pt from './pt.json';
+import type { Lang } from '../types';
 
-export type Lang = 'es' | 'en' | 'pt';
+export type { Lang };
 
 const dictionaries: Record<Lang, Record<string, unknown>> = { es, en, pt };
 

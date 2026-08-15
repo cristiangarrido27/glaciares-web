@@ -21,9 +21,7 @@ export default function RoutesPage() {
 
       <header className="mx-auto max-w-7xl px-4 pb-6 pt-6 lg:px-8">
         <h1 className="font-display text-3xl font-extrabold text-glacial-dark">{t('nav.routes')}</h1>
-        <p className="mt-2 max-w-2xl text-rock/80">
-          Itinerarios editables, con kilometraje, paradas y advertencias, pensados para viajar en vehículo propio.
-        </p>
+        <p className="mt-2 max-w-2xl text-rock/80">{t('routesPage.subtitle')}</p>
         <div className="mt-4">
           <WarningBanner message={t('warnings.general')} />
         </div>

@@ -47,7 +47,10 @@
     "install": "Instalar o aplicativo",
     "loading": "Carregando...",
     "backHome": "Voltar ao início",
-    "reportIssue": "Reportar informação incorreta"
+    "reportIssue": "Reportar informação incorreta",
+    "mileage": "Quilometragem",
+    "crossesBorder": "Cruza fronteira",
+    "orDependsOnRoute": "Depende da via escolhida"
   },
   "warnings": {
     "general": "As distâncias, horários, condições das estradas e requisitos de fronteira podem mudar. Verifique a informação oficial antes de iniciar a viagem.",
@@ -84,6 +87,15 @@
     "fuelStations": "Postos de combustível",
     "safetyRecommendations": "Recomendações de segurança",
     "requiredDocuments": "Documentos necessários",
+    "recommendedRoute": "Rota recomendada",
+    "dependsOnDestination": "Depende do destino escolhido",
+    "checkRouteOrDestination": "Consulte a ficha do destino ou da rota para postos específicos.",
+    "vehicleTypes": {
+      "sedan": "Sedã",
+      "suv": "SUV",
+      "pickup4x4": "Caminhonete 4x4",
+      "van": "Van / Micro-ônibus"
+    },
     "tripTypes": {
       "naturaleza": "Natureza",
       "fotografia": "Fotografia",
@@ -100,6 +112,128 @@
     "privacy": "Aviso de privacidade",
     "cookies": "Política de cookies",
     "terms": "Termos de uso",
-    "followUs": "Siga-nos"
+    "followUs": "Siga-nos",
+    "tagline": "“Seu companheiro de viagem no fim do mundo”"
+  },
+  "labels": {
+    "difficulty": { "facil": "Fácil", "moderado": "Moderado", "exigente": "Exigente" },
+    "roadType": { "pavimentado": "Pavimentada", "ripio": "Cascalho", "mixto": "Mista" },
+    "restaurantCategory": {
+      "cordero-patagonico": "Cordeiro patagônico",
+      "centolla": "Centolha",
+      "merluza-austral": "Pescada austral",
+      "chupe-de-centolla": "Caldo de centolha",
+      "calafate-sour": "Calafate sour",
+      "cafeteria": "Cafeteria",
+      "comida-rapida": "Comida rápida",
+      "restaurante-familiar": "Restaurante familiar",
+      "restaurante-premium": "Restaurante premium"
+    },
+    "accommodationType": {
+      "hotel": "Hotel",
+      "hostal": "Hostel",
+      "cabana": "Cabana",
+      "departamento": "Apartamento",
+      "camping": "Camping"
+    },
+    "priceRange": {
+      "economico": "$ Econômico",
+      "medio": "$$ Médio",
+      "alto": "$$$ Alto",
+      "consultar": "Consultar"
+    },
+    "lodgingFeatures": {
+      "parking": "Estacionamento",
+      "breakfast": "Café da manhã",
+      "accessible": "Acessível",
+      "familyFriendly": "Apto para famílias",
+      "petsAllowed": "Aceita animais"
+    }
+  },
+  "food": {
+    "title": "Onde comer",
+    "subtitle": "Sabores típicos da Patagônia, organizados por categoria.",
+    "all": "Todos"
+  },
+  "lodging": {
+    "title": "Onde se hospedar",
+    "subtitle": "Opções de hospedagem por cidade e tipo, com filtros para encontrar o que você precisa.",
+    "allCities": "Todas as cidades",
+    "noResults": "Nenhum resultado com esses filtros."
+  },
+  "destinationsPage": {
+    "title": "Destinos",
+    "subtitle": "Dez lugares imperdíveis para explorar a partir de Punta Arenas, com distâncias e tempos de condução aproximados.",
+    "all": "Todos"
+  },
+  "routesPage": {
+    "title": "Rotas de carro",
+    "subtitle": "Roteiros editáveis, com quilometragem, paradas e advertências, pensados para viajar com veículo próprio."
+  },
+  "routeDetail": {
+    "stops": "Paradas e pontos de interesse",
+    "warnings": "Advertências",
+    "mileage": "Quilometragem",
+    "departure": "Saída recomendada",
+    "borders": "Fronteiras envolvidas",
+    "none": "Nenhuma",
+    "accordingToRoute": "Conforme a via escolhida"
+  },
+  "destinationDetail": {
+    "seaAccess": "Acesso marítimo",
+    "photoNotice": "Fotografia referencial livre de direitos. Será substituída por fotografia própria da Glaciares Rent a Car."
+  },
+  "officialPage": {
+    "title": "Informação oficial de Punta Arenas",
+    "subtitle": "Coletânea de links úteis para fontes oficiais de turismo da cidade, para complementar este guia."
+  },
+  "safeDrivingPage": {
+    "subtitle": "A Patagônia oferece paisagens únicas, mas exige atenção especial ao dirigir. Revise estas recomendações antes de sair para a estrada.",
+    "needHelpTitle": "Precisa de ajuda na estrada?",
+    "needHelpText": "Se você tiver um acidente, dano ou pane com o seu veículo Glaciares Rent a Car, entre em contato conosco imediatamente.",
+    "cta": "Preciso de assistência pelo WhatsApp",
+    "notConfigured": "[COMPLETAR] Número de assistência pendente de configuração."
+  },
+  "assistanceWidget": {
+    "title": "Preciso de assistência",
+    "ariaLabel": "Preciso de assistência pelo WhatsApp",
+    "openWhatsapp": "Abrir WhatsApp"
+  },
+  "beforeTravelPage": {
+    "subtitle": "Informações práticas para preparar sua viagem pela Região de Magalhães."
+  },
+  "search": {
+    "destination": "Destino",
+    "route": "Rota",
+    "food": "Gastronomia",
+    "lodging": "Hospedagem",
+    "dialogLabel": "Busca",
+    "noResults": "Nenhum resultado para \"{query}\"."
+  },
+  "rentacarPage": {
+    "viewVehicles": "Ver veículos",
+    "quoteNow": "Cotar agora",
+    "visitCompany": "Visitar Glaciares Rent a Car",
+    "quoteMessage": "Olá, gostaria de cotar o aluguel de um veículo com a Glaciares Rent a Car.",
+    "whatsappMissing": "[COMPLETAR] WhatsApp de reservas",
+    "emailLabel": "E-mail de reservas",
+    "emailMissing": "[COMPLETAR] E-mail de reservas",
+    "addressLabel": "Endereço",
+    "addressMissing": "[COMPLETAR] Endereço da empresa",
+    "pricesNotice": "Os preços de aluguel são negociados diretamente com a Glaciares Rent a Car e não são publicados neste guia."
+  },
+  "cookieBanner": {
+    "text": "Usamos o armazenamento local do navegador para lembrar seus favoritos, idioma e roteiro. Não usamos cookies de rastreamento publicitário. Consulte nossa",
+    "linkText": "política de cookies",
+    "reject": "Rejeitar",
+    "accept": "Aceitar"
+  },
+  "helpPage": {
+    "reportIntro": "Ajude-nos a manter este guia atualizado. Conte-nos qual informação você encontrou incorreta ou desatualizada.",
+    "reportSent": "Obrigado! Seu aplicativo de contato foi aberto para enviar o relato.",
+    "sectionLabel": "Seção ou página",
+    "sectionPlaceholder": "Ex.: Rota Punta Arenas - Puerto Natales",
+    "detailLabel": "Detalhe do erro",
+    "submit": "Enviar relato"
   }
 }

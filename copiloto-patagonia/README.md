@@ -121,7 +121,9 @@ Pasos:
 - [x] El botón flotante de asistencia y el de "Cotizar" abren WhatsApp con mensaje predefinido (o muestran
       `[COMPLETAR]` si falta el número)
 - [x] Favoritos, "Mi viaje" e historial persisten en `localStorage` sin necesidad de cuenta
-- [x] Selector de idioma ES/EN/PT funcional (interfaz completa; contenido narrativo en español)
+- [x] Selector de idioma ES/EN/PT funcional, con interfaz y contenido narrativo completamente traducidos
+      (destinos, rutas, gastronomía, alojamiento, enlaces oficiales, conducción segura, antes de viajar, ayuda,
+      sección comercial y páginas legales)
 - [x] Manifest, service worker e íconos PWA generados; instalación probada vía evento `beforeinstallprompt`
 - [x] Aviso de privacidad, cookies y términos de uso con contenido original
 - [x] Ningún botón o sección queda vacía o simulada
@@ -130,8 +132,8 @@ Pasos:
 
 - Completar variables de contacto en `company.json`
 - Reemplazar fotografías de referencia por fotografía propia
-- Revisar y, si se desea, ampliar traducciones EN/PT (actualmente cubren toda la interfaz; el contenido narrativo
-  extenso —descripciones largas, FAQs— está en español)
+- Las traducciones EN/PT fueron redactadas íntegramente para esta entrega; se recomienda una revisión final por
+  un hablante nativo antes de publicar en producción
 - Verificar en terreno las distancias, tiempos y condiciones de camino antes de la temporada alta, y actualizar
   `lastReviewed` en los JSON correspondientes
 - Decidir e implementar el CMS de edición en línea (Decap CMS u otro) si se requiere edición sin tocar código
