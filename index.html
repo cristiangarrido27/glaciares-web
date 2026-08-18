@@ -240,6 +240,16 @@
   .quote-total-box{background:var(--slate-50);border-radius:12px;padding:14px;margin-top:6px;font-size:13.5px;}
   .quote-total-box div{display:flex;justify-content:space-between;padding:3px 0;}
   .quote-total-box .grand{font-size:17px;font-weight:800;color:var(--navy);border-top:1px solid var(--slate-200);margin-top:6px;padding-top:8px;}
+
+  /* ===== Preguntas Frecuentes (acordeón nativo, sin JS) ===== */
+  .faq-list{max-width:760px;margin:0 auto;}
+  .faq-item{border:1px solid var(--slate-200);border-radius:14px;padding:2px 22px;margin-bottom:12px;background:#fff;transition:.2s;}
+  .faq-item[open]{border-color:var(--accent);box-shadow:0 4px 16px rgba(0,0,0,.05);}
+  .faq-item summary{cursor:pointer;font-weight:700;padding:17px 0;list-style:none;display:flex;justify-content:space-between;align-items:center;gap:16px;font-size:15px;color:var(--navy);}
+  .faq-item summary::-webkit-details-marker{display:none;}
+  .faq-item summary .faq-toggle{flex-shrink:0;width:26px;height:26px;border-radius:50%;background:var(--slate-100);color:var(--navy);display:flex;align-items:center;justify-content:center;font-size:16px;font-weight:800;}
+  .faq-item[open] summary .faq-toggle{background:var(--accent);}
+  .faq-item p{color:var(--slate-600);font-size:14px;line-height:1.6;padding:0 0 18px;}
 </style>
 </head>
 <body>
@@ -253,18 +263,20 @@
     </a>
     <nav class="main-nav">
       <a href="#inicio">Inicio</a>
+      <a href="#buscador">Cotiza Aquí</a>
       <a href="#flota">Flota</a>
       <a href="#servicios">Servicios</a>
       <a href="#destinos">Destinos</a>
+      <a href="#preguntas">Preguntas Frecuentes</a>
       <a href="#nosotros">Nosotros</a>
       <a href="#contacto">Contacto</a>
     </nav>
-    <a href="https://wa.me/56983335924?text=Hola%2C%20me%20gustar%C3%ADa%20cotizar%20un%20arriendo%20de%20veh%C3%ADculo." target="_blank" class="header-cta">Reservar</a>
+    <a href="#buscador" class="header-cta">Reservar</a>
     <button id="menuBtn" class="menu-btn" aria-label="Abrir menú">☰</button>
   </div>
   <div id="mobileMenu">
-    <a href="#inicio">Inicio</a><a href="#flota">Flota</a><a href="#servicios">Servicios</a>
-    <a href="#destinos">Destinos</a><a href="#nosotros">Nosotros</a><a href="#contacto">Contacto</a>
+    <a href="#inicio">Inicio</a><a href="#buscador">Cotiza Aquí</a><a href="#flota">Flota</a><a href="#servicios">Servicios</a>
+    <a href="#destinos">Destinos</a><a href="#preguntas">Preguntas Frecuentes</a><a href="#nosotros">Nosotros</a><a href="#contacto">Contacto</a>
   </div>
 </header>
 
@@ -281,15 +293,16 @@
     <p class="eyebrow">EXCELENCIA AL SERVICIO DEL TURISTA</p>
     <h1>Tu viaje a la Patagonia merece <span id="typewriter" class="accent"></span><span class="cursor"></span></h1>
     <p>Vehículos, asistencia 24/7 y la libertad de llegar donde otros no pueden. Vive el fin del mundo sin preocupaciones.</p>
-    <a href="#flota" class="btn btn-accent">Explorar Vehículos</a>
+    <a href="#buscador" class="btn btn-accent">Cotiza Aquí y Paga Online</a>
   </div>
   <div class="wave">
     <svg viewBox="0 0 1440 90" width="100%" height="80" preserveAspectRatio="none"><path fill="#ffffff" d="M0,32 C240,90 480,0 720,24 C960,48 1200,96 1440,40 L1440,100 L0,100 Z"/></svg>
   </div>
 </section>
 
-<!-- ===================== BUSCADOR DE RESERVAS ===================== -->
-<div class="booking-bar-wrap">
+<!-- ===================== BUSCADOR DE RESERVAS (cotiza y luego paga) ===================== -->
+<div id="buscador" class="booking-bar-wrap">
+  <p class="center" style="color:var(--navy);font-weight:800;font-size:13px;letter-spacing:.15em;margin-bottom:10px;text-shadow:0 1px 8px rgba(255,255,255,.6);">COTIZA AHORA Y PAGA ONLINE DE FORMA SEGURA</p>
   <form class="booking-bar" id="searchForm">
     <div class="bfield">
       <label>Lugar de retiro</label>
@@ -510,6 +523,48 @@
   <div class="clause"><h3>12. Identificación de la empresa</h3><p>Glaciares Rent a Car — Av. Francisco Javier Reyna 0473, Punta Arenas, Magallanes y Antártica Chilena. Correo: glaciaresrentacar@gmail.com · Tel.: +56 9 8333 5924.<br><span class="todo">Completar: RUT / razón social exacta de la empresa para que estas condiciones sean vinculantes</span></p></div>
 </section>
 
+<!-- ===================== PREGUNTAS FRECUENTES ===================== -->
+<section id="preguntas" class="section container">
+  <div class="section-head">
+    <h2 class="section-title">Preguntas Frecuentes</h2>
+    <p class="section-sub">Resolvemos tus dudas antes de que subas al auto.</p>
+    <div class="rule"></div>
+  </div>
+  <div class="faq-list">
+    <details class="faq-item">
+      <summary>¿Cuál es la edad mínima para arrendar un vehículo?<span class="faq-toggle">+</span></summary>
+      <p>20 años cumplidos a la fecha de entrega (18–19 años con cargo de conductor joven). Se requiere licencia de conducir y cédula de identidad o pasaporte vigente; si la licencia no está en alfabeto latino, se exige licencia internacional.</p>
+    </details>
+    <details class="faq-item">
+      <summary>¿Puedo cruzar a Argentina con el vehículo arrendado?<span class="faq-toggle">+</span></summary>
+      <p>Sí. Gestionamos el permiso notarial de salida y el seguro obligatorio internacional (Mercosur) para visitar, por ejemplo, El Calafate. Debe solicitarse con 24 a 48 horas hábiles de anticipación y tiene un costo adicional.</p>
+    </details>
+    <details class="faq-item">
+      <summary>¿Qué incluye la tarifa base?<span class="faq-toggle">+</span></summary>
+      <p>Tiempo y kilometraje libre, coberturas básicas de daños y responsabilidad civil, asistencia en ruta 24/7 y vehículo de reemplazo sujeto a disponibilidad. Un día de arriendo equivale a 24 horas con 1 hora de tolerancia sin recargo.</p>
+    </details>
+    <details class="faq-item">
+      <summary>¿Necesito dejar una garantía?<span class="faq-toggle">+</span></summary>
+      <p>Sí, se exige un bloqueo de garantía en tarjeta de crédito (aprox. $500.000, según categoría del vehículo), que se libera una vez que revisamos y recibimos el vehículo conforme.</p>
+    </details>
+    <details class="faq-item">
+      <summary>¿Cómo pago mi reserva?<span class="faq-toggle">+</span></summary>
+      <p>Cotiza online arriba en "Cotiza Aquí", elige tu vehículo y fechas, y paga de forma segura con tarjeta de crédito o débito a través de Webpay (Transbank). También aceptamos transferencia, a convenir con la sucursal.</p>
+    </details>
+    <details class="faq-item">
+      <summary>¿Puedo devolver el vehículo en un lugar distinto al de retiro?<span class="faq-toggle">+</span></summary>
+      <p>Sí, con un cargo adicional según la distancia, que te confirmamos al momento de la reserva.</p>
+    </details>
+    <details class="faq-item">
+      <summary>¿Qué pasa si llego tarde a retirar o devolver el vehículo?<span class="faq-toggle">+</span></summary>
+      <p>Tu reserva se mantiene hasta 2 horas después de la hora pactada; pasado ese plazo el vehículo queda disponible para otro cliente. Los atrasos en la devolución se cobran por hora extra o día adicional.</p>
+    </details>
+  </div>
+  <p class="center" style="margin-top:28px;">
+    <a href="https://wa.me/56983335924?text=Hola%2C%20tengo%20una%20consulta%20sobre%20el%20arriendo." target="_blank" class="btn btn-accent">¿Otra pregunta? Escríbenos</a>
+  </p>
+</section>
+
 <!-- ===================== CONTACTO ===================== -->
 <section id="contacto" class="section section-alt">
   <div class="container contact-grid">
@@ -521,8 +576,8 @@
       <div class="info-item"><p class="label">Horario</p><p class="value">Lunes a domingo, de 8:00 a 21:00 hs.</p></div>
       <div class="info-item">
         <p class="label">Formas de pago</p>
-        <p class="value">Tarjetas de crédito y débito, transferencia — a convenir.</p>
-        <span class="pill">Webpay/Transbank — próximamente (requiere afiliación de comercio)</span>
+        <p class="value">Tarjetas de crédito y débito online con Webpay (Transbank), o transferencia a convenir.</p>
+        <span class="pill">✓ Pago online seguro con Webpay</span>
       </div>
     </div>
     <div class="contact-form">
@@ -549,9 +604,11 @@
     <div>
       <h4>Enlaces Rápidos</h4>
       <ul>
+        <li><a href="#buscador">Cotiza Aquí</a></li>
         <li><a href="#flota">Nuestra Flota</a></li>
+        <li><a href="#preguntas">Preguntas Frecuentes</a></li>
         <li><a href="#condiciones">Condiciones</a></li>
-        <li><a href="#contacto">Cotizar</a></li>
+        <li><a href="#contacto">Contacto</a></li>
       </ul>
     </div>
     <div>
