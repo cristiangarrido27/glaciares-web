@@ -1,13 +1,60 @@
 <!DOCTYPE html>
-<html lang="es">
+<html lang="es-CL">
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Glaciares Rent a Car | Experiencia en la Patagonia</title>
-<meta name="description" content="Arrienda tu vehículo ideal para explorar la Patagonia con estilo, seguridad y confort. Reserva inmediata por WhatsApp.">
+<title>Rent a Car en Punta Arenas | Glaciares Rent a Car</title>
+<meta name="description" content="Arriendo de vehículos en Punta Arenas para recorrer Torres del Paine, Puerto Natales y la Patagonia. Consulta disponibilidad y reserva por WhatsApp.">
+<link rel="canonical" href="https://www.glaciaresrentacar.cl/">
+<meta name="robots" content="index, follow">
 <link rel="icon" href="https://glaciaresrentacar.cl/LOGOSINFONDO.png">
+<link rel="apple-touch-icon" href="https://glaciaresrentacar.cl/LOGOSINFONDO.png">
+
+<!-- Open Graph / Facebook / WhatsApp -->
+<meta property="og:type" content="website">
+<meta property="og:locale" content="es_CL">
+<meta property="og:site_name" content="Glaciares Rent a Car">
+<meta property="og:title" content="Rent a Car en Punta Arenas | Glaciares Rent a Car">
+<meta property="og:description" content="Arriendo de vehículos en Punta Arenas para recorrer Torres del Paine, Puerto Natales y la Patagonia. Consulta disponibilidad y reserva por WhatsApp.">
+<meta property="og:url" content="https://www.glaciaresrentacar.cl/">
+<meta property="og:image" content="https://glaciaresrentacar.cl/PAISAJES/142423.webp">
+
+<!-- Twitter Card -->
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="Rent a Car en Punta Arenas | Glaciares Rent a Car">
+<meta name="twitter:description" content="Arriendo de vehículos en Punta Arenas para recorrer Torres del Paine, Puerto Natales y la Patagonia.">
+<meta name="twitter:image" content="https://glaciaresrentacar.cl/PAISAJES/142423.webp">
+
+<!-- Datos estructurados: negocio local de arriendo de vehículos -->
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "LocalBusiness",
+  "name": "Glaciares Rent a Car",
+  "image": "https://glaciaresrentacar.cl/LOGOSINFONDO.png",
+  "url": "https://www.glaciaresrentacar.cl/",
+  "telephone": "+56983335924",
+  "email": "glaciaresrentacar@gmail.com",
+  "priceRange": "$$",
+  "address": {
+    "@type": "PostalAddress",
+    "streetAddress": "Av. Francisco Javier Reyna 0473",
+    "addressLocality": "Punta Arenas",
+    "addressRegion": "Magallanes y de la Antártica Chilena",
+    "addressCountry": "CL"
+  },
+  "openingHoursSpecification": {
+    "@type": "OpeningHoursSpecification",
+    "dayOfWeek": ["Monday","Tuesday","Wednesday","Thursday","Friday","Saturday","Sunday"],
+    "opens": "08:00",
+    "closes": "21:00"
+  },
+  "areaServed": ["Punta Arenas", "Magallanes", "Torres del Paine", "Puerto Natales", "Tierra del Fuego"]
+}
+</script>
+
 <style>
-  /* ===== Reset & base (CSS propia, sin dependencias externas de JS/framework) ===== */
+  /* ===== Reset & base ===== */
   *{box-sizing:border-box;margin:0;padding:0;}
   html{scroll-behavior:smooth;}
   body{
@@ -18,179 +65,207 @@
   a{text-decoration:none;color:inherit;}
   ul{list-style:none;}
   button{font-family:inherit;cursor:pointer;border:none;background:none;}
+  :focus-visible{outline:3px solid var(--accent-dark);outline-offset:2px;}
 
   :root{
     --navy:#0A2540; --navy-dark:#071B30;
     --accent:#00D4FF; --accent-dark:#00AFD6;
+    --green:#2E7D5B; --green-dark:#235F45;
     --slate-50:#f8fafc; --slate-100:#f1f5f9; --slate-200:#e2e8f0;
     --slate-400:#94a3b8; --slate-500:#64748b; --slate-600:#475569;
-    --rose-50:#fff1f2; --rose-600:#e11d48; --amber-400:#fbbf24;
+    --amber-400:#fbbf24;
   }
 
   .container{max-width:1180px;margin:0 auto;padding:0 20px;}
-  .section{padding:80px 0;}
+  .section{padding:72px 0;}
   .section-alt{background:var(--slate-50);}
   .section-navy{background:var(--navy);}
   .center{text-align:center;}
-  .eyebrow{color:var(--accent);font-weight:700;letter-spacing:.2em;font-size:13px;margin-bottom:14px;}
-  .section-title{font-size:34px;font-weight:800;color:var(--navy);}
+  .eyebrow{color:var(--accent-dark);font-weight:700;letter-spacing:.18em;font-size:13px;margin-bottom:14px;text-transform:uppercase;}
+  .eyebrow.on-navy{color:var(--accent);}
+  .section-title{font-size:32px;font-weight:800;color:var(--navy);letter-spacing:-.01em;}
   .section-title.white{color:#fff;}
-  .section-sub{color:var(--slate-500);margin-top:12px;max-width:560px;margin-left:auto;margin-right:auto;}
-  .section-head{max-width:600px;margin:0 auto 44px;text-align:center;}
+  .section-sub{color:var(--slate-500);margin-top:12px;max-width:560px;margin-left:auto;margin-right:auto;font-size:15.5px;}
+  .section-head{max-width:620px;margin:0 auto 40px;text-align:center;}
   .rule{height:4px;width:56px;background:var(--accent);border-radius:99px;margin:16px auto 0;}
 
-  .btn{display:inline-flex;align-items:center;gap:8px;font-weight:700;padding:13px 26px;border-radius:99px;transition:.2s;font-size:15px;}
+  .btn{display:inline-flex;align-items:center;justify-content:center;gap:8px;font-weight:700;padding:14px 26px;border-radius:12px;transition:.2s;font-size:15px;}
   .btn-accent{background:var(--accent);color:var(--navy);}
   .btn-accent:hover{background:var(--accent-dark);}
-  .btn-outline{border:1.5px solid var(--navy);color:var(--navy);font-size:12px;font-weight:700;padding:9px 0;border-radius:99px;text-align:center;display:block;letter-spacing:.03em;}
+  .btn-whatsapp{background:#25D366;color:#fff;}
+  .btn-whatsapp:hover{background:#1fb959;}
+  .btn-outline{border:1.5px solid var(--navy);color:var(--navy);font-size:12.5px;font-weight:700;padding:10px 0;border-radius:10px;text-align:center;display:block;letter-spacing:.02em;}
   .btn-outline:hover{background:var(--navy);color:#fff;}
+  .btn-outline-white{border:1.5px solid rgba(255,255,255,.5);color:#fff;font-weight:700;padding:12px 22px;border-radius:12px;font-size:14px;}
+  .btn-outline-white:hover{background:rgba(255,255,255,.12);}
 
   /* Header */
-  header{position:fixed;top:0;left:0;right:0;z-index:50;background:rgba(255,255,255,.95);backdrop-filter:blur(6px);border-bottom:1px solid var(--slate-100);}
+  header{position:fixed;top:0;left:0;right:0;z-index:50;background:rgba(255,255,255,.97);backdrop-filter:blur(6px);border-bottom:1px solid var(--slate-100);}
   .header-inner{max-width:1180px;margin:0 auto;padding:12px 20px;display:flex;align-items:center;justify-content:space-between;}
   .brand{display:flex;align-items:center;gap:10px;}
   .brand img{height:44px;width:44px;border-radius:50%;object-fit:cover;}
   .brand-text{font-weight:800;font-size:13px;line-height:1.25;}
   .brand-text small{display:block;font-weight:600;font-size:10px;letter-spacing:.15em;color:var(--slate-500);}
-  nav.main-nav{display:flex;gap:30px;font-weight:600;font-size:14px;}
-  .header-cta{background:var(--accent);color:var(--navy);font-weight:700;font-size:14px;padding:9px 18px;border-radius:99px;}
-  .menu-btn{display:none;background:none;border:none;font-size:22px;}
-  @media (max-width:860px){
+  nav.main-nav{display:flex;gap:22px;font-weight:600;font-size:13.5px;}
+  nav.main-nav a:hover{color:var(--accent-dark);}
+  .header-cta{background:var(--accent);color:var(--navy);font-weight:700;font-size:13.5px;padding:10px 18px;border-radius:10px;}
+  .menu-btn{display:none;background:none;border:none;font-size:24px;line-height:1;padding:4px;}
+  @media (max-width:900px){
     nav.main-nav, .header-cta{display:none;}
     .menu-btn{display:block;}
   }
-  #mobileMenu{display:none;background:#fff;border-top:1px solid var(--slate-100);padding:16px 20px;flex-direction:column;gap:14px;font-weight:600;font-size:14px;}
+  #mobileMenu{display:none;background:#fff;border-top:1px solid var(--slate-100);padding:16px 20px 20px;flex-direction:column;gap:2px;font-weight:600;font-size:15px;}
+  #mobileMenu a{padding:10px 4px;border-bottom:1px solid var(--slate-100);}
   #mobileMenu.open{display:flex;}
 
   /* Hero */
-  .hero{position:relative;height:640px;overflow:hidden;background:var(--navy);}
+  .hero{position:relative;min-height:600px;overflow:hidden;background:var(--navy);}
   .hero-crossfade{position:absolute;inset:0;}
-  .hero-crossfade img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;opacity:0;transition:opacity 1.8s ease-in-out;}
+  .hero-crossfade img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;opacity:0;transition:opacity 2s ease-in-out;}
   .hero-crossfade img.active{opacity:1;}
-  .hero-overlay{position:absolute;inset:0;background:linear-gradient(90deg,rgba(10,37,64,.95) 10%,rgba(10,37,64,.72) 45%,rgba(10,37,64,.18) 100%);}
-  .hero-content{position:relative;max-width:1180px;margin:0 auto;padding:0 20px;height:100%;display:flex;flex-direction:column;justify-content:center;padding-top:70px;}
-  .hero-content h1{color:#fff;font-weight:800;font-size:52px;line-height:1.12;max-width:620px;}
-  .hero-content h1 .accent{color:var(--accent);}
-  .cursor{display:inline-block;width:3px;height:.9em;background:var(--accent);margin-left:4px;vertical-align:-0.1em;animation:blink .9s steps(1) infinite;}
-  @keyframes blink{50%{opacity:0;}}
-  .hero-content p{color:#e2e8f0;max-width:520px;margin-top:22px;font-size:17px;}
-  .hero-content .btn{margin-top:30px;width:fit-content;box-shadow:0 10px 30px rgba(0,212,255,.3);}
+  .hero-overlay{position:absolute;inset:0;background:linear-gradient(100deg,rgba(10,37,64,.96) 15%,rgba(10,37,64,.80) 50%,rgba(10,37,64,.35) 100%);}
+  .hero-content{position:relative;max-width:1180px;margin:0 auto;padding:120px 20px 190px;}
+  .hero-content h1{color:#fff;font-weight:800;font-size:44px;line-height:1.15;max-width:650px;letter-spacing:-.01em;}
+  .hero-content p.lead{color:#dbe6f0;max-width:540px;margin-top:18px;font-size:16.5px;line-height:1.5;}
+  .hero-actions{display:flex;flex-wrap:wrap;gap:14px;margin-top:30px;}
+  .hero-mini-trust{display:flex;flex-wrap:wrap;gap:10px 22px;margin-top:34px;}
+  .hero-mini-trust span{display:flex;align-items:center;gap:7px;color:#e6edf3;font-size:13px;font-weight:600;}
+  .hero-mini-trust svg{flex-shrink:0;width:16px;height:16px;color:var(--accent);}
   .wave{position:absolute;bottom:-1px;left:0;right:0;line-height:0;}
-  @media (max-width:640px){ .hero-content h1{font-size:36px;} .hero{height:580px;} }
+  @media (max-width:640px){ .hero-content h1{font-size:32px;} .hero-content{padding:110px 20px 210px;} }
 
   /* Filter tabs */
-  .filter-tabs{display:flex;flex-wrap:wrap;justify-content:center;gap:10px;margin-bottom:44px;}
+  .filter-tabs{display:flex;flex-wrap:wrap;justify-content:center;gap:10px;margin-bottom:40px;}
   .filter-btn{border:1px solid var(--slate-200);background:#fff;color:var(--navy);padding:9px 20px;border-radius:99px;font-weight:700;font-size:14px;transition:.2s;}
   .filter-btn:hover{border-color:var(--accent);}
   .filter-btn.active{background:var(--navy);border-color:var(--navy);color:#fff;}
 
   /* Grids & cards */
-  .grid{display:grid;gap:24px;}
+  .grid{display:grid;gap:22px;}
   .grid-2{grid-template-columns:repeat(2,1fr);}
   .grid-3{grid-template-columns:repeat(3,1fr);}
   .grid-4{grid-template-columns:repeat(4,1fr);}
   @media (max-width:860px){ .grid-2,.grid-3,.grid-4{grid-template-columns:repeat(2,1fr);} }
   @media (max-width:560px){ .grid-2,.grid-3,.grid-4{grid-template-columns:1fr;} }
 
-  .card{background:#fff;border:1px solid var(--slate-100);border-radius:18px;overflow:hidden;box-shadow:0 1px 2px rgba(0,0,0,.04);transition:.2s;}
-  .card:hover{box-shadow:0 8px 24px rgba(0,0,0,.08);}
-  .card img{width:100%;height:190px;object-fit:cover;}
-  .card-body{padding:20px;}
-  .card-body h3{font-size:14px;font-weight:800;letter-spacing:.02em;text-transform:uppercase;}
-  .price{color:var(--accent-dark);font-weight:800;font-size:19px;margin-top:4px;}
-  .badge-urgent{margin-top:12px;background:var(--rose-50);color:var(--rose-600);font-size:12px;font-weight:700;padding:8px 12px;border-radius:10px;}
+  .card{background:#fff;border:1px solid var(--slate-100);border-radius:16px;overflow:hidden;box-shadow:0 1px 3px rgba(10,37,64,.06);transition:.2s;}
+  .card:hover{box-shadow:0 10px 26px rgba(10,37,64,.09);transform:translateY(-2px);}
+  .card img{width:100%;height:185px;object-fit:cover;}
+  .card-body{padding:18px 20px 20px;}
+  .card-cat{display:inline-block;font-size:11px;font-weight:700;letter-spacing:.06em;color:var(--accent-dark);background:rgba(0,212,255,.12);padding:3px 10px;border-radius:99px;margin-bottom:8px;text-transform:uppercase;}
+  .card-body h3{font-size:15.5px;font-weight:800;letter-spacing:.01em;}
+  .price{color:var(--navy);font-weight:800;font-size:19px;margin-top:6px;}
+  .price small{font-weight:600;font-size:12px;color:var(--slate-500);}
+  .avail-note{margin-top:10px;color:var(--slate-500);font-size:12px;font-weight:600;display:flex;align-items:center;gap:6px;}
+  .avail-note svg{width:14px;height:14px;flex-shrink:0;color:var(--green);}
 
-  .service-note{color:var(--slate-500);font-size:12px;margin-top:2px;}
+  .service-note{color:var(--slate-500);font-size:12.5px;margin-top:3px;}
+
+  /* Franja de confianza / beneficios sin cifras */
+  .trust-strip{background:var(--slate-50);border-top:1px solid var(--slate-100);border-bottom:1px solid var(--slate-100);}
+  .trust-strip .grid-4{gap:0;}
+  .trust-item{display:flex;align-items:center;gap:12px;padding:26px 18px;text-align:left;}
+  .trust-item .ic{flex-shrink:0;width:44px;height:44px;border-radius:12px;background:#fff;border:1px solid var(--slate-200);display:flex;align-items:center;justify-content:center;color:var(--navy);}
+  .trust-item .ic svg{width:22px;height:22px;}
+  .trust-item strong{display:block;font-size:14px;color:var(--navy);}
+  @media (max-width:860px){ .trust-item{padding:18px 14px;} }
 
   /* Ventajas */
   .adv{text-align:center;padding:0 10px;}
-  .adv-icon{height:56px;width:56px;margin:0 auto 16px;border-radius:16px;background:rgba(0,212,255,.15);display:flex;align-items:center;justify-content:center;font-size:24px;}
-  .adv h3{font-weight:700;font-size:18px;margin-bottom:8px;}
-  .adv p{color:var(--slate-500);font-size:14px;}
+  .adv-icon{height:54px;width:54px;margin:0 auto 16px;border-radius:14px;background:rgba(0,212,255,.14);display:flex;align-items:center;justify-content:center;color:var(--navy);}
+  .adv-icon svg{width:26px;height:26px;}
+  .adv h3{font-weight:700;font-size:17px;margin-bottom:8px;}
+  .adv p{color:var(--slate-500);font-size:14px;line-height:1.5;}
 
   /* Promo */
-  .promo-card{background:#fff;border-radius:24px;overflow:hidden;display:grid;grid-template-columns:1fr 1fr;box-shadow:0 20px 50px rgba(0,0,0,.3);}
-  .promo-card img{height:100%;object-fit:cover;min-height:260px;}
-  .promo-body{padding:34px;}
-  .promo-body h3{font-size:20px;font-weight:800;margin-bottom:6px;}
-  .promo-body p.lead{color:var(--slate-500);font-size:14px;margin-bottom:18px;}
+  .promo-card{background:#fff;border-radius:20px;overflow:hidden;display:grid;grid-template-columns:1fr 1fr;box-shadow:0 16px 40px rgba(0,0,0,.28);}
+  .promo-card img{height:100%;object-fit:cover;min-height:240px;}
+  .promo-body{padding:32px;}
+  .promo-body h3{font-size:19px;font-weight:800;margin-bottom:6px;}
+  .promo-body p.lead{color:var(--slate-500);font-size:14px;margin-bottom:16px;}
   .promo-body .label{font-weight:700;font-size:14px;margin-bottom:8px;}
-  .promo-list{margin-bottom:18px;}
-  .promo-list li{display:flex;gap:8px;font-size:14px;color:var(--slate-600);padding:2px 0;}
+  .promo-list{margin-bottom:16px;}
+  .promo-list li{display:flex;gap:8px;font-size:13.5px;color:var(--slate-600);padding:2px 0;}
   @media (max-width:700px){ .promo-card{grid-template-columns:1fr;} }
 
-  /* Testimonios */
-  .stars{color:var(--amber-400);margin-bottom:10px;letter-spacing:2px;}
-  .quote{color:var(--slate-600);font-size:14px;margin-bottom:14px;}
-  .author{font-weight:700;font-size:14px;}
-  .author span{font-weight:400;color:var(--slate-400);}
+  /* Opiniones */
+  .reviews-card{max-width:640px;margin:0 auto;text-align:center;background:#fff;border:1px solid var(--slate-100);border-radius:20px;padding:44px 32px;box-shadow:0 1px 3px rgba(10,37,64,.06);}
+  .reviews-card .stars-ic{display:flex;justify-content:center;gap:4px;color:var(--amber-400);margin-bottom:16px;}
+  .reviews-card .stars-ic svg{width:22px;height:22px;}
+  .reviews-card p{color:var(--slate-600);font-size:15px;margin-bottom:22px;}
 
-  /* Stats */
-  .stats{max-width:940px;margin:0 auto;text-align:center;}
-  .stat-icon{font-size:28px;margin-bottom:8px;}
-  .stat-num{font-size:38px;font-weight:800;}
-  .stat-label{color:var(--slate-500);font-size:11px;font-weight:700;letter-spacing:.05em;margin-top:4px;}
-
-  /* Nosotros */
-  .about{max-width:680px;margin:0 auto;text-align:center;}
-  .about img{height:64px;width:64px;border-radius:50%;margin:0 auto 24px;}
-  .about p{color:#cbd5e1;margin-bottom:16px;}
-  .about strong{color:#fff;}
-  .about .sign{color:var(--accent);font-style:italic;font-weight:600;}
-
-  /* Condiciones */
-  .notice{font-size:12px;color:#92400e;background:#fffbeb;border:1px solid #fde68a;border-radius:14px;padding:14px 18px;margin-bottom:40px;text-align:center;}
-  .clause{margin-bottom:28px;}
-  .clause h3{font-weight:700;font-size:17px;margin-bottom:8px;}
-  .clause p{color:var(--slate-600);font-size:14px;}
-  .todo{display:inline-block;margin-top:8px;font-size:12px;color:#92400e;background:repeating-linear-gradient(45deg,#fffbeb,#fffbeb 10px,#fde68a 10px,#fde68a 20px);border-radius:8px;padding:6px 12px;}
+  /* Condiciones (resumen breve en home, detalle en condiciones.html) */
+  .cond-cta{background:#fff;border:1px solid var(--slate-200);border-radius:16px;padding:22px 26px;display:flex;flex-wrap:wrap;align-items:center;justify-content:space-between;gap:14px;}
+  .cond-cta p{font-size:13.5px;color:var(--slate-600);max-width:520px;}
 
   /* Contacto */
-  .contact-grid{display:grid;grid-template-columns:1fr 1fr;gap:56px;}
+  .contact-grid{display:grid;grid-template-columns:1fr 1fr;gap:48px;}
   @media (max-width:860px){ .contact-grid{grid-template-columns:1fr;} }
-  .info-item{margin-bottom:22px;}
-  .info-item .label{font-weight:700;font-size:14px;}
-  .info-item .value{color:var(--slate-600);font-size:14px;}
+  .info-item{margin-bottom:20px;display:flex;gap:12px;}
+  .info-item .ic{flex-shrink:0;width:36px;height:36px;border-radius:10px;background:var(--slate-100);display:flex;align-items:center;justify-content:center;color:var(--navy);}
+  .info-item .ic svg{width:18px;height:18px;}
+  .info-item .label{font-weight:700;font-size:13.5px;}
+  .info-item .value{color:var(--slate-600);font-size:13.5px;margin-top:2px;}
   .pill{display:inline-block;margin-top:8px;font-size:12px;color:var(--slate-500);border:1px solid var(--slate-200);border-radius:99px;padding:4px 12px;}
-  .contact-form{background:#fff;border:1px solid var(--slate-100);border-radius:24px;padding:32px;box-shadow:0 1px 2px rgba(0,0,0,.04);}
-  .contact-form h3{font-size:20px;font-weight:800;margin-bottom:6px;}
-  .contact-form p{color:var(--slate-500);font-size:14px;margin-bottom:20px;}
-  .contact-form input, .contact-form textarea{width:100%;border:1px solid var(--slate-200);border-radius:12px;padding:12px 14px;font-size:14px;margin-bottom:14px;font-family:inherit;}
+  .contact-form{background:#fff;border:1px solid var(--slate-100);border-radius:20px;padding:30px;box-shadow:0 1px 2px rgba(0,0,0,.04);}
+  .contact-form h3{font-size:19px;font-weight:800;margin-bottom:6px;}
+  .contact-form p{color:var(--slate-500);font-size:14px;margin-bottom:18px;}
+  .contact-form input, .contact-form textarea{width:100%;border:1px solid var(--slate-200);border-radius:10px;padding:12px 14px;font-size:14px;margin-bottom:12px;font-family:inherit;}
   .contact-form input:focus, .contact-form textarea:focus{outline:2px solid var(--accent);}
-  .contact-form button{width:100%;background:var(--accent);color:var(--navy);font-weight:700;padding:13px;border-radius:12px;font-size:15px;}
+  .contact-form button{width:100%;background:var(--accent);color:var(--navy);font-weight:700;padding:13px;border-radius:10px;font-size:15px;}
   .contact-form button:hover{background:var(--accent-dark);}
   .form-note{color:var(--slate-400);font-size:12px;margin-top:10px;}
+  .map-wrap{border-radius:16px;overflow:hidden;box-shadow:0 6px 20px rgba(10,37,64,.1);margin-top:6px;background:var(--slate-100);}
+  .map-wrap iframe{display:block;width:100%;height:280px;border:0;}
 
   /* Footer */
-  footer{background:var(--navy);color:#cbd5e1;padding-top:60px;padding-bottom:30px;}
-  .footer-grid{display:grid;grid-template-columns:1.4fr 1fr 1fr;gap:36px;margin-bottom:40px;}
+  footer{background:var(--navy);color:#cbd5e1;padding-top:56px;padding-bottom:26px;}
+  .footer-grid{display:grid;grid-template-columns:1.4fr 1fr 1fr;gap:32px;margin-bottom:36px;}
   @media (max-width:700px){ .footer-grid{grid-template-columns:1fr;} }
-  .footer-grid img{height:52px;width:52px;border-radius:50%;margin-bottom:14px;}
-  .footer-grid h4{color:#fff;font-weight:700;margin-bottom:12px;}
-  .footer-grid li{margin-bottom:8px;font-size:14px;}
+  .footer-grid img{height:48px;width:48px;border-radius:50%;margin-bottom:14px;}
+  .footer-grid h4{color:#fff;font-weight:700;margin-bottom:12px;font-size:14px;}
+  .footer-grid li{margin-bottom:8px;font-size:13.5px;}
   .footer-grid a:hover{color:var(--accent);}
-  .footer-bottom{text-align:center;font-size:12px;color:#94a3b8;border-top:1px solid rgba(255,255,255,.1);padding-top:22px;}
+  .footer-bottom{text-align:center;font-size:12px;color:#94a3b8;border-top:1px solid rgba(255,255,255,.1);padding-top:20px;}
 
   /* Floating */
-  .wa-float{position:fixed;bottom:24px;right:24px;z-index:50;background:#25D366;color:#fff;height:56px;width:56px;border-radius:50%;display:flex;align-items:center;justify-content:center;box-shadow:0 10px 25px rgba(0,0,0,.25);}
-  .toast-host{position:fixed;bottom:24px;left:24px;z-index:50;}
-  .toast{background:#fff;box-shadow:0 10px 25px rgba(0,0,0,.15);border:1px solid var(--slate-100);border-radius:14px;padding:12px 16px;display:flex;gap:8px;align-items:center;font-size:14px;margin-bottom:10px;max-width:280px;animation:toastIn .4s ease-out, toastOut .4s ease-in 5.5s forwards;}
-  @keyframes toastIn{from{opacity:0;transform:translateY(12px);}to{opacity:1;transform:translateY(0);}}
-  @keyframes toastOut{to{opacity:0;transform:translateY(12px);}}
-  .map-wrap{border-radius:18px;overflow:hidden;box-shadow:0 10px 30px rgba(0,0,0,.1);}
+  .wa-float{position:fixed;bottom:24px;right:20px;z-index:60;background:#25D366;color:#fff;height:54px;width:54px;border-radius:50%;display:flex;align-items:center;justify-content:center;box-shadow:0 8px 22px rgba(0,0,0,.28);}
+  .toast-host{position:fixed;bottom:24px;left:20px;z-index:50;}
+
+  /* Barra fija móvil: Cotizar ahora */
+  .mobile-cta-bar{display:none;}
+  @media (max-width:640px){
+    .mobile-cta-bar{
+      display:flex;position:fixed;left:0;right:0;bottom:0;z-index:55;
+      background:#fff;border-top:1px solid var(--slate-200);padding:10px 14px calc(10px + env(safe-area-inset-bottom));
+      box-shadow:0 -4px 16px rgba(0,0,0,.08);
+    }
+    .mobile-cta-bar a{flex:1;text-align:center;padding:13px;border-radius:10px;font-weight:700;font-size:14.5px;background:var(--accent);color:var(--navy);}
+    .wa-float{bottom:82px;}
+    body{padding-bottom:64px;}
+  }
 
   /* ===== Widget de reservas (buscador + resultados + modal de pago) ===== */
-  .booking-bar-wrap{position:relative;max-width:1100px;margin:-46px auto 0;padding:0 20px;z-index:20;}
-  .booking-bar{background:#fff;border-radius:18px;box-shadow:0 20px 50px rgba(0,0,0,.18);padding:18px;display:flex;flex-wrap:wrap;gap:14px;align-items:end;}
-  .bfield{display:flex;flex-direction:column;gap:5px;flex:1;min-width:150px;}
+  .booking-bar-wrap{position:relative;max-width:1120px;margin:-64px auto 0;padding:0 20px;z-index:20;}
+  .booking-bar-label{color:#fff;font-weight:700;font-size:13px;letter-spacing:.08em;margin-bottom:12px;text-align:center;}
+  .booking-bar{background:#fff;border-radius:18px;box-shadow:0 20px 50px rgba(0,0,0,.22);padding:22px;}
+  .bgrid{display:grid;grid-template-columns:repeat(6,1fr);gap:14px;}
+  @media (max-width:980px){ .bgrid{grid-template-columns:repeat(3,1fr);} }
+  @media (max-width:640px){ .bgrid{grid-template-columns:1fr;} }
+  .bfield{display:flex;flex-direction:column;gap:5px;}
   .bfield label{font-size:11px;font-weight:700;color:var(--slate-500);text-transform:uppercase;letter-spacing:.03em;}
-  .bfield select, .bfield input{border:1px solid var(--slate-200);border-radius:10px;padding:10px 12px;font-size:14px;font-family:inherit;color:var(--navy);}
-  .booking-bar .btn-search{background:var(--navy);color:#fff;font-weight:700;padding:12px 26px;border-radius:10px;font-size:14px;white-space:nowrap;}
-  .booking-bar .btn-search:hover{background:var(--navy-dark);}
-  .booking-note{font-size:12px;color:var(--slate-500);margin-top:10px;display:flex;align-items:center;gap:8px;flex-wrap:wrap;}
-  @media (max-width:760px){ .booking-bar-wrap{margin-top:-30px;} }
+  .bfield select, .bfield input{border:1px solid var(--slate-200);border-radius:10px;padding:11px 12px;font-size:14px;font-family:inherit;color:var(--navy);width:100%;}
+  .bfield-check{display:flex;align-items:center;gap:8px;padding-top:22px;}
+  .bfield-check input{width:18px;height:18px;flex-shrink:0;}
+  .bfield-check label{font-size:13px;font-weight:600;color:var(--navy);text-transform:none;letter-spacing:0;}
+  .booking-bar-actions{display:flex;flex-wrap:wrap;align-items:center;justify-content:space-between;gap:12px;margin-top:18px;}
+  .btn-search{background:var(--navy);color:#fff;font-weight:700;padding:14px 28px;border-radius:12px;font-size:14.5px;white-space:nowrap;}
+  .btn-search:hover{background:var(--navy-dark);}
+  .booking-note{font-size:12.5px;color:var(--slate-500);}
+  .field-error{color:#b91c1c;font-size:12.5px;font-weight:600;margin-top:10px;display:none;}
+  .field-error.show{display:block;}
 
-  #searchResults{max-width:1180px;margin:50px auto 0;padding:0 20px;}
+  #searchResults{max-width:1180px;margin:44px auto 0;padding:0 20px;}
   #searchResults.hidden{display:none;}
   .search-msg{text-align:center;color:var(--slate-500);font-size:14px;padding:20px;}
   .result-card{display:flex;gap:16px;background:#fff;border:1px solid var(--slate-100);border-radius:16px;padding:14px;margin-bottom:14px;align-items:center;flex-wrap:wrap;}
@@ -198,23 +273,17 @@
   .result-info{flex:1;min-width:180px;}
   .result-info h4{font-size:15px;font-weight:800;text-transform:uppercase;}
   .result-info .meta{color:var(--slate-500);font-size:12px;margin-top:2px;}
-  .result-price{text-align:right;min-width:230px;}
-  .result-price .base{font-size:12px;color:var(--slate-400);text-decoration:line-through;margin-bottom:2px;}
+  .result-price{text-align:right;min-width:200px;}
+  .price-box{border-radius:10px;padding:10px 14px;margin-bottom:6px;text-align:right;background:var(--slate-50);border:1px solid var(--slate-200);}
+  .price-box .plabel{font-size:10.5px;font-weight:800;letter-spacing:.3px;display:block;color:var(--slate-500);}
+  .price-box .pamount{font-size:19px;font-weight:800;color:var(--navy);}
   .discount-tag{display:inline-block;background:#dcfce7;color:#166534;font-size:11px;font-weight:700;padding:2px 8px;border-radius:99px;margin-bottom:4px;}
-  .price-box{border-radius:10px;padding:8px 12px;margin-bottom:6px;text-align:right;}
-  .price-box .plabel{font-size:10.5px;font-weight:800;letter-spacing:.3px;display:block;}
-  .price-box .pamount{font-size:17px;font-weight:800;}
-  .price-box.special{background:#f59e0b;color:#fff;}
-  .price-box.special .plabel{color:#fff8e1;}
-  .price-box.normal{background:#fff;border:1px solid var(--slate-200);}
-  .price-box.normal .plabel{color:var(--slate-500);}
-  .price-box.normal .pamount{color:var(--navy);font-size:14px;}
-  .btn-pay{margin-top:8px;background:var(--accent);color:var(--navy);font-weight:700;padding:9px 18px;border-radius:99px;font-size:13px;}
+  .btn-pay{margin-top:8px;background:var(--accent);color:var(--navy);font-weight:700;padding:10px 18px;border-radius:10px;font-size:13px;}
   .btn-pay:hover{background:var(--accent-dark);}
 
   .modal-overlay{position:fixed;inset:0;background:rgba(10,37,64,.6);z-index:100;display:flex;align-items:center;justify-content:center;padding:20px;}
   .modal-overlay.hidden{display:none;}
-  .modal-box{background:#fff;border-radius:20px;padding:30px;max-width:420px;width:100%;}
+  .modal-box{background:#fff;border-radius:18px;padding:28px;max-width:420px;width:100%;max-height:88vh;overflow-y:auto;}
   .modal-box h3{font-size:18px;font-weight:800;margin-bottom:4px;}
   .modal-box .modal-sub{color:var(--slate-500);font-size:13px;margin-bottom:18px;}
   .modal-box input{width:100%;border:1px solid var(--slate-200);border-radius:10px;padding:11px 13px;font-size:14px;margin-bottom:12px;font-family:inherit;}
@@ -224,7 +293,7 @@
   .modal-confirm{background:var(--accent);color:var(--navy);}
   .modal-confirm:hover{background:var(--accent-dark);}
   .modal-summary{background:var(--slate-50);border-radius:12px;padding:12px 14px;margin-bottom:16px;font-size:13px;}
-  .modal-summary div{display:flex;justify-content:space-between;padding:2px 0;}
+  .modal-summary div{display:flex;justify-content:space-between;padding:2px 0;gap:10px;}
 
   .quote-box{max-width:480px;}
   .extra-row{display:flex;align-items:flex-start;gap:12px;border:1px solid var(--slate-100);border-radius:12px;padding:12px;margin-bottom:10px;}
@@ -240,6 +309,7 @@
   .quote-total-box{background:var(--slate-50);border-radius:12px;padding:14px;margin-top:6px;font-size:13.5px;}
   .quote-total-box div{display:flex;justify-content:space-between;padding:3px 0;}
   .quote-total-box .grand{font-size:17px;font-weight:800;color:var(--navy);border-top:1px solid var(--slate-200);margin-top:6px;padding-top:8px;}
+  .quote-extra-note{font-size:11.5px;color:var(--slate-500);margin:-4px 0 12px;}
 
   /* ===== Preguntas Frecuentes (acordeón nativo, sin JS) ===== */
   .faq-list{max-width:760px;margin:0 auto;}
@@ -250,98 +320,150 @@
   .faq-item summary .faq-toggle{flex-shrink:0;width:26px;height:26px;border-radius:50%;background:var(--slate-100);color:var(--navy);display:flex;align-items:center;justify-content:center;font-size:16px;font-weight:800;}
   .faq-item[open] summary .faq-toggle{background:var(--accent);}
   .faq-item p{color:var(--slate-600);font-size:14px;line-height:1.6;padding:0 0 18px;}
+
+  .sr-only{position:absolute;width:1px;height:1px;padding:0;margin:-1px;overflow:hidden;clip:rect(0,0,0,0);white-space:nowrap;border:0;}
 </style>
 </head>
 <body>
+
+<a href="#inicio" class="sr-only">Saltar al contenido principal</a>
 
 <!-- ===================== HEADER ===================== -->
 <header>
   <div class="header-inner">
     <a href="#inicio" class="brand">
-      <img src="https://glaciaresrentacar.cl/LOGOSINFONDO.png" alt="Glaciares Rent a Car">
+      <img src="https://glaciaresrentacar.cl/LOGOSINFONDO.png" alt="Logo Glaciares Rent a Car">
       <span class="brand-text">GLACIARES<small>RENT A CAR</small></span>
     </a>
-    <nav class="main-nav">
+    <nav class="main-nav" aria-label="Navegación principal">
       <a href="#inicio">Inicio</a>
-      <a href="#buscador">Cotiza Aquí</a>
+      <a href="#buscador">Cotizar</a>
       <a href="#flota">Flota</a>
       <a href="#servicios">Servicios</a>
       <a href="#destinos">Destinos</a>
-      <a href="#preguntas">Preguntas Frecuentes</a>
-      <a href="#nosotros">Nosotros</a>
+      <a href="#preguntas">Preguntas frecuentes</a>
       <a href="#contacto">Contacto</a>
+      <a href="condiciones.html">Condiciones</a>
     </nav>
-    <a href="#buscador" class="header-cta">Reservar</a>
-    <button id="menuBtn" class="menu-btn" aria-label="Abrir menú">☰</button>
+    <a href="#buscador" class="header-cta">Cotizar ahora</a>
+    <button id="menuBtn" class="menu-btn" aria-label="Abrir menú" aria-expanded="false" aria-controls="mobileMenu">☰</button>
   </div>
   <div id="mobileMenu">
-    <a href="#inicio">Inicio</a><a href="#buscador">Cotiza Aquí</a><a href="#flota">Flota</a><a href="#servicios">Servicios</a>
-    <a href="#destinos">Destinos</a><a href="#preguntas">Preguntas Frecuentes</a><a href="#nosotros">Nosotros</a><a href="#contacto">Contacto</a>
+    <a href="#inicio">Inicio</a><a href="#buscador">Cotizar</a><a href="#flota">Flota</a><a href="#servicios">Servicios</a>
+    <a href="#destinos">Destinos</a><a href="#preguntas">Preguntas frecuentes</a><a href="#contacto">Contacto</a>
+    <a href="condiciones.html">Condiciones de arriendo</a>
   </div>
 </header>
 
-<!-- ===================== HERO ===================== -->
+<!-- ===================== PORTADA ===================== -->
 <section id="inicio" class="hero">
   <div class="hero-crossfade">
-    <img class="active" src="https://glaciaresrentacar.cl/PAISAJES/142423.webp" alt="Paisaje Patagonia">
-    <img src="https://glaciaresrentacar.cl/PAISAJES/patagonia-landscape-perito-moreno-glacier-autumnal-forest-lake-argentina-scenery-photo.jpg" alt="Glaciares">
-    <img src="https://glaciaresrentacar.cl/PAISAJES/Circuitos-Torres-del-Paine-Ecordua29-1024x683.webp" alt="Torres del Paine">
-    <img src="https://glaciaresrentacar.cl/PAISAJES/patagonia-best-photos.jpg" alt="Patagonia Sur">
+    <img class="active" src="https://glaciaresrentacar.cl/PAISAJES/142423.webp" alt="Paisaje de la Patagonia chilena" width="1600" height="900">
+    <img src="https://glaciaresrentacar.cl/PAISAJES/patagonia-landscape-perito-moreno-glacier-autumnal-forest-lake-argentina-scenery-photo.jpg" alt="Glaciar en la Patagonia" width="1600" height="900">
+    <img src="https://glaciaresrentacar.cl/PAISAJES/Circuitos-Torres-del-Paine-Ecordua29-1024x683.webp" alt="Torres del Paine" width="1600" height="900">
+    <img src="https://glaciaresrentacar.cl/PAISAJES/patagonia-best-photos.jpg" alt="Paisaje del sur de la Patagonia" width="1600" height="900">
   </div>
   <div class="hero-overlay"></div>
   <div class="hero-content">
-    <p class="eyebrow">EXCELENCIA AL SERVICIO DEL TURISTA</p>
-    <h1>Tu viaje a la Patagonia merece <span id="typewriter" class="accent"></span><span class="cursor"></span></h1>
-    <p>Vehículos, asistencia 24/7 y la libertad de llegar donde otros no pueden. Vive el fin del mundo sin preocupaciones.</p>
-    <a href="#buscador" class="btn btn-accent">Cotiza Aquí y Paga Online</a>
+    <p class="eyebrow on-navy">RENT A CAR EN PUNTA ARENAS</p>
+    <h1>Recorre la Patagonia con libertad y seguridad</h1>
+    <p class="lead">Arrienda tu vehículo en Punta Arenas y viaja a Torres del Paine, Puerto Natales, Tierra del Fuego o Argentina con atención personalizada y asistencia durante tu viaje.</p>
+    <div class="hero-actions">
+      <a href="#buscador" class="btn btn-accent">Cotizar mi vehículo</a>
+      <a href="https://wa.me/56983335924?text=Hola%2C%20quiero%20consultar%20disponibilidad%20de%20un%20veh%C3%ADculo." target="_blank" rel="noopener" class="btn btn-whatsapp">Hablar por WhatsApp</a>
+    </div>
+    <div class="hero-mini-trust">
+      <span><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 2v20M2 12h20"/></svg>Kilometraje libre en la Región de Magallanes</span>
+      <span><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="8" r="4"/><path d="M4 21c0-4 3.6-7 8-7s8 3 8 7"/></svg>Atención personalizada</span>
+      <span><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 2 3 6v6c0 5 4 8.5 9 10 5-1.5 9-5 9-10V6l-9-4Z"/></svg>Asistencia durante tu viaje</span>
+      <span><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="4" width="18" height="16" rx="2"/><path d="M3 10h18M8 2v4M16 2v4"/></svg>Permiso para Argentina con costo adicional</span>
+    </div>
   </div>
   <div class="wave">
     <svg viewBox="0 0 1440 90" width="100%" height="80" preserveAspectRatio="none"><path fill="#ffffff" d="M0,32 C240,90 480,0 720,24 C960,48 1200,96 1440,40 L1440,100 L0,100 Z"/></svg>
   </div>
 </section>
 
-<!-- ===================== BUSCADOR DE RESERVAS (cotiza y luego paga) ===================== -->
+<!-- ===================== COTIZADOR ===================== -->
 <div id="buscador" class="booking-bar-wrap">
-  <p class="center" style="color:var(--navy);font-weight:800;font-size:13px;letter-spacing:.15em;margin-bottom:10px;text-shadow:0 1px 8px rgba(255,255,255,.6);">COTIZA AHORA Y PAGA ONLINE DE FORMA SEGURA</p>
-  <form class="booking-bar" id="searchForm">
-    <div class="bfield">
-      <label>Lugar de retiro</label>
-      <select id="pickupPlace">
-        <option>Oficina Punta Arenas</option>
-      </select>
+  <p class="booking-bar-label" style="color:var(--navy);">CONSULTA DISPONIBILIDAD Y COTIZA EN LÍNEA</p>
+  <form class="booking-bar" id="searchForm" novalidate>
+    <div class="bgrid">
+      <div class="bfield">
+        <label for="pickupPlace">Lugar de retiro</label>
+        <select id="pickupPlace">
+          <option>Oficina Punta Arenas</option>
+        </select>
+      </div>
+      <div class="bfield">
+        <label for="fromDate">Fecha de retiro</label>
+        <input type="date" id="fromDate" required>
+      </div>
+      <div class="bfield">
+        <label for="fromTime">Hora de retiro</label>
+        <input type="time" id="fromTime" value="09:00" required>
+      </div>
+      <div class="bfield">
+        <label for="toDate">Fecha de devolución</label>
+        <input type="date" id="toDate" required>
+      </div>
+      <div class="bfield">
+        <label for="toTime">Hora de devolución</label>
+        <input type="time" id="toTime" value="09:00" required>
+      </div>
+      <div class="bfield">
+        <label for="passengers">Pasajeros</label>
+        <select id="passengers">
+          <option value="1-2">1 a 2</option>
+          <option value="3-4" selected>3 a 4</option>
+          <option value="5-6">5 a 6</option>
+          <option value="7+">7 o más</option>
+        </select>
+      </div>
+      <div class="bfield">
+        <label for="destination">Destino estimado</label>
+        <select id="destination">
+          <option value="Punta Arenas y alrededores">Punta Arenas y alrededores</option>
+          <option value="Torres del Paine">Torres del Paine</option>
+          <option value="Puerto Natales">Puerto Natales</option>
+          <option value="Tierra del Fuego">Tierra del Fuego</option>
+          <option value="Argentina (El Calafate / Río Gallegos)">Argentina (El Calafate / Río Gallegos)</option>
+          <option value="Otro">Otro</option>
+        </select>
+      </div>
+      <div class="bfield">
+        <label for="tripArgentina">Viaje a Argentina</label>
+        <select id="tripArgentina">
+          <option value="no">No</option>
+          <option value="si">Sí, necesito permiso</option>
+        </select>
+      </div>
+      <div class="bfield-check">
+        <input type="checkbox" id="airportPickup">
+        <label for="airportPickup">Retiro o entrega en aeropuerto</label>
+      </div>
+      <div class="bfield-check">
+        <input type="checkbox" id="otherPlace">
+        <label for="otherPlace">Devolver en otro lugar</label>
+      </div>
     </div>
-    <div class="bfield">
-      <label>Fecha de retiro</label>
-      <input type="date" id="fromDate" required>
+    <p class="field-error" id="formError"></p>
+    <div class="booking-bar-actions">
+      <span class="booking-note" id="searchStatus"></span>
+      <button type="submit" class="btn-search">CONSULTAR VEHÍCULOS DISPONIBLES</button>
     </div>
-    <div class="bfield">
-      <label>Hora</label>
-      <input type="time" id="fromTime" value="09:00">
-    </div>
-    <div class="bfield">
-      <label>Fecha de devolución</label>
-      <input type="date" id="toDate" required>
-    </div>
-    <div class="bfield">
-      <label>Hora</label>
-      <input type="time" id="toTime" value="09:00">
-    </div>
-    <button type="submit" class="btn-search">BUSCAR DISPONIBILIDAD</button>
   </form>
-  <p class="booking-note">
-    <label><input type="checkbox" id="otherPlace"> Devolver en otro lugar</label>
-    <span id="searchStatus"></span>
-  </p>
 </div>
 
 <div id="searchResults" class="hidden"></div>
 
-<!-- Modal de cotización: agregar servicios (silla, seguros) antes de pagar -->
-<div id="quoteModal" class="modal-overlay hidden">
+<!-- Modal de cotización: agregar servicios (silla, protecciones, permisos) antes de pagar -->
+<div id="quoteModal" class="modal-overlay hidden" role="dialog" aria-modal="true" aria-labelledby="quoteModalTitle">
   <div class="modal-box quote-box">
-    <h3>Arma tu cotización</h3>
+    <h3 id="quoteModalTitle">Arma tu cotización</h3>
     <p class="modal-sub" id="quoteVehicleLine"></p>
     <div id="extrasList"></div>
+    <p class="quote-extra-note">Servicios sujetos a disponibilidad y a las condiciones establecidas en el contrato de arriendo.</p>
     <div class="quote-total-box" id="quoteTotalBox"></div>
     <div class="modal-actions" style="margin-top:14px;">
       <button type="button" class="modal-cancel" id="quoteCancel">Cancelar</button>
@@ -351,15 +473,15 @@
 </div>
 
 <!-- Modal de datos del cliente + pago -->
-<div id="bookingModal" class="modal-overlay hidden">
+<div id="bookingModal" class="modal-overlay hidden" role="dialog" aria-modal="true" aria-labelledby="bookingModalTitle">
   <div class="modal-box">
-    <h3>Completa tu reserva</h3>
+    <h3 id="bookingModalTitle">Completa tu reserva</h3>
     <p class="modal-sub">Te llevaremos a Webpay para pagar de forma segura.</p>
     <div class="modal-summary" id="modalSummary"></div>
     <form id="bookingForm">
-      <input required id="custName" placeholder="Nombre completo">
-      <input required id="custPhone" placeholder="Teléfono (+56 9...)">
-      <input id="custEmail" type="email" placeholder="Correo (opcional)">
+      <input required id="custName" placeholder="Nombre completo" autocomplete="name">
+      <input required id="custPhone" placeholder="Teléfono (+56 9...)" autocomplete="tel">
+      <input id="custEmail" type="email" placeholder="Correo (opcional)" autocomplete="email">
       <div class="modal-actions">
         <button type="button" class="modal-cancel" id="modalCancel">Cancelar</button>
         <button type="submit" class="modal-confirm">Ir a pagar</button>
@@ -368,11 +490,35 @@
   </div>
 </div>
 
+<!-- ===================== FRANJA DE CONFIANZA ===================== -->
+<section class="trust-strip">
+  <div class="container">
+    <div class="grid grid-4">
+      <div class="trust-item">
+        <span class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 21h18M5 21V7l7-4 7 4v14M9 21v-6h6v6"/></svg></span>
+        <div><strong>Empresa local</strong>en Punta Arenas</div>
+      </div>
+      <div class="trust-item">
+        <span class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="8" r="4"/><path d="M4 21c0-4 3.6-7 8-7s8 3 8 7"/></svg></span>
+        <div><strong>Atención personalizada</strong>en cada reserva</div>
+      </div>
+      <div class="trust-item">
+        <span class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 2 3 6v6c0 5 4 8.5 9 10 5-1.5 9-5 9-10V6l-9-4Z"/></svg></span>
+        <div><strong>Asistencia</strong>durante tu viaje</div>
+      </div>
+      <div class="trust-item">
+        <span class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 12h18M3 6h18M3 18h18"/></svg></span>
+        <div><strong>Chile y Argentina</strong>previa autorización</div>
+      </div>
+    </div>
+  </div>
+</section>
+
 <!-- ===================== FLOTA ===================== -->
 <section id="flota" class="section container">
   <div class="section-head">
-    <h2 class="section-title">Nuestra Flota</h2>
-    <p class="section-sub">Seleccionada para ofrecerte comodidad, estilo y seguridad incomparable.</p>
+    <h2 class="section-title">Nuestra flota</h2>
+    <p class="section-sub">Vehículos mantenidos para ofrecerte comodidad y seguridad en cada viaje.</p>
   </div>
   <div class="filter-tabs" id="filterTabs">
     <button data-filter="todos" class="filter-btn active">Todos</button>
@@ -383,28 +529,52 @@
   <div id="fleetGrid" class="grid grid-3"></div>
 </section>
 
-<!-- ===================== SERVICIOS ADICIONALES ===================== -->
-<section id="servicios" class="section section-alt">
+<!-- ===================== BENEFICIOS DEL SERVICIO ===================== -->
+<section id="beneficios" class="section section-alt">
   <div class="container">
     <div class="section-head">
-      <h2 class="section-title">Servicios Adicionales</h2>
-      <p class="section-sub">Complementa tu experiencia con nuestros servicios extra.</p>
-      <div class="rule"></div>
+      <h2 class="section-title">Beneficios de nuestro servicio</h2>
+      <p class="section-sub">Lo que nos distingue como Rent a Car en Magallanes.</p>
     </div>
-    <div id="servicesGrid" class="grid grid-3"></div>
+    <div class="grid grid-3">
+      <div class="adv">
+        <div class="adv-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 2 3 6v6c0 5 4 8.5 9 10 5-1.5 9-5 9-10V6l-9-4Z"/></svg></div>
+        <h3>Seguridad y confianza</h3>
+        <p>Vehículos mantenidos para enfrentar los desafíos de la Patagonia, con asistencia durante tu viaje.</p>
+      </div>
+      <div class="adv">
+        <div class="adv-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="6" width="20" height="14" rx="2"/><path d="M2 10h20"/></svg></div>
+        <h3>Tarifas claras</h3>
+        <p>Confirmación inmediata y kilometraje libre en la Región de Magallanes, sujeto a las condiciones del contrato.</p>
+      </div>
+      <div class="adv">
+        <div class="adv-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="4" width="18" height="16" rx="2"/><path d="M3 10h18M8 2v4M16 2v4"/></svg></div>
+        <h3>Permiso internacional</h3>
+        <p>Gestionamos tu permiso para cruzar a Argentina con costo adicional, previa autorización y anticipación.</p>
+      </div>
+    </div>
   </div>
 </section>
 
-<!-- ===================== VENTAJAS ===================== -->
-<section class="section container">
+<!-- ===================== SERVICIOS ADICIONALES ===================== -->
+<section id="servicios" class="section container">
   <div class="section-head">
-    <h2 class="section-title">Ventajas de Nuestro Servicio</h2>
-    <p class="section-sub">Descubre los beneficios que nos distinguen como tu mejor opción en Magallanes.</p>
+    <h2 class="section-title">Servicios adicionales</h2>
+    <p class="section-sub">Complementa tu arriendo con estas opciones.</p>
+    <div class="rule"></div>
   </div>
-  <div class="grid grid-3">
-    <div class="adv"><div class="adv-icon">🛡️</div><h3>Seguridad y Confianza</h3><p>Vehículos meticulosamente mantenidos para enfrentar los desafíos de la Patagonia, con asistencia en ruta 24/7 en toda la región.</p></div>
-    <div class="adv"><div class="adv-icon">💳</div><h3>Tarifas Transparentes</h3><p>Confirmación inmediata con todo incluido. Sin costos ocultos, kilometraje libre y opciones de pago flexibles a tu medida.</p></div>
-    <div class="adv"><div class="adv-icon">🌎</div><h3>Permiso Internacional</h3><p>Gestionamos tu permiso notarial y seguros obligatorios para que puedas cruzar a Argentina y visitar El Calafate sin problemas.</p></div>
+  <div id="servicesGrid" class="grid grid-3"></div>
+  <p class="center service-note" style="margin-top:18px;">Servicios sujetos a disponibilidad y a las condiciones establecidas en el contrato de arriendo.</p>
+</section>
+
+<!-- ===================== DESTINOS ===================== -->
+<section id="destinos" class="section section-alt">
+  <div class="container">
+    <div class="section-head">
+      <h2 class="section-title">Destinos recomendados</h2>
+      <p class="section-sub">Algunos de los lugares que puedes recorrer con nuestros vehículos.</p>
+    </div>
+    <div id="destGrid" class="grid grid-3"></div>
   </div>
 </section>
 
@@ -412,184 +582,151 @@
 <section class="section section-navy">
   <div class="container" style="max-width:900px;">
     <div class="section-head">
-      <h2 class="section-title white">Promociones Imperdibles</h2>
-      <p class="section-sub" style="color:#cbd5e1;">Aprovecha nuestros descuentos exclusivos.</p>
+      <h2 class="section-title white">Promoción vigente</h2>
+      <p class="section-sub" style="color:#cbd5e1;">Reserva anticipado y accede a un descuento.</p>
     </div>
     <div class="promo-card">
-      <img src="https://glaciaresrentacar.cl/IMAGENES_GLACIARES_NUEVO%20AUTOS/PROMOCION/PROMOCION.jpg" alt="Promoción Arriendo Anticipado">
+      <img src="https://glaciaresrentacar.cl/IMAGENES_GLACIARES_NUEVO%20AUTOS/PROMOCION/PROMOCION.jpg" alt="Promoción por reserva anticipada">
       <div class="promo-body">
-        <h3>RESERVA AHORA ANTICIPADO</h3>
-        <p class="lead">Y te lo premiamos con un 15% de descuento con todo medio de pago.</p>
+        <h3>Reserva con anticipación</h3>
+        <p class="lead">15% de descuento en el total de tu arriendo, con todo medio de pago.</p>
         <p class="label">¿Qué incluye?</p>
         <ul class="promo-list">
-          <li>✓ 15% de descuento en el total de tu arriendo</li>
-          <li>✓ Kilometraje libre</li>
-          <li>✓ Asistencia 24 horas</li>
-          <li>✓ Asesoramos tu viaje</li>
-          <li>✓ Chat 24/7</li>
+          <li>15% de descuento en el total de tu arriendo</li>
+          <li>Kilometraje libre en la Región de Magallanes</li>
+          <li>Asistencia durante tu viaje</li>
+          <li>Asesoría para planificar tu recorrido</li>
         </ul>
-        <p class="label">¿Cuáles son las condiciones?</p>
-        <ul class="promo-list" style="margin-bottom:24px;">
-          <li>ℹ️ Debes reservar con un mínimo de 5 días antes del inicio de tu arriendo</li>
-          <li>ℹ️ Arriendos desde 3 días</li>
+        <p class="label">Condiciones</p>
+        <ul class="promo-list" style="margin-bottom:22px;">
+          <li>Reserva con un mínimo de 5 días antes del inicio de tu arriendo</li>
+          <li>Válido para arriendos desde 3 días</li>
         </ul>
-        <a href="https://wa.me/56983335924?text=Hola%2C%20quiero%20aprovechar%20la%20promoci%C3%B3n%20de%20reserva%20anticipada." target="_blank" class="btn btn-accent">RESERVAR</a>
+        <a href="https://wa.me/56983335924?text=Hola%2C%20quiero%20aprovechar%20la%20promoci%C3%B3n%20de%20reserva%20anticipada." target="_blank" rel="noopener" class="btn btn-accent">Consultar promoción</a>
       </div>
     </div>
   </div>
 </section>
 
-<!-- ===================== TESTIMONIOS ===================== -->
-<section class="section container">
+<!-- ===================== OPINIONES ===================== -->
+<section id="opiniones" class="section container">
   <div class="section-head">
-    <h2 class="section-title">Clientes Satisfechos</h2>
-    <p class="section-sub">Nuestra mejor publicidad son las experiencias de quienes ya viajaron con nosotros.</p>
+    <h2 class="section-title">Opiniones de nuestros clientes</h2>
+    <p class="section-sub">Conoce las opiniones de nuestros clientes en Google.</p>
     <div class="rule"></div>
   </div>
-  <div class="grid grid-3">
-    <div class="card"><div class="card-body">
-      <div class="stars">★★★★★</div>
-      <p class="quote">"Excelente servicio. Arrendamos una camioneta 4x4 para ir a Torres del Paine y todo impecable. El vehículo en perfectas condiciones y la atención por WhatsApp fue rapidísima."</p>
-      <p class="author">Carlos M. <span>— Santiago, Chile</span></p>
-    </div></div>
-    <div class="card"><div class="card-body">
-      <div class="stars">★★★★★</div>
-      <p class="quote">"Nos gestionaron todo para cruzar a El Calafate (Argentina). Fue un alivio no tener que preocuparnos de los trámites. Los recomiendo 100%, súper confiables."</p>
-      <p class="author">Fernanda R. <span>— Buenos Aires, Arg</span></p>
-    </div></div>
-    <div class="card"><div class="card-body">
-      <div class="stars">★★★★★</div>
-      <p class="quote">"Viajamos en familia y pedimos sillas de bebé. Todo estaba instalado y limpio al llegar al aeropuerto. La transparencia en los precios fue lo que más me gustó."</p>
-      <p class="author">Familia Soto <span>— Concepción, Chile</span></p>
-    </div></div>
-  </div>
-</section>
-
-<!-- ===================== DESTINOS ===================== -->
-<section id="destinos" class="section section-alt">
-  <div class="container">
-    <div class="section-head">
-      <h2 class="section-title">Descubre la Región de Magallanes</h2>
-      <p class="section-sub">Los destinos más impresionantes que puedes visitar con nuestros vehículos.</p>
+  <div class="reviews-card">
+    <div class="stars-ic" aria-hidden="true">
+      <svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 2l3.1 6.3 6.9 1-5 4.9 1.2 6.8L12 17.8 5.8 21l1.2-6.8-5-4.9 6.9-1L12 2z"/></svg>
+      <svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 2l3.1 6.3 6.9 1-5 4.9 1.2 6.8L12 17.8 5.8 21l1.2-6.8-5-4.9 6.9-1L12 2z"/></svg>
+      <svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 2l3.1 6.3 6.9 1-5 4.9 1.2 6.8L12 17.8 5.8 21l1.2-6.8-5-4.9 6.9-1L12 2z"/></svg>
+      <svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 2l3.1 6.3 6.9 1-5 4.9 1.2 6.8L12 17.8 5.8 21l1.2-6.8-5-4.9 6.9-1L12 2z"/></svg>
+      <svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 2l3.1 6.3 6.9 1-5 4.9 1.2 6.8L12 17.8 5.8 21l1.2-6.8-5-4.9 6.9-1L12 2z"/></svg>
     </div>
-    <div id="destGrid" class="grid grid-3" style="margin-bottom:56px;"></div>
-    <div class="center" style="margin-bottom:20px;"><h3 style="font-weight:700;font-size:18px;">Mapa de la Aventura</h3></div>
-    <div class="map-wrap">
-      <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d1135439.9575975107!2d-72.55160875691074!3d-53.11195610899387!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0xbdb2632b8510fbc3%3A0x72a5a017b2b62719!2sPunta%20Arenas%2C%20Magallanes%20y%20la%20Ant%C3%A1rtica%20Chilena!5e0!3m2!1ses-419!2scl!4v1714000000000!5m2!1ses-419!2scl" width="100%" height="380" style="border:0;display:block;" allowfullscreen loading="lazy"></iframe>
-    </div>
+    <p>Nos importa lo que dicen nuestros clientes. Revisa las reseñas reales de Glaciares Rent a Car en Google antes de reservar.</p>
+    <a href="https://www.google.com/maps/search/?api=1&query=Glaciares%20Rent%20a%20Car%20Av.%20Francisco%20Javier%20Reyna%200473%20Punta%20Arenas" target="_blank" rel="noopener" class="btn btn-outline" style="display:inline-block;padding:12px 22px;">Ver opiniones en Google</a>
   </div>
-</section>
-
-<!-- ===================== ESTADISTICAS ===================== -->
-<section class="section">
-  <div class="stats grid grid-4">
-    <div><div class="stat-icon">🚗</div><p class="stat-num"><span class="counter" data-target="350">0</span>+</p><p class="stat-label">TRASLADOS EXITOSOS</p></div>
-    <div><div class="stat-icon">🙂</div><p class="stat-num"><span class="counter" data-target="98">0</span>%</p><p class="stat-label">CLIENTES SATISFECHOS</p></div>
-    <div><div class="stat-icon">🕑</div><p class="stat-num"><span class="counter" data-target="24">0</span>/7</p><p class="stat-label">HORAS DE ASISTENCIA</p></div>
-    <div><div class="stat-icon">📍</div><p class="stat-num"><span class="counter" data-target="2">0</span></p><p class="stat-label">PAÍSES DE COBERTURA</p></div>
-  </div>
-</section>
-
-<!-- ===================== NOSOTROS ===================== -->
-<section id="nosotros" class="section section-navy">
-  <div class="container about">
-    <img src="https://glaciaresrentacar.cl/LOGOSINFONDO.png" alt="Glaciares Rent a Car">
-    <h2 class="section-title white" style="font-size:28px;margin-bottom:20px;">Compromiso con la Excelencia</h2>
-    <p>En <strong>Glaciares Rent a Car</strong> entendemos que recorrer la Patagonia es más que un simple viaje; es la aventura de tu vida. Somos una empresa familiar con profundas raíces en Magallanes, dedicada a ofrecer una experiencia de arriendo superior.</p>
-    <p>Nuestra misión es ser tu socio de confianza en esta exploración. Cuidamos cada detalle, desde el mantenimiento riguroso de la flota hasta la atención personalizada, garantizando que tu única preocupación sea disfrutar de los majestuosos paisajes de la Patagonia chileno-argentina.</p>
-    <p class="sign">— El Equipo de Glaciares</p>
-  </div>
-</section>
-
-<!-- ===================== CONDICIONES (ampliadas, inspiradas en Bobadilla Rent a Car) ===================== -->
-<section id="condiciones" class="section container" style="max-width:860px;">
-  <div class="section-head" style="margin-bottom:16px;">
-    <h2 class="section-title">Condiciones Generales</h2>
-    <p class="section-sub">Reglas claras para un viaje tranquilo.</p>
-  </div>
-  <p class="notice">Esta sección amplía tus condiciones actuales con la misma estructura que usa Bobadilla Rent a Car. Los recuadros marcados como "Completar" son datos que debes confirmar (RUT, montos exactos) antes de publicar — no son cifras verificadas por mí.</p>
-
-  <div class="clause"><h3>1. Requisitos y documentación</h3><p>Edad mínima 20 años cumplidos a la fecha de entrega (18–19 años con cargo de conductor joven). Se requiere licencia de conducir vigente y cédula de identidad o pasaporte vigente; si la licencia no está en alfabeto latino, se exige licencia internacional. Todo conductor adicional debe presentar la misma documentación y quedar registrado antes de retirar el vehículo.</p></div>
-  <div class="clause"><h3>2. Garantía y medios de pago</h3><p>Se exige un bloqueo de garantía en tarjeta de crédito (aprox. $500.000, según categoría del vehículo), que se libera una vez revisado y recibido el vehículo conforme. Medios de pago: tarjetas de crédito, débito y transferencia; los detalles de pago presencial se acuerdan con la sucursal.</p></div>
-  <div class="clause"><h3>3. Reserva</h3><p>La reserva se mantiene hasta 2 horas después de la hora pactada; pasado ese plazo se considera no-show y el vehículo queda disponible para otro cliente. La promoción de reserva anticipada (15% dcto.) requiere reservar con 5 días de anticipación mínimo, para arriendos desde 3 días.</p></div>
-  <div class="clause"><h3>4. Qué incluye la tarifa base</h3><p>Tiempo y kilometraje libre, coberturas básicas de daños y responsabilidad civil, asistencia en ruta 24/7 por fallas no imputables a negligencia, y vehículo de reemplazo sujeto a disponibilidad. Un día de arriendo equivale a 24 horas desde el inicio del contrato, con tolerancia de 1 hora sin recargo.</p></div>
-  <div class="clause"><h3>5. Cargos adicionales</h3><p>Atrasos en la devolución más allá de la hora de tolerancia se cobran por hora extra o día adicional. El vehículo se entrega con estanque lleno y debe devolverse igual; de lo contrario se cobra la reposición de combustible. Toda extensión de arriendo debe coordinarse con anticipación y está sujeta a disponibilidad.</p></div>
-  <div class="clause"><h3>6. Coberturas y siniestros</h3><p>Las coberturas aplican dentro de Chile y, con permiso internacional vigente, en el cruce a Argentina. No aplican ante negligencia, conducción bajo alcohol o drogas, o incumplimiento del contrato. Ante un siniestro, robo o choque, el arrendatario debe dar aviso inmediato a Glaciares Rent a Car y hacer la denuncia correspondiente ante Carabineros dentro de las 24 horas siguientes.<br><span class="todo">Completar: deducibles exactos por categoría de vehículo y tope de responsabilidad civil</span></p></div>
-  <div class="clause"><h3>7. Equipamiento y servicios adicionales</h3><p>Silla para bebé (2–18 kg): $6.000/día, tope $50.000. Seguro por cristales: $8.000/día (cubre pérdida total, piquete o frisadura). Seguro de neumáticos: $8.000/día (cubre pérdida total o reventón). Sujetos a disponibilidad al momento de la reserva.</p></div>
-  <div class="clause"><h3>8. Viajes a Argentina</h3><p>Se gestiona el permiso notarial de salida y el seguro obligatorio internacional (Mercosur) para cruzar a Argentina y visitar, por ejemplo, El Calafate. Debe solicitarse con anticipación mínima de 24 a 48 horas hábiles. Ambos trámites tienen un costo adicional.<br><span class="todo">Completar: valor exacto del permiso notarial y del seguro Mercosur</span></p></div>
-  <div class="clause"><h3>9. Devolución en otra sucursal (drop-off)</h3><p>Si el vehículo se devuelve en una ciudad distinta a la de retiro, se aplica un cargo adicional según distancia, informado y confirmado al momento de la reserva.<br><span class="todo">Completar: tabla de tarifas drop-off si ofrecen esta opción</span></p></div>
-  <div class="clause"><h3>10. Prohibiciones</h3><p>No está permitido: que conduzca una persona no registrada en el contrato; usar el vehículo para transporte remunerado de pasajeros o carga; subarrendar el vehículo; circular por zonas no habilitadas (playas, dunas, caminos restringidos) sin autorización expresa; ni conducir bajo efectos de alcohol o drogas. El incumplimiento anula las coberturas contratadas.</p></div>
-  <div class="clause"><h3>11. Tratamiento de datos personales</h3><p>En cumplimiento de la Ley N° 19.628 sobre protección de datos personales, la información entregada se usa exclusivamente para la gestión del contrato de arriendo y no se comparte con terceros, salvo obligación legal.</p></div>
-  <div class="clause"><h3>12. Identificación de la empresa</h3><p>Glaciares Rent a Car — Av. Francisco Javier Reyna 0473, Punta Arenas, Magallanes y Antártica Chilena. Correo: glaciaresrentacar@gmail.com · Tel.: +56 9 8333 5924.<br><span class="todo">Completar: RUT / razón social exacta de la empresa para que estas condiciones sean vinculantes</span></p></div>
 </section>
 
 <!-- ===================== PREGUNTAS FRECUENTES ===================== -->
-<section id="preguntas" class="section container">
+<section id="preguntas" class="section section-alt">
+  <div class="container">
   <div class="section-head">
-    <h2 class="section-title">Preguntas Frecuentes</h2>
+    <h2 class="section-title">Preguntas frecuentes</h2>
     <p class="section-sub">Resolvemos tus dudas antes de que subas al auto.</p>
     <div class="rule"></div>
   </div>
   <div class="faq-list">
     <details class="faq-item">
-      <summary>¿Cuál es la edad mínima para arrendar un vehículo?<span class="faq-toggle">+</span></summary>
-      <p>20 años cumplidos a la fecha de entrega (18–19 años con cargo de conductor joven). Se requiere licencia de conducir y cédula de identidad o pasaporte vigente; si la licencia no está en alfabeto latino, se exige licencia internacional.</p>
+      <summary>¿Cuál es la edad permitida para arrendar un vehículo?<span class="faq-toggle">+</span></summary>
+      <p>Entre 21 y 75 años, con licencia de conducir vigente y cédula de identidad o pasaporte vigente. Consulta el detalle completo en nuestras <a href="condiciones.html" style="color:var(--accent-dark);font-weight:700;">condiciones de arriendo</a>.</p>
     </details>
     <details class="faq-item">
       <summary>¿Puedo cruzar a Argentina con el vehículo arrendado?<span class="faq-toggle">+</span></summary>
-      <p>Sí. Gestionamos el permiso notarial de salida y el seguro obligatorio internacional (Mercosur) para visitar, por ejemplo, El Calafate. Debe solicitarse con 24 a 48 horas hábiles de anticipación y tiene un costo adicional.</p>
+      <p>Sí, gestionamos el permiso para viajar a Argentina con costo adicional. Debe solicitarse con anticipación; indícalo en el cotizador o escríbenos por WhatsApp.</p>
     </details>
     <details class="faq-item">
       <summary>¿Qué incluye la tarifa base?<span class="faq-toggle">+</span></summary>
-      <p>Tiempo y kilometraje libre, coberturas básicas de daños y responsabilidad civil, asistencia en ruta 24/7 y vehículo de reemplazo sujeto a disponibilidad. Un día de arriendo equivale a 24 horas con 1 hora de tolerancia sin recargo.</p>
+      <p>Kilometraje libre en la Región de Magallanes, sujeto a las condiciones del contrato de arriendo, y asistencia durante tu viaje.</p>
     </details>
     <details class="faq-item">
       <summary>¿Necesito dejar una garantía?<span class="faq-toggle">+</span></summary>
-      <p>Sí, se exige un bloqueo de garantía en tarjeta de crédito (aprox. $500.000, según categoría del vehículo), que se libera una vez que revisamos y recibimos el vehículo conforme.</p>
+      <p>Sí, se solicita una garantía referencial con cupo mínimo de $500.000, dependiendo del vehículo, que se libera una vez revisado y recibido el vehículo conforme.</p>
     </details>
     <details class="faq-item">
       <summary>¿Cómo pago mi reserva?<span class="faq-toggle">+</span></summary>
-      <p>Cotiza online arriba en "Cotiza Aquí", elige tu vehículo y fechas, y paga de forma segura con tarjeta de crédito o débito a través de Webpay (Transbank). También aceptamos transferencia, a convenir con la sucursal.</p>
+      <p>Cotiza en línea en la sección "Cotizar", elige tu vehículo y fechas, y paga de forma segura con tarjeta de crédito o débito a través de Webpay (Transbank). También puedes escribirnos por WhatsApp.</p>
     </details>
     <details class="faq-item">
-      <summary>¿Puedo devolver el vehículo en un lugar distinto al de retiro?<span class="faq-toggle">+</span></summary>
-      <p>Sí, con un cargo adicional según la distancia, que te confirmamos al momento de la reserva.</p>
+      <summary>¿Puedo retirar o devolver el vehículo en el aeropuerto?<span class="faq-toggle">+</span></summary>
+      <p>Sí, con un costo adicional de $20.000. Puedes indicarlo directamente en el cotizador.</p>
     </details>
     <details class="faq-item">
-      <summary>¿Qué pasa si llego tarde a retirar o devolver el vehículo?<span class="faq-toggle">+</span></summary>
-      <p>Tu reserva se mantiene hasta 2 horas después de la hora pactada; pasado ese plazo el vehículo queda disponible para otro cliente. Los atrasos en la devolución se cobran por hora extra o día adicional.</p>
+      <summary>¿Cuánto necesito abonar para reservar y cómo cancelo?<span class="faq-toggle">+</span></summary>
+      <p>La reserva se confirma con un abono equivalente a un día de arriendo. Las cancelaciones deben informarse con un mínimo de 72 horas de anticipación, según las condiciones del contrato.</p>
     </details>
   </div>
-  <p class="center" style="margin-top:28px;">
-    <a href="https://wa.me/56983335924?text=Hola%2C%20tengo%20una%20consulta%20sobre%20el%20arriendo." target="_blank" class="btn btn-accent">¿Otra pregunta? Escríbenos</a>
+  <p class="center" style="margin-top:26px;">
+    <a href="https://wa.me/56983335924?text=Hola%2C%20tengo%20una%20consulta%20sobre%20el%20arriendo." target="_blank" rel="noopener" class="btn btn-whatsapp">¿Otra pregunta? Escríbenos por WhatsApp</a>
   </p>
+  </div>
 </section>
 
 <!-- ===================== CONTACTO ===================== -->
-<section id="contacto" class="section section-alt">
-  <div class="container contact-grid">
+<section id="contacto" class="section container">
+  <div class="section-head">
+    <h2 class="section-title">Contacto y ubicación</h2>
+    <p class="section-sub">Visítanos en nuestra oficina principal en Punta Arenas.</p>
+  </div>
+  <div class="contact-grid">
     <div>
-      <h2 class="section-title" style="margin-bottom:6px;">Dónde Encontrarnos</h2>
-      <p class="section-sub" style="margin:0 0 32px;text-align:left;">Visítanos en nuestra oficina principal en Punta Arenas.</p>
-      <div class="info-item"><p class="label">Dirección</p><p class="value">Av. Francisco Javier Reyna 0473, Punta Arenas, Magallanes y Antártica Chilena</p></div>
-      <div class="info-item"><p class="label">Correo</p><p class="value">glaciaresrentacar@gmail.com</p></div>
-      <div class="info-item"><p class="label">Horario</p><p class="value">Lunes a domingo, de 8:00 a 21:00 hs.</p></div>
       <div class="info-item">
-        <p class="label">Formas de pago</p>
-        <p class="value">Tarjetas de crédito y débito online con Webpay (Transbank), o transferencia a convenir.</p>
-        <span class="pill">✓ Pago online seguro con Webpay</span>
+        <span class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 21s7-6.5 7-12a7 7 0 0 0-14 0c0 5.5 7 12 7 12Z"/><circle cx="12" cy="9" r="2.5"/></svg></span>
+        <div><p class="label">Dirección</p><p class="value">Av. Francisco Javier Reyna 0473, Punta Arenas, Magallanes y Antártica Chilena</p></div>
+      </div>
+      <div class="info-item">
+        <span class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 16.9v3a2 2 0 0 1-2.2 2 19.8 19.8 0 0 1-8.6-3 19.5 19.5 0 0 1-6-6 19.8 19.8 0 0 1-3-8.7A2 2 0 0 1 4.1 2h3a2 2 0 0 1 2 1.7c.1 1 .3 2 .7 2.9a2 2 0 0 1-.4 2.1L8 10a16 16 0 0 0 6 6l1.3-1.4a2 2 0 0 1 2.1-.4c.9.4 1.9.6 2.9.7a2 2 0 0 1 1.7 2Z"/></svg></span>
+        <div><p class="label">WhatsApp / Teléfono</p><p class="value"><a href="tel:+56983335924">+56 9 8333 5924</a></p></div>
+      </div>
+      <div class="info-item">
+        <span class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="5" width="18" height="14" rx="2"/><path d="m3 7 9 6 9-6"/></svg></span>
+        <div><p class="label">Correo</p><p class="value"><a href="mailto:glaciaresrentacar@gmail.com">glaciaresrentacar@gmail.com</a></p></div>
+      </div>
+      <div class="info-item">
+        <span class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 3"/></svg></span>
+        <div><p class="label">Horario</p><p class="value">Lunes a domingo, de 08:00 a 21:00 horas</p></div>
+      </div>
+      <div class="info-item">
+        <span class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="6" width="20" height="14" rx="2"/><path d="M2 10h20"/></svg></span>
+        <div>
+          <p class="label">Formas de pago</p>
+          <p class="value">Tarjetas de crédito y débito online con Webpay (Transbank), o transferencia a convenir.</p>
+          <span class="pill">Pago online seguro con Webpay</span>
+        </div>
+      </div>
+      <div class="map-wrap">
+        <iframe
+          src="https://www.google.com/maps?q=Av.+Francisco+Javier+Reyna+0473,+Punta+Arenas,+Chile&output=embed"
+          title="Ubicación de Glaciares Rent a Car en Punta Arenas"
+          loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
+      </div>
+      <a href="https://www.google.com/maps/dir/?api=1&destination=Av.+Francisco+Javier+Reyna+0473,+Punta+Arenas,+Chile" target="_blank" rel="noopener" class="btn btn-outline" style="display:inline-block;padding:11px 22px;margin-top:14px;width:auto;">Cómo llegar</a>
+
+      <div class="cond-cta" style="margin-top:26px;">
+        <p>Las tarifas, garantías, coberturas, deducibles y permisos están sujetos a las condiciones del contrato de arriendo.</p>
+        <a href="condiciones.html" class="btn btn-outline" style="width:auto;padding:11px 20px;">Ver condiciones de arriendo</a>
       </div>
     </div>
     <div class="contact-form">
       <h3>Hablemos</h3>
       <p>Déjanos tus datos y te contactaremos en minutos por WhatsApp para afinar los detalles de tu reserva.</p>
       <form id="contactForm">
-        <input required name="nombre" type="text" placeholder="Tu nombre">
-        <input required name="telefono" type="text" placeholder="Tu teléfono">
+        <input required name="nombre" type="text" placeholder="Tu nombre" autocomplete="name">
+        <input required name="telefono" type="text" placeholder="Tu teléfono" autocomplete="tel">
         <textarea name="mensaje" rows="3" placeholder="Cuéntanos qué necesitas"></textarea>
-        <button type="submit">Enviar Mensaje a WhatsApp</button>
+        <button type="submit">Enviar mensaje a WhatsApp</button>
       </form>
-      <p class="form-note">Este formulario abre WhatsApp con tu mensaje precargado — no hay backend de correo conectado.</p>
+      <p class="form-note">Este formulario abre WhatsApp con tu mensaje precargado.</p>
     </div>
   </div>
 </section>
@@ -598,85 +735,86 @@
 <footer>
   <div class="container footer-grid">
     <div>
-      <img src="https://glaciaresrentacar.cl/LOGOSINFONDO.png" alt="Glaciares Rent a Car">
-      <p style="font-size:14px;">Tu socio de confianza en la Patagonia.</p>
+      <img src="https://glaciaresrentacar.cl/LOGOSINFONDO.png" alt="Logo Glaciares Rent a Car">
+      <p style="font-size:14px;">Rent a Car en Punta Arenas. Patagonia a tu alcance.</p>
     </div>
     <div>
-      <h4>Enlaces Rápidos</h4>
+      <h4>Enlaces rápidos</h4>
       <ul>
-        <li><a href="#buscador">Cotiza Aquí</a></li>
-        <li><a href="#flota">Nuestra Flota</a></li>
-        <li><a href="#preguntas">Preguntas Frecuentes</a></li>
-        <li><a href="#condiciones">Condiciones</a></li>
+        <li><a href="#buscador">Cotizar</a></li>
+        <li><a href="#flota">Nuestra flota</a></li>
+        <li><a href="#preguntas">Preguntas frecuentes</a></li>
+        <li><a href="condiciones.html">Condiciones de arriendo</a></li>
         <li><a href="#contacto">Contacto</a></li>
       </ul>
     </div>
     <div>
       <h4>Síguenos</h4>
       <ul>
-        <li><a href="https://www.instagram.com/glaciares.rentacar" target="_blank">Instagram</a></li>
-        <li><a href="https://web.facebook.com/profile.php?id=100010578304048" target="_blank">Facebook</a></li>
+        <li><a href="https://www.instagram.com/glaciares.rentacar" target="_blank" rel="noopener">Instagram</a></li>
+        <li><a href="https://web.facebook.com/profile.php?id=100010578304048" target="_blank" rel="noopener">Facebook</a></li>
       </ul>
     </div>
   </div>
   <p class="footer-bottom">© <span id="year"></span> Glaciares Rent a Car. Todos los derechos reservados.</p>
 </footer>
 
-<!-- ===================== WHATSAPP FLOTANTE + TOAST ===================== -->
-<a href="https://wa.me/56983335924" target="_blank" class="wa-float" aria-label="WhatsApp">
+<!-- ===================== WHATSAPP FLOTANTE ===================== -->
+<a href="https://wa.me/56983335924" target="_blank" rel="noopener" class="wa-float" aria-label="Escribir por WhatsApp" data-track="whatsapp-float">
   <svg xmlns="http://www.w3.org/2000/svg" width="26" height="26" viewBox="0 0 24 24" fill="currentColor"><path d="M12.04 2c-5.5 0-9.96 4.46-9.96 9.96 0 1.76.46 3.48 1.34 5L2 22l5.2-1.36a9.94 9.94 0 004.84 1.23h.01c5.5 0 9.96-4.46 9.96-9.96S17.54 2 12.04 2z"/></svg>
 </a>
 <div id="toastHost" class="toast-host"></div>
 
+<!-- Barra fija móvil -->
+<div class="mobile-cta-bar">
+  <a href="#buscador" data-track="mobile-cta-cotizar">Cotizar ahora</a>
+</div>
+
+<script src="analytics-config.js"></script>
 <script>
 document.getElementById('year').textContent = new Date().getFullYear();
-document.getElementById('menuBtn').addEventListener('click', () => {
-  document.getElementById('mobileMenu').classList.toggle('open');
+const menuBtn = document.getElementById('menuBtn');
+const mobileMenu = document.getElementById('mobileMenu');
+menuBtn.addEventListener('click', () => {
+  const open = mobileMenu.classList.toggle('open');
+  menuBtn.setAttribute('aria-expanded', open ? 'true' : 'false');
 });
+mobileMenu.querySelectorAll('a').forEach(a => a.addEventListener('click', () => {
+  mobileMenu.classList.remove('open');
+  menuBtn.setAttribute('aria-expanded', 'false');
+}));
 
-/* ---- Typewriter (headline) ---- */
-const words = ['vehículos.', 'aventura.', 'libertad.', 'seguridad.'];
-const tw = document.getElementById('typewriter');
-let wi = 0, ci = 0, deleting = false;
-function typeLoop(){
-  const word = words[wi];
-  tw.textContent = deleting ? word.slice(0, ci--) : word.slice(0, ci++);
-  if (!deleting && ci === word.length + 1){ deleting = true; setTimeout(typeLoop, 1400); return; }
-  if (deleting && ci < 0){ deleting = false; wi = (wi + 1) % words.length; ci = 0; }
-  setTimeout(typeLoop, deleting ? 45 : 90);
-}
-typeLoop();
-
-/* ---- Hero crossfade ---- */
+/* ---- Hero crossfade (transición suave, sin animación de escritura) ---- */
 const heroImgs = document.querySelectorAll('.hero-crossfade img');
 let hi = 0;
 setInterval(() => {
   heroImgs[hi].classList.remove('active');
   hi = (hi + 1) % heroImgs.length;
   heroImgs[hi].classList.add('active');
-}, 5000);
+}, 6000);
 
-/* ---- Fleet data ---- */
+/* ---- Fleet data (datos confirmados: nombre, categoría, precio, imagen) ---- */
 const IMG_BASE = 'https://glaciaresrentacar.cl/IMAGENES_GLACIARES_NUEVO%20AUTOS/';
 const fleet = [
-  { name: 'Suzuki Swift', price: 35000, cat: 'citycar', img: IMG_BASE + 'CITYCAR/SUZUKI%20SWIFT.jpeg' },
-  { name: 'Suzuki Dzire', price: 38000, cat: 'citycar', img: IMG_BASE + 'CITYCAR/SUZUKI%20DZIRE.jpeg' },
-  { name: 'Chevrolet Captiva', price: 50000, cat: 'suv', img: IMG_BASE + 'SUV/CHEVROTET%20CAPTIVA.jpeg' },
-  { name: 'Hyundai H1', price: 65000, cat: 'furgon', img: IMG_BASE + 'FURG%C3%93N/HYUNDAI%20H1.jpeg' },
-  { name: 'Hyundai Tucson', price: 39000, cat: 'suv', img: IMG_BASE + 'SUV/HYUNDAI%20TUCSON%20(1).jpeg' },
-  { name: 'Kia Sorento', price: 40000, cat: 'suv', img: IMG_BASE + 'SUV/KIA%20SORENTO.jpeg' },
-  { name: 'Hyundai Tucson', price: 48000, cat: 'suv', img: IMG_BASE + 'SUV/HYUNDAI%20TUCSON%20(2).jpeg' },
+  { name: 'Suzuki Swift', price: 35000, cat: 'citycar', catLabel: 'Citycar', img: IMG_BASE + 'CITYCAR/SUZUKI%20SWIFT.jpeg' },
+  { name: 'Suzuki Dzire', price: 38000, cat: 'citycar', catLabel: 'Citycar', img: IMG_BASE + 'CITYCAR/SUZUKI%20DZIRE.jpeg' },
+  { name: 'Chevrolet Captiva', price: 50000, cat: 'suv', catLabel: 'SUV', img: IMG_BASE + 'SUV/CHEVROTET%20CAPTIVA.jpeg' },
+  { name: 'Hyundai H1', price: 65000, cat: 'furgon', catLabel: 'Furgón', img: IMG_BASE + 'FURG%C3%93N/HYUNDAI%20H1.jpeg' },
+  { name: 'Hyundai Tucson', price: 39000, cat: 'suv', catLabel: 'SUV', img: IMG_BASE + 'SUV/HYUNDAI%20TUCSON%20(1).jpeg' },
+  { name: 'Kia Sorento', price: 40000, cat: 'suv', catLabel: 'SUV', img: IMG_BASE + 'SUV/KIA%20SORENTO.jpeg' },
+  { name: 'Hyundai Tucson', price: 48000, cat: 'suv', catLabel: 'SUV', img: IMG_BASE + 'SUV/HYUNDAI%20TUCSON%20(2).jpeg' },
 ];
 const fleetGrid = document.getElementById('fleetGrid');
 function renderFleet(filter){
   fleetGrid.innerHTML = fleet.filter(v => filter === 'todos' || v.cat === filter).map(v => `
     <div class="card">
-      <img src="${v.img}" alt="${v.name}">
+      <img src="${v.img}" alt="${v.name}, categoría ${v.catLabel}, disponible en Glaciares Rent a Car Punta Arenas" loading="lazy" width="400" height="300">
       <div class="card-body">
+        <span class="card-cat">${v.catLabel}</span>
         <h3>${v.name}</h3>
-        <p class="price">$${v.price.toLocaleString('es-CL')} / día</p>
-        <div class="badge-urgent">🔥 ¡Queda solo 1 unidad!</div>
-        <a href="https://wa.me/56983335924?text=${encodeURIComponent('Hola, me interesa arrendar un ' + v.name + ' ($' + v.price.toLocaleString('es-CL') + '/día).')}" target="_blank" class="btn-outline" style="margin-top:14px;">VER DETALLES</a>
+        <p class="price">$${v.price.toLocaleString('es-CL')}<small> / día, desde</small></p>
+        <p class="avail-note"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20 6 9 17l-5-5"/></svg>Disponibilidad sujeta a confirmación</p>
+        <a href="https://wa.me/56983335924?text=${encodeURIComponent('Hola, quiero cotizar el ' + v.name + ' ($' + v.price.toLocaleString('es-CL') + '/día).')}" target="_blank" rel="noopener" class="btn-outline" style="margin-top:14px;" data-track="cotizar-vehiculo" data-vehicle="${v.name}">COTIZAR ESTE VEHÍCULO</a>
       </div>
     </div>`).join('');
 }
@@ -689,19 +827,20 @@ document.querySelectorAll('.filter-btn').forEach(btn => {
   });
 });
 
-/* ---- Servicios adicionales ---- */
+/* ---- Servicios adicionales (mostrados en el home; precios reales del cotizador) ---- */
 const SERV_BASE = 'https://glaciaresrentacar.cl/IMAGENES_GLACIARES_NUEVO%20AUTOS/SERVICIOS/';
 const services = [
-  { name: 'Silla para bebé (De 2 a 18 KG)', price: '$6.000 / día', note: 'Máximo por pagar $50.000', img: SERV_BASE + 'SILLA%20BEBE.jpeg' },
-  { name: 'Seguro por Cristales', price: '$8.000 / día', note: 'Pérdida total, piquete, frisadura.', img: SERV_BASE + 'SEGURO.jpeg' },
-  { name: 'Seguro de Neumáticos', price: '$8.000 / día', note: 'Pérdida total o reventón.', img: SERV_BASE + 'SEGURO.jpeg' },
+  { name: 'Silla para bebé (de 2 a 18 kg)', price: '$6.000 / día', note: 'Máximo a pagar $50.000 en total.', img: SERV_BASE + 'SILLA%20BEBE.jpeg' },
+  { name: 'Protección de cristales', price: '$5.000 / día', note: 'Cubre pérdida total, piquete o frisadura.', img: SERV_BASE + 'SEGURO.jpeg' },
+  { name: 'Protección de neumáticos', price: '$5.000 / día', note: 'Cubre pérdida total o reventón.', img: SERV_BASE + 'SEGURO.jpeg' },
+  { name: 'Entrega o retiro en aeropuerto', price: '$20.000', note: 'Costo único por el servicio.', img: SERV_BASE + 'SEGURO.jpeg' },
 ];
 document.getElementById('servicesGrid').innerHTML = services.map(s => `
   <div class="card">
-    <img src="${s.img}" alt="${s.name}">
+    <img src="${s.img}" alt="${s.name}" loading="lazy" width="400" height="300">
     <div class="card-body">
       <h3 style="text-transform:none;">${s.name}</h3>
-      <p class="price">${s.price}</p>
+      <p class="price" style="font-size:16px;">${s.price}</p>
       <p class="service-note">${s.note}</p>
     </div>
   </div>`).join('');
@@ -709,99 +848,89 @@ document.getElementById('servicesGrid').innerHTML = services.map(s => `
 /* ---- Destinos ---- */
 const DEST_BASE = 'https://glaciaresrentacar.cl/SECCION%20LUGARES%20TURISTICOS/';
 const destinos = [
-  { name: 'Parque Nacional Torres del Paine', desc: 'Ícono mundial de la Patagonia. Maravíllate con sus picos de granito, lagos glaciares y fauna silvestre. Perfecto para recorrer en un SUV.', img: DEST_BASE + 'TORRES%20DEL%20PAINE.jpg' },
-  { name: 'Monumento Natural Los Pingüinos', desc: 'Conduce hasta el muelle y navega a Isla Magdalena para caminar entre miles de pingüinos en su hábitat natural.', img: DEST_BASE + 'MOMUMENTO%20LOS%20PINGUINOS.jpg' },
-  { name: 'Parque del Estrecho (Fuerte Bulnes)', desc: 'A solo 50 km al sur de Punta Arenas. Un viaje lleno de historia y paisajes costeros impresionantes.', img: DEST_BASE + 'Parque-del-estrecho.jpg' },
-  { name: 'Plaza de Armas Muñoz Gamero', desc: 'El corazón histórico de Punta Arenas. Rodeada de palacios antiguos y la icónica estatua de Hernando de Magallanes.', img: DEST_BASE + 'place-des-armes-munoz-gamero--v1-1200-800.jpeg' },
-  { name: 'Costanera del Estrecho', desc: 'Un paseo imperdible por la ciudad con vista directa al majestuoso Estrecho de Magallanes y Tierra del Fuego.', img: DEST_BASE + 'COSTANERA%20DEL%20ESTRECHO.jpg' },
-  { name: 'Faro San Isidro', desc: 'Conduce hasta el fin del camino y emprende una caminata única hacia el histórico faro que ilumina el estrecho.', img: DEST_BASE + 'FARO%20SAN%20ISIDRO.jpg' },
+  { name: 'Parque Nacional Torres del Paine', desc: 'Ícono mundial de la Patagonia: picos de granito, lagos glaciares y fauna silvestre. Ideal para recorrer en un SUV.', img: DEST_BASE + 'TORRES%20DEL%20PAINE.jpg' },
+  { name: 'Monumento Natural Los Pingüinos', desc: 'Conduce hasta el muelle y navega a Isla Magdalena para caminar entre pingüinos en su hábitat natural.', img: DEST_BASE + 'MOMUMENTO%20LOS%20PINGUINOS.jpg' },
+  { name: 'Parque del Estrecho (Fuerte Bulnes)', desc: 'A 50 km al sur de Punta Arenas. Historia y paisajes costeros de la región.', img: DEST_BASE + 'Parque-del-estrecho.jpg' },
+  { name: 'Plaza de Armas Muñoz Gamero', desc: 'El corazón histórico de Punta Arenas, con edificios patrimoniales y la estatua de Hernando de Magallanes.', img: DEST_BASE + 'place-des-armes-munoz-gamero--v1-1200-800.jpeg' },
+  { name: 'Costanera del Estrecho', desc: 'Paseo con vista directa al Estrecho de Magallanes y Tierra del Fuego.', img: DEST_BASE + 'COSTANERA%20DEL%20ESTRECHO.jpg' },
+  { name: 'Faro San Isidro', desc: 'Conduce hasta el fin del camino y camina hacia el histórico faro que ilumina el estrecho.', img: DEST_BASE + 'FARO%20SAN%20ISIDRO.jpg' },
 ];
 document.getElementById('destGrid').innerHTML = destinos.map(d => `
   <div class="card">
-    <img src="${d.img}" alt="${d.name}">
+    <img src="${d.img}" alt="${d.name}, destino turístico en Magallanes" loading="lazy" width="400" height="300">
     <div class="card-body">
       <h3 style="text-transform:none;margin-bottom:6px;">${d.name}</h3>
       <p class="service-note" style="font-size:13px;">${d.desc}</p>
     </div>
   </div>`).join('');
 
-/* ---- Counters: se detienen en su valor final, no suben infinito ---- */
-const counters = document.querySelectorAll('.counter');
-const counterObserver = new IntersectionObserver((entries) => {
-  entries.forEach(entry => {
-    if (!entry.isIntersecting || entry.target.dataset.done) return;
-    entry.target.dataset.done = '1';
-    const target = parseInt(entry.target.dataset.target, 10);
-    const duration = 1400;
-    const start = performance.now();
-    function step(now){
-      const progress = Math.min((now - start) / duration, 1);
-      entry.target.textContent = Math.floor(progress * target);
-      if (progress < 1) requestAnimationFrame(step);
-      else entry.target.textContent = target;
-    }
-    requestAnimationFrame(step);
-  });
-}, { threshold: 0.4 });
-counters.forEach(c => counterObserver.observe(c));
-
 /* ---- Contact form -> WhatsApp ---- */
 document.getElementById('contactForm').addEventListener('submit', (e) => {
   e.preventDefault();
   const data = new FormData(e.target);
   const msg = `Hola, soy ${data.get('nombre')} (tel: ${data.get('telefono')}). ${data.get('mensaje') || ''}`;
+  if (window.trackEvent) window.trackEvent('contacto_whatsapp');
   window.open('https://wa.me/56983335924?text=' + encodeURIComponent(msg), '_blank');
 });
 
-/* ---- Social proof toast (limitado, no infinito) ---- */
-const proofNames = [
-  { name: 'Carlos Silva', car: 'KIA SORENTO' },
-  { name: 'Ana Muñoz', car: 'CHEVROLET CAPTIVA' },
-  { name: 'Fernanda Rojas', car: 'HYUNDAI TUCSON' },
-];
-let toastCount = 0;
-function showToast(){
-  if (toastCount >= 3) return;
-  toastCount++;
-  const p = proofNames[Math.floor(Math.random() * proofNames.length)];
-  const el = document.createElement('div');
-  el.className = 'toast';
-  el.innerHTML = `<span style="color:#0ea5e9;">✔</span><span><strong>${p.name}</strong> acaba de consultar por un <strong>${p.car}</strong>.</span>`;
-  document.getElementById('toastHost').appendChild(el);
-  setTimeout(() => el.remove(), 6000);
-}
-setTimeout(showToast, 4000);
-setInterval(showToast, 16000);
-
 /* =====================================================================
    SISTEMA DE RESERVAS REAL (backend propio + Webpay Plus de Transbank)
-   -----------------------------------------------------------------
-   IMPORTANTE: cambia API_BASE por la URL donde quede publicado el backend
-   (carpeta "reservas-backend"). Mientras no lo despliegues, esto seguirá
-   apuntando a localhost y el buscador no podrá conectarse.
    ===================================================================== */
 const API_BASE = 'https://glaciares-reservas-backend.onrender.com';
 
 const todayISO = new Date().toISOString().slice(0, 10);
 const tomorrowISO = new Date(Date.now() + 86400000).toISOString().slice(0, 10);
-document.getElementById('fromDate').value = todayISO;
-document.getElementById('fromDate').min = todayISO;
-document.getElementById('toDate').value = tomorrowISO;
-document.getElementById('toDate').min = tomorrowISO;
-document.getElementById('fromDate').addEventListener('change', (e) => {
-  const min = new Date(new Date(e.target.value).getTime() + 86400000).toISOString().slice(0, 10);
-  document.getElementById('toDate').min = min;
-  if (document.getElementById('toDate').value < min) document.getElementById('toDate').value = min;
+const fromDateEl = document.getElementById('fromDate');
+const toDateEl = document.getElementById('toDate');
+const fromTimeEl = document.getElementById('fromTime');
+const toTimeEl = document.getElementById('toTime');
+fromDateEl.value = todayISO;
+fromDateEl.min = todayISO;
+toDateEl.value = tomorrowISO;
+toDateEl.min = tomorrowISO;
+fromDateEl.addEventListener('change', () => {
+  if (!fromDateEl.value) return;
+  const min = new Date(new Date(fromDateEl.value).getTime() + 86400000).toISOString().slice(0, 10);
+  toDateEl.min = min;
+  if (toDateEl.value < min) toDateEl.value = min;
 });
 
 const searchForm = document.getElementById('searchForm');
 const searchResults = document.getElementById('searchResults');
 const searchStatus = document.getElementById('searchStatus');
+const formError = document.getElementById('formError');
+
+function showFormError(msg){
+  formError.textContent = msg;
+  formError.classList.add('show');
+}
+function clearFormError(){
+  formError.textContent = '';
+  formError.classList.remove('show');
+}
+
+function validateSearch(from, to, fromTime, toTime){
+  if (!from || !to || !fromTime || !toTime) return 'Completa todos los campos obligatorios de fecha y hora.';
+  const todayStr = new Date().toISOString().slice(0, 10);
+  if (from < todayStr) return 'La fecha de retiro no puede ser anterior a hoy.';
+  if (to < from) return 'La fecha de devolución no puede ser anterior a la de retiro.';
+  if (to === from && toTime <= fromTime) return 'La hora de devolución debe ser posterior a la hora de retiro.';
+  return null;
+}
 
 searchForm.addEventListener('submit', async (e) => {
   e.preventDefault();
-  const from = document.getElementById('fromDate').value;
-  const to = document.getElementById('toDate').value;
+  clearFormError();
+  const from = fromDateEl.value;
+  const to = toDateEl.value;
+  const fromTime = fromTimeEl.value;
+  const toTime = toTimeEl.value;
+
+  const err = validateSearch(from, to, fromTime, toTime);
+  if (err) { showFormError(err); return; }
+
+  if (window.trackEvent) window.trackEvent('cotizador_buscar', { from, to });
+
   searchResults.classList.remove('hidden');
   searchResults.innerHTML = '<p class="search-msg">Buscando disponibilidad…</p>';
   searchResults.scrollIntoView({ behavior: 'smooth', block: 'start' });
@@ -811,11 +940,11 @@ searchForm.addEventListener('submit', async (e) => {
     if (!r.ok) throw new Error('bad response');
     const data = await r.json();
     renderResults(data, from, to);
-  } catch (err) {
+  } catch (err2) {
     searchResults.innerHTML = `
       <p class="search-msg">
         No pudimos conectar con el sistema de reservas ahora mismo.<br>
-        <a href="https://wa.me/56983335924?text=${encodeURIComponent('Hola, quiero reservar un vehículo para el ' + from + ' al ' + to + '.')}" target="_blank" style="color:var(--accent-dark);font-weight:700;">Escríbenos por WhatsApp</a> y te cotizamos al toque.
+        <a href="https://wa.me/56983335924?text=${encodeURIComponent('Hola, quiero consultar disponibilidad de un vehículo del ' + from + ' al ' + to + '.')}" target="_blank" rel="noopener" style="color:var(--accent-dark);font-weight:700;">Escríbenos por WhatsApp</a> y te cotizamos al toque.
       </p>`;
   }
 });
@@ -826,32 +955,25 @@ function renderResults(data, from, to) {
     return;
   }
   searchResults.innerHTML = `<p class="search-msg" style="margin-bottom:6px;">${data.results.length} vehículo(s) disponible(s) del ${from} al ${to}</p>` +
-    data.results.map(v => {
-      const normalPrice = Math.round(v.totalPrice / 0.9); // referencial, no es un medio de pago real — ver nota
-      return `
+    data.results.map(v => `
       <div class="result-card">
-        <img src="${v.image}" alt="${v.name}">
+        <img src="${v.image}" alt="${v.name}" loading="lazy">
         <div class="result-info">
           <h4>${v.name}</h4>
           <p class="meta">${v.category.toUpperCase()} · ${v.days} día(s) · Garantía referencial $${v.deposit.toLocaleString('es-CL')}</p>
         </div>
         <div class="result-price">
           ${v.discountPct ? `<span class="discount-tag">-${v.discountPct}% reserva anticipada</span>` : ''}
-          <div class="price-box special">
-            <span class="plabel">PRECIO ESPECIAL PAGO ADELANTADO</span>
+          <div class="price-box">
+            <span class="plabel">TOTAL ESTIMADO</span>
             <span class="pamount">$${v.totalPrice.toLocaleString('es-CL')}</span>
           </div>
-          <div class="price-box normal">
-            <span class="plabel">PRECIO NORMAL CON ABONO MÍNIMO ($50.000)</span>
-            <span class="pamount">$${normalPrice.toLocaleString('es-CL')}</span>
-          </div>
-          <button class="btn-pay" onclick='openQuoteModal(${JSON.stringify({ id: v.id, name: v.name, totalPrice: v.totalPrice, days: v.days })}, "${from}", "${to}")'>Reservar y Pagar</button>
+          <button class="btn-pay" onclick='openQuoteModal(${JSON.stringify({ id: v.id, name: v.name, totalPrice: v.totalPrice, days: v.days })}, "${from}", "${to}")'>Reservar y pagar</button>
         </div>
-      </div>`;
-    }).join('');
+      </div>`).join('');
 }
 
-/* ---------- Cotización: servicios adicionales (silla, seguros, etc.) ---------- */
+/* ---------- Cotización: servicios adicionales (silla, protecciones, permisos) ---------- */
 let extrasCatalog = [];
 async function loadExtrasCatalog() {
   try {
@@ -888,14 +1010,31 @@ function openQuoteModal(vehicle, from, to) {
       <div class="extra-control">
         ${def.kind === 'qty' ? `
           <div class="qty-stepper">
-            <button type="button" onclick="changeExtraQty(${def.id}, -1)">−</button>
+            <button type="button" onclick="changeExtraQty(${def.id}, -1)" aria-label="Restar">−</button>
             <span id="qty-${def.id}">0</span>
-            <button type="button" onclick="changeExtraQty(${def.id}, 1)">+</button>
+            <button type="button" onclick="changeExtraQty(${def.id}, 1)" aria-label="Sumar">+</button>
           </div>` : `
           <input type="checkbox" id="chk-${def.id}" onchange="toggleExtraCheckbox(${def.id})">`}
       </div>
     </div>
   `).join('') || '<p class="search-msg">No hay servicios adicionales configurados.</p>';
+
+  // Preselecciona extras según lo indicado en el cotizador
+  const wantsAirport = document.getElementById('airportPickup') && document.getElementById('airportPickup').checked;
+  const wantsArgentina = document.getElementById('tripArgentina') && document.getElementById('tripArgentina').value === 'si';
+  extrasCatalog.forEach(def => {
+    const nameLower = (def.name || '').toLowerCase();
+    if (wantsAirport && nameLower.includes('aeropuerto')) {
+      selectedExtras[def.id] = 1;
+      const chk = document.getElementById(`chk-${def.id}`);
+      if (chk) chk.checked = true;
+    }
+    if (wantsArgentina && nameLower.includes('argentina')) {
+      selectedExtras[def.id] = 1;
+      const chk = document.getElementById(`chk-${def.id}`);
+      if (chk) chk.checked = true;
+    }
+  });
 
   renderQuoteTotal();
   document.getElementById('quoteModal').classList.remove('hidden');
@@ -949,10 +1088,21 @@ function openBookingModal() {
   extrasArr.forEach(({ id, qty }) => { extrasTotal += extraLineCost(extrasCatalog.find(e => e.id === id), qty); });
   const grandTotal = pendingVehicle.totalPrice + extrasTotal;
 
+  const passengers = document.getElementById('passengers') ? document.getElementById('passengers').value : '';
+  const destination = document.getElementById('destination') ? document.getElementById('destination').value : '';
+  const tripArgentina = document.getElementById('tripArgentina') ? document.getElementById('tripArgentina').value : 'no';
+  const airportPickup = document.getElementById('airportPickup') ? document.getElementById('airportPickup').checked : false;
+  const notesParts = [];
+  if (passengers) notesParts.push(`Pasajeros: ${passengers}`);
+  if (destination) notesParts.push(`Destino estimado: ${destination}`);
+  notesParts.push(`Viaje a Argentina: ${tripArgentina === 'si' ? 'Sí' : 'No'}`);
+  notesParts.push(`Entrega/retiro en aeropuerto: ${airportPickup ? 'Sí' : 'No'}`);
+
   pendingBooking = { vehicleId: pendingVehicle.id, from: pendingVehicle.from, to: pendingVehicle.to,
-    pickupTime: document.getElementById('fromTime').value,
-    returnTime: document.getElementById('toTime').value,
-    extras: extrasArr };
+    pickupTime: fromTimeEl.value,
+    returnTime: toTimeEl.value,
+    extras: extrasArr,
+    notes: notesParts.join(' · ') };
   document.getElementById('modalSummary').innerHTML = `
     <div><span>Vehículo</span><strong>${pendingVehicle.name}</strong></div>
     <div><span>Retiro</span><strong>${pendingVehicle.from}</strong></div>
@@ -983,11 +1133,12 @@ document.getElementById('bookingForm').addEventListener('submit', async (e) => {
     const booking = await r1.json();
     if (!r1.ok) throw new Error(booking.error || 'No se pudo crear la reserva');
 
+    if (window.trackEvent) window.trackEvent('reserva_creada', { totalPrice: booking.totalPrice });
+
     const r2 = await fetch(`${API_BASE}/api/webpay/init/${booking.id}`, { method: 'POST' });
     const webpay = await r2.json();
     if (!r2.ok) throw new Error(webpay.error || 'No se pudo iniciar el pago');
 
-    // Webpay Plus requiere redirigir con un POST (no un simple link) — armamos el formulario y lo enviamos.
     const form = document.createElement('form');
     form.method = 'POST';
     form.action = webpay.url;
@@ -1000,6 +1151,18 @@ document.getElementById('bookingForm').addEventListener('submit', async (e) => {
     alert(err.message || 'Ocurrió un error. Intenta nuevamente o escríbenos por WhatsApp.');
     btn.disabled = false; btn.textContent = 'Ir a pagar';
   }
+});
+
+/* ---- Medición de clics de conversión (WhatsApp, Cómo llegar, teléfono, correo) ---- */
+document.addEventListener('click', (e) => {
+  const el = e.target.closest('[data-track]');
+  if (el && window.trackEvent) window.trackEvent(el.dataset.track);
+  const link = e.target.closest('a[href^="tel:"]');
+  if (link && window.trackEvent) window.trackEvent('click_telefono');
+  const mail = e.target.closest('a[href^="mailto:"]');
+  if (mail && window.trackEvent) window.trackEvent('click_correo');
+  const maps = e.target.closest('a[href*="google.com/maps"]');
+  if (maps && window.trackEvent) window.trackEvent('click_como_llegar');
 });
 </script>
 </body>
