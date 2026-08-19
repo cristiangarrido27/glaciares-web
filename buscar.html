@@ -617,7 +617,7 @@ function renderResults() {
   const list = applyFiltersAndSort(merged);
   const days = daysBetween(state.dateFrom, state.dateTo);
   document.getElementById('resultsCount').innerHTML =
-    `${list.length} opción${list.length === 1 ? '' : 'es'} encontrada${list.length === 1 ? '' : 's'}<span>${state.dateFrom} → ${state.dateTo} · ${days} día${days > 1 ? 's' : ''}</span>`;
+    `${list.length} ${list.length === 1 ? 'opción encontrada' : 'opciones encontradas'}<span>${state.dateFrom} → ${state.dateTo} · ${days} día${days > 1 ? 's' : ''}</span>`;
 
   const resultsList = document.getElementById('resultsList');
   if (list.length === 0) {
