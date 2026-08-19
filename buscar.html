@@ -1,0 +1,875 @@
+<!DOCTYPE html>
+<html lang="es-CL">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Vehículos disponibles | Glaciares Rent a Car</title>
+<meta name="description" content="Resultados de tu búsqueda de arriendo de vehículos en Punta Arenas con Glaciares Rent a Car.">
+<link rel="canonical" href="https://www.glaciaresrentacar.cl/buscar.html">
+<meta name="robots" content="noindex, follow">
+<link rel="icon" href="https://glaciaresrentacar.cl/LOGOSINFONDO.png">
+<link rel="apple-touch-icon" href="https://glaciaresrentacar.cl/LOGOSINFONDO.png">
+
+<style>
+  *{box-sizing:border-box;margin:0;padding:0;}
+  html{scroll-behavior:smooth;scroll-padding-top:92px;}
+  body{font-family:-apple-system,'Segoe UI',Roboto,'Helvetica Neue',Arial,sans-serif;color:#0A2540;background:#f8fafc;-webkit-font-smoothing:antialiased;}
+  img{display:block;max-width:100%;}
+  a{text-decoration:none;color:inherit;}
+  ul{list-style:none;}
+  button{font-family:inherit;cursor:pointer;border:none;background:none;}
+  :focus-visible{outline:3px solid var(--accent-dark);outline-offset:2px;}
+
+  :root{
+    --navy:#0A2540; --navy-dark:#071B30;
+    --accent:#00D4FF; --accent-dark:#00AFD6;
+    --green:#2E7D5B;
+    --slate-50:#f8fafc; --slate-100:#f1f5f9; --slate-200:#e2e8f0;
+    --slate-400:#94a3b8; --slate-500:#64748b; --slate-600:#475569;
+  }
+  .container{max-width:1180px;margin:0 auto;padding:0 20px;}
+  .btn{display:inline-flex;align-items:center;justify-content:center;gap:8px;font-weight:700;padding:13px 22px;border-radius:12px;transition:.2s;font-size:14.5px;}
+  .btn-accent{background:var(--accent);color:var(--navy);}
+  .btn-accent:hover{background:var(--accent-dark);}
+  .btn-whatsapp{background:#25D366;color:#fff;}
+  .btn-whatsapp:hover{background:#1fb959;}
+  .btn-outline{border:1.5px solid var(--navy);color:var(--navy);font-weight:700;padding:11px 20px;border-radius:10px;}
+  .btn-outline:hover{background:var(--navy);color:#fff;}
+  .sr-only{position:absolute;width:1px;height:1px;padding:0;margin:-1px;overflow:hidden;clip:rect(0,0,0,0);white-space:nowrap;border:0;}
+
+  /* Header (idéntico a portada) */
+  header{position:fixed;top:0;left:0;right:0;z-index:50;background:rgba(255,255,255,.97);backdrop-filter:blur(6px);border-bottom:1px solid var(--slate-100);}
+  .header-inner{max-width:1180px;margin:0 auto;padding:12px 20px;display:flex;align-items:center;justify-content:space-between;}
+  .brand{display:flex;align-items:center;gap:10px;}
+  .brand img{height:44px;width:44px;border-radius:50%;object-fit:cover;}
+  .brand-text{font-weight:800;font-size:13px;line-height:1.25;}
+  .brand-text small{display:block;font-weight:600;font-size:10px;letter-spacing:.15em;color:var(--slate-500);}
+  nav.main-nav{display:flex;gap:22px;font-weight:600;font-size:13.5px;}
+  nav.main-nav a:hover{color:var(--accent-dark);}
+  .header-cta{background:var(--accent);color:var(--navy);font-weight:700;font-size:13.5px;padding:10px 18px;border-radius:10px;}
+  .menu-btn{display:none;background:none;border:none;font-size:24px;line-height:1;padding:4px;}
+  @media (max-width:900px){ nav.main-nav, .header-cta{display:none;} .menu-btn{display:block;} }
+  #mobileMenu{display:none;background:#fff;border-top:1px solid var(--slate-100);padding:16px 20px 20px;flex-direction:column;gap:2px;font-weight:600;font-size:15px;}
+  #mobileMenu a{padding:10px 4px;border-bottom:1px solid var(--slate-100);}
+  #mobileMenu.open{display:flex;}
+
+  /* Page layout */
+  .buscar-main{padding-top:92px;padding-bottom:60px;min-height:70vh;}
+  .buscar-grid{display:grid;grid-template-columns:340px 1fr;gap:28px;align-items:start;}
+  @media (max-width:980px){ .buscar-grid{grid-template-columns:1fr;} }
+
+  /* Panel de búsqueda (sticky en desktop) */
+  .search-panel{background:#fff;border:1px solid var(--slate-200);border-radius:16px;padding:20px;box-shadow:0 1px 3px rgba(10,37,64,.06);}
+  @media (min-width:981px){ .search-panel{position:sticky;top:92px;} }
+  .search-panel h2{font-size:15px;font-weight:800;margin-bottom:14px;}
+  .sfield{display:flex;flex-direction:column;gap:5px;margin-bottom:12px;}
+  .sfield label{font-size:11px;font-weight:700;color:var(--slate-500);text-transform:uppercase;letter-spacing:.03em;}
+  .sfield select, .sfield input{border:1px solid var(--slate-200);border-radius:10px;padding:10px 11px;font-size:13.5px;font-family:inherit;color:var(--navy);width:100%;}
+  .sfield select:focus, .sfield input:focus{outline:2px solid var(--accent);border-color:var(--accent);}
+  .sfield.has-error select, .sfield.has-error input{border-color:#dc2626;}
+  .sfield-error{color:#b91c1c;font-size:11px;font-weight:600;display:none;}
+  .sfield.has-error .sfield-error{display:block;}
+  .same-row{display:flex;align-items:center;gap:8px;margin-bottom:12px;}
+  .same-row input{width:17px;height:17px;flex-shrink:0;}
+  .same-row label{font-size:12.5px;font-weight:600;}
+  .two-col{display:grid;grid-template-columns:1fr 1fr;gap:10px;}
+  .airport-note-panel{background:#eff9ff;border:1px solid #bfe9f7;color:var(--navy);font-size:11.5px;font-weight:600;border-radius:8px;padding:8px 10px;margin-bottom:12px;display:none;}
+  .airport-note-panel.show{display:block;}
+  .btn-update{width:100%;background:var(--navy);color:#fff;font-weight:700;padding:13px;border-radius:10px;font-size:14px;margin-top:4px;}
+  .btn-update:hover{background:var(--navy-dark);}
+
+  /* Resumen móvil */
+  .mobile-summary{display:none;}
+  @media (max-width:980px){
+    .mobile-summary{display:flex;align-items:center;justify-content:space-between;gap:10px;background:#fff;border:1px solid var(--slate-200);border-radius:14px;padding:14px 16px;margin-bottom:16px;}
+    .mobile-summary .txt{font-size:12.5px;color:var(--slate-600);line-height:1.5;}
+    .mobile-summary .txt strong{color:var(--navy);}
+    .search-panel{display:none;}
+    .search-panel.open{display:block;margin-bottom:16px;}
+  }
+
+  /* Resultados: header, filtros, orden */
+  .results-head{display:flex;flex-wrap:wrap;align-items:center;justify-content:space-between;gap:12px;margin-bottom:18px;}
+  .results-count{font-size:15px;font-weight:800;color:var(--navy);}
+  .results-count span{font-weight:600;color:var(--slate-500);font-size:13px;display:block;margin-top:2px;}
+  .results-controls{display:flex;flex-wrap:wrap;gap:10px;}
+  .results-controls select{border:1px solid var(--slate-200);border-radius:10px;padding:9px 12px;font-size:13px;font-family:inherit;color:var(--navy);background:#fff;}
+  .cat-tabs{display:flex;flex-wrap:wrap;gap:8px;margin-bottom:18px;}
+  .cat-tab{border:1px solid var(--slate-200);background:#fff;color:var(--navy);padding:8px 16px;border-radius:99px;font-weight:700;font-size:13px;}
+  .cat-tab.active{background:var(--navy);border-color:var(--navy);color:#fff;}
+
+  /* Tarjetas de resultado */
+  .rcard{background:#fff;border:1px solid var(--slate-100);border-radius:16px;padding:16px;margin-bottom:16px;display:grid;grid-template-columns:180px 1fr 220px;gap:18px;box-shadow:0 1px 3px rgba(10,37,64,.06);opacity:0;transform:translateY(10px);animation:cardIn .45s ease forwards;}
+  @media (max-width:860px){ .rcard{grid-template-columns:1fr;} }
+  @keyframes cardIn{to{opacity:1;transform:translateY(0);}}
+  @media (prefers-reduced-motion: reduce){ .rcard{animation:none;opacity:1;transform:none;} }
+  .rcard img{width:100%;height:130px;object-fit:cover;border-radius:12px;}
+  .rcard-cat{display:inline-block;font-size:10.5px;font-weight:700;letter-spacing:.06em;color:var(--accent-dark);background:rgba(0,212,255,.12);padding:3px 9px;border-radius:99px;margin-bottom:6px;text-transform:uppercase;}
+  .rcard h3{font-size:16px;font-weight:800;}
+  .rcard-meta{color:var(--slate-500);font-size:12.5px;margin-top:4px;}
+  .rcard-avail{margin-top:8px;color:var(--slate-500);font-size:12px;font-weight:600;display:flex;align-items:center;gap:5px;}
+  .rcard-avail svg{width:13px;height:13px;color:var(--green);flex-shrink:0;}
+  .rcard-breakdown{border-top:1px dashed var(--slate-200);margin-top:10px;padding-top:8px;font-size:12px;color:var(--slate-600);}
+  .rcard-breakdown div{display:flex;justify-content:space-between;padding:2px 0;}
+  .rcard-price{display:flex;flex-direction:column;gap:8px;}
+  .price-box{border-radius:10px;padding:10px 14px;text-align:right;background:var(--slate-50);border:1px solid var(--slate-200);}
+  .price-box .plabel{font-size:10px;font-weight:800;letter-spacing:.3px;display:block;color:var(--slate-500);}
+  .price-box .pamount{font-size:19px;font-weight:800;color:var(--navy);}
+  .price-note{font-size:10.5px;color:var(--slate-400);text-align:right;}
+  .deposit-note{font-size:11px;color:var(--slate-500);text-align:right;}
+  .rcard-actions{display:flex;flex-direction:column;gap:8px;}
+  .btn-confirm{background:#25D366;color:#fff;font-weight:700;padding:11px;border-radius:10px;font-size:13px;text-align:center;}
+  .btn-confirm:hover{background:#1fb959;}
+  .btn-pay{background:var(--accent);color:var(--navy);font-weight:700;padding:11px;border-radius:10px;font-size:13px;text-align:center;}
+  .btn-pay:hover{background:var(--accent-dark);}
+
+  /* Skeleton */
+  .skeleton-card{background:#fff;border:1px solid var(--slate-100);border-radius:16px;padding:16px;margin-bottom:16px;height:162px;overflow:hidden;position:relative;}
+  .skeleton-card::after{content:'';position:absolute;inset:0;background:linear-gradient(90deg,var(--slate-100) 25%,var(--slate-200) 37%,var(--slate-100) 63%);background-size:400% 100%;animation:shimmer 1.4s ease infinite;}
+  @keyframes shimmer{0%{background-position:100% 0;}100%{background-position:0 0;}}
+  @media (prefers-reduced-motion: reduce){ .skeleton-card::after{animation:none;} }
+  .loading-msg{text-align:center;color:var(--slate-500);font-size:13.5px;margin-bottom:14px;}
+
+  .empty-state{text-align:center;background:#fff;border:1px solid var(--slate-100);border-radius:16px;padding:44px 24px;}
+  .empty-state h3{font-size:17px;font-weight:800;margin-bottom:8px;}
+  .empty-state p{color:var(--slate-500);font-size:14px;margin-bottom:20px;}
+  .empty-actions{display:flex;flex-wrap:wrap;justify-content:center;gap:12px;}
+
+  /* Footer */
+  footer{background:var(--navy);color:#cbd5e1;padding-top:44px;padding-bottom:24px;margin-top:20px;}
+  .footer-inner{text-align:center;font-size:12px;color:#94a3b8;}
+  .footer-inner a{color:var(--accent);font-weight:600;}
+
+  /* WhatsApp flotante (idéntico a portada) */
+  .wa-float-wrap{position:fixed;right:20px;bottom:20px;z-index:60;display:flex;align-items:center;}
+  .wa-float{position:relative;background:#25D366;color:#fff;height:56px;width:56px;border-radius:50%;display:flex;align-items:center;justify-content:center;box-shadow:0 8px 22px rgba(0,0,0,.28);opacity:0;transform:translateY(16px) scale(.9);animation:waEnter .5s ease .3s forwards;}
+  .wa-float:focus-visible{outline:3px solid var(--navy-dark);outline-offset:3px;}
+  @keyframes waEnter{to{opacity:1;transform:translateY(0) scale(1);}}
+  .wa-float.pulse{animation:waEnter .5s ease forwards, waPulse 1.6s ease-out;}
+  @keyframes waPulse{0%{box-shadow:0 8px 22px rgba(0,0,0,.28),0 0 0 0 rgba(37,211,102,.55);}100%{box-shadow:0 8px 22px rgba(0,0,0,.28),0 0 0 16px rgba(37,211,102,0);}}
+  .wa-tooltip{position:absolute;right:64px;bottom:14px;background:var(--navy);color:#fff;font-size:12.5px;font-weight:600;padding:8px 12px;border-radius:8px;white-space:nowrap;opacity:0;pointer-events:none;transform:translateX(6px);transition:opacity .18s,transform .18s;}
+  .wa-tooltip::after{content:'';position:absolute;right:-5px;top:50%;transform:translateY(-50%);border:5px solid transparent;border-left-color:var(--navy);}
+  @media (min-width:641px){ .wa-float:hover .wa-tooltip, .wa-float:focus-visible .wa-tooltip{opacity:1;transform:translateX(0);} }
+  @media (max-width:640px){ .wa-tooltip{display:none;} }
+  @media (prefers-reduced-motion: reduce){ .wa-float{animation:none !important;opacity:1;transform:none;} .wa-float.pulse{animation:none !important;} }
+  @media (max-width:640px){ .wa-float-wrap{right:16px;bottom:16px;} .wa-float{height:52px;width:52px;} }
+
+  /* Modales (reserva + pago, reutilizando flujo Webpay existente) */
+  .modal-overlay{position:fixed;inset:0;background:rgba(10,37,64,.6);z-index:100;display:flex;align-items:center;justify-content:center;padding:20px;}
+  .modal-overlay.hidden{display:none;}
+  .modal-box{background:#fff;border-radius:18px;padding:28px;max-width:420px;width:100%;max-height:88vh;overflow-y:auto;}
+  .modal-box h3{font-size:18px;font-weight:800;margin-bottom:4px;}
+  .modal-box .modal-sub{color:var(--slate-500);font-size:13px;margin-bottom:18px;}
+  .modal-box input{width:100%;border:1px solid var(--slate-200);border-radius:10px;padding:11px 13px;font-size:14px;margin-bottom:12px;font-family:inherit;}
+  .modal-box .modal-actions{display:flex;gap:10px;margin-top:6px;}
+  .modal-box .modal-actions button{flex:1;padding:12px;border-radius:10px;font-weight:700;font-size:14px;}
+  .modal-cancel{background:var(--slate-100);color:var(--navy);}
+  .modal-confirm{background:var(--accent);color:var(--navy);}
+  .modal-confirm:hover{background:var(--accent-dark);}
+  .modal-summary{background:var(--slate-50);border-radius:12px;padding:12px 14px;margin-bottom:16px;font-size:13px;}
+  .modal-summary div{display:flex;justify-content:space-between;padding:2px 0;gap:10px;}
+  .quote-box{max-width:480px;}
+  .extra-row{display:flex;align-items:flex-start;gap:12px;border:1px solid var(--slate-100);border-radius:12px;padding:12px;margin-bottom:10px;}
+  .extra-row .extra-info{flex:1;}
+  .extra-row .extra-info strong{font-size:13.5px;display:block;}
+  .extra-row .extra-info span{font-size:12px;color:var(--slate-500);}
+  .extra-row .extra-price{font-size:12.5px;font-weight:700;color:var(--navy);white-space:nowrap;margin-top:2px;display:block;}
+  .extra-control{flex-shrink:0;display:flex;align-items:center;gap:8px;}
+  .extra-control input[type=checkbox]{width:18px;height:18px;margin:0;}
+  .qty-stepper{display:flex;align-items:center;gap:8px;}
+  .qty-stepper button{width:26px;height:26px;border-radius:8px;background:var(--slate-100);font-weight:800;color:var(--navy);}
+  .qty-stepper span{min-width:16px;text-align:center;font-weight:700;}
+  .quote-total-box{background:var(--slate-50);border-radius:12px;padding:14px;margin-top:6px;font-size:13.5px;}
+  .quote-total-box div{display:flex;justify-content:space-between;padding:3px 0;}
+  .quote-total-box .grand{font-size:17px;font-weight:800;color:var(--navy);border-top:1px solid var(--slate-200);margin-top:6px;padding-top:8px;}
+  .quote-extra-note{font-size:11.5px;color:var(--slate-500);margin:-4px 0 12px;}
+</style>
+</head>
+<body>
+
+<a href="#buscar-resultados" class="sr-only">Saltar a los resultados</a>
+
+<header>
+  <div class="header-inner">
+    <a href="index.html" class="brand">
+      <img src="https://glaciaresrentacar.cl/LOGOSINFONDO.png" alt="Logo Glaciares Rent a Car">
+      <span class="brand-text">GLACIARES<small>RENT A CAR</small></span>
+    </a>
+    <nav class="main-nav" aria-label="Navegación principal">
+      <a href="index.html#inicio">Inicio</a>
+      <a href="index.html#buscador">Cotizar</a>
+      <a href="index.html#flota">Flota</a>
+      <a href="index.html#servicios">Servicios</a>
+      <a href="index.html#preguntas">Preguntas frecuentes</a>
+      <a href="index.html#contacto">Contacto</a>
+      <a href="condiciones.html">Condiciones</a>
+    </nav>
+    <a href="index.html#buscador" class="header-cta">Nueva búsqueda</a>
+    <button id="menuBtn" class="menu-btn" aria-label="Abrir menú" aria-expanded="false" aria-controls="mobileMenu">☰</button>
+  </div>
+  <div id="mobileMenu">
+    <a href="index.html#inicio">Inicio</a><a href="index.html#buscador">Cotizar</a><a href="index.html#flota">Flota</a>
+    <a href="index.html#servicios">Servicios</a><a href="index.html#preguntas">Preguntas frecuentes</a>
+    <a href="index.html#contacto">Contacto</a><a href="condiciones.html">Condiciones de arriendo</a>
+  </div>
+</header>
+
+<main class="buscar-main">
+  <div class="container">
+
+    <!-- Resumen compacto en móvil -->
+    <div class="mobile-summary">
+      <div class="txt" id="mobileSummaryText"></div>
+      <button type="button" class="btn-outline" id="toggleSearchPanel" style="white-space:nowrap;padding:9px 14px;font-size:12.5px;">Modificar búsqueda</button>
+    </div>
+
+    <div class="buscar-grid">
+      <!-- Panel de búsqueda (sticky en desktop) -->
+      <aside class="search-panel" id="searchPanel">
+        <h2>Modifica tu búsqueda</h2>
+        <form id="updateForm" novalidate>
+          <div class="sfield" id="f-pickupPlace">
+            <label for="u-pickupPlace">Lugar de retiro</label>
+            <select id="u-pickupPlace">
+              <option value="agencia">Agencia Glaciares Rent a Car</option>
+              <option value="aeropuerto">Aeropuerto Pdte. Carlos Ibáñez del Campo</option>
+              <option value="hotel">Hotel o alojamiento (sujeto a confirmación)</option>
+            </select>
+          </div>
+          <div class="same-row">
+            <input type="checkbox" id="u-sameLugar">
+            <label for="u-sameLugar">Devolver en el mismo lugar</label>
+          </div>
+          <div class="sfield" id="f-dropoffPlace" style="display:none;">
+            <label for="u-dropoffPlace">Lugar de devolución</label>
+            <select id="u-dropoffPlace">
+              <option value="agencia">Agencia Glaciares Rent a Car</option>
+              <option value="aeropuerto">Aeropuerto Pdte. Carlos Ibáñez del Campo</option>
+              <option value="hotel">Hotel o alojamiento (sujeto a confirmación)</option>
+              <option value="otro">Otro lugar (sujeto a evaluación)</option>
+            </select>
+          </div>
+          <div class="sfield" id="f-dropoffOther" style="display:none;">
+            <label for="u-dropoffOther">Indique el lugar de devolución</label>
+            <input type="text" id="u-dropoffOther">
+          </div>
+          <p class="airport-note-panel" id="u-airportNote">Servicio en aeropuerto con costo adicional de $20.000.</p>
+          <div class="two-col">
+            <div class="sfield" id="f-fromDate"><label for="u-fromDate">Retiro</label><input type="date" id="u-fromDate"></div>
+            <div class="sfield" id="f-fromTime"><label for="u-fromTime">Hora</label><input type="time" id="u-fromTime"></div>
+          </div>
+          <div class="two-col">
+            <div class="sfield" id="f-toDate"><label for="u-toDate">Devolución</label><input type="date" id="u-toDate"></div>
+            <div class="sfield" id="f-toTime"><label for="u-toTime">Hora</label><input type="time" id="u-toTime"></div>
+          </div>
+          <div class="sfield" id="f-passengers">
+            <label for="u-passengers">Pasajeros</label>
+            <select id="u-passengers">
+              <option value="1-2">1 a 2</option><option value="3-4">3 a 4</option>
+              <option value="5-6">5 a 6</option><option value="7+">7 o más</option>
+            </select>
+          </div>
+          <div class="sfield">
+            <label for="u-destination">Destino estimado</label>
+            <select id="u-destination">
+              <option value="Punta Arenas y alrededores">Punta Arenas y alrededores</option>
+              <option value="Torres del Paine">Torres del Paine</option>
+              <option value="Puerto Natales">Puerto Natales</option>
+              <option value="Tierra del Fuego">Tierra del Fuego</option>
+              <option value="Argentina (El Calafate / Río Gallegos)">Argentina (El Calafate / Río Gallegos)</option>
+              <option value="Otro">Otro</option>
+            </select>
+          </div>
+          <div class="sfield">
+            <label for="u-argentina">Viaje a Argentina</label>
+            <select id="u-argentina"><option value="no">No</option><option value="si">Sí, necesito permiso</option></select>
+          </div>
+          <div class="sfield">
+            <label for="u-promo">Código promocional</label>
+            <input type="text" id="u-promo" placeholder="Opcional">
+          </div>
+          <button type="submit" class="btn-update">ACTUALIZAR BÚSQUEDA</button>
+        </form>
+      </aside>
+
+      <!-- Resultados -->
+      <section id="buscar-resultados">
+        <div class="results-head">
+          <div class="results-count" id="resultsCount">Buscando…</div>
+          <div class="results-controls">
+            <select id="sortSelect" aria-label="Ordenar por">
+              <option value="recomendados">Recomendados</option>
+              <option value="menor-precio">Menor precio</option>
+              <option value="mayor-precio">Mayor precio</option>
+            </select>
+            <select id="priceFilter" aria-label="Filtrar por precio">
+              <option value="todos">Cualquier precio</option>
+              <option value="hasta40">Hasta $40.000/día</option>
+              <option value="hasta50">Hasta $50.000/día</option>
+              <option value="mas50">Más de $50.000/día</option>
+            </select>
+          </div>
+        </div>
+        <div class="cat-tabs" id="catTabs">
+          <button class="cat-tab active" data-cat="todos">Todos</button>
+          <button class="cat-tab" data-cat="citycar">Citycar</button>
+          <button class="cat-tab" data-cat="suv">SUV</button>
+          <button class="cat-tab" data-cat="furgon">Furgón</button>
+        </div>
+        <p class="loading-msg" id="loadingMsg">Preparando opciones…</p>
+        <div id="resultsList"></div>
+      </section>
+    </div>
+  </div>
+</main>
+
+<footer>
+  <div class="container footer-inner">
+    <p>© <span id="year"></span> Glaciares Rent a Car — <a href="index.html">Volver al inicio</a> · <a href="condiciones.html">Condiciones de arriendo</a></p>
+  </div>
+</footer>
+
+<div class="wa-float-wrap">
+  <a href="https://wa.me/56983335924?text=Hola%2C%20necesito%20ayuda%20para%20cotizar%20un%20veh%C3%ADculo%20en%20Glaciares%20Rent%20a%20Car." target="_blank" rel="noopener" class="wa-float" id="waFloat" aria-label="Consultar por WhatsApp">
+    <svg xmlns="http://www.w3.org/2000/svg" width="26" height="26" viewBox="0 0 24 24" fill="currentColor"><path d="M12.04 2c-5.5 0-9.96 4.46-9.96 9.96 0 1.76.46 3.48 1.34 5L2 22l5.2-1.36a9.94 9.94 0 004.84 1.23h.01c5.5 0 9.96-4.46 9.96-9.96S17.54 2 12.04 2z"/></svg>
+    <span class="wa-tooltip">¿Necesitas ayuda? Escríbenos</span>
+  </a>
+</div>
+
+<!-- Modal de cotización: servicios adicionales antes de pagar -->
+<div id="quoteModal" class="modal-overlay hidden" role="dialog" aria-modal="true" aria-labelledby="quoteModalTitle">
+  <div class="modal-box quote-box">
+    <h3 id="quoteModalTitle">Arma tu cotización</h3>
+    <p class="modal-sub" id="quoteVehicleLine"></p>
+    <div id="extrasList"></div>
+    <p class="quote-extra-note">Servicios sujetos a disponibilidad y a las condiciones establecidas en el contrato de arriendo.</p>
+    <div class="quote-total-box" id="quoteTotalBox"></div>
+    <div class="modal-actions" style="margin-top:14px;">
+      <button type="button" class="modal-cancel" id="quoteCancel">Cancelar</button>
+      <button type="button" class="modal-confirm" id="quoteContinue">Continuar</button>
+    </div>
+  </div>
+</div>
+
+<!-- Modal de datos del cliente + pago -->
+<div id="bookingModal" class="modal-overlay hidden" role="dialog" aria-modal="true" aria-labelledby="bookingModalTitle">
+  <div class="modal-box">
+    <h3 id="bookingModalTitle">Completa tu reserva</h3>
+    <p class="modal-sub">Te llevaremos a Webpay para pagar de forma segura.</p>
+    <div class="modal-summary" id="modalSummary"></div>
+    <form id="bookingForm">
+      <input required id="custName" placeholder="Nombre completo" autocomplete="name">
+      <input required id="custPhone" placeholder="Teléfono (+56 9...)" autocomplete="tel">
+      <input id="custEmail" type="email" placeholder="Correo (opcional)" autocomplete="email">
+      <div class="modal-actions">
+        <button type="button" class="modal-cancel" id="modalCancel">Cancelar</button>
+        <button type="submit" class="modal-confirm">Ir a pagar</button>
+      </div>
+    </form>
+  </div>
+</div>
+
+<script src="config.js"></script>
+<script src="analytics-config.js"></script>
+<script>
+document.getElementById('year').textContent = new Date().getFullYear();
+const menuBtn = document.getElementById('menuBtn');
+const mobileMenu = document.getElementById('mobileMenu');
+menuBtn.addEventListener('click', () => {
+  const open = mobileMenu.classList.toggle('open');
+  menuBtn.setAttribute('aria-expanded', open ? 'true' : 'false');
+});
+mobileMenu.querySelectorAll('a').forEach(a => a.addEventListener('click', () => mobileMenu.classList.remove('open')));
+
+const cfg = window.GLACIARES_CONFIG || { AIRPORT_FEE: 20000, ARGENTINA_PERMIT_FEE: 120000, MIN_DEPOSIT: 500000 };
+const WA_NUMBER = (cfg.WHATSAPP_NUMBER) || '56983335924';
+
+/* ---- WhatsApp flotante: pulso leve, se detiene con hover/foco, respeta reduced-motion ---- */
+const waFloat = document.getElementById('waFloat');
+const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+if (!prefersReducedMotion) {
+  let waPulsePaused = false;
+  waFloat.addEventListener('mouseenter', () => waPulsePaused = true);
+  waFloat.addEventListener('mouseleave', () => waPulsePaused = false);
+  waFloat.addEventListener('focus', () => waPulsePaused = true);
+  waFloat.addEventListener('blur', () => waPulsePaused = false);
+  setInterval(() => {
+    if (waPulsePaused) return;
+    waFloat.classList.remove('pulse');
+    void waFloat.offsetWidth;
+    waFloat.classList.add('pulse');
+  }, 13000);
+}
+
+const PLACE_LABELS = {
+  agencia: 'Agencia Glaciares Rent a Car — Punta Arenas',
+  aeropuerto: 'Aeropuerto Presidente Carlos Ibáñez del Campo',
+  hotel: 'Hotel o alojamiento en Punta Arenas (sujeto a confirmación)',
+  otro: 'Otro lugar (sujeto a evaluación)',
+};
+
+/* =====================================================================
+   LEER PARÁMETROS DE LA URL (persisten al recargar o compartir el enlace)
+   ===================================================================== */
+function readSearchState() {
+  const p = new URLSearchParams(window.location.search);
+  const todayISO = new Date().toISOString().slice(0, 10);
+  const tomorrowISO = new Date(Date.now() + 86400000).toISOString().slice(0, 10);
+  return {
+    dateFrom: p.get('dateFrom') || todayISO,
+    dateTo: p.get('dateTo') || tomorrowISO,
+    hourFrom: p.get('hourFrom') || '09:00',
+    hourTo: p.get('hourTo') || '09:00',
+    pickUpPlace: p.get('pickUpPlace') || 'agencia',
+    dropOffPlace: p.get('dropOffPlace') || p.get('pickUpPlace') || 'agencia',
+    dropOffOther: p.get('dropOffOther') || '',
+    passengers: p.get('passengers') || '3-4',
+    destination: p.get('destination') || 'Punta Arenas y alrededores',
+    argentina: p.get('argentina') || 'no',
+    promo: p.get('promo') || '',
+  };
+}
+let state = readSearchState();
+
+function daysBetween(from, to) {
+  const d = Math.round((new Date(to) - new Date(from)) / 86400000);
+  return Math.max(d, 1);
+}
+
+/* =====================================================================
+   PANEL DE BÚSQUEDA: precargar con los valores actuales
+   ===================================================================== */
+const uPickup = document.getElementById('u-pickupPlace');
+const uSame = document.getElementById('u-sameLugar');
+const uDropoffField = document.getElementById('f-dropoffPlace');
+const uDropoff = document.getElementById('u-dropoffPlace');
+const uDropoffOtherField = document.getElementById('f-dropoffOther');
+const uDropoffOther = document.getElementById('u-dropoffOther');
+const uAirportNote = document.getElementById('u-airportNote');
+const uFromDate = document.getElementById('u-fromDate');
+const uFromTime = document.getElementById('u-fromTime');
+const uToDate = document.getElementById('u-toDate');
+const uToTime = document.getElementById('u-toTime');
+const uPassengers = document.getElementById('u-passengers');
+const uDestination = document.getElementById('u-destination');
+const uArgentina = document.getElementById('u-argentina');
+const uPromo = document.getElementById('u-promo');
+
+function fillPanelFromState() {
+  uPickup.value = state.pickUpPlace;
+  const same = state.dropOffPlace === state.pickUpPlace && !state.dropOffOther;
+  uSame.checked = same;
+  uDropoff.value = ['agencia','aeropuerto','hotel','otro'].includes(state.dropOffPlace) ? state.dropOffPlace : 'otro';
+  uDropoffOther.value = state.dropOffOther;
+  uFromDate.value = state.dateFrom;
+  uFromTime.value = state.hourFrom;
+  uToDate.value = state.dateTo;
+  uToTime.value = state.hourTo;
+  uPassengers.value = state.passengers;
+  uDestination.value = state.destination;
+  uArgentina.value = state.argentina;
+  uPromo.value = state.promo;
+  updatePanelVisibility();
+}
+function updatePanelVisibility() {
+  const same = uSame.checked;
+  uDropoffField.style.display = same ? 'none' : '';
+  uDropoffOtherField.style.display = (!same && uDropoff.value === 'otro') ? '' : 'none';
+  const wantsAirport = uPickup.value === 'aeropuerto' || (!same && uDropoff.value === 'aeropuerto');
+  uAirportNote.classList.toggle('show', wantsAirport);
+}
+uPickup.addEventListener('change', updatePanelVisibility);
+uSame.addEventListener('change', updatePanelVisibility);
+uDropoff.addEventListener('change', updatePanelVisibility);
+fillPanelFromState();
+
+function updateMobileSummary() {
+  const days = daysBetween(state.dateFrom, state.dateTo);
+  document.getElementById('mobileSummaryText').innerHTML =
+    `<strong>${state.dateFrom}</strong> → <strong>${state.dateTo}</strong> (${days} día${days > 1 ? 's' : ''})<br>${PLACE_LABELS[state.pickUpPlace]}`;
+}
+updateMobileSummary();
+
+document.getElementById('toggleSearchPanel').addEventListener('click', () => {
+  document.getElementById('searchPanel').classList.toggle('open');
+});
+
+document.getElementById('updateForm').addEventListener('submit', (e) => {
+  e.preventDefault();
+  document.querySelectorAll('.sfield').forEach(f => f.classList.remove('has-error'));
+  const errors = [];
+  const todayStr = new Date().toISOString().slice(0, 10);
+  if (!uFromDate.value || uFromDate.value < todayStr) errors.push('fromDate');
+  if (!uToDate.value || uToDate.value < uFromDate.value) errors.push('toDate');
+  if (uToDate.value === uFromDate.value && uToTime.value <= uFromTime.value) errors.push('toTime');
+  if (!uSame.checked && uDropoff.value === 'otro' && !uDropoffOther.value.trim()) errors.push('dropoffOther');
+  if (errors.length) {
+    errors.forEach(id => { const f = document.getElementById('f-' + id); if (f) f.classList.add('has-error'); });
+    return;
+  }
+  const dropOffPlace = uSame.checked ? uPickup.value : uDropoff.value;
+  const params = new URLSearchParams({
+    dateFrom: uFromDate.value, dateTo: uToDate.value, hourFrom: uFromTime.value, hourTo: uToTime.value,
+    pickUpPlace: uPickup.value, dropOffPlace, passengers: uPassengers.value,
+    destination: uDestination.value, argentina: uArgentina.value,
+  });
+  if (dropOffPlace === 'otro' && uDropoffOther.value.trim()) params.set('dropOffOther', uDropoffOther.value.trim());
+  if (uPromo.value.trim()) params.set('promo', uPromo.value.trim());
+  window.location.href = '/buscar?' + params.toString();
+});
+
+/* =====================================================================
+   CATÁLOGO LOCAL DE VEHÍCULOS (mismos datos confirmados que la portada)
+   ===================================================================== */
+const IMG_BASE = 'https://glaciaresrentacar.cl/IMAGENES_GLACIARES_NUEVO%20AUTOS/';
+const FLEET = [
+  { id: 1, name: 'Suzuki Swift', price: 35000, cat: 'citycar', catLabel: 'Citycar', img: IMG_BASE + 'CITYCAR/SUZUKI%20SWIFT.jpeg', deposit: 500000 },
+  { id: 2, name: 'Suzuki Dzire', price: 38000, cat: 'citycar', catLabel: 'Citycar', img: IMG_BASE + 'CITYCAR/SUZUKI%20DZIRE.jpeg', deposit: 500000 },
+  { id: 3, name: 'Chevrolet Captiva', price: 50000, cat: 'suv', catLabel: 'SUV', img: IMG_BASE + 'SUV/CHEVROTET%20CAPTIVA.jpeg', deposit: 600000 },
+  { id: 4, name: 'Hyundai H1', price: 65000, cat: 'furgon', catLabel: 'Furgón', img: IMG_BASE + 'FURG%C3%93N/HYUNDAI%20H1.jpeg', deposit: 700000 },
+  { id: 5, name: 'Hyundai Tucson (unidad A)', price: 39000, cat: 'suv', catLabel: 'SUV', img: IMG_BASE + 'SUV/HYUNDAI%20TUCSON%20(1).jpeg', deposit: 600000 },
+  { id: 6, name: 'Kia Sorento', price: 40000, cat: 'suv', catLabel: 'SUV', img: IMG_BASE + 'SUV/KIA%20SORENTO.jpeg', deposit: 600000 },
+  { id: 7, name: 'Hyundai Tucson (unidad B)', price: 48000, cat: 'suv', catLabel: 'SUV', img: IMG_BASE + 'SUV/HYUNDAI%20TUCSON%20(2).jpeg', deposit: 600000 },
+];
+
+const API_BASE = 'https://glaciares-reservas-backend.onrender.com';
+let merged = [];
+let currentCat = 'todos';
+let currentSort = 'recomendados';
+let currentPriceFilter = 'todos';
+
+async function loadResults() {
+  const days = daysBetween(state.dateFrom, state.dateTo);
+  document.getElementById('resultsCount').textContent = 'Buscando…';
+
+  let backendById = {};
+  try {
+    const r = await fetch(`${API_BASE}/api/availability?from=${state.dateFrom}&to=${state.dateTo}&category=todos`);
+    if (r.ok) {
+      const data = await r.json();
+      (data.results || []).forEach(v => { backendById[v.id] = v; });
+    }
+  } catch (e) { /* backend no disponible: seguimos con cálculo local */ }
+
+  const minDelay = new Promise(res => setTimeout(res, 450));
+  await minDelay;
+
+  merged = FLEET.map(v => {
+    const b = backendById[v.id];
+    return {
+      ...v,
+      days,
+      pricePerDay: v.price,
+      subtotal: b ? b.basePrice : v.price * days,
+      discountPct: b ? b.discountPct : 0,
+      totalPrice: b ? b.totalPrice : v.price * days,
+      confirmedAvailability: !!b,
+    };
+  });
+
+  document.getElementById('loadingMsg').style.display = 'none';
+  renderResults();
+}
+
+function airportApplies() {
+  return state.pickUpPlace === 'aeropuerto' || state.dropOffPlace === 'aeropuerto';
+}
+function argentinaApplies() {
+  return state.argentina === 'si';
+}
+
+function computeCardTotal(v) {
+  let total = v.subtotal;
+  if (airportApplies()) total += cfg.AIRPORT_FEE || 20000;
+  if (argentinaApplies()) total += cfg.ARGENTINA_PERMIT_FEE || 120000;
+  return total;
+}
+
+function buildWhatsappMessage(v, total) {
+  const lines = [
+    'Hola, quiero consultar disponibilidad:',
+    `Vehículo: ${v.name}`,
+    `Retiro: ${PLACE_LABELS[state.pickUpPlace]}`,
+    `Fecha y hora de retiro: ${state.dateFrom} ${state.hourFrom}`,
+    `Devolución: ${state.dropOffPlace === 'otro' ? (state.dropOffOther || 'Otro lugar') : PLACE_LABELS[state.dropOffPlace]}`,
+    `Fecha y hora de devolución: ${state.dateTo} ${state.hourTo}`,
+    `Pasajeros: ${state.passengers}`,
+    `Destino: ${state.destination}`,
+    `Argentina: ${state.argentina === 'si' ? 'Sí' : 'No'}`,
+    `Total estimado: $${total.toLocaleString('es-CL')}`,
+    'Solicito confirmar disponibilidad y condiciones.',
+  ];
+  return lines.join('\n');
+}
+
+function applyFiltersAndSort(list) {
+  let out = list.filter(v => currentCat === 'todos' || v.cat === currentCat);
+  if (currentPriceFilter === 'hasta40') out = out.filter(v => v.pricePerDay <= 40000);
+  else if (currentPriceFilter === 'hasta50') out = out.filter(v => v.pricePerDay <= 50000);
+  else if (currentPriceFilter === 'mas50') out = out.filter(v => v.pricePerDay > 50000);
+
+  if (currentSort === 'menor-precio') out = out.slice().sort((a, b) => a.pricePerDay - b.pricePerDay);
+  else if (currentSort === 'mayor-precio') out = out.slice().sort((a, b) => b.pricePerDay - a.pricePerDay);
+  return out;
+}
+
+function renderResults() {
+  const list = applyFiltersAndSort(merged);
+  const days = daysBetween(state.dateFrom, state.dateTo);
+  document.getElementById('resultsCount').innerHTML =
+    `${list.length} opción${list.length === 1 ? '' : 'es'} encontrada${list.length === 1 ? '' : 's'}<span>${state.dateFrom} → ${state.dateTo} · ${days} día${days > 1 ? 's' : ''}</span>`;
+
+  const resultsList = document.getElementById('resultsList');
+  if (list.length === 0) {
+    resultsList.innerHTML = `
+      <div class="empty-state">
+        <h3>No encontramos vehículos confirmados para esta búsqueda.</h3>
+        <p>Podemos revisar otras fechas o buscar una alternativa para tu viaje.</p>
+        <div class="empty-actions">
+          <button type="button" class="btn-outline" id="emptyModify">MODIFICAR BÚSQUEDA</button>
+          <a href="https://wa.me/${WA_NUMBER}?text=${encodeURIComponent('Hola, no encontré vehículos disponibles para mi búsqueda del ' + state.dateFrom + ' al ' + state.dateTo + '. ¿Pueden ayudarme?')}" target="_blank" rel="noopener" class="btn btn-whatsapp">CONSULTAR POR WHATSAPP</a>
+        </div>
+      </div>`;
+    const btn = document.getElementById('emptyModify');
+    if (btn) btn.addEventListener('click', () => {
+      document.getElementById('searchPanel').classList.add('open');
+      document.getElementById('searchPanel').scrollIntoView({ behavior: 'smooth', block: 'start' });
+    });
+    return;
+  }
+
+  resultsList.innerHTML = list.map((v, i) => {
+    const total = computeCardTotal(v);
+    const waMsg = buildWhatsappMessage(v, total);
+    return `
+    <div class="rcard" style="animation-delay:${prefersReducedMotion ? 0 : Math.min(i, 6) * 70}ms;">
+      <img src="${v.img}" alt="${v.name}" loading="lazy">
+      <div>
+        <span class="rcard-cat">${v.catLabel}</span>
+        <h3>${v.name}</h3>
+        <p class="rcard-meta">${v.days} día${v.days > 1 ? 's' : ''} · $${v.pricePerDay.toLocaleString('es-CL')}/día</p>
+        <p class="rcard-avail"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20 6 9 17l-5-5"/></svg>Disponibilidad sujeta a confirmación</p>
+        <div class="rcard-breakdown">
+          <div><span>Arriendo (${v.days} × $${v.pricePerDay.toLocaleString('es-CL')})</span><span>$${v.subtotal.toLocaleString('es-CL')}</span></div>
+          ${airportApplies() ? `<div><span>Aeropuerto</span><span>$${(cfg.AIRPORT_FEE || 20000).toLocaleString('es-CL')}</span></div>` : ''}
+          ${argentinaApplies() ? `<div><span>Permiso Argentina</span><span>$${(cfg.ARGENTINA_PERMIT_FEE || 120000).toLocaleString('es-CL')}</span></div>` : ''}
+          ${v.discountPct ? `<div><span>Descuento reserva anticipada</span><span>-${v.discountPct}%</span></div>` : ''}
+        </div>
+      </div>
+      <div class="rcard-price">
+        <div class="price-box">
+          <span class="plabel">TOTAL ESTIMADO</span>
+          <span class="pamount">$${total.toLocaleString('es-CL')}</span>
+        </div>
+        <p class="price-note">Valor estimado sujeto a confirmación de disponibilidad y condiciones del contrato.</p>
+        <p class="deposit-note">Garantía requerida: desde $${(v.deposit || cfg.MIN_DEPOSIT || 500000).toLocaleString('es-CL')}.</p>
+        <div class="rcard-actions">
+          <a class="btn-confirm" href="https://wa.me/${WA_NUMBER}?text=${encodeURIComponent(waMsg)}" target="_blank" rel="noopener">SOLICITAR CONFIRMACIÓN</a>
+          <button type="button" class="btn-pay" data-vid="${v.id}" data-total="${total}" data-days="${v.days}" data-name="${v.name}">Reservar y pagar</button>
+        </div>
+      </div>
+    </div>`;
+  }).join('');
+
+  resultsList.querySelectorAll('.btn-pay').forEach(btn => {
+    btn.addEventListener('click', () => openQuoteModal({
+      id: Number(btn.dataset.vid), name: btn.dataset.name,
+      totalPrice: Number(btn.dataset.total), days: Number(btn.dataset.days),
+    }, state.dateFrom, state.dateTo));
+  });
+}
+
+document.getElementById('catTabs').addEventListener('click', (e) => {
+  const btn = e.target.closest('.cat-tab');
+  if (!btn) return;
+  document.querySelectorAll('.cat-tab').forEach(b => b.classList.remove('active'));
+  btn.classList.add('active');
+  currentCat = btn.dataset.cat;
+  renderResults();
+});
+document.getElementById('sortSelect').addEventListener('change', (e) => { currentSort = e.target.value; renderResults(); });
+document.getElementById('priceFilter').addEventListener('change', (e) => { currentPriceFilter = e.target.value; renderResults(); });
+
+/* Skeleton mientras se prepara la búsqueda */
+const resultsListEl = document.getElementById('resultsList');
+resultsListEl.innerHTML = Array.from({ length: 3 }).map(() => '<div class="skeleton-card"></div>').join('');
+loadResults();
+
+/* =====================================================================
+   RESERVAR Y PAGAR — reutiliza el flujo real (extras + Webpay Transbank)
+   ===================================================================== */
+let extrasCatalog = [];
+async function loadExtrasCatalog() {
+  try {
+    const r = await fetch(`${API_BASE}/api/extras`);
+    extrasCatalog = await r.json();
+  } catch (err) { extrasCatalog = []; }
+}
+loadExtrasCatalog();
+
+let pendingVehicle = null;
+let selectedExtras = {};
+
+function extraLineCost(def, qty) {
+  let cost = def.unit === 'day' ? def.price * pendingVehicle.days * qty : def.price * qty;
+  if (def.cap) cost = Math.min(cost, def.cap * qty);
+  return cost;
+}
+
+function openQuoteModal(vehicle, from, to) {
+  pendingVehicle = { ...vehicle, from, to };
+  selectedExtras = {};
+  document.getElementById('quoteVehicleLine').textContent =
+    `${vehicle.name} · ${from} → ${to} (${vehicle.days} día${vehicle.days > 1 ? 's' : ''})`;
+
+  document.getElementById('extrasList').innerHTML = extrasCatalog.map(def => `
+    <div class="extra-row">
+      <div class="extra-info">
+        <strong>${def.name}</strong>
+        <span>${def.description}</span>
+        <span class="extra-price">$${def.price.toLocaleString('es-CL')} ${def.unit === 'day' ? 'por día' : ''}${def.cap ? ` · tope $${def.cap.toLocaleString('es-CL')}` : ''}</span>
+      </div>
+      <div class="extra-control">
+        ${def.kind === 'qty' ? `
+          <div class="qty-stepper">
+            <button type="button" onclick="changeExtraQty(${def.id}, -1)" aria-label="Restar">−</button>
+            <span id="qty-${def.id}">0</span>
+            <button type="button" onclick="changeExtraQty(${def.id}, 1)" aria-label="Sumar">+</button>
+          </div>` : `
+          <input type="checkbox" id="chk-${def.id}" onchange="toggleExtraCheckbox(${def.id})">`}
+      </div>
+    </div>
+  `).join('') || '<p style="color:var(--slate-500);font-size:13px;">No hay servicios adicionales configurados.</p>';
+
+  const wantsAirport = airportApplies();
+  const wantsArgentina = argentinaApplies();
+  extrasCatalog.forEach(def => {
+    const nameLower = (def.name || '').toLowerCase();
+    if (wantsAirport && nameLower.includes('aeropuerto')) {
+      selectedExtras[def.id] = 1;
+      const chk = document.getElementById(`chk-${def.id}`); if (chk) chk.checked = true;
+    }
+    if (wantsArgentina && nameLower.includes('argentina')) {
+      selectedExtras[def.id] = 1;
+      const chk = document.getElementById(`chk-${def.id}`); if (chk) chk.checked = true;
+    }
+  });
+
+  renderQuoteTotal();
+  document.getElementById('quoteModal').classList.remove('hidden');
+}
+function changeExtraQty(id, delta) {
+  const def = extrasCatalog.find(e => e.id === id);
+  const current = selectedExtras[id] || 0;
+  const next = Math.max(0, Math.min(current + delta, def.maxQty || 99));
+  selectedExtras[id] = next;
+  document.getElementById(`qty-${id}`).textContent = next;
+  renderQuoteTotal();
+}
+function toggleExtraCheckbox(id) {
+  const checked = document.getElementById(`chk-${id}`).checked;
+  selectedExtras[id] = checked ? 1 : 0;
+  renderQuoteTotal();
+}
+function renderQuoteTotal() {
+  let extrasTotal = 0;
+  const lines = [];
+  for (const def of extrasCatalog) {
+    const qty = selectedExtras[def.id] || 0;
+    if (qty > 0) {
+      const cost = extraLineCost(def, qty);
+      extrasTotal += cost;
+      lines.push(`<div><span>${def.name}${def.kind === 'qty' ? ` x${qty}` : ''}</span><span>$${cost.toLocaleString('es-CL')}</span></div>`);
+    }
+  }
+  const grand = pendingVehicle.totalPrice + extrasTotal;
+  document.getElementById('quoteTotalBox').innerHTML = `
+    <div><span>Vehículo y cargos (${pendingVehicle.days} día${pendingVehicle.days > 1 ? 's' : ''})</span><span>$${pendingVehicle.totalPrice.toLocaleString('es-CL')}</span></div>
+    ${lines.join('')}
+    <div class="grand"><span>Total</span><span>$${grand.toLocaleString('es-CL')}</span></div>
+  `;
+}
+document.getElementById('quoteCancel').addEventListener('click', () => document.getElementById('quoteModal').classList.add('hidden'));
+document.getElementById('quoteContinue').addEventListener('click', () => {
+  document.getElementById('quoteModal').classList.add('hidden');
+  openBookingModal();
+});
+
+function openBookingModal() {
+  const extrasArr = Object.entries(selectedExtras).filter(([, qty]) => qty > 0).map(([id, qty]) => ({ id: Number(id), qty }));
+  let extrasTotal = 0;
+  extrasArr.forEach(({ id, qty }) => { extrasTotal += extraLineCost(extrasCatalog.find(e => e.id === id), qty); });
+  const grandTotal = pendingVehicle.totalPrice + extrasTotal;
+
+  const notesParts = [
+    `Lugar de retiro: ${PLACE_LABELS[state.pickUpPlace]}`,
+    `Lugar de devolución: ${state.dropOffPlace === 'otro' ? (state.dropOffOther || 'Otro lugar') : PLACE_LABELS[state.dropOffPlace]}`,
+    `Pasajeros: ${state.passengers}`,
+    `Destino estimado: ${state.destination}`,
+    `Viaje a Argentina: ${state.argentina === 'si' ? 'Sí' : 'No'}`,
+  ];
+  if (state.promo) notesParts.push(`Código promocional ingresado: ${state.promo} (a validar por el equipo)`);
+
+  window.__pendingBooking = {
+    vehicleId: pendingVehicle.id, from: pendingVehicle.from, to: pendingVehicle.to,
+    pickupTime: state.hourFrom, returnTime: state.hourTo,
+    extras: extrasArr, notes: notesParts.join(' · '),
+  };
+  document.getElementById('modalSummary').innerHTML = `
+    <div><span>Vehículo</span><strong>${pendingVehicle.name}</strong></div>
+    <div><span>Retiro</span><strong>${pendingVehicle.from}</strong></div>
+    <div><span>Devolución</span><strong>${pendingVehicle.to}</strong></div>
+    ${extrasArr.length ? `<div><span>Servicios adicionales</span><strong>$${extrasTotal.toLocaleString('es-CL')}</strong></div>` : ''}
+    <div><span>Total a pagar</span><strong>$${grandTotal.toLocaleString('es-CL')}</strong></div>
+  `;
+  document.getElementById('bookingModal').classList.remove('hidden');
+}
+document.getElementById('modalCancel').addEventListener('click', () => document.getElementById('bookingModal').classList.add('hidden'));
+
+document.getElementById('bookingForm').addEventListener('submit', async (e) => {
+  e.preventDefault();
+  const btn = e.target.querySelector('.modal-confirm');
+  btn.disabled = true; btn.textContent = 'Procesando…';
+  try {
+    const payload = {
+      ...window.__pendingBooking,
+      customerName: document.getElementById('custName').value,
+      phone: document.getElementById('custPhone').value,
+      email: document.getElementById('custEmail').value,
+    };
+    const r1 = await fetch(`${API_BASE}/api/bookings`, {
+      method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify(payload),
+    });
+    const booking = await r1.json();
+    if (!r1.ok) throw new Error(booking.error || 'No se pudo crear la reserva');
+
+    if (window.trackEvent) window.trackEvent('reserva_creada', { totalPrice: booking.totalPrice });
+
+    const r2 = await fetch(`${API_BASE}/api/webpay/init/${booking.id}`, { method: 'POST' });
+    const webpay = await r2.json();
+    if (!r2.ok) throw new Error(webpay.error || 'No se pudo iniciar el pago');
+
+    const form = document.createElement('form');
+    form.method = 'POST';
+    form.action = webpay.url;
+    const input = document.createElement('input');
+    input.type = 'hidden'; input.name = 'token_ws'; input.value = webpay.token;
+    form.appendChild(input);
+    document.body.appendChild(form);
+    form.submit();
+  } catch (err) {
+    alert(err.message || 'Ocurrió un error. Intenta nuevamente o escríbenos por WhatsApp.');
+    btn.disabled = false; btn.textContent = 'Ir a pagar';
+  }
+});
+
+/* ---- Medición de clics de conversión ---- */
+document.addEventListener('click', (e) => {
+  const wa = e.target.closest('.btn-confirm');
+  if (wa && window.trackEvent) window.trackEvent('solicitar_confirmacion');
+  const pay = e.target.closest('.btn-pay');
+  if (pay && window.trackEvent) window.trackEvent('reservar_pagar_click');
+});
+</script>
+</body>
+</html>

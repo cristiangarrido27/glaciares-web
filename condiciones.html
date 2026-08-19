@@ -29,6 +29,19 @@
   .disclaimer{background:#fff7ed;border:1px solid #fed7aa;border-radius:12px;padding:16px 20px;margin-top:36px;font-size:13.5px;color:#7c2d12;}
   footer{border-top:1px solid #e2e8f0;padding:24px 0;text-align:center;font-size:12px;color:#94a3b8;}
   .cta{display:inline-block;margin-top:26px;background:#25D366;color:#fff;font-weight:700;padding:13px 24px;border-radius:10px;font-size:14.5px;}
+
+  /* WhatsApp flotante (idéntico al resto del sitio) */
+  .wa-float-wrap{position:fixed;right:20px;bottom:20px;z-index:60;display:flex;align-items:center;}
+  .wa-float{position:relative;background:#25D366;color:#fff;height:56px;width:56px;border-radius:50%;display:flex;align-items:center;justify-content:center;box-shadow:0 8px 22px rgba(0,0,0,.28);opacity:0;transform:translateY(16px) scale(.9);animation:waEnter .5s ease .3s forwards;}
+  .wa-float:focus-visible{outline:3px solid #071B30;outline-offset:3px;}
+  @keyframes waEnter{to{opacity:1;transform:translateY(0) scale(1);}}
+  .wa-float.pulse{animation:waEnter .5s ease forwards, waPulse 1.6s ease-out;}
+  @keyframes waPulse{0%{box-shadow:0 8px 22px rgba(0,0,0,.28),0 0 0 0 rgba(37,211,102,.55);}100%{box-shadow:0 8px 22px rgba(0,0,0,.28),0 0 0 16px rgba(37,211,102,0);}}
+  .wa-tooltip{position:absolute;right:64px;bottom:14px;background:#0A2540;color:#fff;font-size:12.5px;font-weight:600;padding:8px 12px;border-radius:8px;white-space:nowrap;opacity:0;pointer-events:none;transform:translateX(6px);transition:opacity .18s,transform .18s;}
+  .wa-tooltip::after{content:'';position:absolute;right:-5px;top:50%;transform:translateY(-50%);border:5px solid transparent;border-left-color:#0A2540;}
+  @media (min-width:641px){ .wa-float:hover .wa-tooltip, .wa-float:focus-visible .wa-tooltip{opacity:1;transform:translateX(0);} }
+  @media (max-width:640px){ .wa-tooltip{display:none;} .wa-float-wrap{right:16px;bottom:16px;} .wa-float{height:52px;width:52px;} }
+  @media (prefers-reduced-motion: reduce){ .wa-float{animation:none !important;opacity:1;transform:none;} .wa-float.pulse{animation:none !important;} }
 </style>
 </head>
 <body>
@@ -75,8 +88,8 @@
 
     <h2>Deducibles</h2>
     <ul>
-      <li>Deducible general: 15 UF + IVA.</li>
-      <li>Deducible por volcamiento, choque, robo o pérdida total: 25 UF + IVA.</li>
+      <li>Deducible general (daños menores no cubiertos por las protecciones contratadas): 15 UF + IVA.</li>
+      <li>Deducible agravado por volcamiento, choque con responsabilidad, robo o pérdida total del vehículo: 25 UF + IVA.</li>
     </ul>
 
     <h2>Servicios adicionales opcionales</h2>
@@ -97,6 +110,31 @@
 <footer>
   © <span id="year"></span> Glaciares Rent a Car. Todos los derechos reservados.
 </footer>
-<script>document.getElementById('year').textContent = new Date().getFullYear();</script>
+
+<div class="wa-float-wrap">
+  <a href="https://wa.me/56983335924?text=Hola%2C%20necesito%20ayuda%20para%20cotizar%20un%20veh%C3%ADculo%20en%20Glaciares%20Rent%20a%20Car." target="_blank" rel="noopener" class="wa-float" id="waFloat" aria-label="Consultar por WhatsApp">
+    <svg xmlns="http://www.w3.org/2000/svg" width="26" height="26" viewBox="0 0 24 24" fill="currentColor"><path d="M12.04 2c-5.5 0-9.96 4.46-9.96 9.96 0 1.76.46 3.48 1.34 5L2 22l5.2-1.36a9.94 9.94 0 004.84 1.23h.01c5.5 0 9.96-4.46 9.96-9.96S17.54 2 12.04 2z"/></svg>
+    <span class="wa-tooltip">¿Necesitas ayuda? Escríbenos</span>
+  </a>
+</div>
+
+<script>
+document.getElementById('year').textContent = new Date().getFullYear();
+const waFloat = document.getElementById('waFloat');
+const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+if (!prefersReducedMotion) {
+  let waPulsePaused = false;
+  waFloat.addEventListener('mouseenter', () => waPulsePaused = true);
+  waFloat.addEventListener('mouseleave', () => waPulsePaused = false);
+  waFloat.addEventListener('focus', () => waPulsePaused = true);
+  waFloat.addEventListener('blur', () => waPulsePaused = false);
+  setInterval(() => {
+    if (waPulsePaused) return;
+    waFloat.classList.remove('pulse');
+    void waFloat.offsetWidth;
+    waFloat.classList.add('pulse');
+  }, 13000);
+}
+</script>
 </body>
 </html>
