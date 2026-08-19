@@ -1,0 +1,884 @@
+[
+  {
+    "slug": "punta-arenas-24h",
+    "name": "Punta Arenas en 24 horas",
+    "summary": {
+      "es": "Un recorrido corto por la ciudad y sus alrededores inmediatos: costanera, Plaza Muñoz Gamero, Zona Franca y Reserva Nacional Magallanes.",
+      "en": "A short tour of the city and its immediate surroundings: the waterfront, Plaza Muñoz Gamero, the Zona Franca duty-free area, and Magallanes National Reserve.",
+      "pt": "Um passeio curto pela cidade e seus arredores imediatos: orla, Plaza Muñoz Gamero, Zona Franca e Reserva Nacional Magalhães."
+    },
+    "durationLabel": { "es": "1 día", "en": "1 day", "pt": "1 dia" },
+    "distanceKm": 40,
+    "drivingTime": {
+      "es": "Aproximadamente 1,5 horas de conducción total",
+      "en": "About 1.5 hours of total driving",
+      "pt": "Aproximadamente 1,5 hora de condução total"
+    },
+    "suggestedDeparture": { "es": "09:00 hrs", "en": "9:00 AM", "pt": "09h00" },
+    "bordersInvolved": [],
+    "roadType": "pavimentado",
+    "difficulty": "facil",
+    "waypoints": [
+      { "name": "Punta Arenas centro", "coordinates": [-53.1638, -70.9171] },
+      { "name": "Reserva Nacional Magallanes", "coordinates": [-53.1500, -70.9833] },
+      { "name": "Punta Arenas centro", "coordinates": [-53.1638, -70.9171] }
+    ],
+    "stops": [
+      {
+        "name": "Plaza Muñoz Gamero",
+        "type": "atractivo",
+        "note": {
+          "es": "Plaza histórica en el centro de la ciudad.",
+          "en": "Historic square in the city center.",
+          "pt": "Praça histórica no centro da cidade."
+        },
+        "km": 0
+      },
+      {
+        "name": "Costanera del Estrecho de Magallanes",
+        "type": "mirador",
+        "note": {
+          "es": "Paseo costero con vista al Estrecho.",
+          "en": "Coastal promenade with views of the Strait.",
+          "pt": "Passeio costeiro com vista para o Estreito."
+        },
+        "km": 2
+      },
+      {
+        "name": "Reserva Nacional Magallanes",
+        "type": "atractivo",
+        "note": {
+          "es": "Bosque subantártico y miradores.",
+          "en": "Sub-Antarctic forest and viewpoints.",
+          "pt": "Floresta subantártica e mirantes."
+        },
+        "km": 8
+      },
+      {
+        "name": "Zona Franca (Zofri Punta Arenas)",
+        "type": "atractivo",
+        "note": {
+          "es": "Área comercial de la ciudad.",
+          "en": "The city's duty-free shopping area.",
+          "pt": "Área comercial da cidade."
+        },
+        "km": 6
+      }
+    ],
+    "warnings": [
+      {
+        "es": "Las calles del centro tienen tránsito reducido en el sector histórico; revisa la señalización.",
+        "en": "Downtown streets have restricted traffic in the historic sector; check the signage.",
+        "pt": "As ruas do centro têm trânsito reduzido no setor histórico; verifique a sinalização."
+      },
+      {
+        "es": "El acceso a la Reserva Nacional Magallanes puede tener nieve en invierno.",
+        "en": "Access to Magallanes National Reserve may have snow in winter.",
+        "pt": "O acesso à Reserva Nacional Magalhães pode ter neve no inverno."
+      }
+    ],
+    "lastReviewed": "2026-08-15"
+  },
+  {
+    "slug": "punta-arenas-48h",
+    "name": "Punta Arenas en 48 horas",
+    "summary": {
+      "es": "Dos días para conocer la ciudad, Fuerte Bulnes y disfrutar de la gastronomía local con tiempo sin apuro.",
+      "en": "Two unhurried days to explore the city, visit Fuerte Bulnes, and enjoy the local cuisine.",
+      "pt": "Dois dias sem pressa para conhecer a cidade, visitar o Fuerte Bulnes e aproveitar a gastronomia local."
+    },
+    "durationLabel": { "es": "2 días", "en": "2 days", "pt": "2 dias" },
+    "distanceKm": 130,
+    "drivingTime": {
+      "es": "Aproximadamente 3 horas de conducción en total, distribuidas en dos días",
+      "en": "About 3 hours of total driving, spread over two days",
+      "pt": "Aproximadamente 3 horas de condução no total, distribuídas em dois dias"
+    },
+    "suggestedDeparture": { "es": "09:00 hrs cada día", "en": "9:00 AM each day", "pt": "09h00 a cada dia" },
+    "bordersInvolved": [],
+    "roadType": "mixto",
+    "difficulty": "facil",
+    "waypoints": [
+      { "name": "Punta Arenas centro", "coordinates": [-53.1638, -70.9171] },
+      { "name": "Fuerte Bulnes", "coordinates": [-53.6167, -70.9167] },
+      { "name": "Punta Arenas centro", "coordinates": [-53.1638, -70.9171] }
+    ],
+    "stops": [
+      {
+        "name": "Museo Regional de Magallanes",
+        "type": "atractivo",
+        "note": {
+          "es": "Día 1: patrimonio histórico de la región.",
+          "en": "Day 1: the region's historical heritage.",
+          "pt": "Dia 1: patrimônio histórico da região."
+        },
+        "km": 0
+      },
+      {
+        "name": "Fuerte Bulnes",
+        "type": "atractivo",
+        "note": {
+          "es": "Día 2: reconstrucción histórica junto al mar.",
+          "en": "Day 2: a historical reconstruction by the sea.",
+          "pt": "Dia 2: reconstrução histórica junto ao mar."
+        },
+        "km": 60
+      },
+      {
+        "name": "Puerto del Hambre",
+        "type": "mirador",
+        "note": {
+          "es": "Parada en el camino a Fuerte Bulnes.",
+          "en": "A stop on the way to Fuerte Bulnes.",
+          "pt": "Parada no caminho para o Fuerte Bulnes."
+        },
+        "km": 55
+      },
+      {
+        "name": "Restaurantes del centro",
+        "type": "restaurante",
+        "note": {
+          "es": "Cena con productos patagónicos.",
+          "en": "Dinner featuring Patagonian ingredients.",
+          "pt": "Jantar com produtos patagônicos."
+        },
+        "km": 0
+      }
+    ],
+    "warnings": [
+      {
+        "es": "El camino a Fuerte Bulnes es parcialmente de ripio; conduce con precaución.",
+        "en": "The road to Fuerte Bulnes is partly unpaved; drive with caution.",
+        "pt": "A estrada para o Fuerte Bulnes é parcialmente de cascalho; dirija com cuidado."
+      },
+      {
+        "es": "El viento puede ser intenso en el sector costero.",
+        "en": "Wind can be intense along the coastal stretch.",
+        "pt": "O vento pode ser intenso no trecho costeiro."
+      }
+    ],
+    "lastReviewed": "2026-08-15"
+  },
+  {
+    "slug": "punta-arenas-fuerte-bulnes",
+    "name": "Punta Arenas y Fuerte Bulnes",
+    "summary": {
+      "es": "Excursión de medio día hacia el sur, siguiendo la costa del Estrecho de Magallanes hasta la reconstrucción histórica de Fuerte Bulnes.",
+      "en": "A half-day excursion south, following the coast of the Strait of Magellan to the historical reconstruction of Fuerte Bulnes.",
+      "pt": "Excursão de meio dia rumo ao sul, seguindo a costa do Estreito de Magalhães até a reconstrução histórica do Fuerte Bulnes."
+    },
+    "durationLabel": { "es": "Medio día", "en": "Half day", "pt": "Meio dia" },
+    "distanceKm": 120,
+    "drivingTime": {
+      "es": "Aproximadamente 2 horas de conducción (ida y vuelta)",
+      "en": "About 2 hours of driving (round trip)",
+      "pt": "Aproximadamente 2 horas de condução (ida e volta)"
+    },
+    "suggestedDeparture": { "es": "10:00 hrs", "en": "10:00 AM", "pt": "10h00" },
+    "bordersInvolved": [],
+    "roadType": "mixto",
+    "difficulty": "facil",
+    "waypoints": [
+      { "name": "Punta Arenas", "coordinates": [-53.1638, -70.9171] },
+      { "name": "Puerto del Hambre", "coordinates": [-53.6167, -70.9333] },
+      { "name": "Fuerte Bulnes", "coordinates": [-53.6167, -70.9167] }
+    ],
+    "stops": [
+      {
+        "name": "Puerto del Hambre",
+        "type": "mirador",
+        "note": {
+          "es": "Sitio histórico junto al Estrecho de Magallanes.",
+          "en": "A historic site by the Strait of Magellan.",
+          "pt": "Sítio histórico junto ao Estreito de Magalhães."
+        },
+        "km": 55
+      },
+      {
+        "name": "Fuerte Bulnes",
+        "type": "atractivo",
+        "note": {
+          "es": "Reconstrucción del primer asentamiento chileno en la zona.",
+          "en": "A reconstruction of the first Chilean settlement in the area.",
+          "pt": "Reconstrução do primeiro assentamento chileno na região."
+        },
+        "km": 60
+      },
+      {
+        "name": "Baños y cafetería del centro de visitantes",
+        "type": "baño",
+        "note": {
+          "es": "Servicios disponibles en el acceso al fuerte.",
+          "en": "Facilities available at the fort's entrance.",
+          "pt": "Serviços disponíveis na entrada do forte."
+        },
+        "km": 60
+      }
+    ],
+    "warnings": [
+      {
+        "es": "Camino con tramos de ripio; reduce la velocidad.",
+        "en": "The road has unpaved stretches; slow down.",
+        "pt": "Estrada com trechos de cascalho; reduza a velocidade."
+      },
+      {
+        "es": "Sin estaciones de combustible entre Punta Arenas y Fuerte Bulnes: sal con estanque lleno.",
+        "en": "No fuel stations between Punta Arenas and Fuerte Bulnes: leave with a full tank.",
+        "pt": "Sem postos de combustível entre Punta Arenas e Fuerte Bulnes: saia com o tanque cheio."
+      }
+    ],
+    "lastReviewed": "2026-08-15"
+  },
+  {
+    "slug": "punta-arenas-puerto-natales",
+    "name": "Punta Arenas – Puerto Natales",
+    "summary": {
+      "es": "La ruta más transitada de la región, totalmente pavimentada, atravesando la estepa patagónica hasta el Seno Última Esperanza.",
+      "en": "The region's busiest route, fully paved, crossing the Patagonian steppe to the Última Esperanza Sound.",
+      "pt": "A rota mais movimentada da região, totalmente pavimentada, atravessando a estepe patagônica até o Seno Última Esperanza."
+    },
+    "durationLabel": { "es": "1 día (ida) o ida y vuelta", "en": "1 day (one way) or round trip", "pt": "1 dia (ida) ou ida e volta" },
+    "distanceKm": 247,
+    "drivingTime": { "es": "Aproximadamente 3 horas", "en": "About 3 hours", "pt": "Aproximadamente 3 horas" },
+    "suggestedDeparture": { "es": "09:00 hrs", "en": "9:00 AM", "pt": "09h00" },
+    "bordersInvolved": [],
+    "roadType": "pavimentado",
+    "difficulty": "facil",
+    "waypoints": [
+      { "name": "Punta Arenas", "coordinates": [-53.1638, -70.9171] },
+      { "name": "Villa Tehuelche", "coordinates": [-52.4667, -71.0000] },
+      { "name": "Puerto Natales", "coordinates": [-51.7236, -72.5064] }
+    ],
+    "stops": [
+      {
+        "name": "Villa Tehuelche",
+        "type": "combustible",
+        "note": {
+          "es": "Localidad intermedia con servicios básicos.",
+          "en": "A midway town with basic services.",
+          "pt": "Localidade intermediária com serviços básicos."
+        },
+        "km": 100
+      },
+      {
+        "name": "Morro Chico",
+        "type": "mirador",
+        "note": {
+          "es": "Formación geológica visible desde la ruta.",
+          "en": "A geological formation visible from the road.",
+          "pt": "Formação geológica visível a partir da rota."
+        },
+        "km": 150
+      },
+      {
+        "name": "Puerto Natales",
+        "type": "restaurante",
+        "note": {
+          "es": "Amplia oferta gastronómica de llegada.",
+          "en": "A wide range of dining options on arrival.",
+          "pt": "Ampla oferta gastronômica na chegada."
+        },
+        "km": 247
+      }
+    ],
+    "warnings": [
+      {
+        "es": "Ruta 9 con viento lateral fuerte en varios tramos, especialmente en primavera y verano.",
+        "en": "Route 9 has strong crosswinds in several sections, especially in spring and summer.",
+        "pt": "A Rota 9 tem vento lateral forte em vários trechos, especialmente na primavera e no verão."
+      },
+      {
+        "es": "Presencia frecuente de fauna silvestre cruzando la ruta (guanacos, ñandúes).",
+        "en": "Wildlife frequently crosses the road (guanacos, rheas).",
+        "pt": "Presença frequente de fauna silvestre cruzando a rota (guanacos, emas)."
+      }
+    ],
+    "lastReviewed": "2026-08-15"
+  },
+  {
+    "slug": "punta-arenas-torres-del-paine",
+    "name": "Punta Arenas – Torres del Paine",
+    "summary": {
+      "es": "El clásico viaje hacia uno de los parques nacionales más espectaculares del planeta, combinando ruta pavimentada y tramos de ripio dentro del parque.",
+      "en": "The classic trip to one of the most spectacular national parks on the planet, combining a paved road with unpaved stretches inside the park.",
+      "pt": "A clássica viagem a um dos parques nacionais mais espetaculares do planeta, combinando rota pavimentada e trechos de cascalho dentro do parque."
+    },
+    "durationLabel": { "es": "1 día (ida) o excursión de día completo", "en": "1 day (one way) or a full-day excursion", "pt": "1 dia (ida) ou excursão de dia inteiro" },
+    "distanceKm": 310,
+    "drivingTime": { "es": "Aproximadamente 4,5 a 5 horas", "en": "About 4.5 to 5 hours", "pt": "Aproximadamente 4,5 a 5 horas" },
+    "suggestedDeparture": { "es": "07:00 hrs", "en": "7:00 AM", "pt": "07h00" },
+    "bordersInvolved": [],
+    "roadType": "mixto",
+    "difficulty": "moderado",
+    "waypoints": [
+      { "name": "Punta Arenas", "coordinates": [-53.1638, -70.9171] },
+      { "name": "Puerto Natales", "coordinates": [-51.7236, -72.5064] },
+      { "name": "Parque Nacional Torres del Paine", "coordinates": [-50.9423, -73.0000] }
+    ],
+    "stops": [
+      {
+        "name": "Puerto Natales",
+        "type": "combustible",
+        "note": {
+          "es": "Última estación de servicio confiable antes del parque.",
+          "en": "The last reliable fuel station before the park.",
+          "pt": "Último posto de combustível confiável antes do parque."
+        },
+        "km": 247
+      },
+      {
+        "name": "Portería Sarmiento / Laguna Amarga",
+        "type": "frontera",
+        "note": {
+          "es": "Control de acceso e ingreso al parque nacional.",
+          "en": "Access control point and entrance to the national park.",
+          "pt": "Controle de acesso e entrada ao parque nacional."
+        },
+        "km": 300
+      },
+      {
+        "name": "Mirador Lago Pehoé",
+        "type": "mirador",
+        "note": {
+          "es": "Vista panorámica de las Torres desde el lago.",
+          "en": "A panoramic view of the Towers from the lake.",
+          "pt": "Vista panorâmica das Torres a partir do lago."
+        },
+        "km": 320
+      }
+    ],
+    "warnings": [
+      {
+        "es": "Reabastece combustible en Puerto Natales: dentro del parque no hay estaciones de servicio.",
+        "en": "Refuel in Puerto Natales: there are no fuel stations inside the park.",
+        "pt": "Reabasteça em Puerto Natales: dentro do parque não há postos de combustível."
+      },
+      {
+        "es": "El ingreso al parque requiere pago de entrada y puede tener aforo limitado en temporada alta.",
+        "en": "Entry to the park requires a paid ticket and may have limited capacity during high season.",
+        "pt": "A entrada no parque requer pagamento de ingresso e pode ter capacidade limitada na alta temporada."
+      },
+      {
+        "es": "Ripio y viento fuerte dentro del parque; reduce la velocidad.",
+        "en": "Unpaved roads and strong wind inside the park; slow down.",
+        "pt": "Cascalho e vento forte dentro do parque; reduza a velocidade."
+      }
+    ],
+    "lastReviewed": "2026-08-15"
+  },
+  {
+    "slug": "punta-arenas-porvenir",
+    "name": "Punta Arenas – Porvenir",
+    "summary": {
+      "es": "Cruce del Estrecho de Magallanes en transbordador hacia Tierra del Fuego, con desembarco en Porvenir.",
+      "en": "A ferry crossing of the Strait of Magellan to Tierra del Fuego, disembarking in Porvenir.",
+      "pt": "Travessia do Estreito de Magalhães de balsa rumo a Tierra del Fuego, com desembarque em Porvenir."
+    },
+    "durationLabel": { "es": "1 día (ida) o ida y vuelta", "en": "1 day (one way) or round trip", "pt": "1 dia (ida) ou ida e volta" },
+    "distanceKm": null,
+    "drivingTime": {
+      "es": "Aproximadamente 2,5 horas de navegación más traslados en tierra",
+      "en": "About 2.5 hours of sailing plus overland transfers",
+      "pt": "Aproximadamente 2,5 horas de navegação mais deslocamentos terrestres"
+    },
+    "suggestedDeparture": { "es": "Según horario del transbordador", "en": "Depends on the ferry schedule", "pt": "Conforme o horário da balsa" },
+    "bordersInvolved": [],
+    "roadType": "mixto",
+    "difficulty": "moderado",
+    "waypoints": [
+      { "name": "Punta Arenas (terminal de transbordadores)", "coordinates": [-53.1638, -70.9171] },
+      { "name": "Cruce marítimo del Estrecho de Magallanes", "coordinates": [-53.2000, -70.6500] },
+      { "name": "Porvenir", "coordinates": [-53.2977, -70.3654] }
+    ],
+    "stops": [
+      {
+        "name": "Terminal de transbordadores de Punta Arenas",
+        "type": "frontera",
+        "note": {
+          "es": "Embarque de vehículos; se recomienda reservar con anticipación.",
+          "en": "Vehicle boarding; advance booking is recommended.",
+          "pt": "Embarque de veículos; recomenda-se reservar com antecedência."
+        },
+        "km": 0
+      },
+      {
+        "name": "Porvenir",
+        "type": "restaurante",
+        "note": {
+          "es": "Localidad con arquitectura patrimonial y oferta gastronómica local.",
+          "en": "A town with heritage architecture and local dining options.",
+          "pt": "Localidade com arquitetura patrimonial e oferta gastronômica local."
+        },
+        "km": 0
+      }
+    ],
+    "warnings": [
+      {
+        "es": "Los horarios del transbordador dependen de condiciones climáticas y de marea; pueden cambiar sin aviso previo.",
+        "en": "Ferry schedules depend on weather and tide conditions; they can change without notice.",
+        "pt": "Os horários da balsa dependem das condições climáticas e de maré; podem mudar sem aviso prévio."
+      },
+      {
+        "es": "Se recomienda reservar el pasaje del vehículo con anticipación en temporada alta.",
+        "en": "It's advisable to book your vehicle's ticket in advance during high season.",
+        "pt": "Recomenda-se reservar a passagem do veículo com antecedência na alta temporada."
+      }
+    ],
+    "lastReviewed": "2026-08-15"
+  },
+  {
+    "slug": "punta-arenas-el-calafate",
+    "name": "Punta Arenas – El Calafate (Argentina)",
+    "summary": {
+      "es": "Ruta internacional hacia el Glaciar Perito Moreno, cruzando la frontera chileno-argentina por el paso Cerro Castillo / Cancha Carrera.",
+      "en": "An international route to the Perito Moreno Glacier, crossing the Chile-Argentina border at the Cerro Castillo / Cancha Carrera checkpoint.",
+      "pt": "Rota internacional rumo ao Glaciar Perito Moreno, cruzando a fronteira Chile-Argentina pelo passo Cerro Castillo / Cancha Carrera."
+    },
+    "durationLabel": { "es": "1 día", "en": "1 day", "pt": "1 dia" },
+    "distanceKm": 480,
+    "drivingTime": {
+      "es": "Aproximadamente 7 a 8 horas, incluyendo el paso fronterizo",
+      "en": "About 7 to 8 hours, including the border crossing",
+      "pt": "Aproximadamente 7 a 8 horas, incluindo a passagem de fronteira"
+    },
+    "suggestedDeparture": { "es": "06:00 hrs", "en": "6:00 AM", "pt": "06h00" },
+    "bordersInvolved": [
+      {
+        "es": "Paso fronterizo Cerro Castillo (Chile) – Cancha Carrera (Argentina)",
+        "en": "Cerro Castillo (Chile) – Cancha Carrera (Argentina) border crossing",
+        "pt": "Passo de fronteira Cerro Castillo (Chile) – Cancha Carrera (Argentina)"
+      }
+    ],
+    "roadType": "mixto",
+    "difficulty": "moderado",
+    "waypoints": [
+      { "name": "Punta Arenas", "coordinates": [-53.1638, -70.9171] },
+      { "name": "Puerto Natales", "coordinates": [-51.7236, -72.5064] },
+      { "name": "Paso Cerro Castillo", "coordinates": [-51.2667, -72.2833] },
+      { "name": "El Calafate", "coordinates": [-50.3379, -72.2648] }
+    ],
+    "stops": [
+      {
+        "name": "Puerto Natales",
+        "type": "combustible",
+        "note": {
+          "es": "Última estación de servicio chilena antes de la frontera.",
+          "en": "The last Chilean fuel station before the border.",
+          "pt": "Último posto de combustível chileno antes da fronteira."
+        },
+        "km": 247
+      },
+      {
+        "name": "Paso Cerro Castillo / Cancha Carrera",
+        "type": "frontera",
+        "note": {
+          "es": "Control migratorio y aduanero entre Chile y Argentina.",
+          "en": "Immigration and customs control between Chile and Argentina.",
+          "pt": "Controle migratório e aduaneiro entre Chile e Argentina."
+        },
+        "km": 320
+      },
+      {
+        "name": "El Calafate",
+        "type": "restaurante",
+        "note": {
+          "es": "Amplia oferta de alojamiento y gastronomía de llegada.",
+          "en": "A wide range of lodging and dining options on arrival.",
+          "pt": "Ampla oferta de hospedagem e gastronomia na chegada."
+        },
+        "km": 480
+      }
+    ],
+    "warnings": [
+      {
+        "es": "Necesitas el permiso de circulación en Argentina emitido por la rent a car, con la patente del vehículo.",
+        "en": "You need the Argentina circulation permit issued by the rental company, with the vehicle's license plate.",
+        "pt": "Você precisa da autorização de circulação na Argentina emitida pela locadora, com a placa do veículo."
+      },
+      {
+        "es": "El paso fronterizo tiene horario de atención limitado; verifica el horario vigente antes de viajar.",
+        "en": "The border crossing has limited operating hours; check the current schedule before traveling.",
+        "pt": "O passo de fronteira tem horário de atendimento limitado; verifique o horário vigente antes de viajar."
+      },
+      {
+        "es": "Lleva documentos originales del vehículo, seguro y de todos los pasajeros.",
+        "en": "Carry original documents for the vehicle, insurance, and all passengers.",
+        "pt": "Leve os documentos originais do veículo, do seguro e de todos os passageiros."
+      }
+    ],
+    "lastReviewed": "2026-08-15"
+  },
+  {
+    "slug": "punta-arenas-ushuaia",
+    "name": "Punta Arenas – Ushuaia (Argentina)",
+    "summary": {
+      "es": "El viaje más largo de la guía: cruza dos veces la frontera chileno-argentina y el Estrecho de Magallanes en transbordador hasta llegar a la ciudad más austral del mundo.",
+      "en": "The longest trip in this guide: it crosses the Chile-Argentina border twice and the Strait of Magellan by ferry, reaching the southernmost city in the world.",
+      "pt": "A viagem mais longa deste guia: cruza duas vezes a fronteira Chile-Argentina e o Estreito de Magalhães de balsa, até chegar à cidade mais austral do mundo."
+    },
+    "durationLabel": { "es": "1 día completo (recomendado con parada intermedia)", "en": "1 full day (an overnight stop is recommended)", "pt": "1 dia completo (recomendável com parada intermediária)" },
+    "distanceKm": 590,
+    "drivingTime": {
+      "es": "Aproximadamente 10 a 12 horas, incluyendo transbordador y dos pasos fronterizos",
+      "en": "About 10 to 12 hours, including the ferry crossing and two border checkpoints",
+      "pt": "Aproximadamente 10 a 12 horas, incluindo balsa e duas passagens de fronteira"
+    },
+    "suggestedDeparture": { "es": "05:00 a 06:00 hrs", "en": "5:00 to 6:00 AM", "pt": "05h00 às 06h00" },
+    "bordersInvolved": [
+      {
+        "es": "Paso fronterizo San Sebastián (Chile) – San Sebastián (Argentina)",
+        "en": "San Sebastián (Chile) – San Sebastián (Argentina) border crossing",
+        "pt": "Passo de fronteira San Sebastián (Chile) – San Sebastián (Argentina)"
+      }
+    ],
+    "roadType": "mixto",
+    "difficulty": "exigente",
+    "waypoints": [
+      { "name": "Punta Arenas", "coordinates": [-53.1638, -70.9171] },
+      { "name": "Cruce Primera Angostura (Bahía Azul)", "coordinates": [-52.4167, -70.0833] },
+      { "name": "San Sebastián (frontera)", "coordinates": [-53.2833, -68.6667] },
+      { "name": "Río Grande, Argentina", "coordinates": [-53.7867, -67.7000] },
+      { "name": "Ushuaia, Argentina", "coordinates": [-54.8019, -68.3030] }
+    ],
+    "stops": [
+      {
+        "name": "Cruce Primera Angostura (Bahía Azul)",
+        "type": "frontera",
+        "note": {
+          "es": "Transbordador que cruza el Estrecho de Magallanes hacia Tierra del Fuego.",
+          "en": "A ferry crossing the Strait of Magellan to Tierra del Fuego.",
+          "pt": "Balsa que cruza o Estreito de Magalhães rumo a Tierra del Fuego."
+        },
+        "km": 140
+      },
+      {
+        "name": "Paso San Sebastián",
+        "type": "frontera",
+        "note": {
+          "es": "Control migratorio y aduanero entre Chile y Argentina.",
+          "en": "Immigration and customs control between Chile and Argentina.",
+          "pt": "Controle migratório e aduaneiro entre Chile e Argentina."
+        },
+        "km": 280
+      },
+      {
+        "name": "Río Grande",
+        "type": "combustible",
+        "note": {
+          "es": "Ciudad intermedia con servicios completos.",
+          "en": "A midway city with full services.",
+          "pt": "Cidade intermediária com serviços completos."
+        },
+        "km": 400
+      },
+      {
+        "name": "Ushuaia",
+        "type": "restaurante",
+        "note": {
+          "es": "Llegada a la ciudad más austral del mundo.",
+          "en": "Arrival at the southernmost city in the world.",
+          "pt": "Chegada à cidade mais austral do mundo."
+        },
+        "km": 590
+      }
+    ],
+    "warnings": [
+      {
+        "es": "Considera pernoctar en Río Grande si sales tarde: no se recomienda conducir de noche en este trayecto.",
+        "en": "Consider staying overnight in Río Grande if you leave late: night driving is not recommended on this route.",
+        "pt": "Considere pernoitar em Río Grande se sair tarde: não é recomendável dirigir à noite neste trajeto."
+      },
+      {
+        "es": "Necesitas el permiso de circulación en Argentina emitido por la rent a car.",
+        "en": "You need the Argentina circulation permit issued by the rental company.",
+        "pt": "Você precisa da autorização de circulação na Argentina emitida pela locadora."
+      },
+      {
+        "es": "Los horarios del transbordador en Primera Angostura dependen de la marea y el clima.",
+        "en": "Ferry schedules at Primera Angostura depend on the tide and weather.",
+        "pt": "Os horários da balsa em Primera Angostura dependem da maré e do clima."
+      },
+      {
+        "es": "Grandes tramos sin cobertura telefónica entre pasos fronterizos.",
+        "en": "Long stretches without mobile phone coverage between border crossings.",
+        "pt": "Longos trechos sem cobertura telefônica entre as passagens de fronteira."
+      }
+    ],
+    "lastReviewed": "2026-08-15"
+  },
+  {
+    "slug": "patagonia-3-dias",
+    "name": "Ruta Patagonia de 3 días",
+    "summary": {
+      "es": "Punta Arenas, Puerto Natales y Torres del Paine en un fin de semana largo. Ideal para quienes disponen de poco tiempo pero no quieren perderse lo esencial.",
+      "en": "Punta Arenas, Puerto Natales and Torres del Paine over a long weekend. Ideal for travelers short on time who don't want to miss the essentials.",
+      "pt": "Punta Arenas, Puerto Natales e Torres del Paine em um feriado prolongado. Ideal para quem tem pouco tempo, mas não quer perder o essencial."
+    },
+    "durationLabel": { "es": "3 días / 2 noches", "en": "3 days / 2 nights", "pt": "3 dias / 2 noites" },
+    "distanceKm": 560,
+    "drivingTime": {
+      "es": "Aproximadamente 8 horas de conducción distribuidas en 3 días",
+      "en": "About 8 hours of driving spread over 3 days",
+      "pt": "Aproximadamente 8 horas de condução distribuídas em 3 dias"
+    },
+    "suggestedDeparture": { "es": "Día 1, 09:00 hrs", "en": "Day 1, 9:00 AM", "pt": "Dia 1, 09h00" },
+    "bordersInvolved": [],
+    "roadType": "mixto",
+    "difficulty": "moderado",
+    "waypoints": [
+      { "name": "Punta Arenas", "coordinates": [-53.1638, -70.9171] },
+      { "name": "Puerto Natales", "coordinates": [-51.7236, -72.5064] },
+      { "name": "Torres del Paine", "coordinates": [-50.9423, -73.0000] },
+      { "name": "Puerto Natales", "coordinates": [-51.7236, -72.5064] },
+      { "name": "Punta Arenas", "coordinates": [-53.1638, -70.9171] }
+    ],
+    "stops": [
+      {
+        "name": "Día 1: Punta Arenas → Puerto Natales",
+        "type": "atractivo",
+        "note": {
+          "es": "Traslado y pernocte en Puerto Natales.",
+          "en": "Transfer and overnight stay in Puerto Natales.",
+          "pt": "Deslocamento e pernoite em Puerto Natales."
+        },
+        "km": 247
+      },
+      {
+        "name": "Día 2: Puerto Natales → Torres del Paine → Puerto Natales",
+        "type": "atractivo",
+        "note": {
+          "es": "Día completo en el parque nacional.",
+          "en": "A full day in the national park.",
+          "pt": "Dia inteiro no parque nacional."
+        },
+        "km": 140
+      },
+      {
+        "name": "Día 3: Puerto Natales → Punta Arenas",
+        "type": "atractivo",
+        "note": {
+          "es": "Retorno con paradas fotográficas.",
+          "en": "Return trip with photo stops.",
+          "pt": "Retorno com paradas para fotos."
+        },
+        "km": 247
+      }
+    ],
+    "warnings": [
+      {
+        "es": "Reserva alojamiento en Puerto Natales con anticipación en temporada alta.",
+        "en": "Book lodging in Puerto Natales in advance during high season.",
+        "pt": "Reserve hospedagem em Puerto Natales com antecedência na alta temporada."
+      },
+      {
+        "es": "Confirma el horario de ingreso al parque y lleva el estanque de combustible lleno.",
+        "en": "Confirm the park's entry hours and leave with a full fuel tank.",
+        "pt": "Confirme o horário de entrada no parque e leve o tanque de combustível cheio."
+      }
+    ],
+    "lastReviewed": "2026-08-15"
+  },
+  {
+    "slug": "patagonia-5-dias",
+    "name": "Ruta Patagonia de 5 días",
+    "summary": {
+      "es": "Punta Arenas, Fuerte Bulnes, Puerto Natales, Torres del Paine y una jornada libre para disfrutar con más calma o cruzar a El Calafate.",
+      "en": "Punta Arenas, Fuerte Bulnes, Puerto Natales, Torres del Paine, and a free day to slow down or cross into El Calafate.",
+      "pt": "Punta Arenas, Fuerte Bulnes, Puerto Natales, Torres del Paine e um dia livre para desfrutar com mais calma ou cruzar até El Calafate."
+    },
+    "durationLabel": { "es": "5 días / 4 noches", "en": "5 days / 4 nights", "pt": "5 dias / 4 noites" },
+    "distanceKm": 900,
+    "drivingTime": {
+      "es": "Variable según actividades elegidas",
+      "en": "Varies depending on chosen activities",
+      "pt": "Variável de acordo com as atividades escolhidas"
+    },
+    "suggestedDeparture": { "es": "Día 1, 09:00 hrs", "en": "Day 1, 9:00 AM", "pt": "Dia 1, 09h00" },
+    "bordersInvolved": [
+      {
+        "es": "Paso fronterizo Cerro Castillo (Chile) – Cancha Carrera (Argentina), si se agrega El Calafate",
+        "en": "Cerro Castillo (Chile) – Cancha Carrera (Argentina) border crossing, if El Calafate is added",
+        "pt": "Passo de fronteira Cerro Castillo (Chile) – Cancha Carrera (Argentina), caso se inclua El Calafate"
+      }
+    ],
+    "roadType": "mixto",
+    "difficulty": "moderado",
+    "waypoints": [
+      { "name": "Punta Arenas", "coordinates": [-53.1638, -70.9171] },
+      { "name": "Fuerte Bulnes", "coordinates": [-53.6167, -70.9167] },
+      { "name": "Puerto Natales", "coordinates": [-51.7236, -72.5064] },
+      { "name": "Torres del Paine", "coordinates": [-50.9423, -73.0000] },
+      { "name": "El Calafate", "coordinates": [-50.3379, -72.2648] }
+    ],
+    "stops": [
+      {
+        "name": "Día 1: Punta Arenas y Fuerte Bulnes",
+        "type": "atractivo",
+        "note": {
+          "es": "Día introductorio en la región.",
+          "en": "An introductory day in the region.",
+          "pt": "Dia introdutório na região."
+        },
+        "km": 120
+      },
+      {
+        "name": "Día 2: Punta Arenas → Puerto Natales",
+        "type": "atractivo",
+        "note": {
+          "es": "Traslado y tarde libre en Puerto Natales.",
+          "en": "Transfer and a free afternoon in Puerto Natales.",
+          "pt": "Deslocamento e tarde livre em Puerto Natales."
+        },
+        "km": 247
+      },
+      {
+        "name": "Día 3: Torres del Paine",
+        "type": "atractivo",
+        "note": {
+          "es": "Día completo en el parque nacional.",
+          "en": "A full day in the national park.",
+          "pt": "Dia inteiro no parque nacional."
+        },
+        "km": 140
+      },
+      {
+        "name": "Día 4: Puerto Natales → El Calafate",
+        "type": "frontera",
+        "note": {
+          "es": "Cruce a Argentina para conocer el Glaciar Perito Moreno.",
+          "en": "Crossing into Argentina to see the Perito Moreno Glacier.",
+          "pt": "Travessia para a Argentina para conhecer o Glaciar Perito Moreno."
+        },
+        "km": 330
+      },
+      {
+        "name": "Día 5: Retorno a Punta Arenas",
+        "type": "atractivo",
+        "note": {
+          "es": "Regreso vía Puerto Natales.",
+          "en": "Return via Puerto Natales.",
+          "pt": "Retorno via Puerto Natales."
+        },
+        "km": 480
+      }
+    ],
+    "warnings": [
+      {
+        "es": "Si cruzas a Argentina necesitas el permiso de circulación emitido por la rent a car.",
+        "en": "If you cross into Argentina you need the circulation permit issued by the rental company.",
+        "pt": "Se você cruzar para a Argentina, precisa da autorização de circulação emitida pela locadora."
+      },
+      {
+        "es": "Planifica con margen: el clima patagónico puede alterar horarios de traslado.",
+        "en": "Plan with a buffer: Patagonian weather can disrupt travel schedules.",
+        "pt": "Planeje com margem: o clima patagônico pode alterar os horários de deslocamento."
+      }
+    ],
+    "lastReviewed": "2026-08-15"
+  },
+  {
+    "slug": "patagonia-7-dias",
+    "name": "Ruta Patagonia de 7 días",
+    "summary": {
+      "es": "El recorrido más completo: Punta Arenas, Fuerte Bulnes, Puerto Natales, Torres del Paine, El Calafate y tiempo adicional para naturaleza, fotografía y descanso.",
+      "en": "The most complete itinerary: Punta Arenas, Fuerte Bulnes, Puerto Natales, Torres del Paine, El Calafate, and extra time for nature, photography and rest.",
+      "pt": "O roteiro mais completo: Punta Arenas, Fuerte Bulnes, Puerto Natales, Torres del Paine, El Calafate e tempo extra para natureza, fotografia e descanso."
+    },
+    "durationLabel": { "es": "7 días / 6 noches", "en": "7 days / 6 nights", "pt": "7 dias / 6 noites" },
+    "distanceKm": 1100,
+    "drivingTime": {
+      "es": "Variable según actividades elegidas",
+      "en": "Varies depending on chosen activities",
+      "pt": "Variável de acordo com as atividades escolhidas"
+    },
+    "suggestedDeparture": { "es": "Día 1, 09:00 hrs", "en": "Day 1, 9:00 AM", "pt": "Dia 1, 09h00" },
+    "bordersInvolved": [
+      {
+        "es": "Paso fronterizo Cerro Castillo (Chile) – Cancha Carrera (Argentina)",
+        "en": "Cerro Castillo (Chile) – Cancha Carrera (Argentina) border crossing",
+        "pt": "Passo de fronteira Cerro Castillo (Chile) – Cancha Carrera (Argentina)"
+      }
+    ],
+    "roadType": "mixto",
+    "difficulty": "exigente",
+    "waypoints": [
+      { "name": "Punta Arenas", "coordinates": [-53.1638, -70.9171] },
+      { "name": "Fuerte Bulnes", "coordinates": [-53.6167, -70.9167] },
+      { "name": "Puerto Natales", "coordinates": [-51.7236, -72.5064] },
+      { "name": "Torres del Paine", "coordinates": [-50.9423, -73.0000] },
+      { "name": "El Calafate", "coordinates": [-50.3379, -72.2648] },
+      { "name": "Puerto Natales", "coordinates": [-51.7236, -72.5064] },
+      { "name": "Punta Arenas", "coordinates": [-53.1638, -70.9171] }
+    ],
+    "stops": [
+      {
+        "name": "Día 1-2: Punta Arenas y alrededores",
+        "type": "atractivo",
+        "note": {
+          "es": "Ciudad, Fuerte Bulnes y Reserva Nacional Magallanes.",
+          "en": "The city, Fuerte Bulnes and Magallanes National Reserve.",
+          "pt": "Cidade, Fuerte Bulnes e Reserva Nacional Magalhães."
+        },
+        "km": 180
+      },
+      {
+        "name": "Día 3: Puerto Natales",
+        "type": "atractivo",
+        "note": {
+          "es": "Traslado y exploración de la ciudad.",
+          "en": "Transfer and exploring the town.",
+          "pt": "Deslocamento e exploração da cidade."
+        },
+        "km": 247
+      },
+      {
+        "name": "Día 4-5: Torres del Paine",
+        "type": "atractivo",
+        "note": {
+          "es": "Dos días completos para recorrer el parque con calma.",
+          "en": "Two full days to explore the park at a relaxed pace.",
+          "pt": "Dois dias inteiros para percorrer o parque com calma."
+        },
+        "km": 280
+      },
+      {
+        "name": "Día 6: El Calafate",
+        "type": "frontera",
+        "note": {
+          "es": "Cruce a Argentina y visita al Glaciar Perito Moreno.",
+          "en": "Crossing into Argentina and visiting the Perito Moreno Glacier.",
+          "pt": "Travessia para a Argentina e visita ao Glaciar Perito Moreno."
+        },
+        "km": 330
+      },
+      {
+        "name": "Día 7: Retorno a Punta Arenas",
+        "type": "atractivo",
+        "note": {
+          "es": "Regreso con paradas fotográficas finales.",
+          "en": "Return trip with final photo stops.",
+          "pt": "Retorno com últimas paradas para fotos."
+        },
+        "km": 480
+      }
+    ],
+    "warnings": [
+      {
+        "es": "Verifica el estado de los caminos antes de cada etapa: pueden cambiar por clima.",
+        "en": "Check road conditions before each leg: they can change due to weather.",
+        "pt": "Verifique o estado das estradas antes de cada etapa: podem mudar por causa do clima."
+      },
+      {
+        "es": "Reserva alojamiento y excursiones con anticipación, especialmente en temporada alta.",
+        "en": "Book lodging and excursions in advance, especially during high season.",
+        "pt": "Reserve hospedagem e excursões com antecedência, especialmente na alta temporada."
+      },
+      {
+        "es": "Lleva siempre el permiso de circulación en Argentina y documentos del vehículo.",
+        "en": "Always carry the Argentina circulation permit and vehicle documents.",
+        "pt": "Leve sempre a autorização de circulação na Argentina e os documentos do veículo."
+      }
+    ],
+    "lastReviewed": "2026-08-15"
+  }
+]

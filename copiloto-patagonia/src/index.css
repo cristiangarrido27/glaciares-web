@@ -1,0 +1,45 @@
+@import "tailwindcss";
+
+@theme {
+  --color-glacial: #1677A6;
+  --color-glacial-dark: #083B5C;
+  --color-nature: #2D7D62;
+  --color-adventure: #F28C28;
+  --color-snow: #F7FAFC;
+  --color-rock: #39424E;
+
+  --font-display: "Poppins", "Segoe UI", system-ui, sans-serif;
+  --font-body: "Inter", "Segoe UI", system-ui, sans-serif;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  font-family: var(--font-body);
+  color: var(--color-rock);
+  background-color: var(--color-snow);
+}
+
+h1, h2, h3, h4, .font-display {
+  font-family: var(--font-display);
+}
+
+:focus-visible {
+  outline: 3px solid var(--color-adventure);
+  outline-offset: 2px;
+}
+
+.leaflet-container {
+  width: 100%;
+  height: 100%;
+  border-radius: 1rem;
+  z-index: 0;
+}
+
+@media print {
+  header, footer, .no-print {
+    display: none !important;
+  }
+}
