@@ -262,24 +262,6 @@
             <div class="sfield" id="f-toDate"><label for="u-toDate">Devolución</label><input type="date" id="u-toDate"></div>
             <div class="sfield" id="f-toTime"><label for="u-toTime">Hora</label><input type="time" id="u-toTime"></div>
           </div>
-          <div class="sfield" id="f-passengers">
-            <label for="u-passengers">Pasajeros</label>
-            <select id="u-passengers">
-              <option value="1-2">1 a 2</option><option value="3-4">3 a 4</option>
-              <option value="5-6">5 a 6</option><option value="7+">7 o más</option>
-            </select>
-          </div>
-          <div class="sfield">
-            <label for="u-destination">Destino estimado</label>
-            <select id="u-destination">
-              <option value="Punta Arenas y alrededores">Punta Arenas y alrededores</option>
-              <option value="Torres del Paine">Torres del Paine</option>
-              <option value="Puerto Natales">Puerto Natales</option>
-              <option value="Tierra del Fuego">Tierra del Fuego</option>
-              <option value="Argentina (El Calafate / Río Gallegos)">Argentina (El Calafate / Río Gallegos)</option>
-              <option value="Otro">Otro</option>
-            </select>
-          </div>
           <div class="sfield">
             <label for="u-argentina">Viaje a Argentina</label>
             <select id="u-argentina"><option value="no">No</option><option value="si">Sí, necesito permiso</option></select>
@@ -423,8 +405,6 @@ function readSearchState() {
     pickUpPlace: p.get('pickUpPlace') || 'agencia',
     dropOffPlace: p.get('dropOffPlace') || p.get('pickUpPlace') || 'agencia',
     dropOffOther: p.get('dropOffOther') || '',
-    passengers: p.get('passengers') || '3-4',
-    destination: p.get('destination') || 'Punta Arenas y alrededores',
     argentina: p.get('argentina') || 'no',
     promo: p.get('promo') || '',
   };
@@ -450,8 +430,6 @@ const uFromDate = document.getElementById('u-fromDate');
 const uFromTime = document.getElementById('u-fromTime');
 const uToDate = document.getElementById('u-toDate');
 const uToTime = document.getElementById('u-toTime');
-const uPassengers = document.getElementById('u-passengers');
-const uDestination = document.getElementById('u-destination');
 const uArgentina = document.getElementById('u-argentina');
 const uPromo = document.getElementById('u-promo');
 
@@ -465,8 +443,6 @@ function fillPanelFromState() {
   uFromTime.value = state.hourFrom;
   uToDate.value = state.dateTo;
   uToTime.value = state.hourTo;
-  uPassengers.value = state.passengers;
-  uDestination.value = state.destination;
   uArgentina.value = state.argentina;
   uPromo.value = state.promo;
   updatePanelVisibility();
@@ -510,8 +486,7 @@ document.getElementById('updateForm').addEventListener('submit', (e) => {
   const dropOffPlace = uSame.checked ? uPickup.value : uDropoff.value;
   const params = new URLSearchParams({
     dateFrom: uFromDate.value, dateTo: uToDate.value, hourFrom: uFromTime.value, hourTo: uToTime.value,
-    pickUpPlace: uPickup.value, dropOffPlace, passengers: uPassengers.value,
-    destination: uDestination.value, argentina: uArgentina.value,
+    pickUpPlace: uPickup.value, dropOffPlace, argentina: uArgentina.value,
   });
   if (dropOffPlace === 'otro' && uDropoffOther.value.trim()) params.set('dropOffOther', uDropoffOther.value.trim());
   if (uPromo.value.trim()) params.set('promo', uPromo.value.trim());
@@ -593,8 +568,6 @@ function buildWhatsappMessage(v, total) {
     `Fecha y hora de retiro: ${state.dateFrom} ${state.hourFrom}`,
     `Devolución: ${state.dropOffPlace === 'otro' ? (state.dropOffOther || 'Otro lugar') : PLACE_LABELS[state.dropOffPlace]}`,
     `Fecha y hora de devolución: ${state.dateTo} ${state.hourTo}`,
-    `Pasajeros: ${state.passengers}`,
-    `Destino: ${state.destination}`,
     `Argentina: ${state.argentina === 'si' ? 'Sí' : 'No'}`,
     `Total estimado: $${total.toLocaleString('es-CL')}`,
     'Solicito confirmar disponibilidad y condiciones.',
@@ -804,8 +777,6 @@ function openBookingModal() {
   const notesParts = [
     `Lugar de retiro: ${PLACE_LABELS[state.pickUpPlace]}`,
     `Lugar de devolución: ${state.dropOffPlace === 'otro' ? (state.dropOffOther || 'Otro lugar') : PLACE_LABELS[state.dropOffPlace]}`,
-    `Pasajeros: ${state.passengers}`,
-    `Destino estimado: ${state.destination}`,
     `Viaje a Argentina: ${state.argentina === 'si' ? 'Sí' : 'No'}`,
   ];
   if (state.promo) notesParts.push(`Código promocional ingresado: ${state.promo} (a validar por el equipo)`);
