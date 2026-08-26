@@ -554,7 +554,7 @@ function argentinaApplies() {
 }
 
 function computeCardTotal(v) {
-  let total = v.subtotal;
+  let total = v.confirmedAvailability ? v.totalPrice : v.subtotal;
   if (airportApplies()) total += cfg.AIRPORT_FEE || 20000;
   if (argentinaApplies()) total += cfg.ARGENTINA_PERMIT_FEE || 120000;
   return total;
