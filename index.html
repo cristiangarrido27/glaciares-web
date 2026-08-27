@@ -474,7 +474,6 @@
     <button data-filter="todos" class="filter-btn active">Todos</button>
     <button data-filter="citycar" class="filter-btn">Citycar</button>
     <button data-filter="suv" class="filter-btn">SUV</button>
-    <button data-filter="furgon" class="filter-btn">Furgón</button>
   </div>
   <div id="fleetGrid" class="grid grid-3"></div>
 </section>
@@ -590,7 +589,15 @@
   <div class="faq-list">
     <details class="faq-item">
       <summary>¿Cuál es la edad permitida para arrendar un vehículo?<span class="faq-toggle">+</span></summary>
-      <p>Entre 21 y 75 años, con licencia de conducir vigente y cédula de identidad o pasaporte vigente. Consulta el detalle completo en nuestras <a href="condiciones.html" style="color:var(--accent-dark);font-weight:700;">condiciones de arriendo</a>.</p>
+      <p>Debes tener 22 años o más, con licencia de conducir vigente (chilena o extranjera) y cédula de identidad o pasaporte vigente. Consulta el detalle completo en nuestras <a href="condiciones.html" style="color:var(--accent-dark);font-weight:700;">condiciones de arriendo</a>.</p>
+    </details>
+    <details class="faq-item">
+      <summary>¿Hay cargo por conductor adicional?<span class="faq-toggle">+</span></summary>
+      <p>Sí. Solo puede conducir el titular del contrato salvo que agregues un conductor adicional autorizado, con un costo de $5.000 + IVA por día.</p>
+    </details>
+    <details class="faq-item">
+      <summary>¿Qué pasa si no me presento a retirar el vehículo?<span class="faq-toggle">+</span></summary>
+      <p>Esperamos hasta 2 horas desde la hora reservada. Pasado ese plazo se cobra un 50% del valor total del arriendo por no presentación (No Show). Si avisas con 48 horas de anticipación, no se cobra.</p>
     </details>
     <details class="faq-item">
       <summary>¿Puedo cruzar a Argentina con el vehículo arrendado?<span class="faq-toggle">+</span></summary>
@@ -602,7 +609,7 @@
     </details>
     <details class="faq-item">
       <summary>¿Necesito dejar una garantía?<span class="faq-toggle">+</span></summary>
-      <p>Sí, se solicita una garantía referencial desde $500.000, dependiendo del vehículo, que se libera una vez revisado y recibido el vehículo conforme.</p>
+      <p>Sí, en tarjeta de crédito: desde $500.000 hasta $800.000 dentro de Chile, y $1.000.000 si viajas a Argentina. Se libera una vez revisado y recibido el vehículo conforme.</p>
     </details>
     <details class="faq-item">
       <summary>¿Cómo pago mi reserva?<span class="faq-toggle">+</span></summary>
@@ -614,7 +621,7 @@
     </details>
     <details class="faq-item">
       <summary>¿Cuánto necesito abonar para reservar y cómo cancelo?<span class="faq-toggle">+</span></summary>
-      <p>La reserva se confirma con un abono equivalente a un día de arriendo. Las cancelaciones deben informarse con un mínimo de 72 horas de anticipación, según las condiciones del contrato.</p>
+      <p>La reserva se confirma con un abono equivalente a un día de arriendo. Cancelando con 48 horas de anticipación o más, se devuelve el 100%; con menos de 48 horas, se descuentan 2 días de arriendo del monto a devolver.</p>
     </details>
   </div>
   <p class="center" style="margin-top:26px;">
@@ -792,7 +799,6 @@ const fleet = [
   { id: 1, name: 'Suzuki Swift', price: 35000, cat: 'citycar', catLabel: 'Citycar', img: IMG_BASE + 'CITYCAR/SUZUKI%20SWIFT.jpeg' },
   { id: 2, name: 'Suzuki Dzire', price: 38000, cat: 'citycar', catLabel: 'Citycar', img: IMG_BASE + 'CITYCAR/SUZUKI%20DZIRE.jpeg' },
   { id: 3, name: 'Chevrolet Captiva', price: 50000, cat: 'suv', catLabel: 'SUV', img: IMG_BASE + 'SUV/CHEVROTET%20CAPTIVA.jpeg' },
-  { id: 4, name: 'Hyundai H1', price: 65000, cat: 'furgon', catLabel: 'Furgón', img: IMG_BASE + 'FURG%C3%93N/HYUNDAI%20H1.jpeg' },
   { id: 5, name: 'Hyundai Tucson (unidad A)', price: 39000, cat: 'suv', catLabel: 'SUV', img: IMG_BASE + 'SUV/HYUNDAI%20TUCSON%20(1).jpeg' },
   { id: 6, name: 'Kia Sorento', price: 40000, cat: 'suv', catLabel: 'SUV', img: IMG_BASE + 'SUV/KIA%20SORENTO.jpeg' },
   { id: 7, name: 'Hyundai Tucson (unidad B)', price: 48000, cat: 'suv', catLabel: 'SUV', img: IMG_BASE + 'SUV/HYUNDAI%20TUCSON%20(2).jpeg' },
