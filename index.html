@@ -17,13 +17,13 @@
 <meta property="og:title" content="Rent a Car en Punta Arenas | Glaciares Rent a Car">
 <meta property="og:description" content="Arriendo de vehículos en Punta Arenas para recorrer Torres del Paine, Puerto Natales y la Patagonia. Consulta disponibilidad y reserva por WhatsApp.">
 <meta property="og:url" content="https://www.glaciaresrentacar.cl/">
-<meta property="og:image" content="https://glaciaresrentacar.cl/PAISAJES/142423.webp">
+<meta property="og:image" content="https://glaciaresrentacar.cl/portada/portada-patagonia-01.webp">
 
 <!-- Twitter Card -->
 <meta name="twitter:card" content="summary_large_image">
 <meta name="twitter:title" content="Rent a Car en Punta Arenas | Glaciares Rent a Car">
 <meta name="twitter:description" content="Arriendo de vehículos en Punta Arenas para recorrer Torres del Paine, Puerto Natales y la Patagonia.">
-<meta name="twitter:image" content="https://glaciaresrentacar.cl/PAISAJES/142423.webp">
+<meta name="twitter:image" content="https://glaciaresrentacar.cl/portada/portada-patagonia-01.webp">
 
 <!-- Datos estructurados: negocio local de arriendo de vehículos -->
 <script type="application/ld+json">
@@ -160,6 +160,11 @@
   .card{background:#fff;border:1px solid var(--slate-100);border-radius:16px;overflow:hidden;box-shadow:0 1px 3px rgba(10,37,64,.06);transition:.2s;}
   .card:hover{box-shadow:0 10px 26px rgba(10,37,64,.09);transform:translateY(-2px);}
   .card img{width:100%;height:185px;object-fit:cover;}
+  /* Servicios adicionales: son íconos cuadrados sobre fondo blanco, no fotos.
+     object-fit:cover los recortaba; con contain se ve el ícono completo. */
+  #servicesGrid .card{display:flex;flex-direction:column;height:100%;}
+  #servicesGrid .card img{height:auto;aspect-ratio:4/3;object-fit:contain;background:#ffffff;padding:14px;}
+  #servicesGrid .card-body{flex:1;}
   .card-body{padding:18px 20px 20px;}
   .card-cat{display:inline-block;font-size:11px;font-weight:700;letter-spacing:.06em;color:var(--accent-dark);background:rgba(0,212,255,.12);padding:3px 10px;border-radius:99px;margin-bottom:8px;text-transform:uppercase;}
   .card-body h3{font-size:15.5px;font-weight:800;letter-spacing:.01em;}
@@ -173,6 +178,14 @@
   /* Franja de confianza / beneficios sin cifras */
   .trust-strip{background:var(--slate-50);border-top:1px solid var(--slate-100);border-bottom:1px solid var(--slate-100);}
   .trust-strip .grid-4{gap:0;}
+
+  /* Banner de formas de pago */
+  .payment-banner{background:var(--navy);padding:18px 20px;}
+  .payment-banner .container{display:flex;flex-wrap:wrap;align-items:center;justify-content:center;gap:16px 28px;}
+  .payment-banner .pb-text{color:#fff;font-weight:700;font-size:14px;display:flex;align-items:center;gap:8px;}
+  .payment-banner .pb-text svg{width:20px;height:20px;color:var(--accent);flex-shrink:0;}
+  .payment-banner .pb-badges{display:flex;flex-wrap:wrap;gap:8px;}
+  .payment-banner .pb-badges span{background:rgba(255,255,255,.1);border:1px solid rgba(255,255,255,.18);color:#fff;font-size:12.5px;font-weight:700;padding:6px 14px;border-radius:99px;}
   .trust-item{display:flex;align-items:center;gap:12px;padding:26px 18px;text-align:left;}
   .trust-item .ic{flex-shrink:0;width:44px;height:44px;border-radius:12px;background:#fff;border:1px solid var(--slate-200);display:flex;align-items:center;justify-content:center;color:var(--navy);}
   .trust-item .ic svg{width:22px;height:22px;}
@@ -235,12 +248,17 @@
 
   /* Footer */
   footer{background:var(--navy);color:#cbd5e1;padding-top:56px;padding-bottom:26px;}
-  .footer-grid{display:grid;grid-template-columns:1.4fr 1fr 1fr;gap:32px;margin-bottom:36px;}
-  @media (max-width:700px){ .footer-grid{grid-template-columns:1fr;} }
+  .footer-grid{display:grid;grid-template-columns:1.2fr 1fr 1fr 1.1fr;gap:32px;margin-bottom:36px;}
+  @media (max-width:900px){ .footer-grid{grid-template-columns:1fr 1fr;} }
+  @media (max-width:560px){ .footer-grid{grid-template-columns:1fr;} }
   .footer-grid img{height:48px;width:48px;border-radius:50%;margin-bottom:14px;}
   .footer-grid h4{color:#fff;font-weight:700;margin-bottom:12px;font-size:14px;}
   .footer-grid li{margin-bottom:8px;font-size:13.5px;}
   .footer-grid a:hover{color:var(--accent);}
+  .pay-badges{display:flex;flex-wrap:wrap;gap:8px;}
+  .pay-badges span{background:rgba(255,255,255,.08);border:1px solid rgba(255,255,255,.15);color:#e6edf3;font-size:11.5px;font-weight:700;padding:6px 12px;border-radius:99px;display:inline-flex;align-items:center;gap:6px;}
+  .pay-badges svg{width:14px;height:14px;color:var(--accent);flex-shrink:0;}
+  .footer-grid .pay-note{color:#94a3b8;font-size:12.5px;margin-top:10px;line-height:1.5;}
   .footer-bottom{text-align:center;font-size:12px;color:#94a3b8;border-top:1px solid rgba(255,255,255,.1);padding-top:20px;}
 
   /* ===== Botón flotante de WhatsApp (global, con animación accesible) ===== */
@@ -361,10 +379,10 @@
         <button type="button" class="hero-car-btn prev" id="heroPrev" aria-label="Imagen anterior">
           <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M15 18l-6-6 6-6"/></svg>
         </button>
-        <img class="active" src="https://glaciaresrentacar.cl/SECCION%20LUGARES%20TURISTICOS/TORRES%20DEL%20PAINE.jpg" alt="Torres del Paine" width="900" height="620">
-        <img src="https://glaciaresrentacar.cl/SECCION%20LUGARES%20TURISTICOS/COSTANERA%20DEL%20ESTRECHO.jpg" alt="Costanera del Estrecho de Magallanes" width="900" height="620">
-        <img src="https://glaciaresrentacar.cl/SECCION%20LUGARES%20TURISTICOS/place-des-armes-munoz-gamero--v1-1200-800.jpeg" alt="Plaza de Armas Muñoz Gamero" width="900" height="620">
-        <img src="https://glaciaresrentacar.cl/SECCION%20LUGARES%20TURISTICOS/FARO%20SAN%20ISIDRO.jpg" alt="Faro San Isidro" width="900" height="620">
+        <img class="active" src="https://glaciaresrentacar.cl/portada/portada-patagonia-01.webp" alt="Torres del Paine" width="900" height="620">
+        <img src="https://glaciaresrentacar.cl/portada/portada-patagonia-02.webp" alt="Costanera del Estrecho de Magallanes" width="900" height="620">
+        <img src="https://glaciaresrentacar.cl/portada/portada-patagonia-03.webp" alt="Plaza de Armas Muñoz Gamero" width="900" height="620">
+        <img src="https://glaciaresrentacar.cl/portada/portada-patagonia-04.webp" alt="Faro San Isidro" width="900" height="620">
         <div class="hero-car-dots" id="heroDots">
           <span class="active"></span><span></span><span></span><span></span>
         </div>
@@ -446,6 +464,39 @@
           <option value="si">Sí, necesito permiso</option>
         </select>
       </div>
+      <div class="bfield" id="field-passengers">
+        <label for="passengers"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="9" cy="7" r="3"/><path d="M2 21c0-3.9 3.1-7 7-7s7 3.1 7 7"/><circle cx="17" cy="8" r="2.5"/><path d="M22 21c0-2.9-1.8-5.3-4.3-6.3"/></svg>Pasajeros</label>
+        <select id="passengers">
+          <option value="1">1 pasajero</option>
+          <option value="2">2 pasajeros</option>
+          <option value="3">3 pasajeros</option>
+          <option value="4">4 pasajeros</option>
+          <option value="5">5 pasajeros</option>
+          <option value="6">6 pasajeros</option>
+          <option value="7">7 pasajeros</option>
+          <option value="8">8 pasajeros</option>
+          <option value="9">9 pasajeros</option>
+        </select>
+      </div>
+      <div class="bfield" id="field-destination">
+        <label for="destination"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 21s7-6.5 7-12a7 7 0 0 0-14 0c0 5.5 7 12 7 12Z"/><circle cx="12" cy="9" r="2.5"/></svg>Destino principal</label>
+        <select id="destination">
+          <option value="">Selecciona un destino</option>
+          <option value="punta-arenas">Punta Arenas</option>
+          <option value="puerto-natales">Puerto Natales</option>
+          <option value="torres-del-paine">Torres del Paine</option>
+          <option value="porvenir">Porvenir</option>
+          <option value="tierra-del-fuego">Tierra del Fuego</option>
+          <option value="el-calafate">El Calafate</option>
+          <option value="ushuaia">Ushuaia</option>
+          <option value="otro">Otro destino</option>
+        </select>
+      </div>
+      <div class="bfield" id="field-destinationOther" style="display:none;">
+        <label for="destinationOther">Especifica tu destino</label>
+        <input type="text" id="destinationOther" placeholder="Ej: Seno Otway">
+        <span class="bfield-error-msg">Escribe tu destino.</span>
+      </div>
       <div class="bfield" id="field-promo">
         <label for="promoCode"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20 12 12 20l-8-8V4h8l8 8Z"/><circle cx="7.5" cy="7.5" r="1.2"/></svg>Código promocional (opcional)</label>
         <input type="text" id="promoCode" placeholder="Ej: ANTICIPADO15" autocomplete="off">
@@ -481,6 +532,19 @@
         <span class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 12h18M3 6h18M3 18h18"/></svg></span>
         <div><strong>Chile y Argentina</strong>previa autorización</div>
       </div>
+    </div>
+  </div>
+</section>
+
+<!-- ===================== BANNER FORMAS DE PAGO ===================== -->
+<section class="payment-banner">
+  <div class="container">
+    <p class="pb-text"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="6" width="20" height="14" rx="2"/><path d="M2 10h20"/></svg>Facilidades de pago: aceptamos débito, crédito y Redcompra</p>
+    <div class="pb-badges">
+      <span>Webpay Plus</span>
+      <span>Débito</span>
+      <span>Crédito</span>
+      <span>Redcompra</span>
     </div>
   </div>
 </section>
@@ -552,11 +616,11 @@
 <section class="section section-navy">
   <div class="container" style="max-width:900px;">
     <div class="section-head">
-      <h2 class="section-title white">Promoción vigente</h2>
+      <h2 class="section-title white" id="promoHeading">Beneficio por reserva anticipada</h2>
       <p class="section-sub" style="color:#cbd5e1;">Reserva anticipado y accede a un descuento.</p>
     </div>
     <div class="promo-card">
-      <img src="https://glaciaresrentacar.cl/IMAGENES_GLACIARES_NUEVO%20AUTOS/PROMOCION/PROMOCION.jpg" alt="Promoción por reserva anticipada">
+      <img src="https://glaciaresrentacar.cl/promocion/promocion-reserva-anticipada.webp" alt="Promoción por reserva anticipada" onerror="this.src='https://glaciaresrentacar.cl/portada/portada-patagonia-01.webp'">
       <div class="promo-body">
         <h3>Reserva con anticipación</h3>
         <p class="lead">15% de descuento en el total de tu arriendo, con todo medio de pago.</p>
@@ -740,6 +804,15 @@
         <li><a href="https://web.facebook.com/profile.php?id=100010578304048" target="_blank" rel="noopener">Facebook</a></li>
       </ul>
     </div>
+    <div>
+      <h4>Formas de pago</h4>
+      <div class="pay-badges">
+        <span><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="6" width="20" height="14" rx="2"/><path d="M2 10h20"/></svg>Débito</span>
+        <span><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="6" width="20" height="14" rx="2"/><path d="M2 10h20"/></svg>Crédito</span>
+        <span><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="6" width="20" height="14" rx="2"/><path d="M2 10h20"/></svg>Redcompra</span>
+      </div>
+      <p class="pay-note">Pago 100% seguro con Webpay Plus (Transbank). También puedes coordinar transferencia bancaria.</p>
+    </div>
   </div>
   <p class="footer-bottom">© <span id="year"></span> Glaciares Rent a Car. Todos los derechos reservados.</p>
 </footer>
@@ -773,11 +846,49 @@ mobileMenu.querySelectorAll('a').forEach(a => a.addEventListener('click', () => 
 }));
 
 const cfg = window.GLACIARES_CONFIG || {};
-if (cfg.PROMO_VALID_NOTE) document.getElementById('promoValidNote').textContent = cfg.PROMO_VALID_NOTE;
+/* Promoción: solo afirmamos "vigente" o "por tiempo limitado" si hay una fecha de
+   término real y confirmada (cfg.PROMOTION_END_DATE). Si no existe, usamos un
+   texto neutro que no promete un plazo que no podemos sostener. */
+(function () {
+  const heading = document.getElementById('promoHeading');
+  const note = document.getElementById('promoValidNote');
+  if (cfg.PROMOTION_END_DATE) {
+    const d = new Date(cfg.PROMOTION_END_DATE + 'T00:00:00');
+    const MESES = ['enero','febrero','marzo','abril','mayo','junio','julio','agosto','septiembre','octubre','noviembre','diciembre'];
+    const fechaTexto = isNaN(d) ? cfg.PROMOTION_END_DATE : `${d.getDate()} de ${MESES[d.getMonth()]} de ${d.getFullYear()}`;
+    if (heading) heading.textContent = 'Promoción vigente';
+    if (note) note.textContent = `Promoción válida para reservas realizadas hasta el ${fechaTexto}.`;
+  } else {
+    if (heading) heading.textContent = 'Beneficio por reserva anticipada';
+    if (note) note.textContent = 'Vigencia sujeta a confirmación; consulta la fecha exacta por WhatsApp antes de reservar.';
+  }
+})();
+
+/* Validación visual (no cambia precios) del código promocional contra la lista autorizada. */
+(function () {
+  const input = document.getElementById('promoCode');
+  if (!input) return;
+  let hint = document.createElement('span');
+  hint.style.cssText = 'display:block;font-size:12px;font-weight:600;margin-top:4px;';
+  input.insertAdjacentElement('afterend', hint);
+  input.addEventListener('input', () => {
+    const code = input.value.trim().toUpperCase();
+    const valid = (cfg.VALID_PROMO_CODES || []).map(c => c.toUpperCase());
+    if (!code) { hint.textContent = ''; return; }
+    if (valid.includes(code)) { hint.textContent = 'Código reconocido.'; hint.style.color = '#2E7D5B'; }
+    else { hint.textContent = 'Este código será validado por nuestro equipo al confirmar tu reserva.'; hint.style.color = 'var(--slate-500)'; }
+  });
+})();
 
 /* ---- Hero: carrusel de imágenes con flechas, puntos y autoplay ---- */
 const heroCarousel = document.getElementById('heroCarousel');
 const heroImgs = heroCarousel ? heroCarousel.querySelectorAll('img') : [];
+/* Imagen de respaldo: si una foto de portada no carga, mostramos un degradado
+   en vez de un ícono de imagen rota, y el texto/botones nunca dependen de ella. */
+const HERO_FALLBACK = 'data:image/svg+xml;charset=UTF-8,' + encodeURIComponent(
+  '<svg xmlns="http://www.w3.org/2000/svg" width="900" height="620"><defs><linearGradient id="g" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#0A2540"/><stop offset="1" stop-color="#071B30"/></linearGradient></defs><rect width="900" height="620" fill="url(#g)"/></svg>'
+);
+heroImgs.forEach(img => { img.addEventListener('error', () => { img.onerror = null; img.src = HERO_FALLBACK; }); });
 const heroDots = heroCarousel ? heroCarousel.querySelectorAll('.hero-car-dots span') : [];
 let hi = 0;
 let heroTimer;
@@ -829,20 +940,20 @@ setTimeout(() => {
 }, 6000);
 
 /* ---- Fleet data (datos confirmados: nombre, categoría, precio, imagen) ---- */
-const IMG_BASE = 'https://glaciaresrentacar.cl/IMAGENES_GLACIARES_NUEVO%20AUTOS/';
+const IMG_BASE = 'https://glaciaresrentacar.cl/flota/';
 const fleet = [
-  { id: 1, name: 'Suzuki Swift', price: 35000, cat: 'citycar', catLabel: 'Citycar', img: IMG_BASE + 'CITYCAR/SUZUKI%20SWIFT.jpeg' },
-  { id: 2, name: 'Suzuki Dzire', price: 38000, cat: 'citycar', catLabel: 'Citycar', img: IMG_BASE + 'CITYCAR/SUZUKI%20DZIRE.jpeg' },
-  { id: 3, name: 'Chevrolet Captiva', price: 50000, cat: 'suv', catLabel: 'SUV', img: IMG_BASE + 'SUV/CHEVROTET%20CAPTIVA.jpeg' },
-  { id: 6, name: 'Kia Sorento', price: 40000, cat: 'suv', catLabel: 'SUV', img: IMG_BASE + 'SUV/KIA%20SORENTO.jpeg' },
-  { id: 7, name: 'Hyundai Tucson', price: 48000, cat: 'suv', catLabel: 'SUV', img: IMG_BASE + 'SUV/HYUNDAI%20TUCSON%20(2).jpeg' },
-  { id: 8, name: 'Peugeot 3008', price: 59000, cat: 'suv', catLabel: 'SUV', img: IMG_BASE + 'SUV/PEUGEOT%203008.jpeg' },
+  { id: 1, name: 'Suzuki Swift', price: 35000, cat: 'citycar', catLabel: 'Citycar', img: IMG_BASE + 'suzuki-swift.webp' },
+  { id: 2, name: 'Suzuki Dzire', price: 38000, cat: 'citycar', catLabel: 'Citycar', img: IMG_BASE + 'suzuki-dzire.webp' },
+  { id: 3, name: 'Chevrolet Captiva', price: 50000, cat: 'suv', catLabel: 'SUV', img: IMG_BASE + 'chevrolet-captiva.webp' },
+  { id: 6, name: 'Kia Sorento', price: 40000, cat: 'suv', catLabel: 'SUV', img: IMG_BASE + 'kia-sorento.webp' },
+  { id: 7, name: 'Hyundai Tucson', price: 48000, cat: 'suv', catLabel: 'SUV', img: IMG_BASE + 'hyundai-tucson.webp' },
+  { id: 8, name: 'Peugeot 3008', price: 59000, cat: 'suv', catLabel: 'SUV', img: IMG_BASE + 'peugeot-3008.webp' },
 ];
 const fleetGrid = document.getElementById('fleetGrid');
 function renderFleet(filter){
   fleetGrid.innerHTML = fleet.filter(v => filter === 'todos' || v.cat === filter).map(v => `
     <div class="card">
-      <img src="${v.img}" alt="${v.name}, categoría ${v.catLabel}, disponible en Glaciares Rent a Car Punta Arenas" loading="lazy" width="400" height="300">
+      <img src="${v.img}" alt="${v.name}, categoría ${v.catLabel}, disponible en Glaciares Rent a Car Punta Arenas" loading="lazy" width="400" height="300" onerror="this.onerror=null;this.src='https://glaciaresrentacar.cl/LOGOSINFONDO.png';this.style.objectFit='contain';this.style.background='#f1f5f9';this.style.padding='30px';">
       <div class="card-body">
         <span class="card-cat">${v.catLabel}</span>
         <h3>${v.name}</h3>
@@ -873,7 +984,7 @@ const services = [
 ];
 document.getElementById('servicesGrid').innerHTML = services.map(s => `
   <div class="card">
-    <img src="${s.img}" alt="${s.name}" loading="lazy" width="400" height="300">
+    <img src="${s.img}" alt="${s.name}" loading="lazy" width="400" height="300" onerror="this.onerror=null;this.src='https://glaciaresrentacar.cl/LOGOSINFONDO.png';">
     <div class="card-body">
       <h3 style="text-transform:none;">${s.name}</h3>
       <p class="price" style="font-size:16px;">${s.price}</p>
@@ -893,7 +1004,7 @@ const destinos = [
 ];
 document.getElementById('destGrid').innerHTML = destinos.map(d => `
   <div class="card">
-    <img src="${d.img}" alt="${d.name}, destino turístico en Magallanes" loading="lazy" width="400" height="300">
+    <img src="${d.img}" alt="${d.name}, destino turístico en Magallanes" loading="lazy" width="400" height="300" onerror="this.onerror=null;this.src='https://glaciaresrentacar.cl/LOGOSINFONDO.png';this.style.objectFit='contain';this.style.background='#f1f5f9';this.style.padding='30px';">
     <div class="card-body">
       <h3 style="text-transform:none;margin-bottom:6px;">${d.name}</h3>
       <p class="service-note" style="font-size:13px;">${d.desc}</p>
@@ -955,6 +1066,16 @@ function updateArgentinaNote(){
 }
 tripArgentinaEl.addEventListener('change', updateArgentinaNote);
 function updateSameLugarText(){ sameLugarText.textContent = PLACE_LABELS[pickupPlaceEl.value] || ''; }
+
+const destinationEl = document.getElementById('destination');
+const destinationOtherField = document.getElementById('field-destinationOther');
+const destinationOtherEl = document.getElementById('destinationOther');
+function updateDestinationVisibility(){
+  destinationOtherField.style.display = destinationEl.value === 'otro' ? '' : 'none';
+}
+destinationEl.addEventListener('change', updateDestinationVisibility);
+updateDestinationVisibility();
+
 function updateDropoffVisibility(){
   const same = sameLugarEl.checked;
   dropoffPlaceField.style.display = same ? 'none' : '';
@@ -978,6 +1099,12 @@ function clearAllErrors(){
   document.querySelectorAll('.bfield').forEach(f => f.classList.remove('has-error'));
 }
 
+/* Nombres canónicos usados en TODO el sitio para los parámetros de búsqueda:
+   pickUpDate, pickUpTime, dropOffDate, dropOffTime, pickUpPlace, dropOffPlace,
+   dropOffOther, passengers, destination, destinationOther, argentina, promoCode.
+   No usar variantes (fromDate, dateFrom, u-fromDate, etc.) fuera de esta función. */
+const SEARCH_STORAGE_KEY = 'glaciares_last_search';
+
 searchForm.addEventListener('submit', (e) => {
   e.preventDefault();
   clearAllErrors();
@@ -985,6 +1112,7 @@ searchForm.addEventListener('submit', (e) => {
   const from = fromDateEl.value, to = toDateEl.value;
   const fromTime = fromTimeEl.value, toTime = toTimeEl.value;
   const dropoffOtherVal = dropoffOtherText.value.trim();
+  const destinationOtherVal = destinationOtherEl.value.trim();
   const todayStr = new Date().toISOString().slice(0, 10);
 
   const errors = [];
@@ -996,6 +1124,7 @@ searchForm.addEventListener('submit', (e) => {
     if (!dropoffPlaceEl.value) errors.push('dropoffPlace');
     if (dropoffPlaceEl.value === 'otro' && !dropoffOtherVal) errors.push('dropoffOther');
   }
+  if (destinationEl.value === 'otro' && !destinationOtherVal) errors.push('destinationOther');
 
   if (errors.length) {
     errors.forEach(id => setFieldError(id, true));
@@ -1007,14 +1136,21 @@ searchForm.addEventListener('submit', (e) => {
   }
 
   const dropoffPlace = sameLugarEl.checked ? pickupPlaceEl.value : dropoffPlaceEl.value;
-  const params = new URLSearchParams({
-    dateFrom: from, dateTo: to, hourFrom: fromTime, hourTo: toTime,
+  const searchState = {
+    pickUpDate: from, pickUpTime: fromTime, dropOffDate: to, dropOffTime: toTime,
     pickUpPlace: pickupPlaceEl.value, dropOffPlace: dropoffPlace,
+    dropOffOther: (dropoffPlace === 'otro' && dropoffOtherVal) ? dropoffOtherVal : '',
+    passengers: document.getElementById('passengers').value,
+    destination: destinationEl.value,
+    destinationOther: destinationEl.value === 'otro' ? destinationOtherVal : '',
     argentina: document.getElementById('tripArgentina').value,
-  });
-  if (dropoffPlace === 'otro' && dropoffOtherVal) params.set('dropOffOther', dropoffOtherVal);
-  const promo = document.getElementById('promoCode').value.trim();
-  if (promo) params.set('promo', promo);
+    promoCode: document.getElementById('promoCode').value.trim(),
+  };
+
+  const params = new URLSearchParams();
+  Object.entries(searchState).forEach(([key, val]) => { if (val) params.set(key, val); });
+
+  try { sessionStorage.setItem(SEARCH_STORAGE_KEY, JSON.stringify(searchState)); } catch (err) { /* almacenamiento no disponible: seguimos solo con la URL */ }
 
   if (window.trackEvent) window.trackEvent('cotizador_buscar', { from, to });
   window.location.href = '/buscar?' + params.toString();

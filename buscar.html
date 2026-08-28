@@ -88,6 +88,13 @@
     .search-panel.open{display:block;margin-bottom:16px;}
   }
 
+  /* Resumen claro de la búsqueda (fechas en español) */
+  .search-summary{background:#fff;border:1px solid var(--slate-200);border-radius:14px;padding:14px 18px;margin-bottom:16px;}
+  .search-summary dl{display:grid;grid-template-columns:repeat(auto-fill,minmax(200px,1fr));gap:8px 20px;margin:0;}
+  .search-summary dt{font-size:10.5px;font-weight:700;letter-spacing:.05em;text-transform:uppercase;color:var(--slate-500);}
+  .search-summary dd{font-size:13.5px;font-weight:700;color:var(--navy);margin:2px 0 0;}
+  .search-summary .invalid{color:#b91c1c;font-weight:700;font-size:13.5px;}
+
   /* Resultados: header, filtros, orden */
   .results-head{display:flex;flex-wrap:wrap;align-items:center;justify-content:space-between;gap:12px;margin-bottom:18px;}
   .results-count{font-size:15px;font-weight:800;color:var(--navy);}
@@ -122,6 +129,7 @@
   .btn-confirm:hover{background:#1fb959;}
   .btn-pay{background:var(--accent);color:var(--navy);font-weight:700;padding:11px;border-radius:10px;font-size:13px;text-align:center;}
   .btn-pay:hover{background:var(--accent-dark);}
+  .pay-note{font-size:10.5px;color:var(--slate-500);text-align:center;margin-top:-2px;line-height:1.4;}
 
   /* Skeleton */
   .skeleton-card{background:#fff;border:1px solid var(--slate-100);border-radius:16px;padding:16px;margin-bottom:16px;height:162px;overflow:hidden;position:relative;}
@@ -267,6 +275,32 @@
             <select id="u-argentina"><option value="no">No</option><option value="si">Sí, necesito permiso</option></select>
           </div>
           <div class="sfield">
+            <label for="u-passengers">Pasajeros</label>
+            <select id="u-passengers">
+              <option value="1">1 pasajero</option><option value="2">2 pasajeros</option><option value="3">3 pasajeros</option>
+              <option value="4">4 pasajeros</option><option value="5">5 pasajeros</option><option value="6">6 pasajeros</option>
+              <option value="7">7 pasajeros</option><option value="8">8 pasajeros</option><option value="9">9 pasajeros</option>
+            </select>
+          </div>
+          <div class="sfield">
+            <label for="u-destination">Destino principal</label>
+            <select id="u-destination">
+              <option value="">Selecciona un destino</option>
+              <option value="punta-arenas">Punta Arenas</option>
+              <option value="puerto-natales">Puerto Natales</option>
+              <option value="torres-del-paine">Torres del Paine</option>
+              <option value="porvenir">Porvenir</option>
+              <option value="tierra-del-fuego">Tierra del Fuego</option>
+              <option value="el-calafate">El Calafate</option>
+              <option value="ushuaia">Ushuaia</option>
+              <option value="otro">Otro destino</option>
+            </select>
+          </div>
+          <div class="sfield" id="f-destinationOther" style="display:none;">
+            <label for="u-destinationOther">Especifica tu destino</label>
+            <input type="text" id="u-destinationOther">
+          </div>
+          <div class="sfield">
             <label for="u-promo">Código promocional</label>
             <input type="text" id="u-promo" placeholder="Opcional">
           </div>
@@ -276,6 +310,7 @@
 
       <!-- Resultados -->
       <section id="buscar-resultados">
+        <div class="search-summary" id="searchSummary"></div>
         <div class="results-head">
           <div class="results-count" id="resultsCount">Buscando…</div>
           <div class="results-controls">
@@ -388,31 +423,100 @@ const PLACE_LABELS = {
   hotel: 'Hotel o alojamiento en Punta Arenas (sujeto a confirmación)',
   otro: 'Otro lugar (sujeto a evaluación)',
 };
+const DESTINATION_LABELS = {};
+(cfg.DESTINATIONS || []).forEach(d => { DESTINATION_LABELS[d.id] = d.label; });
+if (!Object.keys(DESTINATION_LABELS).length) {
+  Object.assign(DESTINATION_LABELS, {
+    'punta-arenas': 'Punta Arenas', 'puerto-natales': 'Puerto Natales', 'torres-del-paine': 'Torres del Paine',
+    porvenir: 'Porvenir', 'tierra-del-fuego': 'Tierra del Fuego', 'el-calafate': 'El Calafate',
+    ushuaia: 'Ushuaia', otro: 'Otro destino',
+  });
+}
+const MESES_ES = ['enero','febrero','marzo','abril','mayo','junio','julio','agosto','septiembre','octubre','noviembre','diciembre'];
+function fechaHoraLarga(dateStr, timeStr) {
+  if (!dateStr) return '—';
+  const [y, m, d] = dateStr.split('-').map(Number);
+  if (!y || !m || !d) return dateStr;
+  return `${d} de ${MESES_ES[m - 1]} de ${y}${timeStr ? ' a las ' + timeStr : ''}`;
+}
+function destinationLabel(state) {
+  if (!state.destination) return '—';
+  if (state.destination === 'otro') return state.destinationOther || 'Otro destino (sin especificar)';
+  return DESTINATION_LABELS[state.destination] || state.destination;
+}
+function dropOffLabel(state) {
+  return state.dropOffPlace === 'otro' ? (state.dropOffOther || 'Otro lugar (sin especificar)') : (PLACE_LABELS[state.dropOffPlace] || state.dropOffPlace);
+}
 
 /* =====================================================================
-   LEER PARÁMETROS DE LA URL (persisten al recargar o compartir el enlace)
+   LEER EL ESTADO DE BÚSQUEDA — nombres únicos usados en TODO el sitio:
+   pickUpDate, pickUpTime, dropOffDate, dropOffTime, pickUpPlace, dropOffPlace,
+   dropOffOther, passengers, destination, destinationOther, argentina, promoCode.
+
+   Prioridad: 1) parámetros válidos de la URL  2) búsqueda anterior guardada
+   (sessionStorage)  3) valores por defecto — SOLO si no hay ninguna de las dos
+   anteriores. Nunca se reemplaza un parámetro válido de la URL por la fecha
+   de hoy.
    ===================================================================== */
+const SEARCH_STORAGE_KEY = 'glaciares_last_search';
+
 function readSearchState() {
   const p = new URLSearchParams(window.location.search);
+  let saved = {};
+  try { saved = JSON.parse(sessionStorage.getItem(SEARCH_STORAGE_KEY) || '{}'); } catch (err) { saved = {}; }
+
   const todayISO = new Date().toISOString().slice(0, 10);
   const tomorrowISO = new Date(Date.now() + 86400000).toISOString().slice(0, 10);
-  return {
-    dateFrom: p.get('dateFrom') || todayISO,
-    dateTo: p.get('dateTo') || tomorrowISO,
-    hourFrom: p.get('hourFrom') || '09:00',
-    hourTo: p.get('hourTo') || '09:00',
-    pickUpPlace: p.get('pickUpPlace') || 'agencia',
-    dropOffPlace: p.get('dropOffPlace') || p.get('pickUpPlace') || 'agencia',
-    dropOffOther: p.get('dropOffOther') || '',
-    argentina: p.get('argentina') || 'no',
-    promo: p.get('promo') || '',
+
+  function pick(key, fallback) {
+    const fromUrl = p.get(key);
+    if (fromUrl !== null && fromUrl !== '') return fromUrl;
+    if (saved[key] !== undefined && saved[key] !== null && saved[key] !== '') return saved[key];
+    return fallback;
+  }
+
+  const isValidDate = (s) => /^\d{4}-\d{2}-\d{2}$/.test(s) && !isNaN(new Date(s + 'T00:00:00'));
+  const isValidTime = (s) => /^\d{2}:\d{2}$/.test(s);
+
+  let pickUpDate = pick('pickUpDate', todayISO);
+  if (!isValidDate(pickUpDate)) pickUpDate = todayISO;
+  let dropOffDate = pick('dropOffDate', tomorrowISO);
+  if (!isValidDate(dropOffDate)) dropOffDate = tomorrowISO;
+  let pickUpTime = pick('pickUpTime', '09:00');
+  if (!isValidTime(pickUpTime)) pickUpTime = '09:00';
+  let dropOffTime = pick('dropOffTime', '09:00');
+  if (!isValidTime(dropOffTime)) dropOffTime = '09:00';
+
+  const pickUpPlace = pick('pickUpPlace', 'agencia');
+  const dropOffPlace = pick('dropOffPlace', pickUpPlace);
+
+  const result = {
+    pickUpDate, pickUpTime, dropOffDate, dropOffTime,
+    pickUpPlace, dropOffPlace,
+    dropOffOther: pick('dropOffOther', ''),
+    passengers: pick('passengers', '1'),
+    destination: pick('destination', ''),
+    destinationOther: pick('destinationOther', ''),
+    argentina: pick('argentina', 'no'),
+    promoCode: pick('promoCode', ''),
   };
+
+  try { sessionStorage.setItem(SEARCH_STORAGE_KEY, JSON.stringify(result)); } catch (err) { /* sin almacenamiento disponible */ }
+  return result;
 }
 let state = readSearchState();
 
-function daysBetween(from, to) {
-  const d = Math.round((new Date(to) - new Date(from)) / 86400000);
-  return Math.max(d, 1);
+/* Duración usando fecha + hora completas (antes se ignoraba la hora).
+   Cada bloque de 24 horas se cobra como un día completo. Duración inválida
+   (fechas iguales/anteriores, hora igual/anterior el mismo día) devuelve 0
+   y el llamador debe mostrar un estado de error, no seguir calculando. */
+function daysBetween(dateFrom, timeFrom, dateTo, timeTo) {
+  const start = new Date(`${dateFrom}T${timeFrom || '00:00'}:00`);
+  const end = new Date(`${dateTo}T${timeTo || '00:00'}:00`);
+  if (isNaN(start) || isNaN(end)) return 0;
+  const diffMs = end - start;
+  if (diffMs <= 0) return 0;
+  return Math.ceil(diffMs / 86400000);
 }
 
 /* =====================================================================
@@ -430,6 +534,10 @@ const uFromTime = document.getElementById('u-fromTime');
 const uToDate = document.getElementById('u-toDate');
 const uToTime = document.getElementById('u-toTime');
 const uArgentina = document.getElementById('u-argentina');
+const uPassengers = document.getElementById('u-passengers');
+const uDestination = document.getElementById('u-destination');
+const uDestinationOtherField = document.getElementById('f-destinationOther');
+const uDestinationOther = document.getElementById('u-destinationOther');
 const uPromo = document.getElementById('u-promo');
 
 function fillPanelFromState() {
@@ -438,32 +546,54 @@ function fillPanelFromState() {
   uSame.checked = same;
   uDropoff.value = ['agencia','aeropuerto','hotel','otro'].includes(state.dropOffPlace) ? state.dropOffPlace : 'otro';
   uDropoffOther.value = state.dropOffOther;
-  uFromDate.value = state.dateFrom;
-  uFromTime.value = state.hourFrom;
-  uToDate.value = state.dateTo;
-  uToTime.value = state.hourTo;
+  uFromDate.value = state.pickUpDate;
+  uFromTime.value = state.pickUpTime;
+  uToDate.value = state.dropOffDate;
+  uToTime.value = state.dropOffTime;
   uArgentina.value = state.argentina;
-  uPromo.value = state.promo;
+  uPassengers.value = state.passengers || '1';
+  uDestination.value = state.destination || '';
+  uDestinationOther.value = state.destinationOther || '';
+  uPromo.value = state.promoCode;
   updatePanelVisibility();
 }
 function updatePanelVisibility() {
   const same = uSame.checked;
   uDropoffField.style.display = same ? 'none' : '';
   uDropoffOtherField.style.display = (!same && uDropoff.value === 'otro') ? '' : 'none';
+  uDestinationOtherField.style.display = uDestination.value === 'otro' ? '' : 'none';
   const wantsAirport = uPickup.value === 'aeropuerto' || (!same && uDropoff.value === 'aeropuerto');
   uAirportNote.classList.toggle('show', wantsAirport);
 }
 uPickup.addEventListener('change', updatePanelVisibility);
 uSame.addEventListener('change', updatePanelVisibility);
 uDropoff.addEventListener('change', updatePanelVisibility);
+uDestination.addEventListener('change', updatePanelVisibility);
 fillPanelFromState();
 
-function updateMobileSummary() {
-  const days = daysBetween(state.dateFrom, state.dateTo);
+function renderSearchSummary() {
+  const days = daysBetween(state.pickUpDate, state.pickUpTime, state.dropOffDate, state.dropOffTime);
+  const box = document.getElementById('searchSummary');
+  if (days <= 0) {
+    box.innerHTML = `<p class="invalid">La fecha/hora de devolución debe ser posterior a la de retiro. Corrige tu búsqueda para ver vehículos disponibles.</p>`;
+    document.getElementById('mobileSummaryText').innerHTML = `<span style="color:#b91c1c;font-weight:700;">Revisa las fechas de tu búsqueda.</span>`;
+    return;
+  }
+  const rows = [
+    ['Retiro', `${PLACE_LABELS[state.pickUpPlace] || state.pickUpPlace} · ${fechaHoraLarga(state.pickUpDate, state.pickUpTime)}`],
+    ['Devolución', `${dropOffLabel(state)} · ${fechaHoraLarga(state.dropOffDate, state.dropOffTime)}`],
+    ['Duración', `${days} día${days > 1 ? 's' : ''}`],
+    ['Pasajeros', state.passengers || '1'],
+    ['Destino', destinationLabel(state)],
+    ['Argentina', state.argentina === 'si' ? 'Sí' : 'No'],
+  ];
+  if (state.promoCode) rows.push(['Código promocional', state.promoCode]);
+  box.innerHTML = `<dl>${rows.map(([k, v]) => `<div><dt>${k}</dt><dd>${v}</dd></div>`).join('')}</dl>`;
+
   document.getElementById('mobileSummaryText').innerHTML =
-    `<strong>${state.dateFrom}</strong> → <strong>${state.dateTo}</strong> (${days} día${days > 1 ? 's' : ''})<br>${PLACE_LABELS[state.pickUpPlace]}`;
+    `<strong>${fechaHoraLarga(state.pickUpDate, state.pickUpTime)}</strong> → <strong>${fechaHoraLarga(state.dropOffDate, state.dropOffTime)}</strong> (${days} día${days > 1 ? 's' : ''})<br>${PLACE_LABELS[state.pickUpPlace] || ''} · ${state.passengers || 1} pasajero${(state.passengers || 1) > 1 ? 's' : ''}${state.destination ? ' · ' + destinationLabel(state) : ''}`;
 }
-updateMobileSummary();
+renderSearchSummary();
 
 document.getElementById('toggleSearchPanel').addEventListener('click', () => {
   document.getElementById('searchPanel').classList.toggle('open');
@@ -478,31 +608,39 @@ document.getElementById('updateForm').addEventListener('submit', (e) => {
   if (!uToDate.value || uToDate.value < uFromDate.value) errors.push('toDate');
   if (uToDate.value === uFromDate.value && uToTime.value <= uFromTime.value) errors.push('toTime');
   if (!uSame.checked && uDropoff.value === 'otro' && !uDropoffOther.value.trim()) errors.push('dropoffOther');
+  if (uDestination.value === 'otro' && !uDestinationOther.value.trim()) errors.push('destinationOther');
   if (errors.length) {
     errors.forEach(id => { const f = document.getElementById('f-' + id); if (f) f.classList.add('has-error'); });
     return;
   }
   const dropOffPlace = uSame.checked ? uPickup.value : uDropoff.value;
-  const params = new URLSearchParams({
-    dateFrom: uFromDate.value, dateTo: uToDate.value, hourFrom: uFromTime.value, hourTo: uToTime.value,
-    pickUpPlace: uPickup.value, dropOffPlace, argentina: uArgentina.value,
-  });
-  if (dropOffPlace === 'otro' && uDropoffOther.value.trim()) params.set('dropOffOther', uDropoffOther.value.trim());
-  if (uPromo.value.trim()) params.set('promo', uPromo.value.trim());
+  const newState = {
+    pickUpDate: uFromDate.value, pickUpTime: uFromTime.value, dropOffDate: uToDate.value, dropOffTime: uToTime.value,
+    pickUpPlace: uPickup.value, dropOffPlace,
+    dropOffOther: (dropOffPlace === 'otro' && uDropoffOther.value.trim()) ? uDropoffOther.value.trim() : '',
+    passengers: uPassengers.value,
+    destination: uDestination.value,
+    destinationOther: uDestination.value === 'otro' ? uDestinationOther.value.trim() : '',
+    argentina: uArgentina.value,
+    promoCode: uPromo.value.trim(),
+  };
+  const params = new URLSearchParams();
+  Object.entries(newState).forEach(([key, val]) => { if (val) params.set(key, val); });
+  try { sessionStorage.setItem(SEARCH_STORAGE_KEY, JSON.stringify(newState)); } catch (err) { /* sin almacenamiento disponible */ }
   window.location.href = '/buscar?' + params.toString();
 });
 
 /* =====================================================================
    CATÁLOGO LOCAL DE VEHÍCULOS (mismos datos confirmados que la portada)
    ===================================================================== */
-const IMG_BASE = 'https://glaciaresrentacar.cl/IMAGENES_GLACIARES_NUEVO%20AUTOS/';
+const IMG_BASE = 'https://glaciaresrentacar.cl/flota/';
 const FLEET = [
-  { id: 1, name: 'Suzuki Swift', price: 35000, cat: 'citycar', catLabel: 'Citycar', img: IMG_BASE + 'CITYCAR/SUZUKI%20SWIFT.jpeg', deposit: 500000 },
-  { id: 2, name: 'Suzuki Dzire', price: 38000, cat: 'citycar', catLabel: 'Citycar', img: IMG_BASE + 'CITYCAR/SUZUKI%20DZIRE.jpeg', deposit: 500000 },
-  { id: 3, name: 'Chevrolet Captiva', price: 50000, cat: 'suv', catLabel: 'SUV', img: IMG_BASE + 'SUV/CHEVROTET%20CAPTIVA.jpeg', deposit: 600000 },
-  { id: 6, name: 'Kia Sorento', price: 40000, cat: 'suv', catLabel: 'SUV', img: IMG_BASE + 'SUV/KIA%20SORENTO.jpeg', deposit: 600000 },
-  { id: 7, name: 'Hyundai Tucson', price: 48000, cat: 'suv', catLabel: 'SUV', img: IMG_BASE + 'SUV/HYUNDAI%20TUCSON%20(2).jpeg', deposit: 600000 },
-  { id: 8, name: 'Peugeot 3008', price: 59000, cat: 'suv', catLabel: 'SUV', img: IMG_BASE + 'SUV/PEUGEOT%203008.jpeg', deposit: 600000 },
+  { id: 1, name: 'Suzuki Swift', price: 35000, cat: 'citycar', catLabel: 'Citycar', img: IMG_BASE + 'suzuki-swift.webp', deposit: 500000 },
+  { id: 2, name: 'Suzuki Dzire', price: 38000, cat: 'citycar', catLabel: 'Citycar', img: IMG_BASE + 'suzuki-dzire.webp', deposit: 500000 },
+  { id: 3, name: 'Chevrolet Captiva', price: 50000, cat: 'suv', catLabel: 'SUV', img: IMG_BASE + 'chevrolet-captiva.webp', deposit: 600000 },
+  { id: 6, name: 'Kia Sorento', price: 40000, cat: 'suv', catLabel: 'SUV', img: IMG_BASE + 'kia-sorento.webp', deposit: 600000 },
+  { id: 7, name: 'Hyundai Tucson', price: 48000, cat: 'suv', catLabel: 'SUV', img: IMG_BASE + 'hyundai-tucson.webp', deposit: 600000 },
+  { id: 8, name: 'Peugeot 3008', price: 59000, cat: 'suv', catLabel: 'SUV', img: IMG_BASE + 'peugeot-3008.webp', deposit: 600000 },
 ];
 
 const API_BASE = 'https://glaciares-reservas-backend.onrender.com';
@@ -512,12 +650,17 @@ let currentSort = 'recomendados';
 let currentPriceFilter = 'todos';
 
 async function loadResults() {
-  const days = daysBetween(state.dateFrom, state.dateTo);
+  const days = daysBetween(state.pickUpDate, state.pickUpTime, state.dropOffDate, state.dropOffTime);
+  if (days <= 0) {
+    document.getElementById('loadingMsg').style.display = 'none';
+    renderResults();
+    return;
+  }
   document.getElementById('resultsCount').textContent = 'Buscando…';
 
   let backendById = {};
   try {
-    const r = await fetch(`${API_BASE}/api/availability?from=${state.dateFrom}&to=${state.dateTo}&category=todos`);
+    const r = await fetch(`${API_BASE}/api/availability?from=${state.pickUpDate}&to=${state.dropOffDate}&category=todos`);
     if (r.ok) {
       const data = await r.json();
       (data.results || []).forEach(v => { backendById[v.id] = v; });
@@ -559,15 +702,26 @@ function computeCardTotal(v) {
 }
 
 function buildWhatsappMessage(v, total) {
+  const extraLines = [];
+  if (airportApplies()) extraLines.push(`Aeropuerto: $${(cfg.AIRPORT_FEE || 20000).toLocaleString('es-CL')}`);
+  if (argentinaApplies()) extraLines.push(`Permiso Argentina: $${(cfg.ARGENTINA_PERMIT_FEE || 120000).toLocaleString('es-CL')}`);
+  if (v.discountPct) extraLines.push(`Descuento reserva anticipada: -${v.discountPct}%`);
   const lines = [
     'Hola, quiero consultar disponibilidad:',
+    '',
     `Vehículo: ${v.name}`,
-    `Retiro: ${PLACE_LABELS[state.pickUpPlace]}`,
-    `Fecha y hora de retiro: ${state.dateFrom} ${state.hourFrom}`,
-    `Devolución: ${state.dropOffPlace === 'otro' ? (state.dropOffOther || 'Otro lugar') : PLACE_LABELS[state.dropOffPlace]}`,
-    `Fecha y hora de devolución: ${state.dateTo} ${state.hourTo}`,
+    `Retiro: ${PLACE_LABELS[state.pickUpPlace] || state.pickUpPlace}`,
+    `Fecha y hora de retiro: ${fechaHoraLarga(state.pickUpDate, state.pickUpTime)}`,
+    `Devolución: ${dropOffLabel(state)}`,
+    `Fecha y hora de devolución: ${fechaHoraLarga(state.dropOffDate, state.dropOffTime)}`,
+    `Duración: ${v.days} día${v.days > 1 ? 's' : ''}`,
+    `Pasajeros: ${state.passengers || '1'}`,
+    `Destino: ${destinationLabel(state)}`,
     `Argentina: ${state.argentina === 'si' ? 'Sí' : 'No'}`,
+    `Arriendo: $${v.subtotal.toLocaleString('es-CL')}`,
+    ...(extraLines.length ? [`Cargos adicionales: ${extraLines.join(', ')}`] : []),
     `Total estimado: $${total.toLocaleString('es-CL')}`,
+    '',
     'Solicito confirmar disponibilidad y condiciones.',
   ];
   return lines.join('\n');
@@ -585,12 +739,32 @@ function applyFiltersAndSort(list) {
 }
 
 function renderResults() {
-  const list = applyFiltersAndSort(merged);
-  const days = daysBetween(state.dateFrom, state.dateTo);
-  document.getElementById('resultsCount').innerHTML =
-    `${list.length} ${list.length === 1 ? 'opción encontrada' : 'opciones encontradas'}<span>${state.dateFrom} → ${state.dateTo} · ${days} día${days > 1 ? 's' : ''}</span>`;
-
+  renderSearchSummary();
+  const days = daysBetween(state.pickUpDate, state.pickUpTime, state.dropOffDate, state.dropOffTime);
   const resultsList = document.getElementById('resultsList');
+
+  if (days <= 0) {
+    document.getElementById('resultsCount').innerHTML = `<span style="color:#b91c1c;">Fechas inválidas</span>`;
+    resultsList.innerHTML = `
+      <div class="empty-state">
+        <h3>La devolución debe ser posterior al retiro.</h3>
+        <p>Corrige las fechas y horas de tu búsqueda para ver vehículos disponibles.</p>
+        <div class="empty-actions">
+          <button type="button" class="btn-outline" id="emptyModify">MODIFICAR BÚSQUEDA</button>
+        </div>
+      </div>`;
+    const fixBtn = document.getElementById('emptyModify');
+    if (fixBtn) fixBtn.addEventListener('click', () => {
+      document.getElementById('searchPanel').classList.add('open');
+      document.getElementById('searchPanel').scrollIntoView({ behavior: 'smooth', block: 'start' });
+    });
+    return;
+  }
+
+  const list = applyFiltersAndSort(merged);
+  document.getElementById('resultsCount').innerHTML =
+    `${list.length} ${list.length === 1 ? 'opción encontrada' : 'opciones encontradas'}<span>${fechaHoraLarga(state.pickUpDate, state.pickUpTime)} → ${fechaHoraLarga(state.dropOffDate, state.dropOffTime)} · ${days} día${days > 1 ? 's' : ''}</span>`;
+
   if (list.length === 0) {
     resultsList.innerHTML = `
       <div class="empty-state">
@@ -598,7 +772,7 @@ function renderResults() {
         <p>Podemos revisar otras fechas o buscar una alternativa para tu viaje.</p>
         <div class="empty-actions">
           <button type="button" class="btn-outline" id="emptyModify">MODIFICAR BÚSQUEDA</button>
-          <a href="https://wa.me/${WA_NUMBER}?text=${encodeURIComponent('Hola, no encontré vehículos disponibles para mi búsqueda del ' + state.dateFrom + ' al ' + state.dateTo + '. ¿Pueden ayudarme?')}" target="_blank" rel="noopener" class="btn btn-whatsapp">CONSULTAR POR WHATSAPP</a>
+          <a href="https://wa.me/${WA_NUMBER}?text=${encodeURIComponent('Hola, no encontré vehículos disponibles para mi búsqueda del ' + state.pickUpDate + ' al ' + state.dropOffDate + '. ¿Pueden ayudarme?')}" target="_blank" rel="noopener" class="btn btn-whatsapp">CONSULTAR POR WHATSAPP</a>
         </div>
       </div>`;
     const btn = document.getElementById('emptyModify');
@@ -612,9 +786,17 @@ function renderResults() {
   resultsList.innerHTML = list.map((v, i) => {
     const total = computeCardTotal(v);
     const waMsg = buildWhatsappMessage(v, total);
+    /* "Reservar y pagar" permite pagar el total por adelantado (con el % de descuento
+       por reserva anticipada cuando corresponda) para dejar la reserva registrada.
+       Esto no reemplaza la confirmación final de unidad: por eso mantenemos el aviso
+       "sujeta a confirmación" y aclaramos junto al botón que el pago reserva el cupo,
+       y el equipo confirma la unidad exacta antes de la entrega. */
+    const payLabel = v.discountPct ? `Reservar y pagar (-${v.discountPct}% incluido)` : 'Reservar y pagar';
+    const payButton = `<button type="button" class="btn-pay" data-vid="${v.id}" data-total="${total}" data-days="${v.days}" data-name="${v.name}">${payLabel}</button>
+          <p class="pay-note">Al pagar quedas con la reserva registrada; te confirmamos la unidad exacta antes de la entrega. ¿Quieres confirmar los montos antes de pagar? Escríbenos por WhatsApp con el botón de arriba.</p>`;
     return `
     <div class="rcard" style="animation-delay:${prefersReducedMotion ? 0 : Math.min(i, 6) * 70}ms;">
-      <img src="${v.img}" alt="${v.name}" loading="lazy">
+      <img src="${v.img}" alt="${v.name}" loading="lazy" onerror="this.onerror=null;this.src='https://glaciaresrentacar.cl/LOGOSINFONDO.png';this.style.objectFit='contain';this.style.background='#f1f5f9';this.style.padding='20px';">
       <div>
         <span class="rcard-cat">${v.catLabel}</span>
         <h3>${v.name}</h3>
@@ -636,7 +818,7 @@ function renderResults() {
         <p class="deposit-note">Garantía requerida: desde $${(v.deposit || cfg.MIN_DEPOSIT || 500000).toLocaleString('es-CL')}.</p>
         <div class="rcard-actions">
           <a class="btn-confirm" href="https://wa.me/${WA_NUMBER}?text=${encodeURIComponent(waMsg)}" target="_blank" rel="noopener">SOLICITAR CONFIRMACIÓN</a>
-          <button type="button" class="btn-pay" data-vid="${v.id}" data-total="${total}" data-days="${v.days}" data-name="${v.name}">Reservar y pagar</button>
+          ${payButton}
         </div>
       </div>
     </div>`;
@@ -646,7 +828,7 @@ function renderResults() {
     btn.addEventListener('click', () => openQuoteModal({
       id: Number(btn.dataset.vid), name: btn.dataset.name,
       totalPrice: Number(btn.dataset.total), days: Number(btn.dataset.days),
-    }, state.dateFrom, state.dateTo));
+    }, state.pickUpDate, state.dropOffDate));
   });
 }
 
@@ -773,15 +955,17 @@ function openBookingModal() {
   const grandTotal = pendingVehicle.totalPrice + extrasTotal;
 
   const notesParts = [
-    `Lugar de retiro: ${PLACE_LABELS[state.pickUpPlace]}`,
-    `Lugar de devolución: ${state.dropOffPlace === 'otro' ? (state.dropOffOther || 'Otro lugar') : PLACE_LABELS[state.dropOffPlace]}`,
+    `Lugar de retiro: ${PLACE_LABELS[state.pickUpPlace] || state.pickUpPlace}`,
+    `Lugar de devolución: ${dropOffLabel(state)}`,
+    `Pasajeros: ${state.passengers || '1'}`,
+    `Destino: ${destinationLabel(state)}`,
     `Viaje a Argentina: ${state.argentina === 'si' ? 'Sí' : 'No'}`,
   ];
-  if (state.promo) notesParts.push(`Código promocional ingresado: ${state.promo} (a validar por el equipo)`);
+  if (state.promoCode) notesParts.push(`Código promocional ingresado: ${state.promoCode} (a validar por el equipo)`);
 
   window.__pendingBooking = {
     vehicleId: pendingVehicle.id, from: pendingVehicle.from, to: pendingVehicle.to,
-    pickupTime: state.hourFrom, returnTime: state.hourTo,
+    pickupTime: state.pickUpTime, returnTime: state.dropOffTime,
     extras: extrasArr, notes: notesParts.join(' · '),
   };
   document.getElementById('modalSummary').innerHTML = `
