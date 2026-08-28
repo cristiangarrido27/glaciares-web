@@ -199,6 +199,13 @@
   .card-chip.webpay-logo img{height:100%;width:auto;display:block;}
   .card-chip.mastercard-logo{height:34px;padding:6px 12px;}
   .card-chip.mastercard-logo img{height:100%;width:auto;display:block;}
+  /* Ranuras para logos oficiales que el dueño puede agregar él mismo: si el
+     archivo pagos/visa.png (o amex.png / diners.png / redcompra.png) existe,
+     se muestra automáticamente y reemplaza la insignia de texto. Si no existe
+     (404), se elimina en silencio y queda la insignia de texto de respaldo. */
+  .card-chip-slot{display:inline-flex;align-items:center;}
+  .card-chip.visa-logo,.card-chip.amex-logo,.card-chip.diners-logo,.card-chip.redcompra-logo{height:34px;padding:5px 14px;}
+  .card-chip.visa-logo img,.card-chip.amex-logo img,.card-chip.diners-logo img,.card-chip.redcompra-logo img{height:100%;width:auto;display:block;}
   .card-chip.amex{font:800 12px/1 -apple-system,Arial,sans-serif;color:#006FCF;}
   .card-chip.diners{font:italic 800 11.5px/1 Georgia,serif;color:#0079BE;}
 
@@ -562,9 +569,15 @@
   <div class="container">
     <p class="pb-text"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="6" width="20" height="14" rx="2"/><path d="M2 10h20"/></svg>Facilidades de pago: aceptamos todo tipo de tarjetas</p>
     <div class="pb-badges">
-      <span class="card-chip visa">VISA</span>
+      <span class="card-chip-slot">
+        <span class="card-chip visa">VISA</span>
+        <span class="card-chip visa-logo" style="display:none"><img src="pagos/visa.png" alt="Visa" loading="lazy" onload="this.parentElement.style.display='flex';this.parentElement.previousElementSibling.style.display='none';" onerror="this.parentElement.remove();"></span>
+      </span>
       <span class="card-chip mastercard-logo"><img src="pagos/mastercard.png" alt="Mastercard" loading="lazy" onerror="this.onerror=null;this.src='LOGOSINFONDO.png'"></span>
-      <span class="card-chip redcompra"><span>Red</span><span>compra</span></span>
+      <span class="card-chip-slot">
+        <span class="card-chip redcompra"><span>Red</span><span>compra</span></span>
+        <span class="card-chip redcompra-logo" style="display:none"><img src="pagos/redcompra.png" alt="Redcompra" loading="lazy" onload="this.parentElement.style.display='flex';this.parentElement.previousElementSibling.style.display='none';" onerror="this.parentElement.remove();"></span>
+      </span>
       <span class="card-chip webpay-logo"><img src="pagos/webpay-transbank.webp" alt="Webpay Plus - Transbank" loading="lazy" onerror="this.onerror=null;this.src='LOGOSINFONDO.png'"></span>
     </div>
   </div>
@@ -809,11 +822,23 @@
       <p class="section-sub">Tarjetas de crédito, débito y pagos digitales.</p>
     </div>
     <div class="pf-badges">
-      <span class="card-chip visa">VISA</span>
+      <span class="card-chip-slot">
+        <span class="card-chip visa">VISA</span>
+        <span class="card-chip visa-logo" style="display:none"><img src="pagos/visa.png" alt="Visa" loading="lazy" onload="this.parentElement.style.display='flex';this.parentElement.previousElementSibling.style.display='none';" onerror="this.parentElement.remove();"></span>
+      </span>
       <span class="card-chip mastercard-logo"><img src="pagos/mastercard.png" alt="Mastercard" loading="lazy" onerror="this.onerror=null;this.src='LOGOSINFONDO.png'"></span>
-      <span class="card-chip amex">Amex</span>
-      <span class="card-chip diners">Diners Club</span>
-      <span class="card-chip redcompra"><span>Red</span><span>compra</span></span>
+      <span class="card-chip-slot">
+        <span class="card-chip amex">Amex</span>
+        <span class="card-chip amex-logo" style="display:none"><img src="pagos/amex.png" alt="American Express" loading="lazy" onload="this.parentElement.style.display='flex';this.parentElement.previousElementSibling.style.display='none';" onerror="this.parentElement.remove();"></span>
+      </span>
+      <span class="card-chip-slot">
+        <span class="card-chip diners">Diners Club</span>
+        <span class="card-chip diners-logo" style="display:none"><img src="pagos/diners.png" alt="Diners Club" loading="lazy" onload="this.parentElement.style.display='flex';this.parentElement.previousElementSibling.style.display='none';" onerror="this.parentElement.remove();"></span>
+      </span>
+      <span class="card-chip-slot">
+        <span class="card-chip redcompra"><span>Red</span><span>compra</span></span>
+        <span class="card-chip redcompra-logo" style="display:none"><img src="pagos/redcompra.png" alt="Redcompra" loading="lazy" onload="this.parentElement.style.display='flex';this.parentElement.previousElementSibling.style.display='none';" onerror="this.parentElement.remove();"></span>
+      </span>
       <span class="card-chip webpay-logo"><img src="pagos/webpay-transbank.webp" alt="Medios de pago disponibles: Visa, Mastercard, Amex, Diners Club, Redcompra, Webpay y Transbank" loading="lazy" onerror="this.onerror=null;this.src='LOGOSINFONDO.png'"></span>
     </div>
   </div>
@@ -846,9 +871,15 @@
     <div>
       <h4>Formas de pago</h4>
       <div class="pay-badges">
+        <span class="card-chip-slot">
         <span class="card-chip visa">VISA</span>
+        <span class="card-chip visa-logo" style="display:none"><img src="pagos/visa.png" alt="Visa" loading="lazy" onload="this.parentElement.style.display='flex';this.parentElement.previousElementSibling.style.display='none';" onerror="this.parentElement.remove();"></span>
+      </span>
         <span class="card-chip mastercard-logo"><img src="pagos/mastercard.png" alt="Mastercard" loading="lazy" onerror="this.onerror=null;this.src='LOGOSINFONDO.png'"></span>
+        <span class="card-chip-slot">
         <span class="card-chip redcompra"><span>Red</span><span>compra</span></span>
+        <span class="card-chip redcompra-logo" style="display:none"><img src="pagos/redcompra.png" alt="Redcompra" loading="lazy" onload="this.parentElement.style.display='flex';this.parentElement.previousElementSibling.style.display='none';" onerror="this.parentElement.remove();"></span>
+      </span>
         <span class="card-chip webpay-logo"><img src="pagos/webpay-transbank.webp" alt="Webpay Plus - Transbank" loading="lazy" onerror="this.onerror=null;this.src='LOGOSINFONDO.png'"></span>
       </div>
       <p class="pay-note">Pago 100% seguro con Webpay Plus (Transbank). También puedes coordinar transferencia bancaria.</p>
