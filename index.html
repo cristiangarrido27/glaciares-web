@@ -186,15 +186,25 @@
   .payment-banner .pb-text svg{width:20px;height:20px;color:var(--accent);flex-shrink:0;}
   .payment-banner .pb-badges{display:flex;flex-wrap:wrap;gap:8px;}
   /* "Tarjetas" estilo chip blanco (como una fila de logos), con el nombre de cada
-     marca en su color asociado. No son los logotipos oficiales (no tenemos los
-     archivos con licencia de cada marca), pero comunican claramente qué se acepta. */
+     marca en su color asociado. Visa/Mastercard/Redcompra son insignias de texto
+     (no tenemos los archivos oficiales con licencia de esas marcas); Webpay/Transbank
+     sí usa el logo oficial real, provisto por el dueño del negocio. */
   .card-chip{background:#fff;border-radius:6px;padding:7px 14px;height:26px;display:flex;align-items:center;justify-content:center;box-shadow:0 1px 3px rgba(0,0,0,.25);}
   .card-chip.visa{font:italic 800 15px/1 Georgia,serif;color:#1A1F71;letter-spacing:.5px;}
   .card-chip.mastercard{font:800 12.5px/1 -apple-system,Arial,sans-serif;background:linear-gradient(90deg,#EB001B,#F79E1B);-webkit-background-clip:text;background-clip:text;-webkit-text-fill-color:transparent;}
   .card-chip.redcompra{font:800 11.5px/1 -apple-system,Arial,sans-serif;}
   .card-chip.redcompra span:first-child{color:#C8102E;}
   .card-chip.redcompra span:last-child{color:#0033A0;}
-  .card-chip.webpay{font:800 12px/1 -apple-system,Arial,sans-serif;color:#E30074;}
+  .card-chip.webpay-logo{height:34px;padding:5px 14px;}
+  .card-chip.webpay-logo img{height:100%;width:auto;display:block;}
+  .card-chip.amex{font:800 12px/1 -apple-system,Arial,sans-serif;color:#006FCF;}
+  .card-chip.diners{font:italic 800 11.5px/1 Georgia,serif;color:#0079BE;}
+
+  /* Sección "Medios de pago disponibles" (antes del footer) */
+  .payment-full{padding:52px 0;background:var(--slate-50);border-top:1px solid var(--slate-100);}
+  .payment-full .pf-badges{display:flex;flex-wrap:wrap;justify-content:center;gap:12px;margin-top:8px;}
+  .payment-full .card-chip{height:30px;padding:8px 16px;box-shadow:0 1px 3px rgba(10,37,64,.12);}
+  .payment-full .card-chip.webpay-logo{height:38px;}
   .trust-item{display:flex;align-items:center;gap:12px;padding:26px 18px;text-align:left;}
   .trust-item .ic{flex-shrink:0;width:44px;height:44px;border-radius:12px;background:#fff;border:1px solid var(--slate-200);display:flex;align-items:center;justify-content:center;color:var(--navy);}
   .trust-item .ic svg{width:22px;height:22px;}
@@ -553,7 +563,7 @@
       <span class="card-chip visa">VISA</span>
       <span class="card-chip mastercard">Mastercard</span>
       <span class="card-chip redcompra"><span>Red</span><span>compra</span></span>
-      <span class="card-chip webpay">Webpay Plus</span>
+      <span class="card-chip webpay-logo"><img src="pagos/webpay-transbank.webp" alt="Webpay Plus - Transbank" loading="lazy" onerror="this.onerror=null;this.src='LOGOSINFONDO.png'"></span>
     </div>
   </div>
 </section>
@@ -789,6 +799,24 @@
   </div>
 </section>
 
+<!-- ===================== MEDIOS DE PAGO DISPONIBLES ===================== -->
+<section class="payment-full">
+  <div class="container">
+    <div class="section-head">
+      <h2 class="section-title">Medios de pago disponibles</h2>
+      <p class="section-sub">Tarjetas de crédito, débito y pagos digitales.</p>
+    </div>
+    <div class="pf-badges">
+      <span class="card-chip visa">VISA</span>
+      <span class="card-chip mastercard">Mastercard</span>
+      <span class="card-chip amex">Amex</span>
+      <span class="card-chip diners">Diners Club</span>
+      <span class="card-chip redcompra"><span>Red</span><span>compra</span></span>
+      <span class="card-chip webpay-logo"><img src="pagos/webpay-transbank.webp" alt="Medios de pago disponibles: Visa, Mastercard, Amex, Diners Club, Redcompra, Webpay y Transbank" loading="lazy" onerror="this.onerror=null;this.src='LOGOSINFONDO.png'"></span>
+    </div>
+  </div>
+</section>
+
 <!-- ===================== FOOTER ===================== -->
 <footer>
   <div class="container footer-grid">
@@ -819,7 +847,7 @@
         <span class="card-chip visa">VISA</span>
         <span class="card-chip mastercard">Mastercard</span>
         <span class="card-chip redcompra"><span>Red</span><span>compra</span></span>
-        <span class="card-chip webpay">Webpay Plus</span>
+        <span class="card-chip webpay-logo"><img src="pagos/webpay-transbank.webp" alt="Webpay Plus - Transbank" loading="lazy" onerror="this.onerror=null;this.src='LOGOSINFONDO.png'"></span>
       </div>
       <p class="pay-note">Pago 100% seguro con Webpay Plus (Transbank). También puedes coordinar transferencia bancaria.</p>
     </div>
