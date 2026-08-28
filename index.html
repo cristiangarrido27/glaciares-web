@@ -119,20 +119,29 @@
   #mobileMenu.open{display:flex;}
 
   /* Hero */
-  .hero{position:relative;min-height:600px;overflow:hidden;background:var(--navy);}
-  .hero-crossfade{position:absolute;inset:0;}
-  .hero-crossfade img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;opacity:0;transition:opacity 2s ease-in-out;}
-  .hero-crossfade img.active{opacity:1;}
-  .hero-overlay{position:absolute;inset:0;background:linear-gradient(100deg,rgba(10,37,64,.96) 15%,rgba(10,37,64,.80) 50%,rgba(10,37,64,.35) 100%);}
-  .hero-content{position:relative;max-width:1180px;margin:0 auto;padding:120px 20px 190px;}
-  .hero-content h1{color:#fff;font-weight:800;font-size:44px;line-height:1.15;max-width:650px;letter-spacing:-.01em;}
-  .hero-content p.lead{color:#dbe6f0;max-width:540px;margin-top:18px;font-size:16.5px;line-height:1.5;}
-  .hero-actions{display:flex;flex-wrap:wrap;gap:14px;margin-top:30px;}
-  .hero-mini-trust{display:flex;flex-wrap:wrap;gap:10px 22px;margin-top:34px;}
+  .hero{position:relative;background:var(--navy);padding:52px 20px 0;}
+  .hero-inner{position:relative;max-width:1180px;margin:0 auto;padding-bottom:64px;}
+  .hero-card{background:var(--navy-dark);border-radius:26px;padding:44px;display:grid;grid-template-columns:1.05fr 1fr;gap:44px;align-items:center;box-shadow:0 24px 60px rgba(0,0,0,.35);}
+  .hero-text h1{font-weight:800;font-size:38px;line-height:1.18;letter-spacing:-.01em;background:linear-gradient(90deg,var(--accent) 10%,#8fefff 55%,#ffffff 100%);-webkit-background-clip:text;background-clip:text;-webkit-text-fill-color:transparent;}
+  .hero-text p.lead{color:#c7d6e4;margin-top:16px;font-size:15.5px;line-height:1.6;max-width:480px;}
+  .hero-actions{display:flex;flex-wrap:wrap;gap:14px;margin-top:28px;}
+  .hero-carousel{position:relative;border-radius:18px;overflow:hidden;aspect-ratio:16/11;background:#04101d;}
+  .hero-carousel img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;opacity:0;transition:opacity 1s ease-in-out;}
+  .hero-carousel img.active{opacity:1;}
+  .hero-car-btn{position:absolute;top:50%;transform:translateY(-50%);z-index:2;width:38px;height:38px;border-radius:50%;background:rgba(255,255,255,.88);color:var(--navy);display:flex;align-items:center;justify-content:center;box-shadow:0 4px 10px rgba(0,0,0,.3);transition:background .2s;}
+  .hero-car-btn:hover{background:#fff;}
+  .hero-car-btn.prev{left:12px;}
+  .hero-car-btn.next{right:12px;}
+  .hero-car-btn svg{width:18px;height:18px;}
+  .hero-car-dots{position:absolute;bottom:12px;left:0;right:0;display:flex;justify-content:center;gap:6px;z-index:2;}
+  .hero-car-dots span{width:7px;height:7px;border-radius:50%;background:rgba(255,255,255,.45);transition:background .2s,transform .2s;}
+  .hero-car-dots span.active{background:#fff;transform:scale(1.25);}
+  .hero-mini-trust{display:flex;flex-wrap:wrap;gap:10px 22px;margin-top:30px;justify-content:center;}
   .hero-mini-trust span{display:flex;align-items:center;gap:7px;color:#e6edf3;font-size:13px;font-weight:600;}
   .hero-mini-trust svg{flex-shrink:0;width:16px;height:16px;color:var(--accent);}
   .wave{position:absolute;bottom:-1px;left:0;right:0;line-height:0;}
-  @media (max-width:640px){ .hero-content h1{font-size:32px;} .hero-content{padding:110px 20px 210px;} }
+  @media (max-width:900px){ .hero-card{grid-template-columns:1fr;padding:30px;gap:28px;} .hero-carousel{aspect-ratio:16/9;} }
+  @media (max-width:640px){ .hero-text h1{font-size:29px;} .hero-card{padding:22px;border-radius:20px;} }
 
   /* Filter tabs */
   .filter-tabs{display:flex;flex-wrap:wrap;justify-content:center;gap:10px;margin-bottom:40px;}
@@ -337,20 +346,32 @@
 
 <!-- ===================== PORTADA ===================== -->
 <section id="inicio" class="hero">
-  <div class="hero-crossfade">
-    <img class="active" src="https://glaciaresrentacar.cl/PAISAJES/142423.webp" alt="Paisaje de la Patagonia chilena" width="1600" height="900">
-    <img src="https://glaciaresrentacar.cl/PAISAJES/patagonia-landscape-perito-moreno-glacier-autumnal-forest-lake-argentina-scenery-photo.jpg" alt="Glaciar en la Patagonia" width="1600" height="900">
-    <img src="https://glaciaresrentacar.cl/PAISAJES/Circuitos-Torres-del-Paine-Ecordua29-1024x683.webp" alt="Torres del Paine" width="1600" height="900">
-    <img src="https://glaciaresrentacar.cl/PAISAJES/patagonia-best-photos.jpg" alt="Paisaje del sur de la Patagonia" width="1600" height="900">
-  </div>
-  <div class="hero-overlay"></div>
-  <div class="hero-content">
-    <p class="eyebrow on-navy">RENT A CAR EN PUNTA ARENAS</p>
-    <h1>Recorre la Patagonia con libertad y seguridad</h1>
-    <p class="lead">Arrienda tu vehículo en Punta Arenas y viaja a Torres del Paine, Puerto Natales, Tierra del Fuego o Argentina con atención personalizada y asistencia durante tu viaje.</p>
-    <div class="hero-actions">
-      <a href="#buscador" class="btn btn-accent">Cotizar mi vehículo</a>
-      <a href="https://wa.me/56983335924?text=Hola%2C%20quiero%20consultar%20disponibilidad%20de%20un%20veh%C3%ADculo." target="_blank" rel="noopener" class="btn btn-whatsapp">Hablar por WhatsApp</a>
+  <div class="hero-inner">
+    <div class="hero-card">
+      <div class="hero-text">
+        <p class="eyebrow on-navy">RENT A CAR EN PUNTA ARENAS</p>
+        <h1>Recorre la Patagonia con libertad y seguridad</h1>
+        <p class="lead">Arrienda tu vehículo en Punta Arenas y viaja a Torres del Paine, Puerto Natales, Tierra del Fuego o Argentina con atención personalizada y asistencia durante tu viaje.</p>
+        <div class="hero-actions">
+          <a href="#buscador" class="btn btn-accent">Cotizar mi vehículo</a>
+          <a href="https://wa.me/56983335924?text=Hola%2C%20quiero%20consultar%20disponibilidad%20de%20un%20veh%C3%ADculo." target="_blank" rel="noopener" class="btn btn-whatsapp">Hablar por WhatsApp</a>
+        </div>
+      </div>
+      <div class="hero-carousel" id="heroCarousel">
+        <button type="button" class="hero-car-btn prev" id="heroPrev" aria-label="Imagen anterior">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M15 18l-6-6 6-6"/></svg>
+        </button>
+        <img class="active" src="https://glaciaresrentacar.cl/SECCION%20LUGARES%20TURISTICOS/TORRES%20DEL%20PAINE.jpg" alt="Torres del Paine" width="900" height="620">
+        <img src="https://glaciaresrentacar.cl/SECCION%20LUGARES%20TURISTICOS/COSTANERA%20DEL%20ESTRECHO.jpg" alt="Costanera del Estrecho de Magallanes" width="900" height="620">
+        <img src="https://glaciaresrentacar.cl/SECCION%20LUGARES%20TURISTICOS/place-des-armes-munoz-gamero--v1-1200-800.jpeg" alt="Plaza de Armas Muñoz Gamero" width="900" height="620">
+        <img src="https://glaciaresrentacar.cl/SECCION%20LUGARES%20TURISTICOS/FARO%20SAN%20ISIDRO.jpg" alt="Faro San Isidro" width="900" height="620">
+        <div class="hero-car-dots" id="heroDots">
+          <span class="active"></span><span></span><span></span><span></span>
+        </div>
+        <button type="button" class="hero-car-btn next" id="heroNext" aria-label="Imagen siguiente">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M9 18l6-6-6-6"/></svg>
+        </button>
+      </div>
     </div>
     <div class="hero-mini-trust">
       <span><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 2v20M2 12h20"/></svg>Kilometraje libre en la Región de Magallanes</span>
@@ -754,14 +775,28 @@ mobileMenu.querySelectorAll('a').forEach(a => a.addEventListener('click', () => 
 const cfg = window.GLACIARES_CONFIG || {};
 if (cfg.PROMO_VALID_NOTE) document.getElementById('promoValidNote').textContent = cfg.PROMO_VALID_NOTE;
 
-/* ---- Hero crossfade (transición suave, sin animación de escritura) ---- */
-const heroImgs = document.querySelectorAll('.hero-crossfade img');
+/* ---- Hero: carrusel de imágenes con flechas, puntos y autoplay ---- */
+const heroCarousel = document.getElementById('heroCarousel');
+const heroImgs = heroCarousel ? heroCarousel.querySelectorAll('img') : [];
+const heroDots = heroCarousel ? heroCarousel.querySelectorAll('.hero-car-dots span') : [];
 let hi = 0;
-setInterval(() => {
+let heroTimer;
+function showHeroSlide(i) {
   heroImgs[hi].classList.remove('active');
-  hi = (hi + 1) % heroImgs.length;
+  heroDots[hi] && heroDots[hi].classList.remove('active');
+  hi = (i + heroImgs.length) % heroImgs.length;
   heroImgs[hi].classList.add('active');
-}, 6000);
+  heroDots[hi] && heroDots[hi].classList.add('active');
+}
+function startHeroAutoplay() {
+  clearInterval(heroTimer);
+  heroTimer = setInterval(() => showHeroSlide(hi + 1), 6000);
+}
+if (heroImgs.length) {
+  document.getElementById('heroPrev').addEventListener('click', () => { showHeroSlide(hi - 1); startHeroAutoplay(); });
+  document.getElementById('heroNext').addEventListener('click', () => { showHeroSlide(hi + 1); startHeroAutoplay(); });
+  startHeroAutoplay();
+}
 
 /* ---- WhatsApp flotante: pulso leve cada 12-15s, se detiene con hover/foco, respeta reduced-motion ---- */
 const waFloat = document.getElementById('waFloat');
