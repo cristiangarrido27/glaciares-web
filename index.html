@@ -830,9 +830,11 @@ document.querySelectorAll('.filter-btn').forEach(btn => {
 const SERV_BASE = 'https://glaciaresrentacar.cl/IMAGENES_GLACIARES_NUEVO%20AUTOS/SERVICIOS/';
 const services = [
   { name: 'Silla para bebé (de 2 a 18 kg)', price: '$6.000 / día', note: 'Máximo a pagar $50.000 en total.', img: SERV_BASE + 'SILLA%20BEBE.jpeg' },
-  { name: 'Protección de cristales', price: '$5.000 / día', note: 'Cubre pérdida total, piquete o frisadura.', img: SERV_BASE + 'SEGURO.jpeg' },
-  { name: 'Protección de neumáticos', price: '$5.000 / día', note: 'Cubre pérdida total o reventón.', img: SERV_BASE + 'SEGURO.jpeg' },
-  { name: 'Entrega o retiro en aeropuerto', price: '$20.000', note: 'Costo único por el servicio.', img: SERV_BASE + 'SEGURO.jpeg' },
+  { name: 'Protección de cristales', price: '$5.000 / día', note: 'Cubre pérdida total, piquete o frisadura.', img: SERV_BASE + 'CRISTALES.jpeg' },
+  { name: 'Protección de neumáticos', price: '$5.000 / día', note: 'Cubre pérdida total o reventón.', img: SERV_BASE + 'NEUMATICOS.jpeg' },
+  { name: 'Entrega o retiro en aeropuerto', price: '$20.000', note: 'Costo único por el servicio.', img: SERV_BASE + 'AEROPUERTO.jpeg' },
+  { name: 'Permiso para viaje a Argentina', price: '$120.000', note: 'Costo único por reserva.', img: SERV_BASE + 'ARGENTINA.jpeg' },
+  { name: 'Conductor adicional', price: '$5.000 + IVA / día', note: 'Debe cumplir los mismos requisitos que el conductor titular.', img: SERV_BASE + 'CONDUCTOR%20ADICIONAL.jpeg' },
 ];
 document.getElementById('servicesGrid').innerHTML = services.map(s => `
   <div class="card">
