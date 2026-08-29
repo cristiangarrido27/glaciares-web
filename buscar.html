@@ -132,15 +132,15 @@
   .btn-pay{background:var(--accent);color:var(--navy);font-weight:700;padding:11px;border-radius:10px;font-size:13px;text-align:center;}
   .btn-pay:hover{background:var(--accent-dark);}
   /* Botón dorado "precio especial pago adelantado" (estilo pedido, inspirado en Matu Rent a Car) */
-  .btn-pay.btn-pay-special{background:linear-gradient(180deg,#d4af37,#a9821c);color:#fff;display:flex;flex-direction:column;align-items:center;gap:1px;padding:9px 11px;}
+  .btn-pay.btn-pay-special{background:linear-gradient(180deg,#e0b940,#a9821c);color:#fff;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:3px;padding:11px;min-height:52px;line-height:1.25;}
   .btn-pay.btn-pay-special:hover{background:linear-gradient(180deg,#c29f2f,#977117);}
-  .btn-pay-special .bps-label{font-size:10.5px;font-weight:800;letter-spacing:.03em;}
-  .btn-pay-special .bps-amount{font-size:16px;font-weight:800;}
+  .btn-pay-special .bps-label{font-size:11.5px;font-weight:800;letter-spacing:.03em;text-shadow:0 1px 1px rgba(0,0,0,.15);}
+  .btn-pay-special .bps-amount{font-size:19px;font-weight:800;}
   /* Botón "abono mínimo" (pago parcial de 1 día para asegurar el cupo, sin descuento) */
-  .btn-pay.btn-pay-deposit{background:#fff;border:1.5px solid var(--navy);color:var(--navy);display:flex;flex-direction:column;align-items:center;gap:1px;padding:8px 11px;}
+  .btn-pay.btn-pay-deposit{background:#fff;border:1.5px solid var(--navy);color:var(--navy);display:flex;flex-direction:column;align-items:center;justify-content:center;gap:3px;padding:10px 11px;min-height:52px;line-height:1.25;}
   .btn-pay.btn-pay-deposit:hover{background:var(--slate-50);}
-  .btn-pay-deposit .bpd-label{font-size:9.5px;font-weight:800;letter-spacing:.02em;text-transform:uppercase;}
-  .btn-pay-deposit .bpd-amount{font-size:15px;font-weight:800;}
+  .btn-pay-deposit .bpd-label{font-size:10.5px;font-weight:800;letter-spacing:.02em;text-transform:uppercase;}
+  .btn-pay-deposit .bpd-amount{font-size:17px;font-weight:800;}
   .pay-note{font-size:10.5px;color:var(--slate-500);text-align:center;margin-top:-2px;line-height:1.4;}
 
   /* Aviso de urgencia: incentiva a pagar ahora para asegurar el % de descuento real
@@ -835,10 +835,8 @@ function renderResults() {
        Además del pago completo, se ofrece un abono mínimo (1 día de arriendo) para
        reservar sin pagar el total ahora: ese camino no lleva el descuento por reserva
        anticipada (por eso se etiqueta como "precio normal"), y el saldo se paga al retiro. */
-    const payButtonFull = `<button type="button" class="btn-pay${showDiscount ? ' btn-pay-special' : ''}" data-vid="${v.id}" data-total="${total}" data-days="${v.days}" data-name="${v.name}" data-mode="full" data-deposit="${depositAmount}">
-            ${showDiscount
-              ? `<span class="bps-label">PRECIO ESPECIAL PAGO ADELANTADO</span><span class="bps-amount">$${total.toLocaleString('es-CL')}</span>`
-              : `<span>Reservar y pagar</span>`}
+    const payButtonFull = `<button type="button" class="btn-pay btn-pay-special" data-vid="${v.id}" data-total="${total}" data-days="${v.days}" data-name="${v.name}" data-mode="full" data-deposit="${depositAmount}">
+            <span class="bps-label">${showDiscount ? 'PRECIO ESPECIAL PAGO ADELANTADO' : 'RESERVAR Y PAGAR AHORA'}</span><span class="bps-amount">$${total.toLocaleString('es-CL')}</span>
           </button>`;
     const payButtonDeposit = `<button type="button" class="btn-pay btn-pay-deposit" data-vid="${v.id}" data-total="${normalTotal}" data-days="${v.days}" data-name="${v.name}" data-mode="deposit" data-deposit="${depositAmount}">
             <span class="bpd-label">Precio normal con abono mínimo ($${depositAmount.toLocaleString('es-CL')})</span>
