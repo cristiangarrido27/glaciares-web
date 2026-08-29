@@ -334,6 +334,8 @@
   .bfield select, .bfield input{border:1px solid var(--slate-200);border-radius:10px;padding:11px 12px;font-size:14px;font-family:inherit;color:var(--navy);width:100%;}
   .bfield select:focus, .bfield input:focus{outline:2px solid var(--accent);border-color:var(--accent);}
   .bfield.has-error select, .bfield.has-error input{border-color:#dc2626;}
+  .bfield-split{display:flex;gap:8px;}
+  .bfield-split input{flex:1;min-width:0;}
   .bfield-error-msg{color:#b91c1c;font-size:11.5px;font-weight:600;margin-top:2px;display:none;}
   .bfield.has-error .bfield-error-msg{display:block;}
   .airport-note{grid-column:1/-1;background:#eff9ff;border:1px solid #bfe9f7;color:var(--navy);font-size:12.5px;font-weight:600;border-radius:10px;padding:10px 14px;display:none;}
@@ -446,13 +448,12 @@
         <span class="bfield-error-msg">Selecciona un lugar de retiro.</span>
       </div>
       <div class="bfield" id="field-fromDate">
-        <label for="fromDate"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="4" width="18" height="18" rx="2"/><path d="M3 9h18M8 2v4M16 2v4"/></svg>Fecha de retiro</label>
-        <input type="date" id="fromDate" required>
+        <label for="fromDate"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="4" width="18" height="18" rx="2"/><path d="M3 9h18M8 2v4M16 2v4"/></svg>Fecha y hora de retiro</label>
+        <div class="bfield-split">
+          <input type="date" id="fromDate" required>
+          <input type="time" id="fromTime" value="09:00" required>
+        </div>
         <span class="bfield-error-msg">Elige una fecha de retiro válida.</span>
-      </div>
-      <div class="bfield" id="field-fromTime">
-        <label for="fromTime"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 3"/></svg>Hora de retiro</label>
-        <input type="time" id="fromTime" value="09:00" required>
       </div>
       <div class="same-place-row">
         <input type="checkbox" id="sameLugar" checked>
@@ -476,14 +477,12 @@
       </div>
 
       <div class="bfield" id="field-toDate">
-        <label for="toDate"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="4" width="18" height="18" rx="2"/><path d="M3 9h18M8 2v4M16 2v4"/></svg>Fecha de devolución</label>
-        <input type="date" id="toDate" required>
-        <span class="bfield-error-msg">La devolución no puede ser anterior al retiro.</span>
-      </div>
-      <div class="bfield" id="field-toTime">
-        <label for="toTime"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 3"/></svg>Hora de devolución</label>
-        <input type="time" id="toTime" value="09:00" required>
-        <span class="bfield-error-msg">La hora de devolución debe ser posterior a la de retiro.</span>
+        <label for="toDate"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="4" width="18" height="18" rx="2"/><path d="M3 9h18M8 2v4M16 2v4"/></svg>Fecha y hora de devolución</label>
+        <div class="bfield-split">
+          <input type="date" id="toDate" required>
+          <input type="time" id="toTime" value="09:00" required>
+        </div>
+        <span class="bfield-error-msg">La fecha y hora de devolución deben ser posteriores a las de retiro.</span>
       </div>
       <div class="bfield" id="field-argentina">
         <label for="tripArgentina"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="4" width="18" height="16" rx="2"/><path d="M3 10h18M8 2v4M16 2v4"/></svg>Viaje a Argentina</label>
@@ -491,39 +490,6 @@
           <option value="no">No</option>
           <option value="si">Sí, necesito permiso</option>
         </select>
-      </div>
-      <div class="bfield" id="field-passengers">
-        <label for="passengers"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="9" cy="7" r="3"/><path d="M2 21c0-3.9 3.1-7 7-7s7 3.1 7 7"/><circle cx="17" cy="8" r="2.5"/><path d="M22 21c0-2.9-1.8-5.3-4.3-6.3"/></svg>Pasajeros</label>
-        <select id="passengers">
-          <option value="1">1 pasajero</option>
-          <option value="2">2 pasajeros</option>
-          <option value="3">3 pasajeros</option>
-          <option value="4">4 pasajeros</option>
-          <option value="5">5 pasajeros</option>
-          <option value="6">6 pasajeros</option>
-          <option value="7">7 pasajeros</option>
-          <option value="8">8 pasajeros</option>
-          <option value="9">9 pasajeros</option>
-        </select>
-      </div>
-      <div class="bfield" id="field-destination">
-        <label for="destination"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 21s7-6.5 7-12a7 7 0 0 0-14 0c0 5.5 7 12 7 12Z"/><circle cx="12" cy="9" r="2.5"/></svg>Destino principal</label>
-        <select id="destination">
-          <option value="">Selecciona un destino</option>
-          <option value="punta-arenas">Punta Arenas</option>
-          <option value="puerto-natales">Puerto Natales</option>
-          <option value="torres-del-paine">Torres del Paine</option>
-          <option value="porvenir">Porvenir</option>
-          <option value="tierra-del-fuego">Tierra del Fuego</option>
-          <option value="el-calafate">El Calafate</option>
-          <option value="ushuaia">Ushuaia</option>
-          <option value="otro">Otro destino</option>
-        </select>
-      </div>
-      <div class="bfield" id="field-destinationOther" style="display:none;">
-        <label for="destinationOther">Especifica tu destino</label>
-        <input type="text" id="destinationOther" placeholder="Ej: Seno Otway">
-        <span class="bfield-error-msg">Escribe tu destino.</span>
       </div>
       <div class="bfield" id="field-promo">
         <label for="promoCode"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20 12 12 20l-8-8V4h8l8 8Z"/><circle cx="7.5" cy="7.5" r="1.2"/></svg>Código promocional (opcional)</label>
@@ -1138,14 +1104,6 @@ function updateArgentinaNote(){
 tripArgentinaEl.addEventListener('change', updateArgentinaNote);
 function updateSameLugarText(){ sameLugarText.textContent = PLACE_LABELS[pickupPlaceEl.value] || ''; }
 
-const destinationEl = document.getElementById('destination');
-const destinationOtherField = document.getElementById('field-destinationOther');
-const destinationOtherEl = document.getElementById('destinationOther');
-function updateDestinationVisibility(){
-  destinationOtherField.style.display = destinationEl.value === 'otro' ? '' : 'none';
-}
-destinationEl.addEventListener('change', updateDestinationVisibility);
-updateDestinationVisibility();
 
 function updateDropoffVisibility(){
   const same = sameLugarEl.checked;
@@ -1173,7 +1131,9 @@ function clearAllErrors(){
 /* Nombres canónicos usados en TODO el sitio para los parámetros de búsqueda:
    pickUpDate, pickUpTime, dropOffDate, dropOffTime, pickUpPlace, dropOffPlace,
    dropOffOther, passengers, destination, destinationOther, argentina, promoCode.
-   No usar variantes (fromDate, dateFrom, u-fromDate, etc.) fuera de esta función. */
+   No usar variantes (fromDate, dateFrom, u-fromDate, etc.) fuera de esta función.
+   passengers/destination ya no se piden en esta caja (se simplificó el home); si el
+   usuario los quiere especificar, puede hacerlo directamente en /buscar. */
 const SEARCH_STORAGE_KEY = 'glaciares_last_search';
 
 searchForm.addEventListener('submit', (e) => {
@@ -1183,19 +1143,16 @@ searchForm.addEventListener('submit', (e) => {
   const from = fromDateEl.value, to = toDateEl.value;
   const fromTime = fromTimeEl.value, toTime = toTimeEl.value;
   const dropoffOtherVal = dropoffOtherText.value.trim();
-  const destinationOtherVal = destinationOtherEl.value.trim();
   const todayStr = new Date().toISOString().slice(0, 10);
 
   const errors = [];
   if (!pickupPlaceEl.value) { errors.push('pickupPlace'); }
   if (!from || from < todayStr) { errors.push('fromDate'); }
-  if (!to || to < from) { errors.push('toDate'); }
-  if (to === from && toTime <= fromTime) { errors.push('toTime'); }
+  if (!to || to < from || (to === from && toTime <= fromTime)) { errors.push('toDate'); }
   if (!sameLugarEl.checked) {
     if (!dropoffPlaceEl.value) errors.push('dropoffPlace');
     if (dropoffPlaceEl.value === 'otro' && !dropoffOtherVal) errors.push('dropoffOther');
   }
-  if (destinationEl.value === 'otro' && !destinationOtherVal) errors.push('destinationOther');
 
   if (errors.length) {
     errors.forEach(id => setFieldError(id, true));
@@ -1211,9 +1168,6 @@ searchForm.addEventListener('submit', (e) => {
     pickUpDate: from, pickUpTime: fromTime, dropOffDate: to, dropOffTime: toTime,
     pickUpPlace: pickupPlaceEl.value, dropOffPlace: dropoffPlace,
     dropOffOther: (dropoffPlace === 'otro' && dropoffOtherVal) ? dropoffOtherVal : '',
-    passengers: document.getElementById('passengers').value,
-    destination: destinationEl.value,
-    destinationOther: destinationEl.value === 'otro' ? destinationOtherVal : '',
     argentina: document.getElementById('tripArgentina').value,
     promoCode: document.getElementById('promoCode').value.trim(),
   };
