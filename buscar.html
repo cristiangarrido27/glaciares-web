@@ -844,7 +844,7 @@ function renderResults() {
           </button>`;
     const payButton = `${payButtonFull}
           ${payButtonDeposit}
-          <p class="pay-note">Al pagar (completo o el abono) quedas con la reserva registrada; te confirmamos la unidad exacta antes de la entrega. Con el abono mínimo, el saldo se paga al retirar el vehículo. ¿Quieres confirmar los montos antes de pagar? Escríbenos por WhatsApp con el botón de arriba.</p>`;
+          <p class="pay-note">Con el abono, pagas el saldo al retirar el vehículo.</p>`;
     return `
     <div class="rcard" style="animation-delay:${prefersReducedMotion ? 0 : Math.min(i, 6) * 70}ms;">
       <img src="${v.img}" alt="${v.name}" loading="lazy" onerror="this.onerror=null;this.src='https://glaciaresrentacar.cl/LOGOSINFONDO.png';this.style.objectFit='contain';this.style.background='#f1f5f9';this.style.padding='20px';">
@@ -867,7 +867,6 @@ function renderResults() {
           <span class="pamount">$${total.toLocaleString('es-CL')}</span>
           ${showDiscount ? `<span class="psave">Ahorras -${v.discountPct}% pagando ahora</span>` : ''}
         </div>
-        <p class="price-note">Valor estimado sujeto a confirmación de disponibilidad y condiciones del contrato.</p>
         <p class="deposit-note">Garantía requerida: desde $${(v.deposit || cfg.MIN_DEPOSIT || 500000).toLocaleString('es-CL')}.</p>
         <div class="rcard-actions">
           <a class="btn-confirm" href="https://wa.me/${WA_NUMBER}?text=${encodeURIComponent(waMsg)}" target="_blank" rel="noopener">SOLICITAR CONFIRMACIÓN</a>
