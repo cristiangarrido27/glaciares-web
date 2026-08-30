@@ -1,0 +1,902 @@
+<!DOCTYPE html>
+<html lang="es-CL">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Personaliza tu reserva | Glaciares Rent a Car</title>
+<meta name="description" content="Elige los servicios adicionales de tu arriendo y revisa el total antes de solicitar confirmación por WhatsApp.">
+<meta name="robots" content="noindex, follow">
+<link rel="icon" href="https://glaciaresrentacar.cl/LOGOSINFONDO.png">
+<link rel="apple-touch-icon" href="https://glaciaresrentacar.cl/LOGOSINFONDO.png">
+
+<style>
+  *{box-sizing:border-box;margin:0;padding:0;}
+  html{scroll-behavior:smooth;scroll-padding-top:92px;}
+  body{font-family:-apple-system,'Segoe UI',Roboto,'Helvetica Neue',Arial,sans-serif;color:#0A2540;background:#f8fafc;-webkit-font-smoothing:antialiased;}
+  img{display:block;max-width:100%;}
+  a{text-decoration:none;color:inherit;}
+  ul{list-style:none;}
+  button{font-family:inherit;cursor:pointer;border:none;background:none;}
+  :focus-visible{outline:3px solid var(--accent-dark);outline-offset:2px;}
+
+  :root{
+    --navy:#0A2540; --navy-dark:#071B30;
+    --accent:#00D4FF; --accent-dark:#00AFD6;
+    --green:#2E7D5B;
+    --slate-50:#f8fafc; --slate-100:#f1f5f9; --slate-200:#e2e8f0;
+    --slate-400:#94a3b8; --slate-500:#64748b; --slate-600:#475569;
+  }
+  .container{max-width:1180px;margin:0 auto;padding:0 20px;}
+  .btn{display:inline-flex;align-items:center;justify-content:center;gap:8px;font-weight:700;padding:13px 22px;border-radius:12px;transition:.2s;font-size:14.5px;min-height:44px;}
+  .btn-whatsapp{background:#25D366;color:#fff;}
+  .btn-whatsapp:hover{background:#1fb959;}
+  .btn-outline{border:1.5px solid var(--navy);color:var(--navy);font-weight:700;padding:11px 20px;border-radius:10px;min-height:44px;display:inline-flex;align-items:center;justify-content:center;}
+  .btn-outline:hover{background:var(--navy);color:#fff;}
+  .sr-only{position:absolute;width:1px;height:1px;padding:0;margin:-1px;overflow:hidden;clip:rect(0,0,0,0);white-space:nowrap;border:0;}
+
+  /* Header (idéntico al resto del sitio) */
+  header{position:fixed;top:0;left:0;right:0;z-index:50;background:rgba(255,255,255,.97);backdrop-filter:blur(6px);border-bottom:1px solid var(--slate-100);}
+  .header-inner{max-width:1180px;margin:0 auto;padding:12px 20px;display:flex;align-items:center;justify-content:space-between;}
+  .brand{display:flex;align-items:center;gap:10px;}
+  .brand img{height:44px;width:44px;border-radius:50%;object-fit:cover;}
+  .brand-text{font-weight:800;font-size:13px;line-height:1.25;}
+  .brand-text small{display:block;font-weight:600;font-size:10px;letter-spacing:.15em;color:var(--slate-500);}
+  nav.main-nav{display:flex;gap:22px;font-weight:600;font-size:13.5px;}
+  nav.main-nav a:hover{color:var(--accent-dark);}
+  .header-cta{background:var(--accent);color:var(--navy);font-weight:700;font-size:13.5px;padding:10px 18px;border-radius:10px;}
+  .menu-btn{display:none;background:none;border:none;font-size:24px;line-height:1;padding:4px;}
+  @media (max-width:900px){ nav.main-nav, .header-cta{display:none;} .menu-btn{display:block;} }
+  #mobileMenu{display:none;background:#fff;border-top:1px solid var(--slate-100);padding:16px 20px 20px;flex-direction:column;gap:2px;font-weight:600;font-size:15px;}
+  #mobileMenu a{padding:10px 4px;border-bottom:1px solid var(--slate-100);}
+  #mobileMenu.open{display:flex;}
+
+  .page-main{padding-top:92px;padding-bottom:80px;min-height:70vh;}
+
+  /* Indicador de pasos (igual que /buscar) */
+  .steps-bar{display:flex;align-items:center;gap:0;margin-bottom:18px;overflow-x:auto;padding-bottom:2px;}
+  .steps-bar .step{display:flex;align-items:center;gap:8px;flex-shrink:0;}
+  .steps-bar .step-num{width:26px;height:26px;border-radius:50%;background:var(--slate-200);color:var(--slate-500);font-weight:800;font-size:12.5px;display:flex;align-items:center;justify-content:center;flex-shrink:0;}
+  .steps-bar .step-label{font-size:12px;font-weight:700;color:var(--slate-500);white-space:nowrap;}
+  .steps-bar .step.done .step-num{background:var(--green);color:#fff;}
+  .steps-bar .step.done .step-label{color:var(--navy);}
+  .steps-bar .step.active .step-num{background:var(--navy);color:#fff;}
+  .steps-bar .step.active .step-label{color:var(--navy);font-weight:800;}
+  .steps-bar .step-sep{width:22px;height:2px;background:var(--slate-200);margin:0 6px;flex-shrink:0;}
+  .steps-bar .step-sep.done{background:var(--green);}
+  @media (max-width:640px){ .steps-bar .step-label{display:none;} .steps-bar .step.active .step-label{display:block;} }
+
+  .error-banner{background:#fef2f2;border:1px solid #fecaca;color:#b91c1c;border-radius:12px;padding:14px 16px;margin-bottom:16px;font-size:13.5px;font-weight:600;display:none;}
+  .error-banner.show{display:block;}
+  .page-error{text-align:center;background:#fff;border:1px solid var(--slate-100);border-radius:16px;padding:44px 24px;}
+  .page-error h2{font-size:18px;font-weight:800;margin-bottom:8px;}
+  .page-error p{color:var(--slate-500);margin-bottom:18px;}
+
+  .adicionales-grid{display:grid;grid-template-columns:1fr 380px;gap:24px;align-items:start;}
+  @media (max-width:980px){ .adicionales-grid{grid-template-columns:1fr;} }
+
+  .card{background:#fff;border:1px solid var(--slate-200);border-radius:16px;padding:18px 20px;margin-bottom:16px;}
+  .card h2{font-size:15px;font-weight:800;margin-bottom:4px;}
+  .card .muted{color:var(--slate-500);font-size:12.5px;}
+
+  /* Resumen del vehículo elegido */
+  .vehicle-card{display:grid;grid-template-columns:120px 1fr;gap:16px;}
+  @media (max-width:520px){ .vehicle-card{grid-template-columns:1fr;} }
+  .vehicle-card img{width:100%;height:88px;object-fit:cover;border-radius:12px;}
+  .vehicle-card h2{font-size:17px;}
+  .vehicle-meta{display:grid;grid-template-columns:repeat(auto-fill,minmax(150px,1fr));gap:6px 16px;margin-top:10px;font-size:12.5px;color:var(--slate-600);}
+  .vehicle-meta dt{font-weight:700;color:var(--slate-500);font-size:10.5px;text-transform:uppercase;letter-spacing:.03em;}
+  .vehicle-meta dd{font-weight:700;color:var(--navy);margin-top:1px;}
+  .avail-note{margin-top:10px;color:var(--slate-500);font-size:12px;font-weight:600;display:flex;align-items:center;gap:5px;}
+  .avail-note svg{width:13px;height:13px;color:var(--green);flex-shrink:0;}
+  .vehicle-actions{margin-top:12px;}
+
+  /* Ítems de adicionales */
+  .addon-item{display:flex;align-items:flex-start;justify-content:space-between;gap:12px;padding:12px 0;border-top:1px solid var(--slate-100);}
+  .addon-item:first-of-type{border-top:none;padding-top:6px;}
+  .addon-info{flex:1;min-width:0;}
+  .addon-info label{display:flex;align-items:flex-start;gap:9px;font-weight:700;font-size:13.5px;cursor:pointer;}
+  .addon-info input[type=checkbox]{width:20px;height:20px;margin-top:1px;flex-shrink:0;}
+  .addon-info .addon-desc{display:block;font-weight:500;color:var(--slate-500);font-size:12px;margin-top:3px;margin-left:29px;}
+  .addon-info details{margin-top:6px;margin-left:29px;}
+  .addon-info summary{cursor:pointer;font-size:12px;font-weight:700;color:var(--accent-dark);list-style:none;}
+  .addon-info summary::-webkit-details-marker{display:none;}
+  .addon-info summary:before{content:'Ver condiciones ▸';}
+  .addon-info details[open] summary:before{content:'Ocultar condiciones ▾';}
+  .addon-info .addon-conditions{font-size:11.5px;color:var(--slate-500);margin-top:6px;line-height:1.5;}
+  .addon-vat-note{font-size:11.5px;color:var(--slate-500);margin-top:6px;margin-left:29px;}
+  .qty-stepper{display:flex;align-items:center;gap:8px;flex-shrink:0;}
+  .qty-stepper button{width:32px;height:32px;min-height:32px;border-radius:9px;background:var(--slate-100);font-weight:800;color:var(--navy);font-size:16px;}
+  .qty-stepper button:disabled{opacity:.4;cursor:not-allowed;}
+  .qty-stepper span{min-width:18px;text-align:center;font-weight:700;}
+  .addon-price{flex-shrink:0;font-size:12.5px;font-weight:800;color:var(--navy);white-space:nowrap;text-align:right;}
+
+  .locked-note{background:#eff9ff;border:1px solid #bfe9f7;color:var(--navy);font-size:11.5px;font-weight:600;border-radius:8px;padding:8px 10px;margin-top:8px;}
+  .link-btn{color:var(--accent-dark);font-weight:700;font-size:12.5px;text-decoration:underline;background:none;padding:0;min-height:auto;}
+
+  .flight-fields{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-top:8px;}
+  @media (max-width:520px){ .flight-fields{grid-template-columns:1fr;} }
+  .flight-fields .field{display:flex;flex-direction:column;gap:4px;}
+  .flight-fields label{font-size:11px;font-weight:700;color:var(--slate-500);text-transform:uppercase;letter-spacing:.03em;}
+  .flight-fields input{border:1px solid var(--slate-200);border-radius:10px;padding:10px 11px;font-size:13.5px;font-family:inherit;min-height:44px;}
+
+  /* Columna resumen (sticky en desktop) */
+  .summary-col{position:relative;}
+  @media (min-width:981px){ .summary-col{position:sticky;top:92px;} }
+  .summary-panel{background:#fff;border:1px solid var(--slate-200);border-radius:16px;padding:20px;margin-bottom:16px;}
+  .summary-panel h2{font-size:15px;font-weight:800;margin-bottom:12px;}
+  .summary-row{display:flex;justify-content:space-between;gap:10px;font-size:13px;color:var(--slate-600);padding:4px 0;}
+  .summary-row.discount{color:var(--green);font-weight:700;}
+  .summary-row.total-row{font-size:17px;font-weight:800;color:var(--navy);border-top:1px solid var(--slate-200);margin-top:8px;padding-top:10px;}
+  .summary-row.total-row.small{font-size:14px;border-top:none;margin-top:0;padding-top:4px;}
+  .summary-legal{font-size:11px;color:var(--slate-400);margin-top:10px;line-height:1.5;}
+  .summary-updating{font-size:11.5px;color:var(--slate-400);font-style:italic;margin-top:6px;}
+  .guarantee-note{background:#fffbeb;border:1px solid #fde68a;border-radius:10px;padding:10px 12px;font-size:12px;color:#92400e;font-weight:600;margin-top:10px;}
+
+  .alt-panel{border:1px solid var(--slate-200);border-radius:14px;padding:14px;margin-bottom:12px;}
+  .alt-panel .alt-label{font-size:11.5px;font-weight:800;letter-spacing:.03em;text-transform:uppercase;color:var(--slate-500);display:block;margin-bottom:6px;}
+  .alt-panel .alt-row{display:flex;justify-content:space-between;font-size:12.5px;padding:2px 0;color:var(--slate-600);}
+  .alt-panel .alt-row.old{text-decoration:line-through;color:var(--slate-400);}
+  .alt-charge{font-size:20px;font-weight:800;color:var(--navy);margin:8px 0;}
+  .btn-pay{width:100%;background:var(--accent);color:var(--navy);font-weight:700;padding:12px;border-radius:10px;font-size:13.5px;text-align:center;min-height:44px;}
+  .btn-pay.btn-pay-special{background:linear-gradient(180deg,#e0b940,#a9821c);color:#fff;}
+  .btn-pay.btn-pay-deposit{background:#fff;border:1.5px solid var(--navy);color:var(--navy);}
+  .btn-pay.locked{opacity:.92;position:relative;}
+  .btn-pay.locked::after{content:'🔒';position:absolute;margin-left:8px;}
+  .lock-note{font-size:10.5px;color:#9a3412;text-align:center;margin-top:6px;line-height:1.4;font-weight:700;}
+  .btn-cta-main{width:100%;background:#25D366;color:#fff;font-weight:800;padding:14px;border-radius:12px;font-size:14px;text-align:center;margin-bottom:14px;min-height:48px;}
+  .btn-cta-main:hover{background:#1fb959;}
+
+  .confirmed-banner{background:#f0fdf4;border:2px solid var(--green);border-radius:14px;padding:14px 16px;margin-bottom:14px;}
+  .confirmed-banner h2{font-size:14.5px;font-weight:800;color:#166534;margin-bottom:2px;}
+  .cc-error{color:#b91c1c;font-size:12.5px;font-weight:600;margin-top:8px;display:none;}
+
+  footer{background:var(--navy);color:#cbd5e1;padding-top:44px;padding-bottom:24px;margin-top:20px;}
+  .footer-inner{text-align:center;font-size:12px;color:#94a3b8;}
+  .footer-inner a{color:var(--accent);font-weight:600;}
+
+  .wa-float-wrap{position:fixed;right:20px;bottom:20px;z-index:60;display:flex;align-items:center;}
+  .wa-float{position:relative;background:radial-gradient(circle at 32% 28%, #4be08a 0%, #25D366 42%, #1fa855 100%);color:#fff;height:56px;width:56px;border-radius:50%;display:flex;align-items:center;justify-content:center;box-shadow:0 8px 22px rgba(0,0,0,.32), inset 0 -3px 5px rgba(0,0,0,.25), inset 0 2px 3px rgba(255,255,255,.5);border:2.5px solid rgba(255,255,255,.85);opacity:0;transform:translateY(16px) scale(.9);animation:waEnter .5s ease .3s forwards;}
+  .wa-float:focus-visible{outline:3px solid var(--navy-dark);outline-offset:3px;}
+  @keyframes waEnter{to{opacity:1;transform:translateY(0) scale(1);}}
+  @media (prefers-reduced-motion: reduce){ .wa-float{animation:none !important;opacity:1;transform:none;} }
+  @media (max-width:640px){ .wa-float-wrap{right:16px;bottom:16px;} .wa-float{height:52px;width:52px;} }
+
+  /* Modal: intento de pago sin confirmación */
+  .modal-overlay{position:fixed;inset:0;background:rgba(10,37,64,.6);z-index:100;display:flex;align-items:center;justify-content:center;padding:20px;}
+  .modal-overlay.hidden{display:none;}
+  .modal-box{background:#fff;border-radius:18px;padding:28px;max-width:420px;width:100%;max-height:88vh;overflow-y:auto;}
+  .modal-box h3{font-size:17px;font-weight:800;margin-bottom:16px;line-height:1.4;}
+  .modal-box .modal-actions{display:flex;flex-direction:column;gap:10px;margin-top:6px;}
+  .modal-box .modal-actions button{padding:13px;border-radius:10px;font-weight:700;font-size:14px;min-height:44px;}
+  .modal-cancel{background:var(--slate-100);color:var(--navy);}
+  .modal-confirm{background:#25D366;color:#fff;}
+  .modal-confirm:hover{background:#1fb959;}
+
+  @media (prefers-reduced-motion: reduce){ *{animation-duration:.001ms !important;animation-iteration-count:1 !important;transition-duration:.001ms !important;} }
+</style>
+</head>
+<body>
+
+<a href="#adicionales-main" class="sr-only">Saltar al contenido</a>
+
+<header>
+  <div class="header-inner">
+    <a href="index.html" class="brand">
+      <img src="https://glaciaresrentacar.cl/LOGOSINFONDO.png" alt="Logo Glaciares Rent a Car">
+      <span class="brand-text">GLACIARES<small>RENT A CAR</small></span>
+    </a>
+    <nav class="main-nav" aria-label="Navegación principal">
+      <a href="index.html#inicio">Inicio</a>
+      <a href="index.html#buscador">Cotizar</a>
+      <a href="index.html#flota">Flota</a>
+      <a href="index.html#servicios">Servicios</a>
+      <a href="index.html#preguntas">Preguntas frecuentes</a>
+      <a href="index.html#contacto">Contacto</a>
+      <a href="condiciones.html">Condiciones</a>
+    </nav>
+    <a href="index.html#buscador" class="header-cta">Nueva búsqueda</a>
+    <button id="menuBtn" class="menu-btn" aria-label="Abrir menú" aria-expanded="false" aria-controls="mobileMenu">☰</button>
+  </div>
+  <div id="mobileMenu">
+    <a href="index.html#inicio">Inicio</a><a href="index.html#buscador">Cotizar</a><a href="index.html#flota">Flota</a>
+    <a href="index.html#servicios">Servicios</a><a href="index.html#preguntas">Preguntas frecuentes</a>
+    <a href="index.html#contacto">Contacto</a><a href="condiciones.html">Condiciones de arriendo</a>
+  </div>
+</header>
+
+<main class="page-main">
+  <div class="container" id="adicionales-main">
+    <nav class="steps-bar" aria-label="Progreso de la reserva" id="stepsBar">
+      <div class="step done"><span class="step-num">✓</span><span class="step-label">Búsqueda</span></div>
+      <div class="step-sep done"></div>
+      <div class="step done"><span class="step-num">✓</span><span class="step-label">Vehículo</span></div>
+      <div class="step-sep" id="sep23"></div>
+      <div class="step active" id="step3"><span class="step-num">3</span><span class="step-label">Adicionales</span></div>
+      <div class="step-sep" id="sep34"></div>
+      <div class="step" id="step4"><span class="step-num">4</span><span class="step-label">Confirmación y pago</span></div>
+    </nav>
+
+    <p class="error-banner" id="linkErrorBanner" role="alert"></p>
+
+    <div id="pageErrorBox" style="display:none;">
+      <div class="page-error">
+        <h2>No encontramos el vehículo de tu búsqueda.</h2>
+        <p>Vuelve a los resultados para elegir un vehículo disponible.</p>
+        <a href="/buscar" class="btn-outline">VOLVER A BUSCAR</a>
+      </div>
+    </div>
+
+    <div class="adicionales-grid" id="adicionalesGrid" style="display:none;">
+      <!-- Columna izquierda -->
+      <div id="leftCol">
+        <div class="card vehicle-card">
+          <img id="vImg" src="" alt="">
+          <div>
+            <span class="rcard-cat muted" id="vCat" style="text-transform:uppercase;font-size:11px;font-weight:800;color:var(--accent-dark);"></span>
+            <h2 id="vName"></h2>
+            <dl class="vehicle-meta" id="vMeta"></dl>
+            <p class="avail-note"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M20 6 9 17l-5-5"/></svg>Disponibilidad sujeta a confirmación.</p>
+            <div class="vehicle-actions"><button type="button" class="btn-outline" id="btnChangeVehicle">CAMBIAR VEHÍCULO</button></div>
+          </div>
+        </div>
+
+        <div class="card" id="protectionsCard" style="display:none;">
+          <h2>Protecciones</h2>
+          <p class="muted">Se cobran por día, sin descuento por reserva anticipada.</p>
+          <div id="protectionsList"></div>
+        </div>
+
+        <div class="card" id="equipmentCard" style="display:none;">
+          <h2>Equipamiento</h2>
+          <div id="equipmentList"></div>
+        </div>
+
+        <div class="card" id="otherServicesCard" style="display:none;">
+          <h2>Servicios adicionales</h2>
+          <div id="otherServicesList"></div>
+        </div>
+
+        <div class="card" id="flightDataCard" style="display:none;">
+          <h2>Datos de tu vuelo (opcional)</h2>
+          <p class="muted">Nos ayuda a coordinar mejor el retiro o la devolución en el aeropuerto.</p>
+          <div class="flight-fields">
+            <div class="field"><label for="fAirline">Aerolínea</label><input type="text" id="fAirline" autocomplete="off"></div>
+            <div class="field"><label for="fFlightNumber">Número de vuelo</label><input type="text" id="fFlightNumber" autocomplete="off"></div>
+            <div class="field"><label for="fFlightEta">Hora estimada de llegada</label><input type="time" id="fFlightEta"></div>
+          </div>
+        </div>
+
+        <div class="card" id="argentinaCard" style="display:none;">
+          <h2>Permiso para viaje a Argentina</h2>
+          <p id="argentinaText" class="muted"></p>
+          <button type="button" class="link-btn" id="btnNoArgentina" style="display:none;">No viajaré a Argentina</button>
+        </div>
+      </div>
+
+      <!-- Columna derecha: resumen y pago -->
+      <div class="summary-col" id="summaryCol">
+        <div class="summary-panel" id="summaryPanel" aria-live="polite">
+          <h2>Resumen de tu reserva</h2>
+          <div id="summaryBody"></div>
+          <p class="summary-updating" id="summaryUpdating" style="display:none;">Actualizando total…</p>
+          <div class="guarantee-note" id="guaranteeNote"></div>
+          <p class="summary-legal">Valor sujeto a confirmación de disponibilidad y condiciones del contrato.</p>
+        </div>
+
+        <div id="preConfirmActions">
+          <button type="button" class="btn-cta-main" id="btnRequestConfirmation">SOLICITAR CONFIRMACIÓN POR WHATSAPP</button>
+          <div class="alt-panel" id="altFullPanel">
+            <span class="alt-label">Precio especial — pago total anticipado</span>
+            <div id="altFullBody"></div>
+            <button type="button" class="btn-pay btn-pay-special locked" id="btnPayFullLocked">PAGO TOTAL — REQUIERE CONFIRMACIÓN</button>
+          </div>
+          <div class="alt-panel" id="altDepositPanel">
+            <span class="alt-label">Precio normal — abono mínimo</span>
+            <div id="altDepositBody"></div>
+            <button type="button" class="btn-pay btn-pay-deposit locked" id="btnPayDepositLocked">ABONO — REQUIERE CONFIRMACIÓN</button>
+          </div>
+          <p class="lock-note">Confirma disponibilidad por WhatsApp antes de pagar.</p>
+        </div>
+
+        <div id="confirmedActions" style="display:none;">
+          <div class="confirmed-banner">
+            <h2>Disponibilidad confirmada para tu solicitud.</h2>
+            <p class="muted" id="confirmedSub"></p>
+          </div>
+          <div class="alt-panel">
+            <span class="alt-label">Precio especial — pago total anticipado</span>
+            <div id="confirmedFullBody"></div>
+            <button type="button" class="btn-pay btn-pay-special" id="btnPayFullReal">PAGAR TOTAL</button>
+          </div>
+          <div class="alt-panel">
+            <span class="alt-label">Precio normal — abono mínimo</span>
+            <div id="confirmedDepositBody"></div>
+            <button type="button" class="btn-pay btn-pay-deposit" id="btnPayDepositReal">PAGAR ABONO</button>
+          </div>
+          <p class="cc-error" id="ccPayError"></p>
+        </div>
+      </div>
+    </div>
+  </div>
+</main>
+
+<footer>
+  <div class="container footer-inner">
+    <p>© <span id="year"></span> Glaciares Rent a Car — <a href="index.html">Volver al inicio</a> · <a href="condiciones.html">Condiciones de arriendo</a></p>
+  </div>
+</footer>
+
+<div class="wa-float-wrap">
+  <a href="https://wa.me/56983335924?text=Hola%2C%20necesito%20ayuda%20para%20cotizar%20un%20veh%C3%ADculo%20en%20Glaciares%20Rent%20a%20Car." target="_blank" rel="noopener" class="wa-float" id="waFloat" aria-label="Consultar por WhatsApp">
+    <svg xmlns="http://www.w3.org/2000/svg" width="26" height="26" viewBox="0 0 24 24" fill="currentColor"><path d="M12.04 2c-5.5 0-9.96 4.46-9.96 9.96 0 1.76.46 3.48 1.34 5L2 22l5.2-1.36a9.94 9.94 0 004.84 1.23h.01c5.5 0 9.96-4.46 9.96-9.96S17.54 2 12.04 2z"/></svg>
+  </a>
+</div>
+
+<!-- Modal: intento de pago sin confirmación (sección 19) -->
+<div id="payBlockedModal" class="modal-overlay hidden" role="dialog" aria-modal="true" aria-labelledby="payBlockedTitle">
+  <div class="modal-box">
+    <h3 id="payBlockedTitle">Antes de pagar, consulta por WhatsApp y confirma, si ya confirmaste el vehiculo procede al pago</h3>
+    <div class="modal-actions">
+      <button type="button" class="modal-confirm" id="payBlockedWhatsapp">CONSULTAR DISPONIBILIDAD POR WHATSAPP</button>
+      <button type="button" class="modal-cancel" id="payBlockedClose">CERRAR</button>
+    </div>
+  </div>
+</div>
+
+<script src="config.js"></script>
+<script src="analytics-config.js"></script>
+<script>
+document.getElementById('year').textContent = new Date().getFullYear();
+const menuBtn = document.getElementById('menuBtn');
+const mobileMenu = document.getElementById('mobileMenu');
+menuBtn.addEventListener('click', () => {
+  const open = mobileMenu.classList.toggle('open');
+  menuBtn.setAttribute('aria-expanded', open ? 'true' : 'false');
+});
+mobileMenu.querySelectorAll('a').forEach(a => a.addEventListener('click', () => mobileMenu.classList.remove('open')));
+
+const cfg = window.GLACIARES_CONFIG || { WHATSAPP_NUMBER: '56983335924', MIN_DEPOSIT: 500000 };
+const WA_NUMBER = cfg.WHATSAPP_NUMBER || '56983335924';
+const API_BASE = 'https://glaciares-reservas-backend.onrender.com';
+
+function esc(s) {
+  return String(s ?? '').replace(/[&<>"']/g, c => ({ '&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;' }[c]));
+}
+function money(n) { return `$${Math.round(n || 0).toLocaleString('es-CL')}`; }
+
+/* Identificadores internos estables de lugar — igual que en /buscar. El
+   nombre visible nunca se usa para calcular cargos. */
+const LEGACY_PLACE_ID_MAP = { agencia: 'agency_punta_arenas', aeropuerto: 'punta_arenas_airport', hotel: 'hotel_punta_arenas', otro: 'custom_location' };
+function normalizePlaceId(raw) { return LEGACY_PLACE_ID_MAP[raw] || raw; }
+const PLACE_LABELS = {
+  agency_punta_arenas: 'Agencia en Punta Arenas (ciudad)',
+  punta_arenas_airport: 'Aeropuerto Presidente Carlos Ibáñez del Campo',
+  hotel_punta_arenas: 'Hotel o alojamiento en Punta Arenas (sujeto a confirmación)',
+  custom_location: 'Otro lugar (sujeto a evaluación)',
+};
+const DESTINATION_LABELS = {};
+(cfg.DESTINATIONS || []).forEach(d => { DESTINATION_LABELS[d.id] = d.label; });
+if (!Object.keys(DESTINATION_LABELS).length) {
+  Object.assign(DESTINATION_LABELS, {
+    'punta-arenas': 'Punta Arenas', 'puerto-natales': 'Puerto Natales', 'torres-del-paine': 'Torres del Paine',
+    porvenir: 'Porvenir', 'tierra-del-fuego': 'Tierra del Fuego', 'el-calafate': 'El Calafate',
+    ushuaia: 'Ushuaia', otro: 'Otro destino',
+  });
+}
+const MESES_ES = ['enero','febrero','marzo','abril','mayo','junio','julio','agosto','septiembre','octubre','noviembre','diciembre'];
+function fechaHoraLarga(dateStr, timeStr) {
+  if (!dateStr) return '—';
+  const [y, m, d] = dateStr.split('-').map(Number);
+  if (!y || !m || !d) return dateStr;
+  return `${d} de ${MESES_ES[m - 1]} de ${y}${timeStr ? ' a las ' + timeStr : ''}`;
+}
+function destinationLabel(st) {
+  if (!st.destination) return '—';
+  if (st.destination === 'otro') return st.destinationOther || 'Otro destino (sin especificar)';
+  return DESTINATION_LABELS[st.destination] || st.destination;
+}
+function placeLabel(id, other) {
+  const norm = normalizePlaceId(id);
+  return norm === 'custom_location' ? (other || 'Otro lugar (sin especificar)') : (PLACE_LABELS[norm] || id);
+}
+function daysBetween(dateFrom, timeFrom, dateTo, timeTo) {
+  const start = new Date(`${dateFrom}T${timeFrom || '00:00'}:00`);
+  const end = new Date(`${dateTo}T${timeTo || '00:00'}:00`);
+  if (isNaN(start) || isNaN(end)) return 0;
+  const diffMs = end - start;
+  if (diffMs <= 0) return 0;
+  return Math.ceil(diffMs / 86400000);
+}
+
+/* =====================================================================
+   LEER EL ESTADO: siempre desde la URL (esta página se llega por enlace
+   desde /buscar o desde el enlace seguro de WhatsApp), con sessionStorage
+   como respaldo si algún parámetro faltara.
+   ===================================================================== */
+const SEARCH_STORAGE_KEY = 'glaciares_last_search';
+const qp = new URLSearchParams(window.location.search);
+let saved = {};
+try { saved = JSON.parse(sessionStorage.getItem(SEARCH_STORAGE_KEY) || '{}'); } catch (e) { saved = {}; }
+function pick(key, fallback) {
+  const v = qp.get(key);
+  if (v !== null && v !== '') return v;
+  if (saved[key] !== undefined && saved[key] !== null && saved[key] !== '') return saved[key];
+  return fallback;
+}
+const state = {
+  pickUpDate: pick('pickUpDate', ''), pickUpTime: pick('pickUpTime', '09:00'),
+  dropOffDate: pick('dropOffDate', ''), dropOffTime: pick('dropOffTime', '09:00'),
+  pickUpPlace: normalizePlaceId(pick('pickUpPlace', 'agency_punta_arenas')),
+  dropOffPlace: normalizePlaceId(pick('dropOffPlace', 'agency_punta_arenas')),
+  dropOffOther: pick('dropOffOther', ''),
+  passengers: pick('passengers', '1'),
+  destination: pick('destination', ''),
+  destinationOther: pick('destinationOther', ''),
+  argentina: pick('argentina', 'no'),
+  promoCode: pick('promoCode', ''),
+};
+const vehicleId = Number(qp.get('vehicleId'));
+const confirmCode = qp.get('confirmCode');
+const linkToken = qp.get('token');
+const days = daysBetween(state.pickUpDate, state.pickUpTime, state.dropOffDate, state.dropOffTime);
+
+const IMG_BASE = 'https://glaciaresrentacar.cl/flota/';
+const FLEET = [
+  { id: 1, name: 'Suzuki Swift', price: 35000, cat: 'citycar', catLabel: 'Citycar', img: IMG_BASE + 'suzuki-swift.webp', deposit: 500000 },
+  { id: 2, name: 'Suzuki Dzire', price: 38000, cat: 'citycar', catLabel: 'Citycar', img: IMG_BASE + 'suzuki-dzire.webp', deposit: 500000 },
+  { id: 3, name: 'Chevrolet Captiva', price: 50000, cat: 'suv', catLabel: 'SUV', img: IMG_BASE + 'chevrolet-captiva.webp', deposit: 600000 },
+  { id: 6, name: 'Kia Sorento', price: 40000, cat: 'suv', catLabel: 'SUV', img: IMG_BASE + 'kia-sorento.webp', deposit: 600000 },
+  { id: 7, name: 'Hyundai Tucson', price: 48000, cat: 'suv', catLabel: 'SUV', img: IMG_BASE + 'hyundai-tucson.webp', deposit: 600000 },
+  { id: 8, name: 'Peugeot 3008', price: 59000, cat: 'suv', catLabel: 'SUV', img: IMG_BASE + 'peugeot-3008.webp', deposit: 600000 },
+];
+const vehicle = FLEET.find(v => v.id === vehicleId);
+
+if (!vehicle || days <= 0) {
+  document.getElementById('pageErrorBox').style.display = 'block';
+} else {
+  document.getElementById('adicionalesGrid').style.display = 'grid';
+  initPage();
+}
+
+function buildBackToBuscarUrl() {
+  const params = new URLSearchParams();
+  Object.entries(state).forEach(([k, v]) => { if (v) params.set(k, v); });
+  return '/buscar?' + params.toString();
+}
+
+/* =====================================================================
+   ESTADO DE ADICIONALES (persistido por vehículo en sessionStorage para
+   que "CAMBIAR VEHÍCULO" y volver no pierda lo ya elegido).
+   ===================================================================== */
+const EXTRAS_STORAGE_KEY = 'glaciares_extras_selection';
+let extrasStore = {};
+try { extrasStore = JSON.parse(sessionStorage.getItem(EXTRAS_STORAGE_KEY) || '{}'); } catch (e) { extrasStore = {}; }
+let selectedExtras = extrasStore[vehicleId] || [];
+function saveSelection() {
+  extrasStore[vehicleId] = selectedExtras;
+  try { sessionStorage.setItem(EXTRAS_STORAGE_KEY, JSON.stringify(extrasStore)); } catch (e) { /* sin almacenamiento disponible */ }
+}
+function getExtraSel(id) { return selectedExtras.find(s => s.id === id); }
+function setExtraQty(id, qty) {
+  selectedExtras = selectedExtras.filter(s => s.id !== id);
+  if (qty > 0) selectedExtras.push({ id, qty });
+  saveSelection();
+}
+
+let extrasCatalog = [];
+let argentinaExtra = null;
+let currentQuote = null;
+let quoteTimer = null;
+
+function initPage() {
+  renderVehicleCard();
+  wireArgentinaToggle();
+  loadExtrasAndQuote();
+  wirePayBlockedModal();
+  wireMainCta();
+  if (confirmCode && linkToken) validateSecureLink();
+}
+
+function renderVehicleCard() {
+  document.getElementById('vImg').src = vehicle.img;
+  document.getElementById('vImg').alt = vehicle.name;
+  document.getElementById('vCat').textContent = vehicle.catLabel;
+  document.getElementById('vName').textContent = vehicle.name;
+  document.getElementById('vMeta').innerHTML = [
+    ['Precio por día', money(vehicle.price)],
+    ['Duración', `${days} día${days > 1 ? 's' : ''}`],
+    ['Retiro', `${placeLabel(state.pickUpPlace)} · ${fechaHoraLarga(state.pickUpDate, state.pickUpTime)}`],
+    ['Devolución', `${placeLabel(state.dropOffPlace, state.dropOffOther)} · ${fechaHoraLarga(state.dropOffDate, state.dropOffTime)}`],
+    ['Pasajeros', state.passengers || '1'],
+    ['Destino', destinationLabel(state)],
+    ['Argentina', state.argentina === 'si' ? 'Sí' : 'No'],
+  ].map(([k, v]) => `<div><dt>${esc(k)}</dt><dd>${esc(v)}</dd></div>`).join('');
+  document.getElementById('btnChangeVehicle').addEventListener('click', () => {
+    window.location.href = buildBackToBuscarUrl();
+  });
+}
+
+function airportServiceType() {
+  const p = normalizePlaceId(state.pickUpPlace) === 'punta_arenas_airport';
+  const d = normalizePlaceId(state.dropOffPlace) === 'punta_arenas_airport';
+  if (p && d) return 'airport_roundtrip';
+  if (p) return 'airport_pickup_only';
+  if (d) return 'airport_dropoff_only';
+  return 'no_airport_service';
+}
+
+function wireArgentinaToggle() {
+  const card = document.getElementById('argentinaCard');
+  const text = document.getElementById('argentinaText');
+  const btn = document.getElementById('btnNoArgentina');
+  card.style.display = 'block';
+  function render() {
+    if (state.argentina === 'si') {
+      text.textContent = 'Indicaste que viajarás a Argentina: el permiso ($120.000, cargo único por reserva) queda incluido automáticamente y no se puede quitar mientras esta opción esté seleccionada.';
+      btn.style.display = 'inline-flex';
+    } else {
+      text.textContent = 'No indicaste viaje a Argentina, así que no se incluye el permiso.';
+      btn.style.display = 'none';
+    }
+  }
+  btn.addEventListener('click', () => {
+    state.argentina = 'no';
+    if (argentinaExtra) setExtraQty(argentinaExtra.id, 0);
+    render();
+    renderAddonLists();
+    scheduleQuote();
+  });
+  render();
+}
+
+async function loadExtrasAndQuote() {
+  try {
+    const r = await fetch(`${API_BASE}/api/extras?vehicleId=${vehicleId}`);
+    extrasCatalog = r.ok ? await r.json() : [];
+  } catch (e) { extrasCatalog = []; }
+  argentinaExtra = extrasCatalog.find(e => e.isArgentinaPermit) || null;
+  if (argentinaExtra && state.argentina === 'si' && !getExtraSel(argentinaExtra.id)) {
+    setExtraQty(argentinaExtra.id, 1);
+  }
+  renderAddonLists();
+  refreshQuote();
+}
+
+function extraByNameIncludes(text) {
+  return extrasCatalog.find(e => e.name.toLowerCase().includes(text));
+}
+
+function priceText(def) {
+  const chargeType = def.chargeType || def.unit;
+  const vatSuffix = def.vatIncluded === false ? ' + IVA' : '';
+  if (chargeType === 'day') return `${money(def.price)}${vatSuffix} por día${def.cap ? `, máximo ${money(def.cap)} por unidad` : ''}`;
+  return `${money(def.price)}${vatSuffix} único`;
+}
+
+function renderAddonLists() {
+  const silla = extraByNameIncludes('silla');
+  const cristales = extraByNameIncludes('cristales');
+  const neumaticos = extraByNameIncludes('neumátic') || extraByNameIncludes('neumatic');
+  const conductor = extraByNameIncludes('conductor adicional');
+  const horario = extraByNameIncludes('fuera de horario');
+
+  // --- Protecciones (cristales, neumáticos): checkbox + "Ver condiciones" ---
+  const protections = [cristales, neumaticos].filter(Boolean);
+  document.getElementById('protectionsCard').style.display = protections.length ? 'block' : 'none';
+  document.getElementById('protectionsList').innerHTML = protections.map(def => {
+    const checked = !!getExtraSel(def.id);
+    return `
+    <div class="addon-item">
+      <div class="addon-info">
+        <label>
+          <input type="checkbox" data-extra-id="${def.id}" data-kind="checkbox" ${checked ? 'checked' : ''} ${def.active === false ? 'disabled' : ''}>
+          <span>${esc(def.name)}<span class="addon-desc">${esc(def.description || '')}</span></span>
+        </label>
+        <details><summary></summary><p class="addon-conditions">${esc(def.conditions || '')}</p></details>
+      </div>
+      <span class="addon-price">${priceText(def)}</span>
+    </div>`;
+  }).join('') || '<p class="muted">Sin protecciones disponibles por ahora.</p>';
+
+  // --- Equipamiento (silla infantil): stepper con tope de stock/maxQty ---
+  document.getElementById('equipmentCard').style.display = silla ? 'block' : 'none';
+  if (silla) {
+    const entry = getExtraSel(silla.id);
+    const qty = entry ? entry.qty : 0;
+    const max = Math.min(silla.maxQty || 9, typeof silla.stock === 'number' ? silla.stock : 99);
+    document.getElementById('equipmentList').innerHTML = `
+      <div class="addon-item">
+        <div class="addon-info">
+          <label style="cursor:default;">
+            <span style="width:0;"></span>
+            <span>${esc(silla.name)}<span class="addon-desc">${esc(silla.description || '')}</span></span>
+          </label>
+        </div>
+        <div class="qty-stepper">
+          <button type="button" id="sillaMinus" ${qty <= 0 ? 'disabled' : ''} aria-label="Quitar una silla">−</button>
+          <span id="sillaQty">${qty}</span>
+          <button type="button" id="sillaPlus" ${qty >= max ? 'disabled' : ''} aria-label="Agregar una silla">+</button>
+        </div>
+      </div>`;
+    document.getElementById('sillaMinus').addEventListener('click', () => { setExtraQty(silla.id, Math.max(0, qty - 1)); renderAddonLists(); scheduleQuote(); });
+    document.getElementById('sillaPlus').addEventListener('click', () => { setExtraQty(silla.id, Math.min(max, qty + 1)); renderAddonLists(); scheduleQuote(); });
+  }
+
+  // --- Otros servicios (conductor adicional con IVA, entrega fuera de horario) ---
+  const others = [conductor, horario].filter(Boolean);
+  document.getElementById('otherServicesCard').style.display = others.length ? 'block' : 'none';
+  document.getElementById('otherServicesList').innerHTML = others.map(def => {
+    const checked = !!getExtraSel(def.id);
+    const isConductor = def === conductor;
+    return `
+    <div class="addon-item">
+      <div class="addon-info">
+        <label>
+          <input type="checkbox" data-extra-id="${def.id}" data-kind="checkbox" ${checked ? 'checked' : ''} ${def.active === false ? 'disabled' : ''}>
+          <span>${esc(def.name)}<span class="addon-desc">${esc(def.description || '')}</span></span>
+        </label>
+        ${isConductor ? `<p class="addon-vat-note">El segundo conductor debe cumplir los mismos requisitos que el conductor titular (edad mínima y licencia vigente).</p>` : ''}
+        ${isConductor && checked ? `<p class="addon-vat-note" id="conductorVatBreakdown">Calculando neto, IVA y total…</p>` : ''}
+      </div>
+      <span class="addon-price">${priceText(def)}</span>
+    </div>`;
+  }).join('') || '<p class="muted">Sin servicios adicionales disponibles por ahora.</p>';
+
+  // Campos de vuelo: solo si aplica servicio de aeropuerto.
+  document.getElementById('flightDataCard').style.display = airportServiceType() !== 'no_airport_service' ? 'block' : 'none';
+
+  document.querySelectorAll('input[data-kind="checkbox"]').forEach(cb => {
+    cb.addEventListener('change', () => {
+      setExtraQty(Number(cb.dataset.extraId), cb.checked ? 1 : 0);
+      renderAddonLists();
+      scheduleQuote();
+    });
+  });
+}
+
+function scheduleQuote() {
+  clearTimeout(quoteTimer);
+  document.getElementById('summaryUpdating').style.display = 'block';
+  quoteTimer = setTimeout(refreshQuote, 300);
+}
+
+async function refreshQuote() {
+  try {
+    const r = await fetch(`${API_BASE}/api/quote`, {
+      method: 'POST', headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({
+        vehicleId, from: state.pickUpDate, to: state.dropOffDate,
+        pickupPlace: state.pickUpPlace, dropoffPlace: state.dropOffPlace,
+        extras: selectedExtras, argentina: state.argentina,
+      }),
+    });
+    if (r.ok) {
+      currentQuote = await r.json();
+      renderSummary();
+    }
+  } catch (e) { /* si falla, se mantiene el último resumen calculado */ }
+  document.getElementById('summaryUpdating').style.display = 'none';
+}
+
+function renderSummary() {
+  const q = currentQuote;
+  if (!q) return;
+  const rows = [];
+  rows.push(`<div class="summary-row"><span>Arriendo (${q.days} × ${money(vehicle.price)})</span><span>${money(q.rental.base)}</span></div>`);
+  (q.extras || []).forEach(e => {
+    const label = e.vat > 0 ? `${e.name} (neto ${money(e.net)} + IVA ${money(e.vat)})` : `${e.name}${e.qty > 1 ? ` x${e.qty}` : ''}`;
+    rows.push(`<div class="summary-row"><span>${esc(label)}</span><span>${money(e.cost)}</span></div>`);
+  });
+  if (q.airportFee > 0) {
+    const label = q.airportServiceType === 'airport_roundtrip' ? 'Servicio en aeropuerto (retiro y devolución)' : q.airportServiceType === 'airport_pickup_only' ? 'Servicio en aeropuerto (retiro)' : 'Servicio en aeropuerto (devolución)';
+    rows.push(`<div class="summary-row"><span>${label}</span><span>${money(q.airportFee)}</span></div>`);
+  }
+  if (q.rental.discountPct) rows.push(`<div class="summary-row discount"><span>Descuento validado (pago total anticipado)</span><span>-${q.rental.discountPct}%</span></div>`);
+  rows.push(`<div class="summary-row total-row"><span>TOTAL NORMAL</span><span>${money(q.totalPriceNormal)}</span></div>`);
+  rows.push(`<div class="summary-row total-row small"><span>TOTAL PAGO ANTICIPADO</span><span>${money(q.totalPriceFull)}</span></div>`);
+  rows.push(`<div class="summary-row total-row small"><span>ABONO MÍNIMO</span><span>${money(q.depositAmount)}</span></div>`);
+  rows.push(`<div class="summary-row total-row small"><span>SALDO AL RETIRAR</span><span>${money(q.balanceDue)}</span></div>`);
+  document.getElementById('summaryBody').innerHTML = rows.join('');
+  document.getElementById('guaranteeNote').textContent = `Garantía requerida: ${money(q.guaranteeAmount)}, dependiendo del vehículo. No se cobra ahora.`;
+
+  const discountAmount = q.rental.discountPct ? Math.round(q.rental.base * q.rental.discountPct / 100) : 0;
+  const cargosAdicionales = q.totalPriceFull - q.rental.base + discountAmount;
+  document.getElementById('altFullBody').innerHTML = `
+    ${q.rental.discountPct ? `<div class="alt-row old"><span>Precio normal (arriendo)</span><span>${money(q.rental.base)}</span></div>
+    <div class="alt-row"><span>Descuento validado</span><span>-${q.rental.discountPct}%</span></div>` : ''}
+    <div class="alt-row"><span>Cargos adicionales</span><span>${money(cargosAdicionales)}</span></div>
+    <div class="alt-charge">${money(q.totalPriceFull)}</div>`;
+  document.getElementById('altDepositBody').innerHTML = `
+    <div class="alt-row"><span>Total del arriendo</span><span>${money(q.totalPriceNormal)}</span></div>
+    <div class="alt-row"><span>Saldo a pagar al retiro</span><span>${money(q.balanceDue)}</span></div>
+    <div class="alt-charge">${money(q.depositAmount)}</div>`;
+  document.getElementById('btnPayFullLocked').innerHTML = `PAGO TOTAL — REQUIERE CONFIRMACIÓN`;
+  document.getElementById('btnPayDepositLocked').innerHTML = `ABONO — REQUIERE CONFIRMACIÓN`;
+
+  const conductorNote = document.getElementById('conductorVatBreakdown');
+  if (conductorNote) {
+    const conductorExtra = (q.extras || []).find(e => e.name.toLowerCase().includes('conductor adicional'));
+    if (conductorExtra) conductorNote.textContent = `Neto ${money(conductorExtra.net)} + IVA ${money(conductorExtra.vat)} = ${money(conductorExtra.cost)}.`;
+  }
+}
+
+/* =====================================================================
+   MENSAJE DE WHATSAPP Y REGISTRO DE LA SOLICITUD (sección 20)
+   ===================================================================== */
+function buildWhatsappMessage(requestCode) {
+  const q = currentQuote;
+  const adicionalesText = (q && q.extras && q.extras.length)
+    ? q.extras.map(e => `${e.name}${e.qty > 1 ? ` x${e.qty}` : ''} (${money(e.cost)})`).join(', ')
+    : 'Ninguno';
+  const lines = [
+    'Hola, quiero solicitar confirmar disponibilidad:',
+    '',
+    ...(requestCode ? [`Código de solicitud: ${requestCode}`] : []),
+    `Vehículo: ${vehicle.name}`,
+    `Retiro: ${placeLabel(state.pickUpPlace)}.`,
+    `Fecha y hora de retiro: ${fechaHoraLarga(state.pickUpDate, state.pickUpTime)}`,
+    `Devolución: ${placeLabel(state.dropOffPlace, state.dropOffOther)}`,
+    `Fecha y hora de devolución: ${fechaHoraLarga(state.dropOffDate, state.dropOffTime)}`,
+    `Duración: ${days} día${days > 1 ? 's' : ''}`,
+    `Pasajeros: ${state.passengers || '1'}`,
+    `Destino: ${destinationLabel(state)}`,
+    `Argentina: ${state.argentina === 'si' ? 'Sí' : 'No'}`,
+    `Adicionales seleccionados: ${adicionalesText}`,
+    `Total normal: ${money(q ? q.totalPriceNormal : 0)}`,
+    `Pago total anticipado: ${money(q ? q.totalPriceFull : 0)}`,
+    `Abono mínimo: ${money(q ? q.depositAmount : 0)}`,
+    `Saldo al retirar: ${money(q ? q.balanceDue : 0)}`,
+    '',
+    'Solicito confirmar disponibilidad, adicionales y condiciones para poder realizar el pago.',
+  ];
+  return lines.join('\n');
+}
+
+async function requestConfirmationViaWhatsapp() {
+  let requestCode = null;
+  try {
+    const payload = {
+      vehicleId, from: state.pickUpDate, to: state.dropOffDate,
+      pickupTime: state.pickUpTime, returnTime: state.dropOffTime,
+      pickupPlace: state.pickUpPlace, dropoffPlace: state.dropOffPlace, dropoffOther: state.dropOffOther,
+      passengers: state.passengers, destination: state.destination, destinationOther: state.destinationOther,
+      argentina: state.argentina, extras: selectedExtras,
+      airlineName: (document.getElementById('fAirline') || {}).value || '',
+      flightNumber: (document.getElementById('fFlightNumber') || {}).value || '',
+      flightEta: (document.getElementById('fFlightEta') || {}).value || '',
+      notes: state.promoCode ? `Código promocional ingresado: ${state.promoCode} (a validar por el equipo)` : '',
+    };
+    const r = await fetch(`${API_BASE}/api/requests`, {
+      method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify(payload),
+    });
+    if (r.ok) { const data = await r.json(); requestCode = data.bookingCode; }
+  } catch (e) { /* igual se abre WhatsApp aunque falle el registro */ }
+  const msg = buildWhatsappMessage(requestCode);
+  window.open(`https://wa.me/${WA_NUMBER}?text=${encodeURIComponent(msg)}`, '_blank', 'noopener');
+  if (window.trackEvent) window.trackEvent('solicitar_confirmacion', { requestCode });
+  return requestCode;
+}
+
+function wireMainCta() {
+  document.getElementById('btnRequestConfirmation').addEventListener('click', requestConfirmationViaWhatsapp);
+}
+
+/* =====================================================================
+   MODAL: intento de pago sin confirmación (sección 19)
+   ===================================================================== */
+let payBlockedTrigger = null;
+function openPayBlockedModal(trigger) {
+  payBlockedTrigger = trigger || null;
+  const modal = document.getElementById('payBlockedModal');
+  modal.classList.remove('hidden');
+  document.getElementById('payBlockedWhatsapp').focus();
+}
+function closePayBlockedModal() {
+  document.getElementById('payBlockedModal').classList.add('hidden');
+  if (payBlockedTrigger) payBlockedTrigger.focus();
+  payBlockedTrigger = null;
+}
+function wirePayBlockedModal() {
+  document.getElementById('btnPayFullLocked').addEventListener('click', (e) => openPayBlockedModal(e.currentTarget));
+  document.getElementById('btnPayDepositLocked').addEventListener('click', (e) => openPayBlockedModal(e.currentTarget));
+  document.getElementById('payBlockedClose').addEventListener('click', closePayBlockedModal);
+  document.getElementById('payBlockedWhatsapp').addEventListener('click', async () => {
+    closePayBlockedModal();
+    await requestConfirmationViaWhatsapp();
+  });
+  document.addEventListener('keydown', (e) => {
+    if (e.key === 'Escape' && !document.getElementById('payBlockedModal').classList.contains('hidden')) closePayBlockedModal();
+  });
+}
+
+/* =====================================================================
+   CAMINO A: enlace seguro (?confirmCode=...&token=...). Nunca confía en el
+   precio del navegador: todo se relee y valida en el servidor. El código
+   visible nunca funciona por sí solo como credencial de pago.
+   ===================================================================== */
+let confirmedBooking = null;
+async function validateSecureLink() {
+  try {
+    const r = await fetch(`${API_BASE}/api/requests/${encodeURIComponent(confirmCode.trim())}/validate`, {
+      method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify({ token: linkToken }),
+    });
+    const data = await r.json();
+    if (!r.ok || !data.ok) {
+      const banner = document.getElementById('linkErrorBanner');
+      banner.textContent = `${data.error || 'No se pudo validar el enlace.'} Escríbenos por WhatsApp para generar uno nuevo.`;
+      banner.classList.add('show');
+      return;
+    }
+    confirmedBooking = { ...data.booking, token: data.token };
+    showConfirmedState();
+  } catch (e) {
+    const banner = document.getElementById('linkErrorBanner');
+    banner.textContent = 'No pudimos validar el enlace. Revisa tu conexión e intenta de nuevo, o escríbenos por WhatsApp.';
+    banner.classList.add('show');
+  }
+}
+
+function showConfirmedState() {
+  const b = confirmedBooking;
+  // Paso 4 activo: la selección de adicionales ya quedó fija al confirmar.
+  document.getElementById('step3').classList.remove('active'); document.getElementById('step3').classList.add('done');
+  document.getElementById('step3').querySelector('.step-num').textContent = '✓';
+  document.getElementById('sep34').classList.add('done');
+  document.getElementById('step4').classList.add('active');
+
+  document.getElementById('preConfirmActions').style.display = 'none';
+  document.getElementById('confirmedActions').style.display = 'block';
+  const balanceDue = Math.max(0, (b.totalPriceNormal || 0) - (b.depositAmount || 0));
+  document.getElementById('confirmedSub').textContent = `Reserva ${b.bookingCode} · ${b.vehicleName} · ${b.from} → ${b.to} (${b.days} día${b.days > 1 ? 's' : ''})`;
+  document.getElementById('confirmedFullBody').innerHTML = `
+    ${b.discountPct ? `<div class="alt-row old"><span>Precio normal</span><span>${money(b.totalPriceNormal)}</span></div>
+    <div class="alt-row"><span>Descuento reserva anticipada</span><span>-${b.discountPct}%</span></div>` : ''}
+    <div class="alt-charge">${money(b.totalPriceFull)}</div>`;
+  document.getElementById('confirmedDepositBody').innerHTML = `
+    <div class="alt-row"><span>Total del arriendo</span><span>${money(b.totalPriceNormal)}</span></div>
+    <div class="alt-row"><span>Saldo a pagar al retiro</span><span>${money(balanceDue)}</span></div>
+    <div class="alt-charge">${money(b.depositAmount)}</div>`;
+  document.getElementById('btnPayFullReal').textContent = `PAGAR TOTAL DE ${money(b.totalPriceFull)}`;
+  document.getElementById('btnPayDepositReal').textContent = `PAGAR ABONO DE ${money(b.depositAmount)}`;
+  document.getElementById('btnPayFullReal').addEventListener('click', () => payConfirmed('full'));
+  document.getElementById('btnPayDepositReal').addEventListener('click', () => payConfirmed('deposit'));
+}
+
+async function payConfirmed(mode) {
+  if (!confirmedBooking) return;
+  const errBox = document.getElementById('ccPayError');
+  const btnFull = document.getElementById('btnPayFullReal');
+  const btnDeposit = document.getElementById('btnPayDepositReal');
+  errBox.style.display = 'none';
+  btnFull.disabled = true; btnDeposit.disabled = true;
+  try {
+    const r1 = await fetch(`${API_BASE}/api/requests/${encodeURIComponent(confirmedBooking.bookingCode)}/choose-payment`, {
+      method: 'POST', headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ token: confirmedBooking.token, paymentMode: mode }),
+    });
+    const chosen = await r1.json();
+    if (!r1.ok || !chosen.ok) throw new Error(chosen.error || 'No se pudo fijar la modalidad de pago.');
+
+    const r2 = await fetch(`${API_BASE}/api/webpay/init/${confirmedBooking.id}`, {
+      method: 'POST', headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ token: confirmedBooking.token }),
+    });
+    const webpay = await r2.json();
+    if (!r2.ok) throw new Error(webpay.error || 'No se pudo iniciar el pago.');
+
+    const form = document.createElement('form');
+    form.method = 'POST'; form.action = webpay.url;
+    const input = document.createElement('input');
+    input.type = 'hidden'; input.name = 'token_ws'; input.value = webpay.token;
+    form.appendChild(input);
+    document.body.appendChild(form);
+    form.submit();
+  } catch (err) {
+    errBox.textContent = err.message || 'Ocurrió un error. Intenta nuevamente o escríbenos por WhatsApp.';
+    errBox.style.display = 'block';
+    btnFull.disabled = false; btnDeposit.disabled = false;
+  }
+}
+</script>
+</body>
+</html>

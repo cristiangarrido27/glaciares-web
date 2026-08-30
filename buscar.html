@@ -254,6 +254,20 @@
   .quote-total-box div{display:flex;justify-content:space-between;padding:3px 0;}
   .quote-total-box .grand{font-size:17px;font-weight:800;color:var(--navy);border-top:1px solid var(--slate-200);margin-top:6px;padding-top:8px;}
   .quote-extra-note{font-size:11.5px;color:var(--slate-500);margin:-4px 0 12px;}
+
+  /* Indicador de pasos del flujo de reserva (1. Búsqueda 2. Vehículo 3. Adicionales
+     4. Confirmación y pago). Se usa en /buscar y en /reserva/adicionales. */
+  .steps-bar{display:flex;align-items:center;gap:0;margin-bottom:18px;overflow-x:auto;padding-bottom:2px;}
+  .steps-bar .step{display:flex;align-items:center;gap:8px;flex-shrink:0;}
+  .steps-bar .step-num{width:26px;height:26px;border-radius:50%;background:var(--slate-200);color:var(--slate-500);font-weight:800;font-size:12.5px;display:flex;align-items:center;justify-content:center;flex-shrink:0;}
+  .steps-bar .step-label{font-size:12px;font-weight:700;color:var(--slate-500);white-space:nowrap;}
+  .steps-bar .step.done .step-num{background:var(--green);color:#fff;}
+  .steps-bar .step.done .step-label{color:var(--navy);}
+  .steps-bar .step.active .step-num{background:var(--navy);color:#fff;}
+  .steps-bar .step.active .step-label{color:var(--navy);font-weight:800;}
+  .steps-bar .step-sep{width:22px;height:2px;background:var(--slate-200);margin:0 6px;flex-shrink:0;}
+  .steps-bar .step-sep.done{background:var(--green);}
+  @media (max-width:640px){ .steps-bar .step-label{display:none;} .steps-bar .step.active .step-label{display:block;} }
 </style>
 </head>
 <body>
@@ -302,9 +316,9 @@
           <div class="sfield" id="f-pickupPlace">
             <label for="u-pickupPlace">Lugar de retiro</label>
             <select id="u-pickupPlace">
-              <option value="agencia">Agencia en Punta Arenas (ciudad)</option>
-              <option value="aeropuerto">Aeropuerto Pdte. Carlos Ibáñez del Campo</option>
-              <option value="hotel">Hotel o alojamiento (sujeto a confirmación)</option>
+              <option value="agency_punta_arenas">Agencia en Punta Arenas (ciudad)</option>
+              <option value="punta_arenas_airport">Aeropuerto Pdte. Carlos Ibáñez del Campo</option>
+              <option value="hotel_punta_arenas">Hotel o alojamiento (sujeto a confirmación)</option>
             </select>
           </div>
           <div class="same-row">
@@ -314,10 +328,10 @@
           <div class="sfield" id="f-dropoffPlace" style="display:none;">
             <label for="u-dropoffPlace">Lugar de devolución</label>
             <select id="u-dropoffPlace">
-              <option value="agencia">Agencia en Punta Arenas (ciudad)</option>
-              <option value="aeropuerto">Aeropuerto Pdte. Carlos Ibáñez del Campo</option>
-              <option value="hotel">Hotel o alojamiento (sujeto a confirmación)</option>
-              <option value="otro">Otro lugar (sujeto a evaluación)</option>
+              <option value="agency_punta_arenas">Agencia en Punta Arenas (ciudad)</option>
+              <option value="punta_arenas_airport">Aeropuerto Pdte. Carlos Ibáñez del Campo</option>
+              <option value="hotel_punta_arenas">Hotel o alojamiento (sujeto a confirmación)</option>
+              <option value="custom_location">Otro lugar (sujeto a evaluación)</option>
             </select>
           </div>
           <div class="sfield" id="f-dropoffOther" style="display:none;">
@@ -373,8 +387,16 @@
 
       <!-- Resultados -->
       <section id="buscar-resultados">
+        <nav class="steps-bar" aria-label="Progreso de la reserva">
+          <div class="step done"><span class="step-num">✓</span><span class="step-label">Búsqueda</span></div>
+          <div class="step-sep done"></div>
+          <div class="step active"><span class="step-num">2</span><span class="step-label">Vehículo</span></div>
+          <div class="step-sep"></div>
+          <div class="step"><span class="step-num">3</span><span class="step-label">Adicionales</span></div>
+          <div class="step-sep"></div>
+          <div class="step"><span class="step-num">4</span><span class="step-label">Confirmación y pago</span></div>
+        </nav>
         <div class="search-summary" id="searchSummary"></div>
-        <div id="confirmedBookingCard" class="confirmed-card" style="display:none;"></div>
         <div class="results-head">
           <div class="results-count" id="resultsCount">Buscando…</div>
           <div class="results-controls">
@@ -404,11 +426,6 @@
             <p>Reserva y paga ahora para asegurar tu vehículo con el descuento por reserva anticipada.</p>
           </div>
         </div>
-        <div class="extras-panel" id="extrasPanel" style="display:none;">
-          <h2>Servicios adicionales disponibles</h2>
-          <p class="muted">Elígelos en "ELEGIR VEHÍCULO Y PERSONALIZAR" dentro de cada vehículo.</p>
-          <div class="extras-chips" id="extrasChips"></div>
-        </div>
         <div id="resultsList"></div>
       </section>
     </div>
@@ -426,37 +443,6 @@
     <svg xmlns="http://www.w3.org/2000/svg" width="26" height="26" viewBox="0 0 24 24" fill="currentColor"><path d="M12.04 2c-5.5 0-9.96 4.46-9.96 9.96 0 1.76.46 3.48 1.34 5L2 22l5.2-1.36a9.94 9.94 0 004.84 1.23h.01c5.5 0 9.96-4.46 9.96-9.96S17.54 2 12.04 2z"/></svg>
     <span class="wa-tooltip">¿Necesitas ayuda? Escríbenos</span>
   </a>
-</div>
-
-<!-- Modal: aviso de que hace falta confirmar disponibilidad antes de pagar
-     (sin campos de código: el cliente nunca escribe ni valida nada acá) -->
-<div id="confirmRequiredModal" class="modal-overlay hidden" role="dialog" aria-modal="true" aria-labelledby="confirmRequiredTitle">
-  <div class="modal-box">
-    <h3 id="confirmRequiredTitle">Antes de pagar, solicita por WhatsApp la confirmación de disponibilidad.</h3>
-    <div class="modal-actions">
-      <button type="button" class="modal-cancel" id="confirmRequiredClose">CERRAR</button>
-      <button type="button" class="modal-confirm" id="confirmRequiredWhatsapp">SOLICITAR CONFIRMACIÓN POR WHATSAPP</button>
-    </div>
-  </div>
-</div>
-
-<!-- Modal: elegir vehículo y personalizar (servicios adicionales + total en
-     vivo) antes de solicitar confirmación por WhatsApp -->
-<div id="personalizeModal" class="modal-overlay hidden" role="dialog" aria-modal="true" aria-labelledby="personalizeTitle">
-  <div class="modal-box personalize-box">
-    <h3 id="personalizeTitle">Personaliza tu reserva</h3>
-    <p class="modal-sub" id="personalizeVehicleName"></p>
-    <div id="personalizeExtras" class="personalize-extras"></div>
-    <div class="personalize-total">
-      <span>Total estimado</span>
-      <strong id="personalizeTotal">$0</strong>
-    </div>
-    <p class="muted" id="personalizeDeposit" style="margin:2px 0 12px;"></p>
-    <div class="modal-actions">
-      <button type="button" class="modal-cancel" id="personalizeClose">CERRAR</button>
-      <button type="button" class="modal-confirm" id="personalizeWhatsapp">SOLICITAR CONFIRMACIÓN POR WHATSAPP</button>
-    </div>
-  </div>
 </div>
 
 <script src="config.js"></script>
@@ -497,11 +483,20 @@ if (!prefersReducedMotion) {
   }, 13000);
 }
 
+// Identificadores internos estables de lugar (2026-08-30): el nombre visible
+// ("Agencia en Punta Arenas (ciudad)", etc.) nunca se usa para calcular
+// cargos — solo estos ids. Los ids antiguos (agencia/aeropuerto/hotel/otro)
+// se siguen aceptando por si queda un enlace o un sessionStorage viejo dando
+// vueltas; se normalizan a los nuevos apenas se leen.
+const LEGACY_PLACE_ID_MAP = { agencia: 'agency_punta_arenas', aeropuerto: 'punta_arenas_airport', hotel: 'hotel_punta_arenas', otro: 'custom_location' };
+function normalizePlaceId(raw) {
+  return LEGACY_PLACE_ID_MAP[raw] || raw;
+}
 const PLACE_LABELS = {
-  agencia: 'Agencia en Punta Arenas (ciudad)',
-  aeropuerto: 'Aeropuerto Presidente Carlos Ibáñez del Campo',
-  hotel: 'Hotel o alojamiento en Punta Arenas (sujeto a confirmación)',
-  otro: 'Otro lugar (sujeto a evaluación)',
+  agency_punta_arenas: 'Agencia en Punta Arenas (ciudad)',
+  punta_arenas_airport: 'Aeropuerto Presidente Carlos Ibáñez del Campo',
+  hotel_punta_arenas: 'Hotel o alojamiento en Punta Arenas (sujeto a confirmación)',
+  custom_location: 'Otro lugar (sujeto a evaluación)',
 };
 const DESTINATION_LABELS = {};
 (cfg.DESTINATIONS || []).forEach(d => { DESTINATION_LABELS[d.id] = d.label; });
@@ -525,7 +520,7 @@ function destinationLabel(state) {
   return DESTINATION_LABELS[state.destination] || state.destination;
 }
 function dropOffLabel(state) {
-  return state.dropOffPlace === 'otro' ? (state.dropOffOther || 'Otro lugar (sin especificar)') : (PLACE_LABELS[state.dropOffPlace] || state.dropOffPlace);
+  return normalizePlaceId(state.dropOffPlace) === 'custom_location' ? (state.dropOffOther || 'Otro lugar (sin especificar)') : (PLACE_LABELS[normalizePlaceId(state.dropOffPlace)] || state.dropOffPlace);
 }
 
 /* =====================================================================
@@ -567,8 +562,8 @@ function readSearchState() {
   let dropOffTime = pick('dropOffTime', '09:00');
   if (!isValidTime(dropOffTime)) dropOffTime = '09:00';
 
-  const pickUpPlace = pick('pickUpPlace', 'agencia');
-  const dropOffPlace = pick('dropOffPlace', pickUpPlace);
+  const pickUpPlace = normalizePlaceId(pick('pickUpPlace', 'agency_punta_arenas'));
+  const dropOffPlace = normalizePlaceId(pick('dropOffPlace', pickUpPlace));
 
   const result = {
     pickUpDate, pickUpTime, dropOffDate, dropOffTime,
@@ -624,7 +619,7 @@ function fillPanelFromState() {
   uPickup.value = state.pickUpPlace;
   const same = state.dropOffPlace === state.pickUpPlace && !state.dropOffOther;
   uSame.checked = same;
-  uDropoff.value = ['agencia','aeropuerto','hotel','otro'].includes(state.dropOffPlace) ? state.dropOffPlace : 'otro';
+  uDropoff.value = ['agency_punta_arenas','punta_arenas_airport','hotel_punta_arenas','custom_location'].includes(state.dropOffPlace) ? state.dropOffPlace : 'custom_location';
   uDropoffOther.value = state.dropOffOther;
   uFromDate.value = state.pickUpDate;
   uFromTime.value = state.pickUpTime;
@@ -640,14 +635,14 @@ function fillPanelFromState() {
 function updatePanelVisibility() {
   const same = uSame.checked;
   uDropoffField.style.display = same ? 'none' : '';
-  uDropoffOtherField.style.display = (!same && uDropoff.value === 'otro') ? '' : 'none';
+  uDropoffOtherField.style.display = (!same && uDropoff.value === 'custom_location') ? '' : 'none';
   uDestinationOtherField.style.display = uDestination.value === 'otro' ? '' : 'none';
   // Un tramo corresponde solamente al retiro o solamente a la devolución del
   // vehículo en el aeropuerto; si ambos ocurren en el aeropuerto, corresponde
   // el valor combinado (nunca la suma de los dos tramos).
-  const pickupIsAirport = uPickup.value === 'aeropuerto';
+  const pickupIsAirport = uPickup.value === 'punta_arenas_airport';
   const effectiveDropoff = same ? uPickup.value : uDropoff.value;
-  const dropoffIsAirport = effectiveDropoff === 'aeropuerto';
+  const dropoffIsAirport = effectiveDropoff === 'punta_arenas_airport';
   const leg = cfg.AIRPORT_FEE_LEG || 20000;
   const roundtrip = cfg.AIRPORT_FEE_ROUNDTRIP || 30000;
   if (pickupIsAirport && dropoffIsAirport) {
@@ -699,7 +694,7 @@ document.getElementById('updateForm').addEventListener('submit', (e) => {
   if (!uFromDate.value || uFromDate.value < todayStr) errors.push('fromDate');
   if (!uToDate.value || uToDate.value < uFromDate.value) errors.push('toDate');
   if (uToDate.value === uFromDate.value && uToTime.value <= uFromTime.value) errors.push('toTime');
-  if (!uSame.checked && uDropoff.value === 'otro' && !uDropoffOther.value.trim()) errors.push('dropoffOther');
+  if (!uSame.checked && uDropoff.value === 'custom_location' && !uDropoffOther.value.trim()) errors.push('dropoffOther');
   if (uDestination.value === 'otro' && !uDestinationOther.value.trim()) errors.push('destinationOther');
   if (errors.length) {
     errors.forEach(id => { const f = document.getElementById('f-' + id); if (f) f.classList.add('has-error'); });
@@ -709,7 +704,7 @@ document.getElementById('updateForm').addEventListener('submit', (e) => {
   const newState = {
     pickUpDate: uFromDate.value, pickUpTime: uFromTime.value, dropOffDate: uToDate.value, dropOffTime: uToTime.value,
     pickUpPlace: uPickup.value, dropOffPlace,
-    dropOffOther: (dropOffPlace === 'otro' && uDropoffOther.value.trim()) ? uDropoffOther.value.trim() : '',
+    dropOffOther: (dropOffPlace === 'custom_location' && uDropoffOther.value.trim()) ? uDropoffOther.value.trim() : '',
     passengers: uPassengers.value,
     destination: uDestination.value,
     destinationOther: uDestination.value === 'otro' ? uDestinationOther.value.trim() : '',
@@ -786,8 +781,8 @@ async function loadResults() {
 // al cliente antes de escribir: el monto que realmente se cobra siempre lo
 // recalcula el backend a partir de los lugares guardados en la reserva.
 function airportServiceInfo() {
-  const pickupIsAirport = state.pickUpPlace === 'aeropuerto';
-  const dropoffIsAirport = state.dropOffPlace === 'aeropuerto';
+  const pickupIsAirport = normalizePlaceId(state.pickUpPlace) === 'punta_arenas_airport';
+  const dropoffIsAirport = normalizePlaceId(state.dropOffPlace) === 'punta_arenas_airport';
   const leg = cfg.AIRPORT_FEE_LEG || 20000;
   const roundtrip = cfg.AIRPORT_FEE_ROUNDTRIP || 30000;
   if (pickupIsAirport && dropoffIsAirport) return { type: 'airport_roundtrip', amount: roundtrip, label: 'retiro y devolución' };
@@ -802,113 +797,24 @@ function argentinaApplies() {
   return state.argentina === 'si';
 }
 
-// --- Servicios adicionales: catálogo + selección por vehículo ---
-// El cliente SÍ puede elegir adicionales acá (silla infantil con cantidad,
-// seguros, conductor adicional, etc.) antes de pedir confirmación. El monto
-// que finalmente se cobra siempre lo vuelve a calcular el backend al
-// confirmar — esto es solo para mostrarle al cliente el total en vivo.
-let extrasCatalog = [];
-const vehicleExtrasSelection = {}; // { [vehicleId]: [{id, qty}] }
-function getSelectedExtras(vehicleId) {
-  return vehicleExtrasSelection[vehicleId] || [];
-}
-function computeExtrasTotalFor(vehicleId, days) {
-  const sel = getSelectedExtras(vehicleId);
-  let total = 0;
-  const detail = [];
-  for (const s of sel) {
-    const def = extrasCatalog.find(e => e.id === s.id);
-    if (!def) continue;
-    const qty = def.kind === 'qty' ? Math.max(1, Math.min(Number(s.qty) || 1, def.maxQty || 9)) : 1;
-    let cost = def.unit === 'day' ? def.price * days * qty : def.price * qty;
-    if (def.cap) cost = Math.min(cost, def.cap * qty);
-    total += cost;
-    detail.push({ id: def.id, name: def.name, qty, cost });
-  }
-  return { total, detail };
+// El "subtotal estimado" de la tarjeta es SOLO el arriendo (días × precio/día,
+// con el descuento por reserva anticipada si el backend lo confirma). Los
+// adicionales, el aeropuerto y el permiso Argentina ya NO se muestran ni se
+// eligen acá: eso pasa a la pantalla "Personaliza tu reserva" del paso
+// siguiente (/reserva/adicionales), donde el backend vuelve a calcular todo.
+function computeCardSubtotal(v) {
+  return v.confirmedAvailability ? v.totalPrice : v.subtotal;
 }
 
-function computeCardTotal(v) {
-  let total = v.confirmedAvailability ? v.totalPrice : v.subtotal;
-  total += airportServiceInfo().amount;
-  if (argentinaApplies()) total += cfg.ARGENTINA_PERMIT_FEE || 120000;
-  total += computeExtrasTotalFor(v.id, v.days).total;
-  return total;
-}
-
-// Mensaje de WhatsApp para pedir confirmación de disponibilidad. Incluye el
-// código de solicitud (si el backend logró registrarla) para que el operador
-// la encuentre de inmediato en el panel, pestaña Solicitudes.
-function buildRequestWhatsappMessage(v, total, requestCode) {
-  const airport = airportServiceInfo();
-  const { total: extrasTotal, detail: extrasDetail } = computeExtrasTotalFor(v.id, v.days);
-  const adicionalesText = extrasDetail.length
-    ? extrasDetail.map(e => `${e.name}${e.qty > 1 ? ` x${e.qty}` : ''} ($${e.cost.toLocaleString('es-CL')})`).join(', ')
-    : 'Ninguno';
-  // "Total" es el precio normal (sin el descuento por reserva anticipada, que
-  // solo aplica si el cliente paga todo por adelantado). El abono y el saldo
-  // siempre se calculan sobre este precio normal, igual que hace el backend
-  // una vez confirmada la reserva.
-  const depositAmount = v.pricePerDay;
-  let normalTotal = v.subtotal + airport.amount + extrasTotal;
-  if (argentinaApplies()) normalTotal += cfg.ARGENTINA_PERMIT_FEE || 120000;
-  const balance = Math.max(0, normalTotal - depositAmount);
-  const lines = [
-    'Hola, quiero solicitar confirmar disponibilidad:',
-    '',
-    ...(requestCode ? [`Código de solicitud: ${requestCode}`] : []),
-    `Vehículo: ${v.name}`,
-    `Retiro: ${PLACE_LABELS[state.pickUpPlace] || state.pickUpPlace}.`,
-    `Fecha y hora de retiro: ${fechaHoraLarga(state.pickUpDate, state.pickUpTime)}`,
-    `Devolución: ${dropOffLabel(state)}`,
-    `Fecha y hora de devolución: ${fechaHoraLarga(state.dropOffDate, state.dropOffTime)}`,
-    `Duración: ${v.days} día${v.days > 1 ? 's' : ''}`,
-    `Pasajeros: ${state.passengers || '1'}`,
-    `Destino: ${destinationLabel(state)}`,
-    `Argentina: ${state.argentina === 'si' ? 'Sí' : 'No'}`,
-    `Adicionales: ${adicionalesText}`,
-    `Arriendo: $${v.subtotal.toLocaleString('es-CL')}`,
-    ...(airport.amount > 0 ? [`Servicio en aeropuerto: ${airport.label} — $${airport.amount.toLocaleString('es-CL')}.`] : []),
-    ...(argentinaApplies() ? [`Permiso Argentina: $${(cfg.ARGENTINA_PERMIT_FEE || 120000).toLocaleString('es-CL')}`] : []),
-    `Total: $${normalTotal.toLocaleString('es-CL')}`,
-    `Pago total anticipado: $${total.toLocaleString('es-CL')}${v.discountPct ? ` (incluye -${v.discountPct}% por reserva anticipada)` : ''}`,
-    `Abono mínimo: $${depositAmount.toLocaleString('es-CL')}`,
-    `Saldo si pago solo el abono: $${balance.toLocaleString('es-CL')}`,
-    '',
-    'Solicito confirmar disponibilidad y condiciones para poder realizar el pago.',
-  ];
-  return lines.join('\n');
-}
-
-// Registra la solicitud en el backend (para que aparezca en el panel) y abre
-// WhatsApp con el detalle completo. Si el registro automático falla (red,
-// backend caído), igual se abre WhatsApp: el flujo de contacto con el cliente
-// nunca debe bloquearse por un problema de registro.
-async function requestConfirmation(v) {
-  const total = computeCardTotal(v);
-  let requestCode = null;
-  try {
-    const payload = {
-      vehicleId: v.id, from: state.pickUpDate, to: state.dropOffDate,
-      pickupTime: state.pickUpTime, returnTime: state.dropOffTime,
-      pickupPlace: state.pickUpPlace, dropoffPlace: state.dropOffPlace, dropoffOther: state.dropOffOther,
-      passengers: state.passengers, destination: state.destination, destinationOther: state.destinationOther,
-      argentina: state.argentina, extras: getSelectedExtras(v.id),
-      notes: state.promoCode ? `Código promocional ingresado: ${state.promoCode} (a validar por el equipo)` : '',
-    };
-    const r = await fetch(`${API_BASE}/api/requests`, {
-      method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify(payload),
-    });
-    if (r.ok) {
-      const data = await r.json();
-      requestCode = data.bookingCode;
-    }
-  } catch (err) { /* seguimos igual: abrimos WhatsApp aunque no se haya podido registrar */ }
-
-  const waMsg = buildRequestWhatsappMessage(v, total, requestCode);
-  window.open(`https://wa.me/${WA_NUMBER}?text=${encodeURIComponent(waMsg)}`, '_blank', 'noopener');
-  if (window.trackEvent) window.trackEvent('solicitar_confirmacion', { requestCode });
-  return requestCode;
+// Arma la URL de la siguiente etapa (/reserva/adicionales) con el vehículo
+// elegido y toda la búsqueda ya realizada, para no pedirle nada de nuevo al
+// cliente. La página de adicionales vuelve a leer y validar todo desde el
+// backend (nunca confía en los montos de esta URL).
+function buildAdicionalesUrl(v) {
+  const params = new URLSearchParams();
+  params.set('vehicleId', v.id);
+  Object.entries(state).forEach(([key, val]) => { if (val) params.set(key, val); });
+  return '/reserva/adicionales?' + params.toString();
 }
 
 function applyFiltersAndSort(list) {
@@ -974,29 +880,12 @@ function renderResults() {
   if (urgencyBanner) urgencyBanner.style.display = list.some(v => v.discountPct) ? 'flex' : 'none';
 
   resultsList.innerHTML = list.map((v, i) => {
-    const total = computeCardTotal(v);
-    // Precio "normal" (sin descuento) para mostrar el ahorro real, calculado con la
-    // misma lógica de computeCardTotal pero sobre el subtotal sin descuento aplicado.
-    let normalTotal = v.subtotal;
-    normalTotal += airportServiceInfo().amount;
-    if (argentinaApplies()) normalTotal += cfg.ARGENTINA_PERMIT_FEE || 120000;
-    const showDiscount = v.confirmedAvailability && v.discountPct > 0 && normalTotal > total;
-    const depositAmount = v.pricePerDay;
-    /* Los botones de pago quedan siempre visibles (nunca se eliminan), pero
-       BLOQUEADOS: mientras Glaciares no confirme disponibilidad por WhatsApp,
-       hacer clic aquí solo abre el modal para validar el código de confirmación
-       o consultar por WhatsApp — nunca inicia Webpay directamente. Esto es lo
-       que impide que se cobre antes de que se confirme la disponibilidad real. */
-    const payButtonFull = `<button type="button" class="btn-pay btn-pay-special locked" data-vid="${v.id}" data-name="${v.name}">
-            <span class="bps-label">PAGO TOTAL — REQUIERE CONFIRMACIÓN</span><span class="bps-amount">$${total.toLocaleString('es-CL')}</span>
-          </button>`;
-    const payButtonDeposit = `<button type="button" class="btn-pay btn-pay-deposit locked" data-vid="${v.id}" data-name="${v.name}">
-            <span class="bpd-label">ABONO — REQUIERE CONFIRMACIÓN</span>
-            <span class="bpd-amount">$${depositAmount.toLocaleString('es-CL')}</span>
-          </button>`;
-    const payButton = `${payButtonFull}
-          ${payButtonDeposit}
-          <p class="lock-note">Confirma disponibilidad por WhatsApp antes de pagar.</p>`;
+    const subtotal = computeCardSubtotal(v);
+    // Precio "normal" (sin descuento) para mostrar el ahorro real de pagar el
+    // total por adelantado — el descuento SOLO aplica al arriendo, nunca a
+    // adicionales, aeropuerto, Argentina o garantía (esos se calculan en el
+    // paso siguiente, ya con el vehículo elegido).
+    const showDiscount = v.confirmedAvailability && v.discountPct > 0 && v.subtotal > subtotal;
     return `
     <div class="rcard" style="animation-delay:${prefersReducedMotion ? 0 : Math.min(i, 6) * 70}ms;">
       <img src="${v.img}" alt="${v.name}" loading="lazy" onerror="this.onerror=null;this.src='https://glaciaresrentacar.cl/LOGOSINFONDO.png';this.style.objectFit='contain';this.style.background='#f1f5f9';this.style.padding='20px';">
@@ -1005,24 +894,18 @@ function renderResults() {
         <h3>${v.name}</h3>
         <p class="rcard-meta">${v.days} día${v.days > 1 ? 's' : ''} · $${v.pricePerDay.toLocaleString('es-CL')}/día</p>
         <p class="rcard-avail"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20 6 9 17l-5-5"/></svg>Disponibilidad sujeta a confirmación</p>
-        <div class="rcard-breakdown">
-          <div><span>Arriendo (${v.days} × $${v.pricePerDay.toLocaleString('es-CL')})</span><span>$${v.subtotal.toLocaleString('es-CL')}</span></div>
-          ${airportServiceInfo().amount > 0 ? `<div><span>${airportServiceInfo().type === 'airport_roundtrip' ? 'Retiro y devolución en aeropuerto' : airportServiceInfo().type === 'airport_pickup_only' ? 'Retiro en aeropuerto' : 'Devolución en aeropuerto'}</span><span>$${airportServiceInfo().amount.toLocaleString('es-CL')}</span></div>` : ''}
-          ${argentinaApplies() ? `<div><span>Permiso Argentina</span><span>$${(cfg.ARGENTINA_PERMIT_FEE || 120000).toLocaleString('es-CL')}</span></div>` : ''}
-          ${v.discountPct ? `<div><span>Descuento reserva anticipada</span><span>-${v.discountPct}%</span></div>` : ''}
-        </div>
+        ${v.discountPct ? `<div class="rcard-breakdown"><div><span>Descuento reserva anticipada</span><span>-${v.discountPct}%</span></div></div>` : ''}
       </div>
       <div class="rcard-price">
         <div class="price-box">
-          <span class="plabel">TOTAL ESTIMADO</span>
-          ${showDiscount ? `<span class="pamount-old">$${normalTotal.toLocaleString('es-CL')}</span>` : ''}
-          <span class="pamount">$${total.toLocaleString('es-CL')}</span>
-          ${showDiscount ? `<span class="psave">Ahorras -${v.discountPct}% pagando ahora</span>` : ''}
+          <span class="plabel">SUBTOTAL ESTIMADO</span>
+          ${showDiscount ? `<span class="pamount-old">$${v.subtotal.toLocaleString('es-CL')}</span>` : ''}
+          <span class="pamount">$${subtotal.toLocaleString('es-CL')}</span>
+          ${showDiscount ? `<span class="psave">Ahorras -${v.discountPct}% pagando el total ahora</span>` : ''}
         </div>
         <p class="deposit-note">Garantía requerida: desde $${(v.deposit || cfg.MIN_DEPOSIT || 500000).toLocaleString('es-CL')}, dependiendo del vehículo. No se cobra ahora.</p>
         <div class="rcard-actions">
           <button type="button" class="btn-confirm" data-vid="${v.id}">ELEGIR VEHÍCULO Y PERSONALIZAR</button>
-          ${payButton}
         </div>
       </div>
     </div>`;
@@ -1031,13 +914,7 @@ function renderResults() {
   resultsList.querySelectorAll('.btn-confirm').forEach(btn => {
     btn.addEventListener('click', () => {
       const v = merged.find(x => x.id === Number(btn.dataset.vid));
-      if (v) openPersonalizeModal(v);
-    });
-  });
-  resultsList.querySelectorAll('.btn-pay').forEach(btn => {
-    btn.addEventListener('click', () => {
-      const v = merged.find(x => x.id === Number(btn.dataset.vid));
-      openConfirmRequiredModal(v || null);
+      if (v) window.location.href = buildAdicionalesUrl(v);
     });
   });
 }
@@ -1058,269 +935,10 @@ const resultsListEl = document.getElementById('resultsList');
 resultsListEl.innerHTML = Array.from({ length: 3 }).map(() => '<div class="skeleton-card"></div>').join('');
 loadResults();
 
-// Carga el catálogo real de servicios adicionales: alimenta tanto el panel
-// informativo de arriba de los resultados como el selector del modal
-// "Personaliza tu reserva" (con checkboxes/cantidad) de cada vehículo.
-function extraPriceText(def) {
-  return def.unit === 'day'
-    ? `$${def.price.toLocaleString('es-CL')} por día${def.cap ? `, máximo $${def.cap.toLocaleString('es-CL')} por ${def.kind === 'qty' ? 'unidad' : 'total'}` : ''}`
-    : `$${def.price.toLocaleString('es-CL')} único`;
-}
-async function loadExtrasInfo() {
-  try {
-    const r = await fetch(`${API_BASE}/api/extras`);
-    if (!r.ok) return;
-    const extras = await r.json();
-    if (!Array.isArray(extras) || !extras.length) return;
-    extrasCatalog = extras;
-    document.getElementById('extrasChips').innerHTML = extras.map(def =>
-      `<span class="extra-chip">${esc(def.name)} — <strong>${extraPriceText(def)}</strong></span>`
-    ).join('');
-    document.getElementById('extrasPanel').style.display = 'block';
-  } catch (err) { /* si falla, el panel simplemente no se muestra */ }
-}
-loadExtrasInfo();
-
-/* =====================================================================
-   CONFIRMACIÓN Y PAGO — gate de seguridad
-   El pago real (Webpay) solo se habilita para una reserva que Glaciares Rent
-   a Car ya confirmó desde el panel, y únicamente a través del enlace seguro
-   que el operador envía por WhatsApp: /buscar?confirmCode=...&token=...
-   El cliente nunca escribe ni valida un código a mano: eso se eliminó de la
-   interfaz. El precio, el estado y el monto SIEMPRE se leen del servidor
-   (nunca se confía en nada que venga de la URL o del navegador); el token es
-   aleatorio, temporal, no reutilizable después del pago y se valida siempre
-   junto con el código — el código visible de la reserva nunca funciona por
-   sí solo como credencial de pago.
-   ===================================================================== */
-let confirmedBooking = null; // { id, bookingCode, vehicleName, from, to, days, discountPct,
-                              //   totalPriceFull, totalPriceNormal, depositAmount, guaranteeAmount,
-                              //   tokenExpiresAt, token }
-
-async function validateConfirmationCode(code, token) {
-  if (!code || !token) return { ok: false, error: 'Enlace de confirmación inválido o incompleto.' };
-  try {
-    const r = await fetch(`${API_BASE}/api/requests/${encodeURIComponent(code.trim())}/validate`, {
-      method: 'POST', headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({ token }),
-    });
-    const data = await r.json();
-    if (!r.ok || !data.ok) return { ok: false, error: data.error || 'No se pudo validar el enlace.' };
-    confirmedBooking = { ...data.booking, token: data.token };
-    renderConfirmedCard();
-    // Deja la URL en un estado que sobrevive a un F5: mismo enlace seguro que
-    // el que se manda por WhatsApp al confirmar.
-    const params = new URLSearchParams(window.location.search);
-    params.set('confirmCode', confirmedBooking.bookingCode);
-    params.set('token', confirmedBooking.token);
-    history.replaceState(null, '', '/buscar?' + params.toString());
-    return { ok: true };
-  } catch (err) {
-    return { ok: false, error: 'No pudimos validar el enlace. Revisa tu conexión e intenta de nuevo.' };
-  }
-}
-
-function renderConfirmedCard() {
-  const box = document.getElementById('confirmedBookingCard');
-  if (!confirmedBooking) { box.style.display = 'none'; return; }
-  const b = confirmedBooking;
-  const showDiscount = b.discountPct > 0 && b.totalPriceFull < b.totalPriceNormal;
-  const balanceDue = Math.max(0, (b.totalPriceNormal || 0) - (b.depositAmount || 0));
-  box.innerHTML = `
-    <h3>✓ Disponibilidad confirmada para tu solicitud</h3>
-    <p class="cc-sub">Reserva ${esc(b.bookingCode)} · ${esc(b.vehicleName)} · ${esc(b.from)} → ${esc(b.to)} (${b.days} día${b.days > 1 ? 's' : ''})</p>
-    <div class="cc-grid">
-      <div class="cc-option">
-        <span class="cc-label">Precio especial — pago total anticipado</span>
-        ${showDiscount ? `<div class="cc-row old"><span>Precio normal</span><span>$${b.totalPriceNormal.toLocaleString('es-CL')}</span></div>
-        <div class="cc-row"><span>Descuento reserva anticipada</span><span>-${b.discountPct}%</span></div>` : ''}
-        <div class="cc-charge">$${b.totalPriceFull.toLocaleString('es-CL')}</div>
-        <button type="button" class="btn-pay btn-pay-special" id="ccPayFull" style="width:100%;">
-          <span class="bps-label">PAGAR TOTAL DE $${b.totalPriceFull.toLocaleString('es-CL')}</span>
-        </button>
-      </div>
-      <div class="cc-option">
-        <span class="cc-label">Precio normal — abono mínimo</span>
-        <div class="cc-row"><span>Total del arriendo</span><span>$${b.totalPriceNormal.toLocaleString('es-CL')}</span></div>
-        <div class="cc-row"><span>Saldo a pagar al retiro</span><span>$${balanceDue.toLocaleString('es-CL')}</span></div>
-        <div class="cc-charge">$${b.depositAmount.toLocaleString('es-CL')}</div>
-        <button type="button" class="btn-pay btn-pay-deposit" id="ccPayDeposit" style="width:100%;">
-          <span class="bpd-label">PAGAR ABONO DE $${b.depositAmount.toLocaleString('es-CL')}</span>
-        </button>
-      </div>
-      <div class="cc-guarantee">Garantía requerida: desde $${b.guaranteeAmount.toLocaleString('es-CL')}, dependiendo del vehículo. No forma parte del abono ni del total: se solicita aparte, como retención, y no se cobra ahora.</div>
-    </div>
-    <p class="cc-error" id="ccPayError"></p>
-  `;
-  box.style.display = 'block';
-  document.getElementById('ccPayFull').addEventListener('click', () => payConfirmed('full'));
-  document.getElementById('ccPayDeposit').addEventListener('click', () => payConfirmed('deposit'));
-}
-
-async function payConfirmed(mode) {
-  if (!confirmedBooking) return;
-  const errBox = document.getElementById('ccPayError');
-  const btn = document.getElementById(mode === 'deposit' ? 'ccPayDeposit' : 'ccPayFull');
-  const otherBtn = document.getElementById(mode === 'deposit' ? 'ccPayFull' : 'ccPayDeposit');
-  if (errBox) errBox.style.display = 'none';
-  if (btn) { btn.disabled = true; }
-  if (otherBtn) { otherBtn.disabled = true; }
-  try {
-    const r1 = await fetch(`${API_BASE}/api/requests/${encodeURIComponent(confirmedBooking.bookingCode)}/choose-payment`, {
-      method: 'POST', headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({ token: confirmedBooking.token, paymentMode: mode }),
-    });
-    const chosen = await r1.json();
-    if (!r1.ok || !chosen.ok) throw new Error(chosen.error || 'No se pudo fijar la modalidad de pago.');
-
-    if (window.trackEvent) window.trackEvent('reservar_pagar_click', { mode, bookingCode: confirmedBooking.bookingCode });
-
-    const r2 = await fetch(`${API_BASE}/api/webpay/init/${confirmedBooking.id}`, {
-      method: 'POST', headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({ token: confirmedBooking.token }),
-    });
-    const webpay = await r2.json();
-    if (!r2.ok) throw new Error(webpay.error || 'No se pudo iniciar el pago.');
-
-    const form = document.createElement('form');
-    form.method = 'POST';
-    form.action = webpay.url;
-    const input = document.createElement('input');
-    input.type = 'hidden'; input.name = 'token_ws'; input.value = webpay.token;
-    form.appendChild(input);
-    document.body.appendChild(form);
-    form.submit();
-  } catch (err) {
-    if (errBox) { errBox.textContent = err.message || 'Ocurrió un error. Intenta nuevamente o escríbenos por WhatsApp.'; errBox.style.display = 'block'; }
-    if (btn) btn.disabled = false;
-    if (otherBtn) otherBtn.disabled = false;
-  }
-}
-
-/* ---- Modal "antes de pagar, solicita confirmación" (sin código, sin input) ----
-   Se abre al presionar un botón de pago bloqueado. Nunca abre Webpay, nunca
-   pide ni valida un código: solo ofrece pedir confirmación por WhatsApp. */
-let confirmRequiredVehicle = null;
-function openConfirmRequiredModal(vehicle) {
-  confirmRequiredVehicle = vehicle || null;
-  document.getElementById('confirmRequiredModal').classList.remove('hidden');
-}
-function closeConfirmRequiredModal() {
-  document.getElementById('confirmRequiredModal').classList.add('hidden');
-  confirmRequiredVehicle = null;
-}
-document.getElementById('confirmRequiredClose').addEventListener('click', closeConfirmRequiredModal);
-document.getElementById('confirmRequiredWhatsapp').addEventListener('click', async () => {
-  const v = confirmRequiredVehicle;
-  closeConfirmRequiredModal();
-  if (v) await requestConfirmation(v);
-});
-
-/* ---- Modal "Personaliza tu reserva" (elegir vehículo + adicionales + total) ---- */
-let personalizeVehicle = null;
-function openPersonalizeModal(vehicle) {
-  personalizeVehicle = vehicle || null;
-  if (!personalizeVehicle) return;
-  document.getElementById('personalizeVehicleName').textContent =
-    `${personalizeVehicle.name} · ${personalizeVehicle.days} día${personalizeVehicle.days > 1 ? 's' : ''}`;
-  renderPersonalizeExtras();
-  document.getElementById('personalizeModal').classList.remove('hidden');
-}
-function closePersonalizeModal() {
-  document.getElementById('personalizeModal').classList.add('hidden');
-  personalizeVehicle = null;
-}
-function renderPersonalizeExtras() {
-  const v = personalizeVehicle;
-  const box = document.getElementById('personalizeExtras');
-  if (!v) return;
-  if (!extrasCatalog.length) {
-    box.innerHTML = `<p class="muted">Todavía no hay servicios adicionales cargados.</p>`;
-  } else {
-    const sel = getSelectedExtras(v.id);
-    box.innerHTML = extrasCatalog.map(def => {
-      const entry = sel.find(s => s.id === def.id);
-      const checked = !!entry;
-      const qty = entry ? (entry.qty || 1) : 1;
-      return `
-        <div class="personalize-item">
-          <label class="pi-info">
-            <input type="checkbox" data-extra-id="${def.id}" ${checked ? 'checked' : ''}>
-            <span class="pi-text"><strong>${esc(def.name)}</strong><span>${extraPriceText(def)}</span></span>
-          </label>
-          ${def.kind === 'qty' ? `
-            <div class="pi-qty">
-              <button type="button" data-qty-minus="${def.id}" ${!checked ? 'disabled' : ''} aria-label="Quitar una unidad">−</button>
-              <span data-qty-value="${def.id}">${qty}</span>
-              <button type="button" data-qty-plus="${def.id}" ${!checked ? 'disabled' : ''} aria-label="Agregar una unidad">+</button>
-            </div>` : ''}
-        </div>`;
-    }).join('');
-    box.querySelectorAll('input[type="checkbox"]').forEach(cb => {
-      cb.addEventListener('change', () => toggleExtra(Number(cb.dataset.extraId), cb.checked));
-    });
-    box.querySelectorAll('[data-qty-minus]').forEach(btn => {
-      btn.addEventListener('click', () => changeExtraQty(Number(btn.dataset.qtyMinus), -1));
-    });
-    box.querySelectorAll('[data-qty-plus]').forEach(btn => {
-      btn.addEventListener('click', () => changeExtraQty(Number(btn.dataset.qtyPlus), 1));
-    });
-  }
-  updatePersonalizeTotal();
-}
-function toggleExtra(extraId, checked) {
-  const v = personalizeVehicle;
-  if (!v) return;
-  let sel = vehicleExtrasSelection[v.id] || [];
-  sel = sel.filter(s => s.id !== extraId);
-  if (checked) sel.push({ id: extraId, qty: 1 });
-  vehicleExtrasSelection[v.id] = sel;
-  renderPersonalizeExtras();
-  renderResults();
-}
-function changeExtraQty(extraId, delta) {
-  const v = personalizeVehicle;
-  if (!v) return;
-  const def = extrasCatalog.find(e => e.id === extraId);
-  if (!def) return;
-  const sel = vehicleExtrasSelection[v.id] || [];
-  const entry = sel.find(s => s.id === extraId);
-  if (!entry) return;
-  const max = def.maxQty || 9;
-  entry.qty = Math.max(1, Math.min(max, (entry.qty || 1) + delta));
-  renderPersonalizeExtras();
-  renderResults();
-}
-function updatePersonalizeTotal() {
-  const v = personalizeVehicle;
-  if (!v) return;
-  const total = computeCardTotal(v);
-  document.getElementById('personalizeTotal').textContent = `$${total.toLocaleString('es-CL')}`;
-  document.getElementById('personalizeDeposit').textContent =
-    `Abono mínimo: $${v.pricePerDay.toLocaleString('es-CL')} · Garantía requerida: desde $${(v.deposit || cfg.MIN_DEPOSIT || 500000).toLocaleString('es-CL')} (no se cobra ahora).`;
-}
-document.getElementById('personalizeClose').addEventListener('click', closePersonalizeModal);
-document.getElementById('personalizeWhatsapp').addEventListener('click', async () => {
-  const v = personalizeVehicle;
-  closePersonalizeModal();
-  if (v) await requestConfirmation(v);
-});
-
-/* Camino A: enlace seguro que llega por WhatsApp (?confirmCode=...&token=...) */
-(function checkSecureLinkOnLoad() {
-  const p = new URLSearchParams(window.location.search);
-  const code = p.get('confirmCode');
-  const token = p.get('token');
-  if (code && token) {
-    validateConfirmationCode(code, token).then(result => {
-      if (!result.ok) {
-        const box = document.getElementById('confirmedBookingCard');
-        box.innerHTML = `<p class="invalid" style="color:#b91c1c;font-weight:700;">${esc(result.error)} Escríbenos por WhatsApp para generar un enlace nuevo.</p>`;
-        box.style.display = 'block';
-      }
-    });
-  }
-})();
+/* La confirmación de disponibilidad, la selección de adicionales y el pago
+   (Webpay) ya no ocurren en esta página: todo eso pasa a /reserva/adicionales,
+   a la que se llega desde el único botón de cada tarjeta ("ELEGIR VEHÍCULO Y
+   PERSONALIZAR"). Esta página se limita a buscar y mostrar vehículos. */
 </script>
 </body>
 </html>
