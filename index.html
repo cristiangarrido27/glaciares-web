@@ -441,7 +441,7 @@
       <div class="bfield" id="field-pickupPlace">
         <label for="pickupPlace"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 21s7-6.5 7-12a7 7 0 0 0-14 0c0 5.5 7 12 7 12Z"/><circle cx="12" cy="9" r="2.5"/></svg>Lugar de retiro</label>
         <select id="pickupPlace" required>
-          <option value="agencia">Agencia Glaciares Rent a Car — Punta Arenas</option>
+          <option value="agencia">Agencia en Punta Arenas (ciudad)</option>
           <option value="aeropuerto">Aeropuerto Presidente Carlos Ibáñez del Campo</option>
           <option value="hotel">Hotel o alojamiento en Punta Arenas — sujeto a confirmación</option>
         </select>
@@ -457,13 +457,13 @@
       </div>
       <div class="same-place-row">
         <input type="checkbox" id="sameLugar" checked>
-        <label for="sameLugar">Devolver en el mismo lugar (<span id="sameLugarText">Agencia Glaciares Rent a Car — Punta Arenas</span>)</label>
+        <label for="sameLugar">Devolver en el mismo lugar (<span id="sameLugarText">Agencia en Punta Arenas (ciudad)</span>)</label>
       </div>
 
       <div class="bfield" id="field-dropoffPlace" style="display:none;">
         <label for="dropoffPlace"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 21s7-6.5 7-12a7 7 0 0 0-14 0c0 5.5 7 12 7 12Z"/><circle cx="12" cy="9" r="2.5"/></svg>Lugar de devolución</label>
         <select id="dropoffPlace">
-          <option value="agencia">Agencia Glaciares Rent a Car — Punta Arenas</option>
+          <option value="agencia">Agencia en Punta Arenas (ciudad)</option>
           <option value="aeropuerto">Aeropuerto Presidente Carlos Ibáñez del Campo</option>
           <option value="hotel">Hotel o alojamiento en Punta Arenas — sujeto a confirmación</option>
           <option value="otro">Otro lugar — sujeto a evaluación</option>
@@ -1061,7 +1061,7 @@ document.getElementById('contactForm').addEventListener('submit', (e) => {
    COTIZADOR — ETAPA 1: recoger criterios y redirigir a /buscar
    ===================================================================== */
 const PLACE_LABELS = {
-  agencia: 'Agencia Glaciares Rent a Car — Punta Arenas',
+  agencia: 'Agencia en Punta Arenas (ciudad)',
   aeropuerto: 'Aeropuerto Presidente Carlos Ibáñez del Campo',
   hotel: 'Hotel o alojamiento en Punta Arenas — sujeto a confirmación',
 };

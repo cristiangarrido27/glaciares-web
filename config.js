@@ -23,12 +23,12 @@ window.GLACIARES_CONFIG = {
   MIN_DEPOSIT: 500000,       // Garantía referencial mínima ("desde")
 
   PICKUP_PLACES: [
-    { id: 'agencia', label: 'Agencia Glaciares Rent a Car — Punta Arenas', extraFee: 0 },
+    { id: 'agencia', label: 'Agencia en Punta Arenas (ciudad)', extraFee: 0 },
     { id: 'aeropuerto', label: 'Aeropuerto Presidente Carlos Ibáñez del Campo', extraFee: 20000 },
     { id: 'hotel', label: 'Hotel o alojamiento en Punta Arenas — sujeto a confirmación', extraFee: 0 },
   ],
   DROPOFF_PLACES: [
-    { id: 'agencia', label: 'Agencia Glaciares Rent a Car — Punta Arenas' },
+    { id: 'agencia', label: 'Agencia en Punta Arenas (ciudad)' },
     { id: 'aeropuerto', label: 'Aeropuerto Presidente Carlos Ibáñez del Campo' },
     { id: 'hotel', label: 'Hotel o alojamiento en Punta Arenas — sujeto a confirmación' },
     { id: 'otro', label: 'Otro lugar — sujeto a evaluación' },
