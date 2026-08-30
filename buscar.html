@@ -310,7 +310,7 @@
             <label for="u-dropoffOther">Indique el lugar de devolución</label>
             <input type="text" id="u-dropoffOther">
           </div>
-          <p class="airport-note-panel" id="u-airportNote">Servicio en aeropuerto con costo adicional de $20.000.</p>
+          <p class="airport-note-panel" id="u-airportNote">Servicio en aeropuerto: $20.000 por un tramo. Retiro y devolución en aeropuerto: $30.000 en total.</p>
           <div class="two-col">
             <div class="sfield" id="f-fromDate"><label for="u-fromDate">Retiro</label><input type="date" id="u-fromDate"></div>
             <div class="sfield" id="f-fromTime"><label for="u-fromTime">Hora</label><input type="time" id="u-fromTime"></div>
@@ -441,7 +441,7 @@ menuBtn.addEventListener('click', () => {
 });
 mobileMenu.querySelectorAll('a').forEach(a => a.addEventListener('click', () => mobileMenu.classList.remove('open')));
 
-const cfg = window.GLACIARES_CONFIG || { AIRPORT_FEE: 20000, ARGENTINA_PERMIT_FEE: 120000, MIN_DEPOSIT: 500000 };
+const cfg = window.GLACIARES_CONFIG || { AIRPORT_FEE_LEG: 20000, AIRPORT_FEE_ROUNDTRIP: 30000, ARGENTINA_PERMIT_FEE: 120000, MIN_DEPOSIT: 500000 };
 const WA_NUMBER = (cfg.WHATSAPP_NUMBER) || '56983335924';
 
 // Escapa cualquier texto que venga del servidor (código de reserva, nombre de
@@ -612,8 +612,20 @@ function updatePanelVisibility() {
   uDropoffField.style.display = same ? 'none' : '';
   uDropoffOtherField.style.display = (!same && uDropoff.value === 'otro') ? '' : 'none';
   uDestinationOtherField.style.display = uDestination.value === 'otro' ? '' : 'none';
-  const wantsAirport = uPickup.value === 'aeropuerto' || (!same && uDropoff.value === 'aeropuerto');
-  uAirportNote.classList.toggle('show', wantsAirport);
+  // Un tramo corresponde solamente al retiro o solamente a la devolución del
+  // vehículo en el aeropuerto; si ambos ocurren en el aeropuerto, corresponde
+  // el valor combinado (nunca la suma de los dos tramos).
+  const pickupIsAirport = uPickup.value === 'aeropuerto';
+  const effectiveDropoff = same ? uPickup.value : uDropoff.value;
+  const dropoffIsAirport = effectiveDropoff === 'aeropuerto';
+  const leg = cfg.AIRPORT_FEE_LEG || 20000;
+  const roundtrip = cfg.AIRPORT_FEE_ROUNDTRIP || 30000;
+  if (pickupIsAirport && dropoffIsAirport) {
+    uAirportNote.textContent = `Servicio en aeropuerto: retiro y devolución en aeropuerto, valor total $${roundtrip.toLocaleString('es-CL')} (no se suman dos tramos).`;
+  } else {
+    uAirportNote.textContent = `Servicio en aeropuerto: $${leg.toLocaleString('es-CL')} por un tramo. Un tramo corresponde solamente al retiro o solamente a la devolución del vehículo en el aeropuerto. Si solicitas retiro y devolución en aeropuerto, el valor total es $${roundtrip.toLocaleString('es-CL')}.`;
+  }
+  uAirportNote.classList.toggle('show', pickupIsAirport || dropoffIsAirport);
 }
 uPickup.addEventListener('change', updatePanelVisibility);
 uSame.addEventListener('change', updatePanelVisibility);
@@ -737,8 +749,24 @@ async function loadResults() {
   renderResults();
 }
 
+// Servicio de aeropuerto: se cobra POR TRAMO, nunca dos veces el mismo tramo.
+// Un solo tramo (retiro O devolución en aeropuerto) = AIRPORT_FEE_LEG.
+// Retiro Y devolución en aeropuerto = AIRPORT_FEE_ROUNDTRIP (nunca la suma de
+// los dos tramos, nunca $40.000). Este cálculo es solo para MOSTRAR el monto
+// al cliente antes de escribir: el monto que realmente se cobra siempre lo
+// recalcula el backend a partir de los lugares guardados en la reserva.
+function airportServiceInfo() {
+  const pickupIsAirport = state.pickUpPlace === 'aeropuerto';
+  const dropoffIsAirport = state.dropOffPlace === 'aeropuerto';
+  const leg = cfg.AIRPORT_FEE_LEG || 20000;
+  const roundtrip = cfg.AIRPORT_FEE_ROUNDTRIP || 30000;
+  if (pickupIsAirport && dropoffIsAirport) return { type: 'airport_roundtrip', amount: roundtrip, label: 'retiro y devolución' };
+  if (pickupIsAirport) return { type: 'airport_pickup_only', amount: leg, label: 'retiro' };
+  if (dropoffIsAirport) return { type: 'airport_dropoff_only', amount: leg, label: 'devolución' };
+  return { type: 'no_airport_service', amount: 0, label: null };
+}
 function airportApplies() {
-  return state.pickUpPlace === 'aeropuerto' || state.dropOffPlace === 'aeropuerto';
+  return airportServiceInfo().amount > 0;
 }
 function argentinaApplies() {
   return state.argentina === 'si';
@@ -746,7 +774,7 @@ function argentinaApplies() {
 
 function computeCardTotal(v) {
   let total = v.confirmedAvailability ? v.totalPrice : v.subtotal;
-  if (airportApplies()) total += cfg.AIRPORT_FEE || 20000;
+  total += airportServiceInfo().amount;
   if (argentinaApplies()) total += cfg.ARGENTINA_PERMIT_FEE || 120000;
   return total;
 }
@@ -756,7 +784,10 @@ function computeCardTotal(v) {
 // la encuentre de inmediato en el panel, pestaña Solicitudes.
 function buildRequestWhatsappMessage(v, total, requestCode) {
   const extraLines = [];
-  if (airportApplies()) extraLines.push(`Aeropuerto: $${(cfg.AIRPORT_FEE || 20000).toLocaleString('es-CL')}`);
+  const airport = airportServiceInfo();
+  // El cargo de aeropuerto tiene su propia línea dedicada más abajo (regla de
+  // negocio: "Servicio en aeropuerto: [tramo] — $[monto]."), así que acá no se
+  // repite dentro de "Cargos adicionales" para no duplicar el monto.
   if (argentinaApplies()) extraLines.push(`Permiso Argentina: $${(cfg.ARGENTINA_PERMIT_FEE || 120000).toLocaleString('es-CL')}`);
   if (v.discountPct) extraLines.push(`Descuento reserva anticipada (si pago el total): -${v.discountPct}%`);
   const lines = [
@@ -774,6 +805,7 @@ function buildRequestWhatsappMessage(v, total, requestCode) {
     `Argentina: ${state.argentina === 'si' ? 'Sí' : 'No'}`,
     `Servicios adicionales: Ninguno seleccionado todavía (puedo indicarlos por este chat)`,
     `Arriendo: $${v.subtotal.toLocaleString('es-CL')}`,
+    ...(airport.amount > 0 ? [`Servicio en aeropuerto: ${airport.label} — $${airport.amount.toLocaleString('es-CL')}.`] : []),
     ...(extraLines.length ? [`Cargos adicionales: ${extraLines.join(', ')}`] : []),
     `Total estimado: $${total.toLocaleString('es-CL')}`,
     '',
@@ -893,7 +925,7 @@ function renderResults() {
     // Precio "normal" (sin descuento) para mostrar el ahorro real, calculado con la
     // misma lógica de computeCardTotal pero sobre el subtotal sin descuento aplicado.
     let normalTotal = v.subtotal;
-    if (airportApplies()) normalTotal += cfg.AIRPORT_FEE || 20000;
+    normalTotal += airportServiceInfo().amount;
     if (argentinaApplies()) normalTotal += cfg.ARGENTINA_PERMIT_FEE || 120000;
     const showDiscount = v.confirmedAvailability && v.discountPct > 0 && normalTotal > total;
     const depositAmount = v.pricePerDay;
@@ -922,7 +954,7 @@ function renderResults() {
         <p class="rcard-avail"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20 6 9 17l-5-5"/></svg>Disponibilidad sujeta a confirmación</p>
         <div class="rcard-breakdown">
           <div><span>Arriendo (${v.days} × $${v.pricePerDay.toLocaleString('es-CL')})</span><span>$${v.subtotal.toLocaleString('es-CL')}</span></div>
-          ${airportApplies() ? `<div><span>Aeropuerto</span><span>$${(cfg.AIRPORT_FEE || 20000).toLocaleString('es-CL')}</span></div>` : ''}
+          ${airportServiceInfo().amount > 0 ? `<div><span>${airportServiceInfo().type === 'airport_roundtrip' ? 'Retiro y devolución en aeropuerto' : airportServiceInfo().type === 'airport_pickup_only' ? 'Retiro en aeropuerto' : 'Devolución en aeropuerto'}</span><span>$${airportServiceInfo().amount.toLocaleString('es-CL')}</span></div>` : ''}
           ${argentinaApplies() ? `<div><span>Permiso Argentina</span><span>$${(cfg.ARGENTINA_PERMIT_FEE || 120000).toLocaleString('es-CL')}</span></div>` : ''}
           ${v.discountPct ? `<div><span>Descuento reserva anticipada</span><span>-${v.discountPct}%</span></div>` : ''}
         </div>
@@ -982,9 +1014,15 @@ async function loadExtrasInfo() {
     if (!r.ok) return;
     const extras = await r.json();
     if (!Array.isArray(extras) || !extras.length) return;
-    document.getElementById('extrasChips').innerHTML = extras.map(def => `
-      <span class="extra-chip">${esc(def.name)} — <strong>$${def.price.toLocaleString('es-CL')}</strong>${def.unit === 'day' ? '/día' : ''}</span>
-    `).join('');
+    document.getElementById('extrasChips').innerHTML = extras.map(def => {
+      // Los extras con tope (como la silla infantil) muestran el precio por día
+      // Y el máximo a pagar, para que quede claro que no se sigue cobrando
+      // indefinidamente por reservas largas.
+      const priceText = def.unit === 'day'
+        ? `$${def.price.toLocaleString('es-CL')} por día${def.cap ? `, máximo $${def.cap.toLocaleString('es-CL')} por ${def.kind === 'qty' ? 'unidad' : 'total'}` : ''}`
+        : `$${def.price.toLocaleString('es-CL')}`;
+      return `<span class="extra-chip">${esc(def.name)} — <strong>${priceText}</strong></span>`;
+    }).join('');
     document.getElementById('extrasPanel').style.display = 'block';
   } catch (err) { /* si falla, el panel simplemente no se muestra */ }
 }

@@ -496,7 +496,7 @@
         <input type="text" id="promoCode" placeholder="Ej: ANTICIPADO15" autocomplete="off">
       </div>
 
-      <p class="airport-note" id="airportNote">Servicio en aeropuerto con costo adicional de $20.000, sujeto a las condiciones del arriendo.</p>
+      <p class="airport-note" id="airportNote">Servicio en aeropuerto: $20.000 por un tramo (solo retiro o solo devolución en aeropuerto). Si solicitas retiro y devolución en aeropuerto, el valor total es $30.000.</p>
       <p class="airport-note" id="argentinaNote">Permiso para viaje a Argentina con costo adicional de $120.000, sujeto a autorización y anticipación.</p>
     </div>
     <div class="booking-bar-actions">
@@ -702,7 +702,7 @@
     </details>
     <details class="faq-item">
       <summary>¿Puedo retirar o devolver el vehículo en el aeropuerto?<span class="faq-toggle">+</span></summary>
-      <p>Sí, con un costo adicional de $20.000. Selecciónalo directamente como lugar de retiro o de devolución en el cotizador.</p>
+      <p>Sí. El servicio en aeropuerto cuesta $20.000 por un tramo (solo retiro o solo devolución). Si necesitas retiro y devolución en aeropuerto, el valor total es $30.000, no la suma de los dos tramos. Selecciónalo directamente como lugar de retiro o de devolución en el cotizador.</p>
     </details>
     <details class="faq-item">
       <summary>¿Cuánto necesito abonar para reservar y cómo cancelo?<span class="faq-toggle">+</span></summary>
@@ -1012,10 +1012,10 @@ document.querySelectorAll('.filter-btn').forEach(btn => {
 /* ---- Servicios adicionales (mostrados en el home; precios reales del cotizador) ---- */
 const SERV_BASE = 'https://glaciaresrentacar.cl/IMAGENES_GLACIARES_NUEVO%20AUTOS/SERVICIOS/';
 const services = [
-  { name: 'Silla para bebé (de 2 a 18 kg)', price: '$6.000 / día', note: 'Máximo a pagar $50.000 en total.', img: SERV_BASE + 'SILLA%20BEBE.jpeg' },
+  { name: 'Silla infantil (de 2 a 18 kg)', price: '$5.000 / día', note: 'Máximo a pagar $50.000 por silla. Sujeta a disponibilidad.', img: SERV_BASE + 'SILLA%20BEBE.jpeg' },
   { name: 'Protección de cristales', price: '$5.000 / día', note: 'Cubre pérdida total, piquete o frisadura.', img: SERV_BASE + 'CRISTALES.jpeg' },
   { name: 'Protección de neumáticos', price: '$5.000 / día', note: 'Cubre pérdida total o reventón.', img: SERV_BASE + 'NEUMATICOS.jpeg' },
-  { name: 'Entrega o retiro en aeropuerto', price: '$20.000', note: 'Costo único por el servicio.', img: SERV_BASE + 'AEROPUERTO.jpeg' },
+  { name: 'Retiro o devolución en aeropuerto', price: '$20.000 por tramo', note: 'Retiro y devolución en aeropuerto: $30.000 en total (no se suman dos tramos).', img: SERV_BASE + 'AEROPUERTO.jpeg' },
   { name: 'Permiso para viaje a Argentina', price: '$120.000', note: 'Costo único por reserva.', img: SERV_BASE + 'ARGENTINA.jpeg' },
   { name: 'Conductor adicional', price: '$5.000 + IVA / día', note: 'Debe cumplir los mismos requisitos que el conductor titular.', img: SERV_BASE + 'CONDUCTOR%20ADICIONAL.jpeg' },
 ];
@@ -1095,8 +1095,19 @@ const airportNote = document.getElementById('airportNote');
 const argentinaNote = document.getElementById('argentinaNote');
 const tripArgentinaEl = document.getElementById('tripArgentina');
 function updateAirportNote(){
-  const wantsAirport = pickupPlaceEl.value === 'aeropuerto' || (!sameLugarEl.checked && dropoffPlaceEl.value === 'aeropuerto');
-  airportNote.classList.toggle('show', wantsAirport);
+  // Un tramo corresponde solamente al retiro o solamente a la devolución del
+  // vehículo en el aeropuerto; si ambos ocurren en el aeropuerto, corresponde
+  // el valor combinado (nunca la suma de los dos tramos).
+  const pickupIsAirport = pickupPlaceEl.value === 'aeropuerto';
+  const effectiveDropoff = sameLugarEl.checked ? pickupPlaceEl.value : dropoffPlaceEl.value;
+  const dropoffIsAirport = effectiveDropoff === 'aeropuerto';
+  const cfg = window.GLACIARES_CONFIG || { AIRPORT_FEE_LEG: 20000, AIRPORT_FEE_ROUNDTRIP: 30000 };
+  if (pickupIsAirport && dropoffIsAirport) {
+    airportNote.textContent = `Servicio en aeropuerto: retiro y devolución en aeropuerto, valor total $${(cfg.AIRPORT_FEE_ROUNDTRIP || 30000).toLocaleString('es-CL')} (no se suman dos tramos).`;
+  } else {
+    airportNote.textContent = `Servicio en aeropuerto: $${(cfg.AIRPORT_FEE_LEG || 20000).toLocaleString('es-CL')} por un tramo (solo retiro o solo devolución en aeropuerto). Si solicitas retiro y devolución en aeropuerto, el valor total es $${(cfg.AIRPORT_FEE_ROUNDTRIP || 30000).toLocaleString('es-CL')}.`;
+  }
+  airportNote.classList.toggle('show', pickupIsAirport || dropoffIsAirport);
 }
 function updateArgentinaNote(){
   argentinaNote.classList.toggle('show', tripArgentinaEl.value === 'si');

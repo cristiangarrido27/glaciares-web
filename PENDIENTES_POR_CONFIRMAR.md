@@ -2,6 +2,35 @@
 
 Este archivo es de uso interno. Ningún texto de aquí fue publicado en la web pública. Reúne los datos que el dueño del negocio debe confirmar o entregar para dejar el sitio 100% preciso.
 
+## 25. Corrección de precios: silla infantil con tope y aeropuerto por tramo (2026-08-30, madrugada)
+
+Instrucción explícita del dueño con reglas comerciales definitivas. Reemplaza cualquier cálculo anterior de estos dos ítems.
+
+**Silla infantil**: se corrigió el precio de $6.000/día a **$5.000 por día, máximo $50.000 por silla** (antes ya existía el tope en el backend, `computeExtrasTotal` con el campo `cap`, pero el precio estaba mal). Se corrigió con el script `reservas/fix-precios-silla-aeropuerto.js`. Verificado con los 5 escenarios pedidos (4/10/15 días × 1 silla, 4/15 días × 2 sillas) — todos dan el monto exacto pedido.
+
+**Servicio de aeropuerto — cambio de arquitectura importante**: antes de este cambio, el cargo de aeropuerto era **solo informativo en el sitio** (`sitio-web/config.js` → `AIRPORT_FEE`, agregado únicamente en pantalla) y **nunca se sumaba al monto real que se cobraba** al confirmar una reserva o pagar por Webpay — el backend no tenía ningún concepto de "aeropuerto" en su cálculo de precio (era el punto #10 de este mismo documento). Esto significaba que, si un cliente pedía retiro en el aeropuerto, el sitio se lo mostraba en el total, pero al final el operador cobraba el monto sin ese cargo salvo que se acordara aparte por WhatsApp.
+
+Ahora el cargo de aeropuerto:
+- Se calcula **siempre en el backend** (`reservas/db.js` → `computeAirportFee`), nunca se confía en un monto que mande el navegador.
+- Se cobra **por tramo**: $20.000 si el vehículo se retira O se devuelve en el aeropuerto (no ambos), $30.000 si se retira Y se devuelve en el aeropuerto — nunca $40.000 (nunca se suman dos tramos de $20.000).
+- Queda guardado por separado en cada reserva: lugar de retiro, lugar de devolución, tipo de servicio (`airportServiceType`), cargo calculado (`airportFeeCalculated`), cargo finalmente confirmado (`airportFeeConfirmed`) y quién lo confirmó/modificó (`airportFeeConfirmedBy`).
+- Si el lugar es "otro" (personalizado), el sistema no le inventa un cargo: lo deja en $0 pero marcado para que el operador lo revise y lo ajuste manualmente antes de confirmar (en el panel, modal de "Confirmar disponibilidad", o con el botón "Editar cargo aeropuerto" en la pestaña Reservas).
+- Se probaron los 6 combos pedidos (agencia/aeropuerto/hotel en ambas direcciones) más el caso de lugar personalizado con ajuste manual del operador — todos correctos.
+
+**Se eliminó** el extra suelto "Entrega en aeropuerto" ($20.000 fijo) que existía en el catálogo de extras (`/api/extras`): contradecía la nueva regla por tramo (cobraba siempre $20.000 sin importar si era un tramo o ambos). El cargo de aeropuerto ya no pasa por el catálogo de extras.
+
+**Reserva manual desde el panel**: el formulario "Nueva reserva manual" ahora también pide lugar de retiro/devolución y muestra el cargo de aeropuerto calculado (editable) antes de guardar, para que las reservas cargadas a mano por teléfono también reflejen el cargo real.
+
+**Archivos modificados en esta ronda**:
+- `reservas/config.js`: `airportFee` (único) → `airportFeeLeg` (20.000) + `airportFeeRoundtrip` (30.000).
+- `reservas/db.js`: nuevas funciones `airportServiceType`, `computeAirportFee`, `airportServiceLabel`; `createRequest`, `confirmRequest`, `generatePaymentLinkForBooking` y `buildWhatsAppMessage` actualizadas para calcular/congelar/mostrar el cargo.
+- `reservas/routes/admin.js`: `POST /bookings` (reserva manual) y `POST /requests/:id/confirm` y `POST /bookings/:id/generate-payment-link` aceptan lugares/override de aeropuerto; `PATCH /bookings/:id` permite editar el cargo confirmado mientras la reserva no esté pagada.
+- `reservas/public/admin/index.html`: modal de confirmar solicitud muestra y permite editar el cargo antes de confirmar; tabla de Reservas muestra el cargo; botón nuevo "Editar cargo aeropuerto"; formulario de reserva manual con lugares y cargo.
+- `reservas/fix-precios-silla-aeropuerto.js` (nuevo, uso único): corrige el precio de la silla y elimina el extra "Entrega en aeropuerto" del catálogo.
+- `sitio-web/config.js`, `sitio-web/index.html`, `sitio-web/buscar.html`, `sitio-web/condiciones.html`: textos y cálculos actualizados a la regla por tramo; ningún texto sigue diciendo que el aeropuerto cuesta siempre $20.000.
+
+**Nota**: en `/buscar` no existe un selector interactivo donde el cliente elija la cantidad de sillas antes de escribir — los extras (silla incluida) se muestran informativamente y se coordinan por WhatsApp al confirmar, igual que antes de este cambio. Si en algún momento se quiere que el cliente elija cantidad de sillas y vea el total actualizado en la tarjeta sin escribir, es una mejora aparte a evaluar.
+
 ## 24. Extras nuevos, cotización por email y botón único de confirmación (2026-08-30, noche)
 
 A partir del análisis del checkout de Matu Rent a Car, se hicieron estos cambios en `/buscar`:
@@ -188,8 +217,8 @@ Se mantuvieron los enlaces de Instagram y Facebook ya existentes en el sitio ant
 ## 9. Dominio y despliegue
 El sitio está desplegado en `glaciares-web.netlify.app`. El `canonical` y los datos estructurados apuntan a `https://www.glaciaresrentacar.cl/`, que es el dominio oficial mencionado en el brief. Confirmar que ese dominio ya esté apuntando (DNS) al sitio de Netlify; si no, el canonical quedaría apuntando a un dominio que aún no resuelve.
 
-## 10. Cargo de aeropuerto: ¿por traslado o por servicio total?
-El cotizador nuevo (portada + `/buscar`) cobra los $20.000 de aeropuerto **una sola vez por reserva**, sin importar si se usa para el retiro, la devolución, o ambos. `sitio-web/config.js` centraliza este monto (`AIRPORT_FEE`). Falta confirmar si el negocio realmente cobra una sola vez por todo el servicio o si corresponde cobrar por cada traslado (retiro Y devolución por separado, es decir el doble si ambos son en el aeropuerto). Ajustar la lógica en `buscar.html` (función `airportApplies`/`computeCardTotal`) según se confirme.
+## 10. Cargo de aeropuerto: ¿por traslado o por servicio total? — RESUELTO (2026-08-30, madrugada)
+**Resuelto.** El dueño confirmó la regla definitiva: $20.000 por tramo (solo retiro o solo devolución), $30.000 si es retiro Y devolución en aeropuerto (nunca $40.000). Implementado y probado en el backend (`reservas/db.js` → `computeAirportFee`) y en todo el sitio — ver punto 25 para el detalle completo de archivos modificados.
 
 ## 11. Flota actual (actualizado 2026-08-27/28)
 La Tucson duplicada ya no existe: se eliminó la unidad de $39.000 y se dejó una sola "Hyundai Tucson" a $48.000/día. Se agregó "Peugeot 3008" a $59.000/día con foto real. Se quitó del catálogo la "Hyundai H1" (furgón) porque no había foto disponible; si se consigue la foto, se puede reincorporar en `index.html`/`buscar.html` (buscar `FLEET`/`fleet`).

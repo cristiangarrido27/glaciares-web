@@ -5,19 +5,20 @@
    (portada, /buscar). No se inventan cifras: estos valores vienen del
    brief comercial ya confirmado por el dueño del negocio.
 
-   IMPORTANTE: si el cargo de aeropuerto corresponde a un cobro por
-   cada traslado (retiro Y devolución) o a un único cobro por todo el
-   servicio, todavía no está confirmado. Mientras tanto este archivo
-   cobra el monto UNA sola vez por reserva (no se duplica si el
-   aeropuerto se usa tanto para el retiro como para la devolución).
-   Ver PENDIENTES_POR_CONFIRMAR.md, punto sobre "cargo de aeropuerto".
+   SERVICIO DE AEROPUERTO (regla definitiva, confirmada 2026-08-30): se cobra
+   POR TRAMO. Un solo tramo (solo retiro O solo devolución en aeropuerto) vale
+   AIRPORT_FEE_LEG. Si el vehículo se retira Y se devuelve en el aeropuerto,
+   corresponde el valor combinado AIRPORT_FEE_ROUNDTRIP — nunca la suma de dos
+   tramos ($40.000). El monto mostrado acá es solo informativo para el
+   cliente: el monto que realmente se cobra siempre lo calcula el backend.
    ===================================================================== */
 
 window.GLACIARES_CONFIG = {
   WHATSAPP_NUMBER: '56983335924',
   AGENCY_ADDRESS: 'Av. Francisco Javier Reyna 0473, Punta Arenas',
 
-  AIRPORT_FEE: 20000,        // Cobro único por servicio de aeropuerto (retiro y/o devolución)
+  AIRPORT_FEE_LEG: 20000,        // un tramo: solo retiro O solo devolución en aeropuerto
+  AIRPORT_FEE_ROUNDTRIP: 30000,  // retiro Y devolución en aeropuerto (nunca $40.000)
   ARGENTINA_PERMIT_FEE: 120000, // Permiso para viaje a Argentina
   MIN_DEPOSIT: 500000,       // Garantía referencial mínima ("desde")
 
@@ -72,7 +73,8 @@ window.GLACIARES_CONFIG = {
   RENTAL_POLICIES: {
     minimumAge: 22,                 // Confirmado por el dueño (2026-08-18)
     cancellationHours: 48,          // Confirmado por el dueño (2026-08-18)
-    airportFee: 20000,
+    airportFeeLeg: 20000,           // un tramo (solo retiro o solo devolución)
+    airportFeeRoundtrip: 30000,     // retiro y devolución en aeropuerto (nunca $40.000)
     argentinaPermitFee: 120000,
     additionalDriverDailyFee: 5000,
     additionalDriverIncludesVAT: false, // Se cobra "+ IVA" aparte
