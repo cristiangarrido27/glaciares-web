@@ -451,7 +451,30 @@ const FLEET = [
 ];
 const vehicle = FLEET.find(v => v.id === vehicleId);
 
-if (!vehicle || days <= 0) {
+if (confirmCode && linkToken) {
+  // Enlace seguro (viene del panel de administración o de un "Generar enlace
+  // de pago"): la disponibilidad, el vehículo y los precios ya quedaron
+  // fijados al confirmar y se validan siempre contra el backend — la página
+  // NUNCA debe depender de que la URL traiga vehicleId/fechas para funcionar,
+  // porque el enlace que arma el panel (reservas/routes/admin.js) solo incluye
+  // confirmCode y token.
+  document.getElementById('adicionalesGrid').style.display = 'grid';
+  if (vehicle && days > 0) {
+    // Si además la URL trae los datos de búsqueda (por ejemplo, un enlace
+    // armado desde esta misma página), se muestra también la columna de
+    // adicionales editable antes de validar.
+    initPage();
+  } else {
+    document.getElementById('leftCol').style.display = 'none';
+    document.getElementById('summaryPanel').style.display = 'none';
+    // Sin datos de vehículo/fechas en la URL no hay nada útil que ofrecer
+    // todavía en el bloque "antes de confirmar" (no hay cotización que
+    // mostrar); si el enlace resulta inválido, el aviso de error de abajo
+    // queda como el único contenido, en vez de dejar paneles de pago vacíos.
+    document.getElementById('preConfirmActions').style.display = 'none';
+    validateSecureLink();
+  }
+} else if (!vehicle || days <= 0) {
   document.getElementById('pageErrorBox').style.display = 'block';
 } else {
   document.getElementById('adicionalesGrid').style.display = 'grid';
