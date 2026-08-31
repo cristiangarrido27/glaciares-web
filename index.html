@@ -143,6 +143,14 @@
   @media (max-width:900px){ .hero-card{grid-template-columns:1fr;padding:30px;gap:28px;} .hero-carousel{aspect-ratio:16/9;} }
   @media (max-width:640px){ .hero-text h1{font-size:29px;} .hero-card{padding:22px;border-radius:20px;} }
 
+  /* Banner de promoción (4 días, paga 3) */
+  .promo-banner-wrap{max-width:1180px;margin:-34px auto 0;padding:0 20px;position:relative;z-index:5;}
+  .promo-banner-link{display:block;border-radius:18px;overflow:hidden;box-shadow:0 14px 34px rgba(10,37,64,.18);transition:transform .2s, box-shadow .2s;}
+  .promo-banner-link:hover{transform:translateY(-3px);box-shadow:0 20px 44px rgba(10,37,64,.24);}
+  .promo-banner-link img{display:block;width:100%;height:auto;}
+  .promo-banner-note{text-align:center;color:var(--slate-500);font-size:12px;margin-top:10px;}
+  @media (max-width:640px){ .promo-banner-wrap{margin-top:-18px;} .promo-banner-link{border-radius:14px;} }
+
   /* Filter tabs */
   .filter-tabs{display:flex;flex-wrap:wrap;justify-content:center;gap:10px;margin-bottom:40px;}
   .filter-btn{border:1px solid var(--slate-200);background:#fff;color:var(--navy);padding:9px 20px;border-radius:99px;font-weight:700;font-size:14px;transition:.2s;}
@@ -432,6 +440,14 @@
     <svg viewBox="0 0 1440 90" width="100%" height="80" preserveAspectRatio="none"><path fill="#ffffff" d="M0,32 C240,90 480,0 720,24 C960,48 1200,96 1440,40 L1440,100 L0,100 Z"/></svg>
   </div>
 </section>
+
+<!-- ===================== BANNER PROMOCIÓN 4x3 ===================== -->
+<div class="promo-banner-wrap">
+  <a href="#buscador" class="promo-banner-link" aria-label="Ver promoción: arrienda 4 días y paga 3. Cotizar ahora.">
+    <img src="https://glaciaresrentacar.cl/promocion/promo-4x3.jpg" alt="Promoción exclusiva: arrienda 4 días y paga 3 — Glaciares Rent a Car" width="2000" height="1125" loading="eager" onerror="this.closest('.promo-banner-wrap').style.display='none'">
+  </a>
+  <p class="promo-banner-note">Promoción sujeta a confirmación de disponibilidad por WhatsApp al momento de reservar.</p>
+</div>
 
 <!-- ===================== COTIZADOR (etapa 1: criterios de búsqueda) ===================== -->
 <div id="buscador" class="booking-bar-wrap">
