@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://copiloto-patagonia.netlify.app/sitemap.xml
