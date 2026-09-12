@@ -866,13 +866,18 @@ function renderResults() {
         <p>Podemos revisar otras fechas o buscar una alternativa para tu viaje.</p>
         <div class="empty-actions">
           <button type="button" class="btn-outline" id="emptyModify">MODIFICAR BÚSQUEDA</button>
-          <a href="https://wa.me/${WA_NUMBER}?text=${encodeURIComponent('Hola, no encontré vehículos disponibles para mi búsqueda del ' + state.pickUpDate + ' al ' + state.dropOffDate + '. ¿Pueden ayudarme?')}" target="_blank" rel="noopener" class="btn btn-whatsapp">CONSULTAR POR WHATSAPP</a>
+          <a href="https://wa.me/${WA_NUMBER}?text=${encodeURIComponent('Hola, no encontré vehículos disponibles para mi búsqueda del ' + state.pickUpDate + ' al ' + state.dropOffDate + '. ¿Pueden ayudarme?')}" target="_blank" rel="noopener" class="btn btn-whatsapp" id="emptyWhatsapp">CONSULTAR POR WHATSAPP</a>
         </div>
       </div>`;
     const btn = document.getElementById('emptyModify');
     if (btn) btn.addEventListener('click', () => {
       document.getElementById('searchPanel').classList.add('open');
       document.getElementById('searchPanel').scrollIntoView({ behavior: 'smooth', block: 'start' });
+    });
+    const emptyWhatsapp = document.getElementById('emptyWhatsapp');
+    if (emptyWhatsapp) emptyWhatsapp.addEventListener('click', () => {
+      if (window.trackEvent) window.trackEvent('whatsapp-sin-resultados');
+      if (window.reportAdsConversion) window.reportAdsConversion('whatsapp_otras_paginas');
     });
     return;
   }
@@ -939,6 +944,13 @@ loadResults();
    (Webpay) ya no ocurren en esta página: todo eso pasa a /reserva/adicionales,
    a la que se llega desde el único botón de cada tarjeta ("ELEGIR VEHÍCULO Y
    PERSONALIZAR"). Esta página se limita a buscar y mostrar vehículos. */
+
+/* ---- Medición de conversión: botón flotante de WhatsApp (Google Ads: "Contacto", 2ª acción) ---- */
+const waFloatBtn = document.getElementById('waFloat');
+if (waFloatBtn) waFloatBtn.addEventListener('click', () => {
+  if (window.trackEvent) window.trackEvent('whatsapp-float-otras-paginas');
+  if (window.reportAdsConversion) window.reportAdsConversion('whatsapp_otras_paginas');
+});
 </script>
 </body>
 </html>

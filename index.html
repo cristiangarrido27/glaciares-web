@@ -1070,7 +1070,7 @@ document.getElementById('contactForm').addEventListener('submit', (e) => {
   const data = new FormData(e.target);
   const msg = `Hola, soy ${data.get('nombre')} (tel: ${data.get('telefono')}). ${data.get('mensaje') || ''}`;
   if (window.trackEvent) window.trackEvent('contacto_whatsapp');
-  if (window.reportAdsConversion) window.reportAdsConversion();
+  if (window.reportAdsConversion) window.reportAdsConversion('whatsapp');
   window.open('https://wa.me/56983335924?text=' + encodeURIComponent(msg), '_blank');
 });
 
@@ -1212,8 +1212,9 @@ searchForm.addEventListener('submit', (e) => {
 /* ---- Medición de clics de conversión (WhatsApp, Cómo llegar, teléfono, correo) ---- */
 document.addEventListener('click', (e) => {
   const el = e.target.closest('[data-track]');
-  if (el && window.trackEvent) window.trackEvent(el.dataset.track);
-  if (el && el.dataset.track === 'whatsapp-float' && window.reportAdsConversion) window.reportAdsConversion();
+  if (el && window.trackEvent) window.trackEvent(el.dataset.track, el.dataset.vehicle ? { vehicle: el.dataset.vehicle } : undefined);
+  if (el && el.dataset.track === 'whatsapp-float' && window.reportAdsConversion) window.reportAdsConversion('whatsapp');
+  if (el && el.dataset.track === 'cotizar-vehiculo' && window.reportAdsConversion) window.reportAdsConversion('formulario_cotizacion');
   const link = e.target.closest('a[href^="tel:"]');
   if (link && window.trackEvent) window.trackEvent('click_telefono');
   const mail = e.target.closest('a[href^="mailto:"]');

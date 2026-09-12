@@ -7,12 +7,13 @@
 
    Eventos de conversión que ya están instrumentados en index.html
    mediante window.trackEvent(nombre, datos):
-     - whatsapp-float        (clic en botón flotante de WhatsApp) [Google Ads: conversión "WhatsApp"]
+     - whatsapp-float        (clic en botón flotante de WhatsApp, home) [Google Ads: "Contacto" → whatsapp]
      - mobile-cta-cotizar    (clic en barra fija móvil "Cotizar ahora")
-     - cotizador_buscar      (uso del buscador de disponibilidad)
-     - cotizar-vehiculo      (clic en "Cotizar este vehículo" por auto)
-     - reserva_creada        (reserva generada antes de ir a pagar)
-     - contacto_whatsapp     (envío del formulario de contacto) [Google Ads: conversión "WhatsApp"]
+     - cotizador_buscar      (uso del buscador de disponibilidad) [Google Ads: "Solicitar cotización" → pendiente, ver GOOGLE_ADS_CONVERSIONES.solicitar_cotizacion]
+     - cotizar-vehiculo      (clic en "Cotizar este vehículo" por auto) [Google Ads: "Formulario Cotización" → formulario_cotizacion]
+     - solicitar_confirmacion (botón "SOLICITAR CONFIRMACIÓN" en /reserva/adicionales) [Google Ads: "Formulario Glaciares" → formulario_glaciares]
+     - contacto_whatsapp     (envío del formulario de contacto, home) [Google Ads: "Contacto" → whatsapp]
+     - whatsapp-float (en /buscar y /reserva/adicionales) y "CONSULTAR POR WHATSAPP" sin resultados [Google Ads: "Contacto" (2ª acción) → whatsapp_otras_paginas]
      - click_telefono        (clic en un enlace tel:)
      - click_correo          (clic en un enlace mailto:)
      - click_como_llegar     (clic en el botón/enlace "Cómo llegar")
@@ -21,8 +22,20 @@
 window.ANALYTICS_CONFIG = {
   GOOGLE_ANALYTICS_ID: null,   // Ej: "G-XXXXXXXXXX" (Google Analytics 4)
   GOOGLE_ADS_ID: "AW-16582335899",
-  GOOGLE_ADS_CONVERSION_LABEL: "AxklCK-F9IoaEJu7ieM9", // Acción de conversión "WhatsApp"
   META_PIXEL_ID: null,         // Ej: "1234567890123456"
+
+  /* Acciones de conversión configuradas en Google Ads (Objetivos → Conversiones).
+     Cada clave es un nombre interno usado en el código de este sitio; el valor
+     es el "conversion label" que entrega Google Ads para esa acción específica.
+     Un valor null significa que la acción existe en Google Ads pero todavía no
+     tiene un label utilizable (ver nota junto a "solicitar_cotizacion"). */
+  GOOGLE_ADS_CONVERSIONS: {
+    whatsapp: "AxklCK-F9IoaEJu7ieM9",                // "Contacto" — WhatsApp flotante y formulario de contacto (home)
+    whatsapp_otras_paginas: "7KQqCO-B8qscEJu7ieM9",  // "Contacto" (2ª acción) — WhatsApp flotante en /buscar y /reserva/adicionales, y "consultar por WhatsApp" sin resultados
+    solicitar_cotizacion: null,                       // "Solicitar cotización" — Google Ads no terminó de generar el label (revisar en Objetivos → Conversiones antes de activar)
+    formulario_glaciares: "Og1rCOqC8qscEJu7ieM9",    // "Enviar formulario de clientes potenciales" — solicitud de confirmación de reserva (/reserva/adicionales)
+    formulario_cotizacion: "A3LBCOvP8YoaEJu7ieM9",   // "Enviar formulario de clientes potenciales" (2ª acción) — "Cotizar este vehículo" (home)
+  },
 };
 
 /* Función central de tracking. Mientras no haya IDs configurados,
@@ -80,34 +93,48 @@ if (window.ANALYTICS_CONFIG.GOOGLE_ANALYTICS_ID || window.ANALYTICS_CONFIG.GOOGL
 // }
 
 /* =====================================================================
-   CONVERSIÓN DE GOOGLE ADS "WhatsApp"
+   CONVERSIONES DE GOOGLE ADS
    =====================================================================
-   Los dos puntos de WhatsApp instrumentados (botón flotante y formulario
-   de contacto) abren WhatsApp en una PESTAÑA NUEVA (target="_blank" /
-   window.open), así que la pestaña del sitio nunca navega fuera: basta
+   Todos los puntos de contacto instrumentados (WhatsApp, formularios)
+   abren WhatsApp o hacen su trabajo en una PESTAÑA NUEVA o vía fetch en
+   segundo plano, así que la pestaña del sitio nunca navega fuera: basta
    con disparar el evento de conversión en paralelo al clic, sin
-   interceptar ni retrasar la apertura de WhatsApp.
+   interceptar ni retrasar la acción del usuario.
+
+   `key` debe ser una de las claves de GOOGLE_ADS_CONVERSIONS. Si se omite,
+   se usa "whatsapp" (comportamiento histórico, para no romper llamadas
+   existentes). Si la clave no tiene un label configurado (null), no se
+   envía nada a Google Ads y solo se deja un aviso en consola — no se
+   inventan IDs.
    --------------------------------------------------------------------- */
-window.reportAdsConversion = function () {
+window.reportAdsConversion = function (key, extraParams) {
+  key = key || 'whatsapp';
   try {
-    if (typeof gtag === 'function' && window.ANALYTICS_CONFIG.GOOGLE_ADS_ID && window.ANALYTICS_CONFIG.GOOGLE_ADS_CONVERSION_LABEL) {
-      gtag('event', 'conversion', {
-        'send_to': window.ANALYTICS_CONFIG.GOOGLE_ADS_ID + '/' + window.ANALYTICS_CONFIG.GOOGLE_ADS_CONVERSION_LABEL,
-      });
+    var conversions = window.ANALYTICS_CONFIG.GOOGLE_ADS_CONVERSIONS || {};
+    var label = conversions[key];
+    if (!label) {
+      console.debug('[reportAdsConversion] sin conversion label para "' + key + '" — evento no enviado a Google Ads todavía');
+      return;
+    }
+    if (typeof gtag === 'function' && window.ANALYTICS_CONFIG.GOOGLE_ADS_ID) {
+      var payload = { 'send_to': window.ANALYTICS_CONFIG.GOOGLE_ADS_ID + '/' + label };
+      for (var k in (extraParams || {})) { payload[k] = extraParams[k]; }
+      gtag('event', 'conversion', payload);
     }
   } catch (e) {
     console.warn('reportAdsConversion error', e);
   }
 };
 
-/* gtag_report_conversion(url): variante estándar recomendada por Google
-   Ads para un enlace que SÍ navega en la MISMA pestaña (dispara la
-   conversión y recién en el callback redirige a `url`, con un timeout
-   de seguridad para no bloquear la navegación si gtag no responde).
-   No se usa hoy en whatsapp-float ni contacto_whatsapp (ver arriba),
-   pero queda disponible por si en el futuro se agrega un botón de
-   WhatsApp sin target="_blank". */
-window.gtag_report_conversion = function (url) {
+/* gtag_report_conversion(url, key): variante estándar recomendada por
+   Google Ads para un enlace que SÍ navega en la MISMA pestaña (dispara la
+   conversión y recién en el callback redirige a `url`, con un timeout de
+   seguridad para no bloquear la navegación si gtag no responde). No se usa
+   hoy en los puntos de contacto instrumentados (todos abren WhatsApp en
+   pestaña nueva o van por fetch), pero queda disponible por si en el
+   futuro se agrega un flujo que sí navegue en la misma pestaña. */
+window.gtag_report_conversion = function (url, key) {
+  key = key || 'whatsapp';
   var called = false;
   var callback = function () {
     if (called) return;
@@ -117,9 +144,11 @@ window.gtag_report_conversion = function (url) {
     }
   };
   try {
-    if (typeof gtag === 'function' && window.ANALYTICS_CONFIG.GOOGLE_ADS_ID && window.ANALYTICS_CONFIG.GOOGLE_ADS_CONVERSION_LABEL) {
+    var conversions = window.ANALYTICS_CONFIG.GOOGLE_ADS_CONVERSIONS || {};
+    var label = conversions[key];
+    if (typeof gtag === 'function' && window.ANALYTICS_CONFIG.GOOGLE_ADS_ID && label) {
       gtag('event', 'conversion', {
-        'send_to': window.ANALYTICS_CONFIG.GOOGLE_ADS_ID + '/' + window.ANALYTICS_CONFIG.GOOGLE_ADS_CONVERSION_LABEL,
+        'send_to': window.ANALYTICS_CONFIG.GOOGLE_ADS_ID + '/' + label,
         'event_callback': callback,
         'event_timeout': 2000,
       });
