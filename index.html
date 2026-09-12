@@ -1070,6 +1070,7 @@ document.getElementById('contactForm').addEventListener('submit', (e) => {
   const data = new FormData(e.target);
   const msg = `Hola, soy ${data.get('nombre')} (tel: ${data.get('telefono')}). ${data.get('mensaje') || ''}`;
   if (window.trackEvent) window.trackEvent('contacto_whatsapp');
+  if (window.reportAdsConversion) window.reportAdsConversion();
   window.open('https://wa.me/56983335924?text=' + encodeURIComponent(msg), '_blank');
 });
 
@@ -1212,6 +1213,7 @@ searchForm.addEventListener('submit', (e) => {
 document.addEventListener('click', (e) => {
   const el = e.target.closest('[data-track]');
   if (el && window.trackEvent) window.trackEvent(el.dataset.track);
+  if (el && el.dataset.track === 'whatsapp-float' && window.reportAdsConversion) window.reportAdsConversion();
   const link = e.target.closest('a[href^="tel:"]');
   if (link && window.trackEvent) window.trackEvent('click_telefono');
   const mail = e.target.closest('a[href^="mailto:"]');
