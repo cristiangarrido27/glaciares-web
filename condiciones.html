@@ -143,9 +143,16 @@
   </a>
 </div>
 
+<script src="config.js"></script>
+<script src="analytics-config.js"></script>
 <script>
 document.getElementById('year').textContent = new Date().getFullYear();
 const waFloat = document.getElementById('waFloat');
+/* Medición de conversión: botón flotante de WhatsApp (Google Ads: "Contacto", 2ª acción) */
+waFloat.addEventListener('click', () => {
+  if (window.trackEvent) window.trackEvent('whatsapp-float-otras-paginas');
+  if (window.reportAdsConversion) window.reportAdsConversion('whatsapp_otras_paginas');
+});
 const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
 if (!prefersReducedMotion) {
   let waPulsePaused = false;

@@ -797,11 +797,18 @@ async function requestConfirmationViaWhatsapp() {
   const msg = buildWhatsappMessage(requestCode);
   window.open(`https://wa.me/${WA_NUMBER}?text=${encodeURIComponent(msg)}`, '_blank', 'noopener');
   if (window.trackEvent) window.trackEvent('solicitar_confirmacion', { requestCode });
+  if (window.reportAdsConversion) window.reportAdsConversion('formulario_glaciares');
   return requestCode;
 }
 
 function wireMainCta() {
   document.getElementById('btnRequestConfirmation').addEventListener('click', requestConfirmationViaWhatsapp);
+  /* Medición de conversión: botón flotante de WhatsApp (Google Ads: "Contacto", 2ª acción) */
+  const waFloatBtn = document.getElementById('waFloat');
+  if (waFloatBtn) waFloatBtn.addEventListener('click', () => {
+    if (window.trackEvent) window.trackEvent('whatsapp-float-otras-paginas');
+    if (window.reportAdsConversion) window.reportAdsConversion('whatsapp_otras_paginas');
+  });
 }
 
 /* =====================================================================
