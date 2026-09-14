@@ -367,6 +367,7 @@
   .faq-item summary .faq-toggle{flex-shrink:0;width:26px;height:26px;border-radius:50%;background:var(--slate-100);color:var(--navy);display:flex;align-items:center;justify-content:center;font-size:16px;font-weight:800;}
   .faq-item[open] summary .faq-toggle{background:var(--accent);}
   .faq-item p{color:var(--slate-600);font-size:14px;line-height:1.6;padding:0 0 18px;}
+.card[hidden]{display:none !important;}
 </style>
 </head>
 <body>
@@ -576,7 +577,68 @@
     <button data-filter="citycar" class="filter-btn">Citycar</button>
     <button data-filter="suv" class="filter-btn">SUV</button>
   </div>
-  <div id="fleetGrid" class="grid grid-3"></div>
+  <div id="fleetGrid" class="grid grid-3">
+    <div class="card" data-cat="citycar">
+      <img src="https://glaciaresrentacar.cl/flota/suzuki-swift.webp" alt="Suzuki Swift, categoría Citycar, disponible en Glaciares Rent a Car Punta Arenas" loading="lazy" width="400" height="300" onerror="this.onerror=null;this.src='https://glaciaresrentacar.cl/LOGOSINFONDO.png';this.style.objectFit='contain';this.style.background='#f1f5f9';this.style.padding='30px';">
+      <div class="card-body">
+        <span class="card-cat">Citycar</span>
+        <h3>Suzuki Swift</h3>
+        <p class="price">$35.000<small> / día, desde</small></p>
+        <p class="avail-note"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20 6 9 17l-5-5"/></svg>Disponibilidad sujeta a confirmación</p>
+        <a href="https://wa.me/56983335924?text=Hola%2C%20quiero%20cotizar%20el%20Suzuki%20Swift%20%28%2435.000%2Fd%C3%ADa%29." target="_blank" rel="noopener" class="btn-outline" style="margin-top:14px;" data-track="cotizar-vehiculo" data-vehicle="Suzuki Swift">COTIZAR ESTE VEHÍCULO</a>
+      </div>
+    </div>
+    <div class="card" data-cat="citycar">
+      <img src="https://glaciaresrentacar.cl/flota/suzuki-dzire.webp" alt="Suzuki Dzire, categoría Citycar, disponible en Glaciares Rent a Car Punta Arenas" loading="lazy" width="400" height="300" onerror="this.onerror=null;this.src='https://glaciaresrentacar.cl/LOGOSINFONDO.png';this.style.objectFit='contain';this.style.background='#f1f5f9';this.style.padding='30px';">
+      <div class="card-body">
+        <span class="card-cat">Citycar</span>
+        <h3>Suzuki Dzire</h3>
+        <p class="price">$38.000<small> / día, desde</small></p>
+        <p class="avail-note"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20 6 9 17l-5-5"/></svg>Disponibilidad sujeta a confirmación</p>
+        <a href="https://wa.me/56983335924?text=Hola%2C%20quiero%20cotizar%20el%20Suzuki%20Dzire%20%28%2438.000%2Fd%C3%ADa%29." target="_blank" rel="noopener" class="btn-outline" style="margin-top:14px;" data-track="cotizar-vehiculo" data-vehicle="Suzuki Dzire">COTIZAR ESTE VEHÍCULO</a>
+      </div>
+    </div>
+    <div class="card" data-cat="suv">
+      <img src="https://glaciaresrentacar.cl/flota/chevrolet-captiva.webp" alt="Chevrolet Captiva, categoría SUV, disponible en Glaciares Rent a Car Punta Arenas" loading="lazy" width="400" height="300" onerror="this.onerror=null;this.src='https://glaciaresrentacar.cl/LOGOSINFONDO.png';this.style.objectFit='contain';this.style.background='#f1f5f9';this.style.padding='30px';">
+      <div class="card-body">
+        <span class="card-cat">SUV</span>
+        <h3>Chevrolet Captiva</h3>
+        <p class="price">$50.000<small> / día, desde</small></p>
+        <p class="avail-note"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20 6 9 17l-5-5"/></svg>Disponibilidad sujeta a confirmación</p>
+        <a href="https://wa.me/56983335924?text=Hola%2C%20quiero%20cotizar%20el%20Chevrolet%20Captiva%20%28%2450.000%2Fd%C3%ADa%29." target="_blank" rel="noopener" class="btn-outline" style="margin-top:14px;" data-track="cotizar-vehiculo" data-vehicle="Chevrolet Captiva">COTIZAR ESTE VEHÍCULO</a>
+      </div>
+    </div>
+    <div class="card" data-cat="suv">
+      <img src="https://glaciaresrentacar.cl/flota/kia-sorento.webp" alt="Kia Sorento, categoría SUV, disponible en Glaciares Rent a Car Punta Arenas" loading="lazy" width="400" height="300" onerror="this.onerror=null;this.src='https://glaciaresrentacar.cl/LOGOSINFONDO.png';this.style.objectFit='contain';this.style.background='#f1f5f9';this.style.padding='30px';">
+      <div class="card-body">
+        <span class="card-cat">SUV</span>
+        <h3>Kia Sorento</h3>
+        <p class="price">$40.000<small> / día, desde</small></p>
+        <p class="avail-note"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20 6 9 17l-5-5"/></svg>Disponibilidad sujeta a confirmación</p>
+        <a href="https://wa.me/56983335924?text=Hola%2C%20quiero%20cotizar%20el%20Kia%20Sorento%20%28%2440.000%2Fd%C3%ADa%29." target="_blank" rel="noopener" class="btn-outline" style="margin-top:14px;" data-track="cotizar-vehiculo" data-vehicle="Kia Sorento">COTIZAR ESTE VEHÍCULO</a>
+      </div>
+    </div>
+    <div class="card" data-cat="suv">
+      <img src="https://glaciaresrentacar.cl/flota/hyundai-tucson.webp" alt="Hyundai Tucson, categoría SUV, disponible en Glaciares Rent a Car Punta Arenas" loading="lazy" width="400" height="300" onerror="this.onerror=null;this.src='https://glaciaresrentacar.cl/LOGOSINFONDO.png';this.style.objectFit='contain';this.style.background='#f1f5f9';this.style.padding='30px';">
+      <div class="card-body">
+        <span class="card-cat">SUV</span>
+        <h3>Hyundai Tucson</h3>
+        <p class="price">$48.000<small> / día, desde</small></p>
+        <p class="avail-note"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20 6 9 17l-5-5"/></svg>Disponibilidad sujeta a confirmación</p>
+        <a href="https://wa.me/56983335924?text=Hola%2C%20quiero%20cotizar%20el%20Hyundai%20Tucson%20%28%2448.000%2Fd%C3%ADa%29." target="_blank" rel="noopener" class="btn-outline" style="margin-top:14px;" data-track="cotizar-vehiculo" data-vehicle="Hyundai Tucson">COTIZAR ESTE VEHÍCULO</a>
+      </div>
+    </div>
+    <div class="card" data-cat="suv">
+      <img src="https://glaciaresrentacar.cl/flota/peugeot-3008.webp" alt="Peugeot 3008, categoría SUV, disponible en Glaciares Rent a Car Punta Arenas" loading="lazy" width="400" height="300" onerror="this.onerror=null;this.src='https://glaciaresrentacar.cl/LOGOSINFONDO.png';this.style.objectFit='contain';this.style.background='#f1f5f9';this.style.padding='30px';">
+      <div class="card-body">
+        <span class="card-cat">SUV</span>
+        <h3>Peugeot 3008</h3>
+        <p class="price">$59.000<small> / día, desde</small></p>
+        <p class="avail-note"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20 6 9 17l-5-5"/></svg>Disponibilidad sujeta a confirmación</p>
+        <a href="https://wa.me/56983335924?text=Hola%2C%20quiero%20cotizar%20el%20Peugeot%203008%20%28%2459.000%2Fd%C3%ADa%29." target="_blank" rel="noopener" class="btn-outline" style="margin-top:14px;" data-track="cotizar-vehiculo" data-vehicle="Peugeot 3008">COTIZAR ESTE VEHÍCULO</a>
+      </div>
+    </div>
+  </div>
 </section>
 
 <!-- ===================== BENEFICIOS DEL SERVICIO ===================== -->
@@ -1003,18 +1065,12 @@ const fleet = [
   { id: 8, name: 'Peugeot 3008', price: 59000, cat: 'suv', catLabel: 'SUV', img: IMG_BASE + 'peugeot-3008.webp' },
 ];
 const fleetGrid = document.getElementById('fleetGrid');
+/* Las tarjetas viven en el HTML (visibles para Google y sin depender de JS).
+   Esta funcion solo las muestra u oculta segun el filtro elegido. */
 function renderFleet(filter){
-  fleetGrid.innerHTML = fleet.filter(v => filter === 'todos' || v.cat === filter).map(v => `
-    <div class="card">
-      <img src="${v.img}" alt="${v.name}, categoría ${v.catLabel}, disponible en Glaciares Rent a Car Punta Arenas" loading="lazy" width="400" height="300" onerror="this.onerror=null;this.src='https://glaciaresrentacar.cl/LOGOSINFONDO.png';this.style.objectFit='contain';this.style.background='#f1f5f9';this.style.padding='30px';">
-      <div class="card-body">
-        <span class="card-cat">${v.catLabel}</span>
-        <h3>${v.name}</h3>
-        <p class="price">$${v.price.toLocaleString('es-CL')}<small> / día, desde</small></p>
-        <p class="avail-note"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20 6 9 17l-5-5"/></svg>Disponibilidad sujeta a confirmación</p>
-        <a href="https://wa.me/56983335924?text=${encodeURIComponent('Hola, quiero cotizar el ' + v.name + ' ($' + v.price.toLocaleString('es-CL') + '/día).')}" target="_blank" rel="noopener" class="btn-outline" style="margin-top:14px;" data-track="cotizar-vehiculo" data-vehicle="${v.name}">COTIZAR ESTE VEHÍCULO</a>
-      </div>
-    </div>`).join('');
+  fleetGrid.querySelectorAll('.card').forEach(card => {
+    card.hidden = !(filter === 'todos' || card.dataset.cat === filter);
+  });
 }
 renderFleet('todos');
 document.querySelectorAll('.filter-btn').forEach(btn => {
@@ -1213,7 +1269,7 @@ searchForm.addEventListener('submit', (e) => {
 document.addEventListener('click', (e) => {
   const el = e.target.closest('[data-track]');
   if (el && window.trackEvent) window.trackEvent(el.dataset.track);
-  if (el && el.dataset.track === 'whatsapp-float' && window.reportAdsConversion) window.reportAdsConversion();
+  if (el && ['whatsapp-float','cotizar-vehiculo','mobile-cta-cotizar'].includes(el.dataset.track) && window.reportAdsConversion) window.reportAdsConversion();
   const link = e.target.closest('a[href^="tel:"]');
   if (link && window.trackEvent) window.trackEvent('click_telefono');
   const mail = e.target.closest('a[href^="mailto:"]');
