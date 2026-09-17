@@ -7,8 +7,8 @@
 <meta name="description" content="Resultados de tu búsqueda de arriendo de vehículos en Punta Arenas con Glaciares Rent a Car.">
 <link rel="canonical" href="https://www.glaciaresrentacar.cl/buscar.html">
 <meta name="robots" content="noindex, follow">
-<link rel="icon" href="https://glaciaresrentacar.cl/LOGOSINFONDO.png">
-<link rel="apple-touch-icon" href="https://glaciaresrentacar.cl/LOGOSINFONDO.png">
+<link rel="icon" href="https://glaciaresrentacar.cl/img/logo-glaciares-192.png">
+<link rel="apple-touch-icon" href="https://glaciaresrentacar.cl/img/logo-glaciares-192.png">
 
 <style>
   *{box-sizing:border-box;margin:0;padding:0;}
@@ -277,7 +277,7 @@
 <header>
   <div class="header-inner">
     <a href="index.html" class="brand">
-      <img src="https://glaciaresrentacar.cl/LOGOSINFONDO.png" alt="Logo Glaciares Rent a Car">
+      <img src="https://glaciaresrentacar.cl/img/logo-glaciares.webp" alt="Logo Glaciares Rent a Car" width="44" height="44">
       <span class="brand-text">GLACIARES<small>RENT A CAR</small></span>
     </a>
     <nav class="main-nav" aria-label="Navegación principal">
@@ -423,7 +423,7 @@
           <svg class="urgency-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 3"/></svg>
           <div>
             <strong>¡Aprovecha el precio especial!</strong>
-            <p>Reserva y paga ahora para asegurar tu vehículo con el descuento por reserva anticipada.</p>
+            <p>Paga el total ahora y obtén 15% de descuento en el arriendo. Si tu arriendo es de 4 días o más, también puede aplicar la promo 4×3: te confirmamos la opción más conveniente (no son acumulables).</p>
           </div>
         </div>
         <div id="resultsList"></div>
@@ -888,7 +888,7 @@ function renderResults() {
     const showDiscount = v.confirmedAvailability && v.discountPct > 0 && v.subtotal > subtotal;
     return `
     <div class="rcard" style="animation-delay:${prefersReducedMotion ? 0 : Math.min(i, 6) * 70}ms;">
-      <img src="${v.img}" alt="${v.name}" loading="lazy" onerror="this.onerror=null;this.src='https://glaciaresrentacar.cl/LOGOSINFONDO.png';this.style.objectFit='contain';this.style.background='#f1f5f9';this.style.padding='20px';">
+      <img src="${v.img}" alt="${v.name}" loading="lazy" onerror="this.onerror=null;this.src='https://glaciaresrentacar.cl/img/logo-glaciares.webp';this.style.objectFit='contain';this.style.background='#f1f5f9';this.style.padding='20px';">
       <div>
         <span class="rcard-cat">${v.catLabel}</span>
         <h3>${v.name}</h3>
@@ -903,7 +903,7 @@ function renderResults() {
           <span class="pamount">$${subtotal.toLocaleString('es-CL')}</span>
           ${showDiscount ? `<span class="psave">Ahorras -${v.discountPct}% pagando el total ahora</span>` : ''}
         </div>
-        <p class="deposit-note">Garantía requerida: desde $${(v.deposit || cfg.MIN_DEPOSIT || 500000).toLocaleString('es-CL')}, dependiendo del vehículo. No se cobra ahora.</p>
+        <p class="deposit-note">${state.argentina === 'si' ? `Garantía requerida para viajar a Argentina: $${(cfg.ARGENTINA_GUARANTEE || 750000).toLocaleString('es-CL')}` : `Garantía requerida: desde $${(v.deposit || cfg.MIN_DEPOSIT || 500000).toLocaleString('es-CL')}, dependiendo del vehículo`}. No se cobra ahora.</p>
         <div class="rcard-actions">
           <button type="button" class="btn-confirm" data-vid="${v.id}">ELEGIR VEHÍCULO Y PERSONALIZAR</button>
         </div>

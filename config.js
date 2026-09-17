@@ -21,6 +21,7 @@ window.GLACIARES_CONFIG = {
   AIRPORT_FEE_ROUNDTRIP: 30000,  // retiro Y devolución en aeropuerto (nunca $40.000)
   ARGENTINA_PERMIT_FEE: 120000, // Permiso para viaje a Argentina
   MIN_DEPOSIT: 500000,       // Garantía referencial mínima ("desde")
+  ARGENTINA_GUARANTEE: 750000, // Garantía para viajes a Argentina (confirmado 2026-09-17)
 
   PICKUP_PLACES: [
     { id: 'agencia', label: 'Agencia en Punta Arenas (ciudad)', extraFee: 0 },
@@ -79,6 +80,6 @@ window.GLACIARES_CONFIG = {
     additionalDriverDailyFee: 5000,
     additionalDriverIncludesVAT: false, // Se cobra "+ IVA" aparte
     chileGuaranteeMinimum: 500000,
-    argentinaGuarantee: 1000000,
+    argentinaGuarantee: 750000,     // Confirmado por el dueño (2026-09-17)
   },
 };

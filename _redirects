@@ -1,3 +1,6 @@
 /buscar               /buscar.html               200
 /condiciones          /condiciones.html          200
 /reserva/adicionales  /reserva-adicionales.html  200
+
+# Archivos internos: nunca públicos
+/PENDIENTES_POR_CONFIRMAR.md  /404.html  404!

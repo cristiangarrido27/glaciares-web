@@ -7,8 +7,8 @@
 <meta name="description" content="Arriendo de vehículos en Punta Arenas para recorrer Torres del Paine, Puerto Natales y la Patagonia. Consulta disponibilidad y reserva por WhatsApp.">
 <link rel="canonical" href="https://www.glaciaresrentacar.cl/">
 <meta name="robots" content="index, follow">
-<link rel="icon" href="https://glaciaresrentacar.cl/LOGOSINFONDO.png">
-<link rel="apple-touch-icon" href="https://glaciaresrentacar.cl/LOGOSINFONDO.png">
+<link rel="icon" href="https://glaciaresrentacar.cl/img/logo-glaciares-192.png">
+<link rel="apple-touch-icon" href="https://glaciaresrentacar.cl/img/logo-glaciares-192.png">
 
 <!-- Open Graph / Facebook / WhatsApp -->
 <meta property="og:type" content="website">
@@ -378,7 +378,7 @@
 <header>
   <div class="header-inner">
     <a href="#inicio" class="brand">
-      <img src="https://glaciaresrentacar.cl/LOGOSINFONDO.png" alt="Logo Glaciares Rent a Car">
+      <img src="https://glaciaresrentacar.cl/img/logo-glaciares.webp" alt="Logo Glaciares Rent a Car" width="44" height="44">
       <span class="brand-text">GLACIARES<small>RENT A CAR</small></span>
     </a>
     <nav class="main-nav" aria-label="Navegación principal">
@@ -418,10 +418,10 @@
         <button type="button" class="hero-car-btn prev" id="heroPrev" aria-label="Imagen anterior">
           <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M15 18l-6-6 6-6"/></svg>
         </button>
-        <img class="active" src="https://glaciaresrentacar.cl/portada/portada-patagonia-01.webp" alt="Torres del Paine" width="900" height="620">
-        <img src="https://glaciaresrentacar.cl/portada/portada-patagonia-02.webp" alt="Costanera del Estrecho de Magallanes" width="900" height="620">
-        <img src="https://glaciaresrentacar.cl/portada/portada-patagonia-03.webp" alt="Plaza de Armas Muñoz Gamero" width="900" height="620">
-        <img src="https://glaciaresrentacar.cl/portada/portada-patagonia-04.webp" alt="Faro San Isidro" width="900" height="620">
+        <img class="active" src="https://glaciaresrentacar.cl/portada/portada-patagonia-01.webp" alt="Torres del Paine" width="900" height="620" fetchpriority="high">
+        <img src="https://glaciaresrentacar.cl/portada/portada-patagonia-02.webp" loading="lazy" decoding="async" alt="Costanera del Estrecho de Magallanes" width="900" height="620">
+        <img src="https://glaciaresrentacar.cl/portada/portada-patagonia-03.webp" loading="lazy" decoding="async" alt="Plaza de Armas Muñoz Gamero" width="900" height="620">
+        <img src="https://glaciaresrentacar.cl/portada/portada-patagonia-04.webp" loading="lazy" decoding="async" alt="Faro San Isidro" width="900" height="620">
         <div class="hero-car-dots" id="heroDots">
           <span class="active"></span><span></span><span></span><span></span>
         </div>
@@ -445,9 +445,9 @@
 <!-- ===================== BANNER PROMOCIÓN 4x3 ===================== -->
 <div class="promo-banner-wrap">
   <a href="#buscador" class="promo-banner-link" aria-label="Ver promoción: arrienda 4 días y paga 3. Cotizar ahora.">
-    <img src="https://glaciaresrentacar.cl/promocion/promo-4x3.jpg" alt="Promoción exclusiva: arrienda 4 días y paga 3 — Glaciares Rent a Car" width="2000" height="1125" loading="eager" onerror="this.closest('.promo-banner-wrap').style.display='none'">
+    <img src="https://glaciaresrentacar.cl/promocion/promo-4x3.webp" srcset="https://glaciaresrentacar.cl/promocion/promo-4x3-800.webp 800w, https://glaciaresrentacar.cl/promocion/promo-4x3.webp 1400w" sizes="(max-width: 1180px) 100vw, 1140px" alt="Promoción exclusiva: arrienda 4 días y paga 3 — Glaciares Rent a Car" width="1400" height="781" loading="lazy" decoding="async" onerror="this.closest('.promo-banner-wrap').style.display='none'">
   </a>
-  <p class="promo-banner-note">Promoción sujeta a confirmación de disponibilidad por WhatsApp al momento de reservar.</p>
+  <p class="promo-banner-note"><strong>Arrienda 4 días y paga 3.</strong> No acumulable con el 15&nbsp;% por reserva anticipada: aplicamos la opción que más te convenga. Sujeta a disponibilidad; se aplica al confirmar tu reserva por WhatsApp.</p>
 </div>
 
 <!-- ===================== COTIZADOR (etapa 1: criterios de búsqueda) ===================== -->
@@ -510,7 +510,7 @@
       </div>
       <div class="bfield" id="field-promo">
         <label for="promoCode"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20 12 12 20l-8-8V4h8l8 8Z"/><circle cx="7.5" cy="7.5" r="1.2"/></svg>Código promocional (opcional)</label>
-        <input type="text" id="promoCode" placeholder="Ej: ANTICIPADO15" autocomplete="off">
+        <input type="text" id="promoCode" placeholder="Opcional" autocomplete="off">
       </div>
 
       <p class="airport-note" id="airportNote">Servicio en aeropuerto: $20.000 por un tramo (solo retiro o solo devolución en aeropuerto). Si solicitas retiro y devolución en aeropuerto, el valor total es $30.000.</p>
@@ -556,12 +556,12 @@
         <span class="card-chip visa">VISA</span>
         <span class="card-chip visa-logo" style="display:none"><img src="pagos/visa.png" alt="Visa" loading="lazy" onload="this.parentElement.style.display='flex';this.parentElement.previousElementSibling.style.display='none';" onerror="this.parentElement.remove();"></span>
       </span>
-      <span class="card-chip mastercard-logo"><img src="pagos/mastercard.png" alt="Mastercard" loading="lazy" onerror="this.onerror=null;this.src='LOGOSINFONDO.png'"></span>
+      <span class="card-chip mastercard-logo"><img src="pagos/mastercard.png" alt="Mastercard" loading="lazy" onerror="this.onerror=null;this.src='/img/logo-glaciares.webp'"></span>
       <span class="card-chip-slot">
         <span class="card-chip redcompra"><span>Red</span><span>compra</span></span>
         <span class="card-chip redcompra-logo" style="display:none"><img src="pagos/redcompra.png" alt="Redcompra" loading="lazy" onload="this.parentElement.style.display='flex';this.parentElement.previousElementSibling.style.display='none';" onerror="this.parentElement.remove();"></span>
       </span>
-      <span class="card-chip webpay-logo"><img src="pagos/webpay-transbank.webp" alt="Webpay Plus - Transbank" loading="lazy" onerror="this.onerror=null;this.src='LOGOSINFONDO.png'"></span>
+      <span class="card-chip webpay-logo"><img src="pagos/webpay-transbank.webp" alt="Webpay Plus - Transbank" loading="lazy" onerror="this.onerror=null;this.src='/img/logo-glaciares.webp'"></span>
     </div>
   </div>
 </section>
@@ -579,7 +579,7 @@
   </div>
   <div id="fleetGrid" class="grid grid-3">
     <div class="card" data-cat="citycar">
-      <img src="https://glaciaresrentacar.cl/flota/suzuki-swift.webp" alt="Suzuki Swift, categoría Citycar, disponible en Glaciares Rent a Car Punta Arenas" loading="lazy" width="400" height="300" onerror="this.onerror=null;this.src='https://glaciaresrentacar.cl/LOGOSINFONDO.png';this.style.objectFit='contain';this.style.background='#f1f5f9';this.style.padding='30px';">
+      <img src="https://glaciaresrentacar.cl/flota/suzuki-swift.webp" alt="Suzuki Swift, categoría Citycar, disponible en Glaciares Rent a Car Punta Arenas" loading="lazy" width="400" height="300" onerror="this.onerror=null;this.src='https://glaciaresrentacar.cl/img/logo-glaciares.webp';this.style.objectFit='contain';this.style.background='#f1f5f9';this.style.padding='30px';">
       <div class="card-body">
         <span class="card-cat">Citycar</span>
         <h3>Suzuki Swift</h3>
@@ -589,7 +589,7 @@
       </div>
     </div>
     <div class="card" data-cat="citycar">
-      <img src="https://glaciaresrentacar.cl/flota/suzuki-dzire.webp" alt="Suzuki Dzire, categoría Citycar, disponible en Glaciares Rent a Car Punta Arenas" loading="lazy" width="400" height="300" onerror="this.onerror=null;this.src='https://glaciaresrentacar.cl/LOGOSINFONDO.png';this.style.objectFit='contain';this.style.background='#f1f5f9';this.style.padding='30px';">
+      <img src="https://glaciaresrentacar.cl/flota/suzuki-dzire.webp" alt="Suzuki Dzire, categoría Citycar, disponible en Glaciares Rent a Car Punta Arenas" loading="lazy" width="400" height="300" onerror="this.onerror=null;this.src='https://glaciaresrentacar.cl/img/logo-glaciares.webp';this.style.objectFit='contain';this.style.background='#f1f5f9';this.style.padding='30px';">
       <div class="card-body">
         <span class="card-cat">Citycar</span>
         <h3>Suzuki Dzire</h3>
@@ -599,7 +599,7 @@
       </div>
     </div>
     <div class="card" data-cat="suv">
-      <img src="https://glaciaresrentacar.cl/flota/chevrolet-captiva.webp" alt="Chevrolet Captiva, categoría SUV, disponible en Glaciares Rent a Car Punta Arenas" loading="lazy" width="400" height="300" onerror="this.onerror=null;this.src='https://glaciaresrentacar.cl/LOGOSINFONDO.png';this.style.objectFit='contain';this.style.background='#f1f5f9';this.style.padding='30px';">
+      <img src="https://glaciaresrentacar.cl/flota/chevrolet-captiva.webp" alt="Chevrolet Captiva, categoría SUV, disponible en Glaciares Rent a Car Punta Arenas" loading="lazy" width="400" height="300" onerror="this.onerror=null;this.src='https://glaciaresrentacar.cl/img/logo-glaciares.webp';this.style.objectFit='contain';this.style.background='#f1f5f9';this.style.padding='30px';">
       <div class="card-body">
         <span class="card-cat">SUV</span>
         <h3>Chevrolet Captiva</h3>
@@ -609,7 +609,7 @@
       </div>
     </div>
     <div class="card" data-cat="suv">
-      <img src="https://glaciaresrentacar.cl/flota/kia-sorento.webp" alt="Kia Sorento, categoría SUV, disponible en Glaciares Rent a Car Punta Arenas" loading="lazy" width="400" height="300" onerror="this.onerror=null;this.src='https://glaciaresrentacar.cl/LOGOSINFONDO.png';this.style.objectFit='contain';this.style.background='#f1f5f9';this.style.padding='30px';">
+      <img src="https://glaciaresrentacar.cl/flota/kia-sorento.webp" alt="Kia Sorento, categoría SUV, disponible en Glaciares Rent a Car Punta Arenas" loading="lazy" width="400" height="300" onerror="this.onerror=null;this.src='https://glaciaresrentacar.cl/img/logo-glaciares.webp';this.style.objectFit='contain';this.style.background='#f1f5f9';this.style.padding='30px';">
       <div class="card-body">
         <span class="card-cat">SUV</span>
         <h3>Kia Sorento</h3>
@@ -619,7 +619,7 @@
       </div>
     </div>
     <div class="card" data-cat="suv">
-      <img src="https://glaciaresrentacar.cl/flota/hyundai-tucson.webp" alt="Hyundai Tucson, categoría SUV, disponible en Glaciares Rent a Car Punta Arenas" loading="lazy" width="400" height="300" onerror="this.onerror=null;this.src='https://glaciaresrentacar.cl/LOGOSINFONDO.png';this.style.objectFit='contain';this.style.background='#f1f5f9';this.style.padding='30px';">
+      <img src="https://glaciaresrentacar.cl/flota/hyundai-tucson.webp" alt="Hyundai Tucson, categoría SUV, disponible en Glaciares Rent a Car Punta Arenas" loading="lazy" width="400" height="300" onerror="this.onerror=null;this.src='https://glaciaresrentacar.cl/img/logo-glaciares.webp';this.style.objectFit='contain';this.style.background='#f1f5f9';this.style.padding='30px';">
       <div class="card-body">
         <span class="card-cat">SUV</span>
         <h3>Hyundai Tucson</h3>
@@ -629,7 +629,7 @@
       </div>
     </div>
     <div class="card" data-cat="suv">
-      <img src="https://glaciaresrentacar.cl/flota/peugeot-3008.webp" alt="Peugeot 3008, categoría SUV, disponible en Glaciares Rent a Car Punta Arenas" loading="lazy" width="400" height="300" onerror="this.onerror=null;this.src='https://glaciaresrentacar.cl/LOGOSINFONDO.png';this.style.objectFit='contain';this.style.background='#f1f5f9';this.style.padding='30px';">
+      <img src="https://glaciaresrentacar.cl/flota/peugeot-3008.webp" alt="Peugeot 3008, categoría SUV, disponible en Glaciares Rent a Car Punta Arenas" loading="lazy" width="400" height="300" onerror="this.onerror=null;this.src='https://glaciaresrentacar.cl/img/logo-glaciares.webp';this.style.objectFit='contain';this.style.background='#f1f5f9';this.style.padding='30px';">
       <div class="card-body">
         <span class="card-cat">SUV</span>
         <h3>Peugeot 3008</h3>
@@ -701,10 +701,10 @@
       <img src="https://glaciaresrentacar.cl/promocion/promocion-reserva-anticipada.webp" alt="Promoción por reserva anticipada" onerror="this.src='https://glaciaresrentacar.cl/portada/portada-patagonia-01.webp'">
       <div class="promo-body">
         <h3>Reserva con anticipación</h3>
-        <p class="lead">15% de descuento en el total de tu arriendo, con todo medio de pago.</p>
+        <p class="lead">15% de descuento en el valor del arriendo pagando el total al reservar.</p>
         <p class="label">¿Qué incluye?</p>
         <ul class="promo-list">
-          <li>15% de descuento en el total de tu arriendo</li>
+          <li>15% de descuento en el valor del arriendo</li>
           <li>Kilometraje libre en la Región de Magallanes</li>
           <li>Asistencia durante tu viaje</li>
           <li>Asesoría para planificar tu recorrido</li>
@@ -713,6 +713,8 @@
         <ul class="promo-list" style="margin-bottom:8px;">
           <li>Reserva con un mínimo de 5 días antes del inicio de tu arriendo</li>
           <li>Válido para arriendos desde 3 días</li>
+          <li>Pagando el 100% al reservar con Webpay (no aplica con abono)</li>
+          <li>No acumulable con la promoción 4×3; los adicionales no tienen descuento</li>
         </ul>
         <p class="promo-valid" id="promoValidNote"></p>
         <a href="https://wa.me/56983335924?text=Hola%2C%20quiero%20aprovechar%20la%20promoci%C3%B3n%20de%20reserva%20anticipada." target="_blank" rel="noopener" class="btn btn-accent" style="margin-top:14px;">Consultar promoción</a>
@@ -772,7 +774,7 @@
     </details>
     <details class="faq-item">
       <summary>¿Necesito dejar una garantía?<span class="faq-toggle">+</span></summary>
-      <p>Sí, en tarjeta de crédito: desde $500.000 hasta $800.000 dentro de Chile, y $1.000.000 si viajas a Argentina. Se libera una vez revisado y recibido el vehículo conforme.</p>
+      <p>Sí, en tarjeta de crédito: desde $500.000 hasta $800.000 dentro de Chile, y $750.000 si viajas a Argentina. Se libera una vez revisado y recibido el vehículo conforme.</p>
     </details>
     <details class="faq-item">
       <summary>¿Cómo pago mi reserva?<span class="faq-toggle">+</span></summary>
@@ -870,7 +872,7 @@
         <span class="card-chip visa">VISA</span>
         <span class="card-chip visa-logo" style="display:none"><img src="pagos/visa.png" alt="Visa" loading="lazy" onload="this.parentElement.style.display='flex';this.parentElement.previousElementSibling.style.display='none';" onerror="this.parentElement.remove();"></span>
       </span>
-      <span class="card-chip mastercard-logo"><img src="pagos/mastercard.png" alt="Mastercard" loading="lazy" onerror="this.onerror=null;this.src='LOGOSINFONDO.png'"></span>
+      <span class="card-chip mastercard-logo"><img src="pagos/mastercard.png" alt="Mastercard" loading="lazy" onerror="this.onerror=null;this.src='/img/logo-glaciares.webp'"></span>
       <span class="card-chip-slot">
         <span class="card-chip amex">Amex</span>
         <span class="card-chip amex-logo" style="display:none"><img src="pagos/amex.png" alt="American Express" loading="lazy" onload="this.parentElement.style.display='flex';this.parentElement.previousElementSibling.style.display='none';" onerror="this.parentElement.remove();"></span>
@@ -883,7 +885,7 @@
         <span class="card-chip redcompra"><span>Red</span><span>compra</span></span>
         <span class="card-chip redcompra-logo" style="display:none"><img src="pagos/redcompra.png" alt="Redcompra" loading="lazy" onload="this.parentElement.style.display='flex';this.parentElement.previousElementSibling.style.display='none';" onerror="this.parentElement.remove();"></span>
       </span>
-      <span class="card-chip webpay-logo"><img src="pagos/webpay-transbank.webp" alt="Medios de pago disponibles: Visa, Mastercard, Amex, Diners Club, Redcompra, Webpay y Transbank" loading="lazy" onerror="this.onerror=null;this.src='LOGOSINFONDO.png'"></span>
+      <span class="card-chip webpay-logo"><img src="pagos/webpay-transbank.webp" alt="Medios de pago disponibles: Visa, Mastercard, Amex, Diners Club, Redcompra, Webpay y Transbank" loading="lazy" onerror="this.onerror=null;this.src='/img/logo-glaciares.webp'"></span>
     </div>
   </div>
 </section>
@@ -892,7 +894,7 @@
 <footer>
   <div class="container footer-grid">
     <div>
-      <img src="https://glaciaresrentacar.cl/LOGOSINFONDO.png" alt="Logo Glaciares Rent a Car">
+      <img src="https://glaciaresrentacar.cl/img/logo-glaciares.webp" alt="Logo Glaciares Rent a Car" width="44" height="44">
       <p style="font-size:14px;">Rent a Car en Punta Arenas. Patagonia a tu alcance.</p>
     </div>
     <div>
@@ -919,12 +921,12 @@
         <span class="card-chip visa">VISA</span>
         <span class="card-chip visa-logo" style="display:none"><img src="pagos/visa.png" alt="Visa" loading="lazy" onload="this.parentElement.style.display='flex';this.parentElement.previousElementSibling.style.display='none';" onerror="this.parentElement.remove();"></span>
       </span>
-        <span class="card-chip mastercard-logo"><img src="pagos/mastercard.png" alt="Mastercard" loading="lazy" onerror="this.onerror=null;this.src='LOGOSINFONDO.png'"></span>
+        <span class="card-chip mastercard-logo"><img src="pagos/mastercard.png" alt="Mastercard" loading="lazy" onerror="this.onerror=null;this.src='/img/logo-glaciares.webp'"></span>
         <span class="card-chip-slot">
         <span class="card-chip redcompra"><span>Red</span><span>compra</span></span>
         <span class="card-chip redcompra-logo" style="display:none"><img src="pagos/redcompra.png" alt="Redcompra" loading="lazy" onload="this.parentElement.style.display='flex';this.parentElement.previousElementSibling.style.display='none';" onerror="this.parentElement.remove();"></span>
       </span>
-        <span class="card-chip webpay-logo"><img src="pagos/webpay-transbank.webp" alt="Webpay Plus - Transbank" loading="lazy" onerror="this.onerror=null;this.src='LOGOSINFONDO.png'"></span>
+        <span class="card-chip webpay-logo"><img src="pagos/webpay-transbank.webp" alt="Webpay Plus - Transbank" loading="lazy" onerror="this.onerror=null;this.src='/img/logo-glaciares.webp'"></span>
       </div>
       <p class="pay-note">Pago 100% seguro con Webpay Plus (Transbank). También puedes coordinar transferencia bancaria.</p>
     </div>
@@ -1082,18 +1084,18 @@ document.querySelectorAll('.filter-btn').forEach(btn => {
 });
 
 /* ---- Servicios adicionales (mostrados en el home; precios reales del cotizador) ---- */
-const SERV_BASE = 'https://glaciaresrentacar.cl/IMAGENES_GLACIARES_NUEVO%20AUTOS/SERVICIOS/';
+const SERV_BASE = 'https://glaciaresrentacar.cl/img/servicios/';
 const services = [
-  { name: 'Silla infantil (de 2 a 18 kg)', price: '$5.000 / día', note: 'Máximo a pagar $50.000 por silla. Sujeta a disponibilidad.', img: SERV_BASE + 'SILLA%20BEBE.jpeg' },
-  { name: 'Protección de cristales', price: '$5.000 / día', note: 'Cubre pérdida total, piquete o frisadura.', img: SERV_BASE + 'CRISTALES.jpeg' },
-  { name: 'Protección de neumáticos', price: '$5.000 / día', note: 'Cubre pérdida total o reventón.', img: SERV_BASE + 'NEUMATICOS.jpeg' },
-  { name: 'Retiro o devolución en aeropuerto', price: '$20.000 por tramo', note: 'Retiro y devolución en aeropuerto: $30.000 en total (no se suman dos tramos).', img: SERV_BASE + 'AEROPUERTO.jpeg' },
-  { name: 'Permiso para viaje a Argentina', price: '$120.000', note: 'Costo único por reserva.', img: SERV_BASE + 'ARGENTINA.jpeg' },
-  { name: 'Conductor adicional', price: '$5.000 + IVA / día', note: 'Debe cumplir los mismos requisitos que el conductor titular.', img: SERV_BASE + 'CONDUCTOR%20ADICIONAL.jpeg' },
+  { name: 'Silla infantil (de 2 a 18 kg)', price: '$5.000 / día', note: 'Máximo a pagar $50.000 por silla. Sujeta a disponibilidad.', img: SERV_BASE + 'silla-infantil.webp' },
+  { name: 'Protección de cristales', price: '$5.000 / día', note: 'Cubre pérdida total, piquete o frisadura.', img: SERV_BASE + 'proteccion-cristales.webp' },
+  { name: 'Protección de neumáticos', price: '$5.000 / día', note: 'Cubre pérdida total o reventón.', img: SERV_BASE + 'proteccion-neumaticos.webp' },
+  { name: 'Retiro o devolución en aeropuerto', price: '$20.000 por tramo', note: 'Retiro y devolución en aeropuerto: $30.000 en total (no se suman dos tramos).', img: SERV_BASE + 'aeropuerto.webp' },
+  { name: 'Permiso para viaje a Argentina', price: '$120.000', note: 'Costo único por reserva.', img: SERV_BASE + 'permiso-argentina.webp' },
+  { name: 'Conductor adicional', price: '$5.000 + IVA / día', note: 'Debe cumplir los mismos requisitos que el conductor titular.', img: SERV_BASE + 'conductor-adicional.webp' },
 ];
 document.getElementById('servicesGrid').innerHTML = services.map(s => `
   <div class="card">
-    <img src="${s.img}" alt="${s.name}" loading="lazy" width="400" height="300" onerror="this.onerror=null;this.src='https://glaciaresrentacar.cl/LOGOSINFONDO.png';">
+    <img src="${s.img}" alt="${s.name}" loading="lazy" width="400" height="300" onerror="this.onerror=null;this.src='https://glaciaresrentacar.cl/img/logo-glaciares.webp';">
     <div class="card-body">
       <h3 style="text-transform:none;">${s.name}</h3>
       <p class="price" style="font-size:16px;">${s.price}</p>
@@ -1102,18 +1104,18 @@ document.getElementById('servicesGrid').innerHTML = services.map(s => `
   </div>`).join('');
 
 /* ---- Destinos ---- */
-const DEST_BASE = 'https://glaciaresrentacar.cl/SECCION%20LUGARES%20TURISTICOS/';
+const DEST_BASE = 'https://glaciaresrentacar.cl/img/destinos/';
 const destinos = [
-  { name: 'Parque Nacional Torres del Paine', desc: 'Ícono mundial de la Patagonia: picos de granito, lagos glaciares y fauna silvestre. Ideal para recorrer en un SUV.', img: DEST_BASE + 'TORRES%20DEL%20PAINE.jpg' },
-  { name: 'Monumento Natural Los Pingüinos', desc: 'Conduce hasta el muelle y navega a Isla Magdalena para caminar entre pingüinos en su hábitat natural.', img: DEST_BASE + 'MOMUMENTO%20LOS%20PINGUINOS.jpg' },
-  { name: 'Parque del Estrecho (Fuerte Bulnes)', desc: 'A 50 km al sur de Punta Arenas. Historia y paisajes costeros de la región.', img: DEST_BASE + 'Parque-del-estrecho.jpg' },
-  { name: 'Plaza de Armas Muñoz Gamero', desc: 'El corazón histórico de Punta Arenas, con edificios patrimoniales y la estatua de Hernando de Magallanes.', img: DEST_BASE + 'place-des-armes-munoz-gamero--v1-1200-800.jpeg' },
-  { name: 'Costanera del Estrecho', desc: 'Paseo con vista directa al Estrecho de Magallanes y Tierra del Fuego.', img: DEST_BASE + 'COSTANERA%20DEL%20ESTRECHO.jpg' },
-  { name: 'Faro San Isidro', desc: 'Conduce hasta el fin del camino y camina hacia el histórico faro que ilumina el estrecho.', img: DEST_BASE + 'FARO%20SAN%20ISIDRO.jpg' },
+  { name: 'Parque Nacional Torres del Paine', desc: 'Ícono mundial de la Patagonia: picos de granito, lagos glaciares y fauna silvestre. Ideal para recorrer en un SUV.', img: DEST_BASE + 'torres-del-paine.webp' },
+  { name: 'Monumento Natural Los Pingüinos', desc: 'Conduce hasta el muelle y navega a Isla Magdalena para caminar entre pingüinos en su hábitat natural.', img: DEST_BASE + 'monumento-los-pinguinos.webp' },
+  { name: 'Parque del Estrecho (Fuerte Bulnes)', desc: 'A 50 km al sur de Punta Arenas. Historia y paisajes costeros de la región.', img: DEST_BASE + 'parque-del-estrecho.webp' },
+  { name: 'Plaza de Armas Muñoz Gamero', desc: 'El corazón histórico de Punta Arenas, con edificios patrimoniales y la estatua de Hernando de Magallanes.', img: DEST_BASE + 'plaza-munoz-gamero.webp' },
+  { name: 'Costanera del Estrecho', desc: 'Paseo con vista directa al Estrecho de Magallanes y Tierra del Fuego.', img: DEST_BASE + 'costanera-del-estrecho.webp' },
+  { name: 'Faro San Isidro', desc: 'Conduce hasta el fin del camino y camina hacia el histórico faro que ilumina el estrecho.', img: DEST_BASE + 'faro-san-isidro.webp' },
 ];
 document.getElementById('destGrid').innerHTML = destinos.map(d => `
   <div class="card">
-    <img src="${d.img}" alt="${d.name}, destino turístico en Magallanes" loading="lazy" width="400" height="300" onerror="this.onerror=null;this.src='https://glaciaresrentacar.cl/LOGOSINFONDO.png';this.style.objectFit='contain';this.style.background='#f1f5f9';this.style.padding='30px';">
+    <img src="${d.img}" alt="${d.name}, destino turístico en Magallanes" loading="lazy" width="400" height="300" onerror="this.onerror=null;this.src='https://glaciaresrentacar.cl/img/logo-glaciares.webp';this.style.objectFit='contain';this.style.background='#f1f5f9';this.style.padding='30px';">
     <div class="card-body">
       <h3 style="text-transform:none;margin-bottom:6px;">${d.name}</h3>
       <p class="service-note" style="font-size:13px;">${d.desc}</p>

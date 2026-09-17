@@ -6,8 +6,8 @@
 <title>Personaliza tu reserva | Glaciares Rent a Car</title>
 <meta name="description" content="Elige los servicios adicionales de tu arriendo y revisa el total antes de solicitar confirmación por WhatsApp.">
 <meta name="robots" content="noindex, follow">
-<link rel="icon" href="https://glaciaresrentacar.cl/LOGOSINFONDO.png">
-<link rel="apple-touch-icon" href="https://glaciaresrentacar.cl/LOGOSINFONDO.png">
+<link rel="icon" href="https://glaciaresrentacar.cl/img/logo-glaciares-192.png">
+<link rel="apple-touch-icon" href="https://glaciaresrentacar.cl/img/logo-glaciares-192.png">
 
 <style>
   *{box-sizing:border-box;margin:0;padding:0;}
@@ -182,7 +182,7 @@
 <header>
   <div class="header-inner">
     <a href="index.html" class="brand">
-      <img src="https://glaciaresrentacar.cl/LOGOSINFONDO.png" alt="Logo Glaciares Rent a Car">
+      <img src="https://glaciaresrentacar.cl/img/logo-glaciares.webp" alt="Logo Glaciares Rent a Car" width="44" height="44">
       <span class="brand-text">GLACIARES<small>RENT A CAR</small></span>
     </a>
     <nav class="main-nav" aria-label="Navegación principal">
@@ -714,13 +714,16 @@ function renderSummary() {
     const label = q.airportServiceType === 'airport_roundtrip' ? 'Servicio en aeropuerto (retiro y devolución)' : q.airportServiceType === 'airport_pickup_only' ? 'Servicio en aeropuerto (retiro)' : 'Servicio en aeropuerto (devolución)';
     rows.push(`<div class="summary-row"><span>${label}</span><span>${money(q.airportFee)}</span></div>`);
   }
-  if (q.rental.discountPct) rows.push(`<div class="summary-row discount"><span>Descuento validado (pago total anticipado)</span><span>-${q.rental.discountPct}%</span></div>`);
+  if (q.rental.discountPct) rows.push(`<div class="summary-row discount"><span>Descuento 15% en el arriendo (solo pagando el total ahora)</span><span>-${q.rental.discountPct}%</span></div>`);
+  if (days >= 4) rows.push(`<div class="summary-row discount"><span>Promo 4×3 disponible: al confirmar te aplicamos la opción más conveniente (no acumulable con el 15%)</span><span></span></div>`);
   rows.push(`<div class="summary-row total-row"><span>TOTAL NORMAL</span><span>${money(q.totalPriceNormal)}</span></div>`);
   rows.push(`<div class="summary-row total-row small"><span>TOTAL PAGO ANTICIPADO</span><span>${money(q.totalPriceFull)}</span></div>`);
   rows.push(`<div class="summary-row total-row small"><span>ABONO MÍNIMO</span><span>${money(q.depositAmount)}</span></div>`);
   rows.push(`<div class="summary-row total-row small"><span>SALDO AL RETIRAR</span><span>${money(q.balanceDue)}</span></div>`);
   document.getElementById('summaryBody').innerHTML = rows.join('');
-  document.getElementById('guaranteeNote').textContent = `Garantía requerida: ${money(q.guaranteeAmount)}, dependiendo del vehículo. No se cobra ahora.`;
+  document.getElementById('guaranteeNote').textContent = state.argentina === 'si'
+    ? `Garantía requerida para viajar a Argentina: ${money(cfg.ARGENTINA_GUARANTEE || 750000)} en tarjeta de crédito. No se cobra ahora.`
+    : `Garantía requerida: ${money(q.guaranteeAmount)}, dependiendo del vehículo. No se cobra ahora.`;
 
   const discountAmount = q.rental.discountPct ? Math.round(q.rental.base * q.rental.discountPct / 100) : 0;
   const cargosAdicionales = q.totalPriceFull - q.rental.base + discountAmount;
@@ -777,6 +780,13 @@ function buildWhatsappMessage(requestCode) {
 
 async function requestConfirmationViaWhatsapp() {
   let requestCode = null;
+  // Safari (iPhone) bloquea ventanas abiertas después de un await: abrimos la
+  // pestaña de inmediato, dentro del clic, y le asignamos el enlace al final.
+  let waWindow = null;
+  try { waWindow = window.open('', '_blank'); } catch (e) { waWindow = null; }
+  if (waWindow) {
+    try { waWindow.opener = null; waWindow.document.title = 'Abriendo WhatsApp…'; waWindow.document.body.innerHTML = '<p style="font-family:sans-serif;padding:24px">Abriendo WhatsApp…</p>'; } catch (e) {}
+  }
   try {
     const payload = {
       vehicleId, from: state.pickUpDate, to: state.dropOffDate,
@@ -789,19 +799,38 @@ async function requestConfirmationViaWhatsapp() {
       flightEta: (document.getElementById('fFlightEta') || {}).value || '',
       notes: state.promoCode ? `Código promocional ingresado: ${state.promoCode} (a validar por el equipo)` : '',
     };
+    // Si el servidor tarda (arranque en frío), no dejamos al cliente esperando.
+    const ctrl = (typeof AbortController === 'function') ? new AbortController() : null;
+    const timer = ctrl ? setTimeout(() => ctrl.abort(), 8000) : null;
     const r = await fetch(`${API_BASE}/api/requests`, {
       method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify(payload),
+      signal: ctrl ? ctrl.signal : undefined,
     });
+    if (timer) clearTimeout(timer);
     if (r.ok) { const data = await r.json(); requestCode = data.bookingCode; }
   } catch (e) { /* igual se abre WhatsApp aunque falle el registro */ }
   const msg = buildWhatsappMessage(requestCode);
-  window.open(`https://wa.me/${WA_NUMBER}?text=${encodeURIComponent(msg)}`, '_blank', 'noopener');
+  const waUrl = `https://wa.me/${WA_NUMBER}?text=${encodeURIComponent(msg)}`;
+  if (waWindow && !waWindow.closed) {
+    waWindow.location.href = waUrl;
+  } else {
+    // Si el navegador bloqueó la pestaña nueva, abrimos WhatsApp en la misma.
+    window.location.href = waUrl;
+  }
   if (window.trackEvent) window.trackEvent('solicitar_confirmacion', { requestCode });
   return requestCode;
 }
 
 function wireMainCta() {
-  document.getElementById('btnRequestConfirmation').addEventListener('click', requestConfirmationViaWhatsapp);
+  const btn = document.getElementById('btnRequestConfirmation');
+  btn.addEventListener('click', async () => {
+    if (btn.disabled) return;
+    const label = btn.textContent;
+    btn.disabled = true;
+    btn.textContent = 'ABRIENDO WHATSAPP…';
+    try { await requestConfirmationViaWhatsapp(); }
+    finally { btn.disabled = false; btn.textContent = label; }
+  });
 }
 
 /* =====================================================================
