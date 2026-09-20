@@ -411,7 +411,7 @@
         <p class="lead">Arrienda tu vehículo en Punta Arenas y viaja a Torres del Paine, Puerto Natales, Tierra del Fuego o Argentina con atención personalizada y asistencia durante tu viaje.</p>
         <div class="hero-actions">
           <a href="#buscador" class="btn btn-accent">Cotizar mi vehículo</a>
-          <a href="https://wa.me/56983335924?text=Hola%2C%20quiero%20consultar%20disponibilidad%20de%20un%20veh%C3%ADculo." target="_blank" rel="noopener" class="btn btn-whatsapp">Hablar por WhatsApp</a>
+          <a href="https://wa.me/56983335924?text=Hola%2C%20quiero%20consultar%20disponibilidad%20de%20un%20veh%C3%ADculo." target="_blank" rel="noopener" class="btn btn-whatsapp" data-track="whatsapp-hero">Hablar por WhatsApp</a>
         </div>
       </div>
       <div class="hero-carousel" id="heroCarousel">
@@ -717,7 +717,7 @@
           <li>No acumulable con la promoción 4×3; los adicionales no tienen descuento</li>
         </ul>
         <p class="promo-valid" id="promoValidNote"></p>
-        <a href="https://wa.me/56983335924?text=Hola%2C%20quiero%20aprovechar%20la%20promoci%C3%B3n%20de%20reserva%20anticipada." target="_blank" rel="noopener" class="btn btn-accent" style="margin-top:14px;">Consultar promoción</a>
+        <a href="https://wa.me/56983335924?text=Hola%2C%20quiero%20aprovechar%20la%20promoci%C3%B3n%20de%20reserva%20anticipada." target="_blank" rel="noopener" class="btn btn-accent" style="margin-top:14px;" data-track="whatsapp-promocion">Consultar promoción</a>
       </div>
     </div>
   </div>
@@ -790,7 +790,7 @@
     </details>
   </div>
   <p class="center" style="margin-top:26px;">
-    <a href="https://wa.me/56983335924?text=Hola%2C%20tengo%20una%20consulta%20sobre%20el%20arriendo." target="_blank" rel="noopener" class="btn btn-whatsapp">¿Otra pregunta? Escríbenos por WhatsApp</a>
+    <a href="https://wa.me/56983335924?text=Hola%2C%20tengo%20una%20consulta%20sobre%20el%20arriendo." target="_blank" rel="noopener" class="btn btn-whatsapp" data-track="whatsapp-faq">¿Otra pregunta? Escríbenos por WhatsApp</a>
   </p>
   </div>
 </section>
@@ -1267,11 +1267,22 @@ searchForm.addEventListener('submit', (e) => {
   window.location.href = '/buscar?' + params.toString();
 });
 
-/* ---- Medición de clics de conversión (WhatsApp, Cómo llegar, teléfono, correo) ---- */
+/* ---- Medición de clics de conversión (WhatsApp, Cómo llegar, teléfono, correo) ----
+   ADS_CONVERSION_TRACKS: todo data-track listado aquí dispara además la
+   conversión "WhatsApp" de Google Ads. Cualquier botón nuevo de WhatsApp
+   solo necesita su atributo data-track y estar en esta lista. */
+const ADS_CONVERSION_TRACKS = [
+  'whatsapp-float',
+  'whatsapp-hero',
+  'whatsapp-promocion',
+  'whatsapp-faq',
+  'cotizar-vehiculo',
+  'mobile-cta-cotizar',
+];
 document.addEventListener('click', (e) => {
   const el = e.target.closest('[data-track]');
-  if (el && window.trackEvent) window.trackEvent(el.dataset.track);
-  if (el && ['whatsapp-float','cotizar-vehiculo','mobile-cta-cotizar'].includes(el.dataset.track) && window.reportAdsConversion) window.reportAdsConversion();
+  if (el && window.trackEvent) window.trackEvent(el.dataset.track, el.dataset.vehicle ? { vehicle: el.dataset.vehicle } : undefined);
+  if (el && ADS_CONVERSION_TRACKS.includes(el.dataset.track) && window.reportAdsConversion) window.reportAdsConversion();
   const link = e.target.closest('a[href^="tel:"]');
   if (link && window.trackEvent) window.trackEvent('click_telefono');
   const mail = e.target.closest('a[href^="mailto:"]');

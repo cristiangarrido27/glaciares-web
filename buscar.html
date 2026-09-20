@@ -439,7 +439,7 @@
 </footer>
 
 <div class="wa-float-wrap">
-  <a href="https://wa.me/56983335924?text=Hola%2C%20necesito%20ayuda%20para%20cotizar%20un%20veh%C3%ADculo%20en%20Glaciares%20Rent%20a%20Car." target="_blank" rel="noopener" class="wa-float" id="waFloat" aria-label="Consultar por WhatsApp">
+  <a href="https://wa.me/56983335924?text=Hola%2C%20necesito%20ayuda%20para%20cotizar%20un%20veh%C3%ADculo%20en%20Glaciares%20Rent%20a%20Car." target="_blank" rel="noopener" class="wa-float" id="waFloat" aria-label="Consultar por WhatsApp" data-track="whatsapp-float">
     <svg xmlns="http://www.w3.org/2000/svg" width="26" height="26" viewBox="0 0 24 24" fill="currentColor"><path d="M12.04 2c-5.5 0-9.96 4.46-9.96 9.96 0 1.76.46 3.48 1.34 5L2 22l5.2-1.36a9.94 9.94 0 004.84 1.23h.01c5.5 0 9.96-4.46 9.96-9.96S17.54 2 12.04 2z"/></svg>
     <span class="wa-tooltip">¿Necesitas ayuda? Escríbenos</span>
   </a>
@@ -735,6 +735,7 @@ let merged = [];
 let currentCat = 'todos';
 let currentSort = 'recomendados';
 let currentPriceFilter = 'todos';
+let viewContentSent = false;
 
 async function loadResults() {
   const days = daysBetween(state.pickUpDate, state.pickUpTime, state.dropOffDate, state.dropOffTime);
@@ -772,6 +773,18 @@ async function loadResults() {
 
   document.getElementById('loadingMsg').style.display = 'none';
   renderResults();
+
+  // ViewContent: el usuario vio la lista de vehículos (una vez por búsqueda,
+  // no en cada cambio de filtro u orden).
+  if (!viewContentSent) {
+    viewContentSent = true;
+    const disponibles = merged.filter(v => v.confirmedAvailability).length;
+    if (window.trackEvent) window.trackEvent('ver_vehiculos', {
+      from: state.pickUpDate,
+      to: state.dropOffDate,
+      results: disponibles || merged.length,
+    });
+  }
 }
 
 // Servicio de aeropuerto: se cobra POR TRAMO, nunca dos veces el mismo tramo.
@@ -866,7 +879,7 @@ function renderResults() {
         <p>Podemos revisar otras fechas o buscar una alternativa para tu viaje.</p>
         <div class="empty-actions">
           <button type="button" class="btn-outline" id="emptyModify">MODIFICAR BÚSQUEDA</button>
-          <a href="https://wa.me/${WA_NUMBER}?text=${encodeURIComponent('Hola, no encontré vehículos disponibles para mi búsqueda del ' + state.pickUpDate + ' al ' + state.dropOffDate + '. ¿Pueden ayudarme?')}" target="_blank" rel="noopener" class="btn btn-whatsapp">CONSULTAR POR WHATSAPP</a>
+          <a href="https://wa.me/${WA_NUMBER}?text=${encodeURIComponent('Hola, no encontré vehículos disponibles para mi búsqueda del ' + state.pickUpDate + ' al ' + state.dropOffDate + '. ¿Pueden ayudarme?')}" target="_blank" rel="noopener" class="btn btn-whatsapp" data-track="whatsapp-sin-resultados">CONSULTAR POR WHATSAPP</a>
         </div>
       </div>`;
     const btn = document.getElementById('emptyModify');
@@ -914,7 +927,15 @@ function renderResults() {
   resultsList.querySelectorAll('.btn-confirm').forEach(btn => {
     btn.addEventListener('click', () => {
       const v = merged.find(x => x.id === Number(btn.dataset.vid));
-      if (v) window.location.href = buildAdicionalesUrl(v);
+      if (!v) return;
+      // AddToCart: eligió un vehículo concreto y pasa a personalizar.
+      if (window.trackEvent) window.trackEvent('elegir_vehiculo', {
+        vehicle: v.name || v.title || ('Vehículo ' + v.id),
+        id: v.id,
+        category: v.catLabel || v.cat || '',
+        value: computeCardSubtotal(v),
+      });
+      window.location.href = buildAdicionalesUrl(v);
     });
   });
 }
@@ -927,6 +948,18 @@ document.getElementById('catTabs').addEventListener('click', (e) => {
   currentCat = btn.dataset.cat;
   renderResults();
 });
+/* ---- Medición de clics de conversión (mismo mecanismo que la portada) ---- */
+const ADS_CONVERSION_TRACKS = ['whatsapp-float', 'whatsapp-sin-resultados'];
+document.addEventListener('click', (e) => {
+  const el = e.target.closest('[data-track]');
+  if (el && window.trackEvent) window.trackEvent(el.dataset.track);
+  if (el && ADS_CONVERSION_TRACKS.includes(el.dataset.track) && window.reportAdsConversion) window.reportAdsConversion();
+  const tel = e.target.closest('a[href^="tel:"]');
+  if (tel && window.trackEvent) window.trackEvent('click_telefono');
+  const mail = e.target.closest('a[href^="mailto:"]');
+  if (mail && window.trackEvent) window.trackEvent('click_correo');
+});
+
 document.getElementById('sortSelect').addEventListener('change', (e) => { currentSort = e.target.value; renderResults(); });
 document.getElementById('priceFilter').addEventListener('change', (e) => { currentPriceFilter = e.target.value; renderResults(); });
 
