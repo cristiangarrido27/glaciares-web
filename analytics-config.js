@@ -8,6 +8,13 @@
    Eventos de conversión que ya están instrumentados en index.html
    mediante window.trackEvent(nombre, datos):
      - whatsapp-float        (clic en botón flotante de WhatsApp) [Google Ads: conversión "WhatsApp"]
+     - whatsapp-hero         (clic en "Hablar por WhatsApp" de la portada) [Google Ads: conversión "WhatsApp"]
+     - whatsapp-promocion    (clic en "Consultar promoción") [Google Ads: conversión "WhatsApp"]
+     - whatsapp-faq          (clic en "¿Otra pregunta? Escríbenos por WhatsApp") [Google Ads: conversión "WhatsApp"]
+     - whatsapp-sin-resultados (clic en "CONSULTAR POR WHATSAPP" cuando no hay autos) [Google Ads: conversión "WhatsApp"]
+     - ver_vehiculos         (se mostró la lista de resultados) [Meta: ViewContent]
+     - elegir_vehiculo       (eligió un vehículo en los resultados) [Meta: AddToCart]
+     - solicitar_confirmacion (pidió confirmación por WhatsApp) [Meta: Lead] [Google Ads: conversión "WhatsApp"]
      - mobile-cta-cotizar    (clic en barra fija móvil "Cotizar ahora")
      - cotizador_buscar      (uso del buscador de disponibilidad)
      - cotizar-vehiculo      (clic en "Cotizar este vehículo" por auto)
@@ -19,22 +26,40 @@
    ===================================================================== */
 
 window.ANALYTICS_CONFIG = {
-  GOOGLE_ANALYTICS_ID: null,   // Ej: "G-XXXXXXXXXX" (Google Analytics 4)
+  GOOGLE_ANALYTICS_ID: "G-Y6QMWQ7Z3T",   // GA4, propiedad "www.glaciaresrentacar.cl"
   GOOGLE_ADS_ID: "AW-16582335899",
   GOOGLE_ADS_CONVERSION_LABEL: "AxklCK-F9IoaEJu7ieM9", // Acción de conversión "WhatsApp"
-  META_PIXEL_ID: null,         // Ej: "1234567890123456"
+  META_PIXEL_ID: "415096147540038", // Pixel "Los Glaciares"
 };
 
 /* Función central de tracking. Mientras no haya IDs configurados,
    solo registra el evento en consola (modo silencioso) para no romper
    la ejecución ni inventar datos de medición. */
+/* Mapa embudo interno -> eventos ESTANDAR del Pixel de Meta.
+   Los eventos estandar son los que Meta usa para optimizar campanas y
+   construir publicos; el resto de los eventos internos se sigue enviando
+   como trackCustom con su propio nombre. */
+window.META_STANDARD_EVENTS = {
+  cotizador_buscar: 'Search',          // busco disponibilidad
+  ver_vehiculos: 'ViewContent',        // vio la lista de vehiculos disponibles
+  elegir_vehiculo: 'AddToCart',        // eligio un vehiculo y pasa a personalizar
+  solicitar_confirmacion: 'Lead',      // pidio confirmacion por WhatsApp
+  contacto_whatsapp: 'Lead',           // envio el formulario de contacto
+  reserva_creada: 'InitiateCheckout',  // reserva generada antes de pagar
+};
+
 window.trackEvent = function (eventName, data) {
   try {
     if (window.ANALYTICS_CONFIG.GOOGLE_ANALYTICS_ID && typeof gtag === 'function') {
       gtag('event', eventName, data || {});
     }
     if (window.ANALYTICS_CONFIG.META_PIXEL_ID && typeof fbq === 'function') {
-      fbq('trackCustom', eventName, data || {});
+      var stdName = window.META_STANDARD_EVENTS[eventName];
+      if (stdName) {
+        fbq('track', stdName, window.buildMetaParams ? window.buildMetaParams(eventName, data) : (data || {}));
+      } else {
+        fbq('trackCustom', eventName, data || {});
+      }
     }
     if (!window.ANALYTICS_CONFIG.GOOGLE_ANALYTICS_ID && !window.ANALYTICS_CONFIG.META_PIXEL_ID) {
       console.debug('[trackEvent]', eventName, data || {});
@@ -42,6 +67,24 @@ window.trackEvent = function (eventName, data) {
   } catch (e) {
     console.warn('trackEvent error', e);
   }
+};
+
+/* Normaliza los datos del sitio a los parametros que espera Meta
+   (content_name, content_category, value, currency, etc.). Nunca lanza:
+   si algo falta, devuelve lo que haya. */
+window.buildMetaParams = function (eventName, data) {
+  var d = data || {};
+  var out = {};
+  try {
+    if (d.vehicle || d.content_name) out.content_name = d.vehicle || d.content_name;
+    if (d.category) out.content_category = d.category;
+    if (d.id) { out.content_ids = [String(d.id)]; out.content_type = 'product'; }
+    if (typeof d.value === 'number' && !isNaN(d.value)) { out.value = d.value; out.currency = 'CLP'; }
+    if (d.from) out.search_string = d.from + (d.to ? ' -> ' + d.to : '');
+    if (typeof d.results === 'number') out.num_items = d.results;
+    if (d.requestCode) out.content_name = out.content_name || d.requestCode;
+  } catch (e) { /* datos incompletos: enviamos el evento igual */ }
+  return out;
 };
 
 /* ---------------------------------------------------------------------
@@ -69,15 +112,20 @@ if (window.ANALYTICS_CONFIG.GOOGLE_ANALYTICS_ID || window.ANALYTICS_CONFIG.GOOGL
   })();
 }
 
-// if (window.ANALYTICS_CONFIG.META_PIXEL_ID) {
-//   !function(f,b,e,v,n,t,s){if(f.fbq)return;n=f.fbq=function(){n.callMethod?
-//   n.callMethod.apply(n,arguments):n.queue.push(arguments)};if(!f._fbq)f._fbq=n;
-//   n.push=n;n.loaded=!0;n.version='2.0';n.queue=[];t=b.createElement(e);t.async=!0;
-//   t.src=v;s=b.getElementsByTagName(e)[0];s.parentNode.insertBefore(t,s)}(window,
-//   document,'script','https://connect.facebook.net/en_US/fbevents.js');
-//   fbq('init', window.ANALYTICS_CONFIG.META_PIXEL_ID);
-//   fbq('track', 'PageView');
-// }
+/* ---------------------------------------------------------------------
+   META PIXEL (Facebook / Instagram)
+   Se carga solo si META_PIXEL_ID esta completado arriba. Con el ID en
+   null el sitio funciona exactamente igual que antes (sin pixel).
+   --------------------------------------------------------------------- */
+if (window.ANALYTICS_CONFIG.META_PIXEL_ID) {
+  !function(f,b,e,v,n,t,s){if(f.fbq)return;n=f.fbq=function(){n.callMethod?
+  n.callMethod.apply(n,arguments):n.queue.push(arguments)};if(!f._fbq)f._fbq=n;
+  n.push=n;n.loaded=!0;n.version='2.0';n.queue=[];t=b.createElement(e);t.async=!0;
+  t.src=v;s=b.getElementsByTagName(e)[0];s.parentNode.insertBefore(t,s)}(window,
+  document,'script','https://connect.facebook.net/en_US/fbevents.js');
+  fbq('init', window.ANALYTICS_CONFIG.META_PIXEL_ID);
+  fbq('track', 'PageView');
+}
 
 /* =====================================================================
    CONVERSIÓN DE GOOGLE ADS "WhatsApp"
