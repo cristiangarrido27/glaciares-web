@@ -12,6 +12,8 @@
      - whatsapp-promocion    (clic en "Consultar promoción") [Google Ads: conversión "WhatsApp"]
      - whatsapp-faq          (clic en "¿Otra pregunta? Escríbenos por WhatsApp") [Google Ads: conversión "WhatsApp"]
      - whatsapp-sin-resultados (clic en "CONSULTAR POR WHATSAPP" cuando no hay autos) [Google Ads: conversión "WhatsApp"]
+     - whatsapp-promo4x3     (clic en "Cotizar promoción 4×3 por WhatsApp") [Google Ads: conversión "WhatsApp"]
+     - whatsapp-espera       (clic en "¿No quieres esperar?" mientras carga /buscar) [Google Ads: conversión "WhatsApp"]
      - ver_vehiculos         (se mostró la lista de resultados) [Meta: ViewContent]
      - elegir_vehiculo       (eligió un vehículo en los resultados) [Meta: AddToCart]
      - solicitar_confirmacion (pidió confirmación por WhatsApp) [Meta: Lead] [Google Ads: conversión "WhatsApp"]
