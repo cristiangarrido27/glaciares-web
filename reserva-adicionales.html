@@ -145,6 +145,14 @@
   .lock-note{font-size:10.5px;color:#9a3412;text-align:center;margin-top:6px;line-height:1.4;font-weight:700;}
   .btn-cta-main{width:100%;background:#25D366;color:#fff;font-weight:800;padding:14px;border-radius:12px;font-size:14px;text-align:center;margin-bottom:14px;min-height:48px;}
   .btn-cta-main:hover{background:#1fb959;}
+  .wa-fallback{border:1px solid #25D366;background:#f0fdf4;border-radius:12px;padding:12px 14px;margin:-4px 0 14px;font-size:13px;color:var(--slate-600);}
+  .wa-fallback p{margin:0 0 8px;}
+  .wa-fallback .small{font-size:12px;margin:8px 0 0;}
+  .wa-fb-btn{display:inline-block;background:#25D366;color:#fff;font-weight:800;font-size:13px;padding:9px 12px;border-radius:10px;margin:0 6px 6px 0;text-decoration:none;border:0;cursor:pointer;}
+  .wa-fb-btn.secondary{background:#fff;color:var(--navy);border:1px solid var(--slate-200);}
+  .locked-pay-row{display:grid;grid-template-columns:1fr 1fr;gap:8px;}
+  .locked-pay-row .btn-pay{font-size:12.5px;min-height:44px;margin:0;}
+  .summary-note{font-size:12.5px;color:var(--slate-500);margin:8px 0 0;}
 
   .confirmed-banner{background:#f0fdf4;border:2px solid var(--green);border-radius:14px;padding:14px 16px;margin-bottom:14px;}
   .confirmed-banner h2{font-size:14.5px;font-weight:800;color:#166534;margin-bottom:2px;}
@@ -284,18 +292,19 @@
         </div>
 
         <div id="preConfirmActions">
-          <button type="button" class="btn-cta-main" id="btnRequestConfirmation">SOLICITAR CONFIRMACIÓN POR WHATSAPP</button>
-          <div class="alt-panel" id="altFullPanel">
-            <span class="alt-label">Precio especial — pago total anticipado</span>
-            <div id="altFullBody"></div>
-            <button type="button" class="btn-pay btn-pay-special locked" id="btnPayFullLocked">PAGO TOTAL — REQUIERE CONFIRMACIÓN</button>
+          <button type="button" class="btn-cta-main" id="btnRequestConfirmation">CONFIRMAR DISPONIBILIDAD POR WHATSAPP</button>
+          <div class="wa-fallback" id="waFallback" hidden>
+            <p><strong>¿No se abrió WhatsApp?</strong> Elige una de estas opciones:</p>
+            <a class="wa-fb-btn" id="waFbWeb" href="#" target="_blank" rel="noopener">Abrir WhatsApp Web</a>
+            <button type="button" class="wa-fb-btn secondary" id="waFbCopy">Copiar mensaje</button>
+            <p class="muted small">También puedes escribirnos al <strong>+56 9 8333 5924</strong>.</p>
           </div>
-          <div class="alt-panel" id="altDepositPanel">
-            <span class="alt-label">Precio normal — abono mínimo</span>
-            <div id="altDepositBody"></div>
-            <button type="button" class="btn-pay btn-pay-deposit locked" id="btnPayDepositLocked">ABONO — REQUIERE CONFIRMACIÓN</button>
+          <p class="lock-note">Una vez confirmada la disponibilidad podrás pagar en línea:</p>
+          <div class="locked-pay-row">
+            <button type="button" class="btn-pay btn-pay-special locked" id="btnPayFullLocked">PAGO TOTAL</button>
+            <button type="button" class="btn-pay btn-pay-deposit locked" id="btnPayDepositLocked">ABONO</button>
           </div>
-          <p class="lock-note">Confirma disponibilidad por WhatsApp antes de pagar.</p>
+          <div id="altFullBody" hidden></div><div id="altDepositBody" hidden></div>
         </div>
 
         <div id="confirmedActions" style="display:none;">
@@ -714,12 +723,18 @@ function renderSummary() {
     const label = q.airportServiceType === 'airport_roundtrip' ? 'Servicio en aeropuerto (retiro y devolución)' : q.airportServiceType === 'airport_pickup_only' ? 'Servicio en aeropuerto (retiro)' : 'Servicio en aeropuerto (devolución)';
     rows.push(`<div class="summary-row"><span>${label}</span><span>${money(q.airportFee)}</span></div>`);
   }
-  if (q.rental.discountPct) rows.push(`<div class="summary-row discount"><span>Descuento 15% en el arriendo (solo pagando el total ahora)</span><span>-${q.rental.discountPct}%</span></div>`);
-  if (days >= 4) rows.push(`<div class="summary-row discount"><span>Promo 4×3 disponible: al confirmar te aplicamos la opción más conveniente (no acumulable con el 15%)</span><span></span></div>`);
-  rows.push(`<div class="summary-row total-row"><span>TOTAL NORMAL</span><span>${money(q.totalPriceNormal)}</span></div>`);
-  rows.push(`<div class="summary-row total-row small"><span>TOTAL PAGO ANTICIPADO</span><span>${money(q.totalPriceFull)}</span></div>`);
-  rows.push(`<div class="summary-row total-row small"><span>ABONO MÍNIMO</span><span>${money(q.depositAmount)}</span></div>`);
-  rows.push(`<div class="summary-row total-row small"><span>SALDO AL RETIRAR</span><span>${money(q.balanceDue)}</span></div>`);
+  if (days >= 4) rows.push(`<div class="summary-row discount"><span>Promo 4×3: al confirmar te aplicamos la opción más conveniente</span><span></span></div>`);
+  rows.push(`<div class="summary-row total-row"><span>Total estimado</span><span>${money(q.totalPriceNormal)}</span></div>`);
+  if (q.depositAmount && q.depositAmount < q.totalPriceNormal) {
+    rows.push(`<div class="summary-row total-row small"><span>Para reservar (abono)</span><span>${money(q.depositAmount)}</span></div>`);
+    rows.push(`<p class="summary-note">El saldo (${money(q.balanceDue)}) se paga al retirar el vehículo.</p>`);
+  } else {
+    rows.push(`<div class="summary-row total-row small"><span>Para reservar</span><span>${money(q.totalPriceNormal)}</span></div>`);
+  }
+  if (q.rental.discountPct && q.totalPriceFull < q.totalPriceNormal) {
+    rows.push(`<p class="summary-note">Si pagas el total por adelantado: <strong>${money(q.totalPriceFull)}</strong> (${q.rental.discountPct}% de descuento en el arriendo, no acumulable con la promo 4×3).</p>`);
+  }
+  rows.push(`<p class="summary-note">La disponibilidad debe confirmarse antes de pagar.</p>`);
   document.getElementById('summaryBody').innerHTML = rows.join('');
   document.getElementById('guaranteeNote').textContent = state.argentina === 'si'
     ? `Garantía requerida para viajar a Argentina: ${money(cfg.ARGENTINA_GUARANTEE || 750000)} en tarjeta de crédito. No se cobra ahora.`
@@ -736,8 +751,8 @@ function renderSummary() {
     <div class="alt-row"><span>Total del arriendo</span><span>${money(q.totalPriceNormal)}</span></div>
     <div class="alt-row"><span>Saldo a pagar al retiro</span><span>${money(q.balanceDue)}</span></div>
     <div class="alt-charge">${money(q.depositAmount)}</div>`;
-  document.getElementById('btnPayFullLocked').innerHTML = `PAGO TOTAL — REQUIERE CONFIRMACIÓN`;
-  document.getElementById('btnPayDepositLocked').innerHTML = `ABONO — REQUIERE CONFIRMACIÓN`;
+  document.getElementById('btnPayFullLocked').innerHTML = `PAGO TOTAL`;
+  document.getElementById('btnPayDepositLocked').innerHTML = `ABONO`;
 
   const conductorNote = document.getElementById('conductorVatBreakdown');
   if (conductorNote) {
@@ -751,31 +766,37 @@ function renderSummary() {
    ===================================================================== */
 function buildWhatsappMessage(requestCode) {
   const q = currentQuote;
-  const adicionalesText = (q && q.extras && q.extras.length)
-    ? q.extras.map(e => `${e.name}${e.qty > 1 ? ` x${e.qty}` : ''} (${money(e.cost)})`).join(', ')
-    : 'Ninguno';
+  const fecha = (d, t) => { const p = String(d || '').split('-'); return (p.length === 3 ? `${p[2]}/${p[1]}/${p[0]}` : d) + (t ? ` a las ${t}` : ''); };
+  const extras = (q && q.extras && q.extras.length) ? q.extras.map(e => `${e.name}${e.qty > 1 ? ` x${e.qty}` : ''}`).join(', ') : '';
+  const lugarRetiro = placeLabel(state.pickUpPlace);
+  const lugarDevol = placeLabel(state.dropOffPlace, state.dropOffOther);
   const lines = [
-    'Hola, quiero solicitar confirmar disponibilidad:',
+    'Hola, quiero confirmar disponibilidad para esta cotización:',
     '',
-    ...(requestCode ? [`Código de solicitud: ${requestCode}`] : []),
     `Vehículo: ${vehicle.name}`,
-    `Retiro: ${placeLabel(state.pickUpPlace)}.`,
-    `Fecha y hora de retiro: ${fechaHoraLarga(state.pickUpDate, state.pickUpTime)}`,
-    `Devolución: ${placeLabel(state.dropOffPlace, state.dropOffOther)}`,
-    `Fecha y hora de devolución: ${fechaHoraLarga(state.dropOffDate, state.dropOffTime)}`,
-    `Duración: ${days} día${days > 1 ? 's' : ''}`,
-    `Pasajeros: ${state.passengers || '1'}`,
-    `Destino: ${destinationLabel(state)}`,
-    `Argentina: ${state.argentina === 'si' ? 'Sí' : 'No'}`,
-    `Adicionales seleccionados: ${adicionalesText}`,
-    `Total normal: ${money(q ? q.totalPriceNormal : 0)}`,
-    `Pago total anticipado: ${money(q ? q.totalPriceFull : 0)}`,
-    `Abono mínimo: ${money(q ? q.depositAmount : 0)}`,
-    `Saldo al retirar: ${money(q ? q.balanceDue : 0)}`,
+    `Retiro: ${fecha(state.pickUpDate, state.pickUpTime)}`,
+    `Devolución: ${fecha(state.dropOffDate, state.dropOffTime)}`,
+    lugarRetiro === lugarDevol ? `Lugar: ${lugarRetiro}` : `Lugar: retiro en ${lugarRetiro}, devolución en ${lugarDevol}`,
+    ...(extras ? [`Adicionales: ${extras}`] : []),
+    ...(state.argentina === 'si' ? ['Viajo a Argentina: sí'] : []),
+    `Total estimado: ${money(q ? q.totalPriceNormal : 0)}`,
+    ...(requestCode ? [`Código: ${requestCode}`] : []),
     '',
-    'Solicito confirmar disponibilidad, adicionales y condiciones para poder realizar el pago.',
+    '¿Está disponible?',
   ];
   return lines.join('\n');
+}
+
+function showWaFallback(msg) {
+  const box = document.getElementById('waFallback');
+  if (!box) return;
+  document.getElementById('waFbWeb').href = `https://web.whatsapp.com/send?phone=${WA_NUMBER}&text=${encodeURIComponent(msg)}`;
+  const copyBtn = document.getElementById('waFbCopy');
+  copyBtn.onclick = async () => {
+    try { await navigator.clipboard.writeText(msg); copyBtn.textContent = '¡Mensaje copiado!'; }
+    catch (e) { window.prompt('Copia este mensaje:', msg); }
+  };
+  box.hidden = false;
 }
 
 async function requestConfirmationViaWhatsapp() {
@@ -801,7 +822,7 @@ async function requestConfirmationViaWhatsapp() {
     };
     // Si el servidor tarda (arranque en frío), no dejamos al cliente esperando.
     const ctrl = (typeof AbortController === 'function') ? new AbortController() : null;
-    const timer = ctrl ? setTimeout(() => ctrl.abort(), 8000) : null;
+    const timer = ctrl ? setTimeout(() => ctrl.abort(), 4000) : null;
     const r = await fetch(`${API_BASE}/api/requests`, {
       method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify(payload),
       signal: ctrl ? ctrl.signal : undefined,
@@ -817,6 +838,9 @@ async function requestConfirmationViaWhatsapp() {
     // Si el navegador bloqueó la pestaña nueva, abrimos WhatsApp en la misma.
     window.location.href = waUrl;
   }
+  // Respaldo visible: en computadores sin la app de WhatsApp, el cliente
+  // puede seguir por WhatsApp Web o copiar el mensaje.
+  setTimeout(() => showWaFallback(msg), 1200);
   // Lead (Meta) + conversión "WhatsApp" (Google Ads): es el punto más
   // profundo del embudo, el cliente abre WhatsApp con su solicitud armada.
   if (window.trackEvent) window.trackEvent('solicitar_confirmacion', { requestCode });

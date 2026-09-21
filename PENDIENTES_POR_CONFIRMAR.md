@@ -2,6 +2,21 @@
 
 Este archivo es de uso interno. Ningún texto de aquí fue publicado en la web pública. Reúne los datos que el dueño del negocio debe confirmar o entregar para dejar el sitio 100% preciso.
 
+## 26. Correcciones de la auditoría de conversión (2026-09-21)
+
+- **WhatsApp en computadores**: el sitio ya usaba `https://wa.me/`; el `whatsapp://` que vio la auditoría lo genera la propia página de WhatsApp al pulsar "Continuar al chat" en un PC. Ahora, después de abrir WhatsApp, `/reserva/adicionales` muestra un panel "¿No se abrió WhatsApp?" con **Abrir WhatsApp Web** y **Copiar mensaje**.
+- **Mensaje automático** acortado (vehículo, fechas, lugar, adicionales, total estimado, código).
+- **Cotizador lento**: el servidor de reservas (Render) tarda cuando está "dormido". La portada ahora lo despierta al cargar; `/buscar` muestra la flota con tarifas de referencia a los 2,5 s si el servidor aún no responde, y la actualiza sola cuando llega la respuesta. Mensaje de espera nuevo + botón "¿No quieres esperar? Cotiza directamente por WhatsApp" (conversión `whatsapp-espera`).
+- **Portada**: botón principal "Cotizar por WhatsApp en 1 minuto" y secundario "Cotización detallada en línea"; el banner 4×3 bajó debajo del buscador y tiene condiciones + botón verde (conversión `whatsapp-promo4x3`).
+- **Asistencia**: todos los "Asistencia durante tu viaje" pasan a "Soporte por WhatsApp durante tu viaje"; la FAQ aclara que la asistencia mecánica en ruta se contrata aparte.
+- **Confirmación**: resumen reducido a Total estimado / Para reservar / saldo, con el precio de pago anticipado en una sola línea. Los botones de pago siguen visibles (decisión del punto 22), pero más compactos.
+- **Mapa**: el aviso "No pudimos cargar el mapa" salía porque el plazo de 6 s corría desde que se abría la portada, aunque el mapa (carga diferida) aún no hubiera empezado a cargar. Ahora el plazo empieza cuando el cliente llega al mapa.
+- **Garantía Argentina**: en este repositorio todos los textos dicen $750.000. Si el sitio publicado muestra $1.000.000, el sitio en línea no tiene la última versión.
+
+**Pendiente del dueño**:
+- `config.js` → `PROMO_4X3`: vigencia, vehículos participantes y fechas excluidas reales.
+- `config.js` → `GOOGLE_REVIEWS`: calificación, cantidad de opiniones y 3 reseñas reales copiadas del perfil de Google (no se inventan).
+
 ## 25. Corrección de precios: silla infantil con tope y aeropuerto por tramo (2026-08-30, madrugada)
 
 Instrucción explícita del dueño con reglas comerciales definitivas. Reemplaza cualquier cálculo anterior de estos dos ítems.

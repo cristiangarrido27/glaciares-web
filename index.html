@@ -149,6 +149,14 @@
   .promo-banner-link:hover{transform:translateY(-3px);box-shadow:0 20px 44px rgba(10,37,64,.24);}
   .promo-banner-link img{display:block;width:100%;height:auto;}
   .promo-banner-note{text-align:center;color:var(--slate-500);font-size:12px;margin-top:10px;}
+  .promo-4x3-info{max-width:760px;margin:14px auto 0;background:#fff;border:1px solid var(--slate-100);border-radius:16px;padding:16px 18px;text-align:center;}
+  .promo-4x3-title{font-size:17px;color:var(--navy);margin:0 0 8px;}
+  .promo-4x3-info ul{list-style:none;padding:0;margin:0 0 14px;text-align:left;font-size:13px;color:var(--slate-600);display:grid;gap:4px;}
+  .promo-4x3-info .btn{display:inline-block;}
+  .reviews-summary{font-size:15px;color:var(--navy);margin-bottom:16px;}
+  .reviews-list{display:grid;gap:12px;text-align:left;margin:0 0 20px;}
+  .review-item{border:1px solid var(--slate-100);border-radius:12px;padding:12px 14px;font-size:14px;color:var(--slate-600);}
+  .review-item .who{font-weight:800;color:var(--navy);font-size:13px;margin-top:6px;}
   @media (max-width:640px){ .promo-banner-wrap{margin-top:-18px;} .promo-banner-link{border-radius:14px;} }
 
   /* Filter tabs */
@@ -408,10 +416,10 @@
       <div class="hero-text">
         <p class="eyebrow on-navy">RENT A CAR EN PUNTA ARENAS</p>
         <h1>Recorre la Patagonia con libertad y seguridad</h1>
-        <p class="lead">Arrienda tu vehículo en Punta Arenas y viaja a Torres del Paine, Puerto Natales, Tierra del Fuego o Argentina con atención personalizada y asistencia durante tu viaje.</p>
+        <p class="lead">Arrienda tu vehículo en Punta Arenas y viaja a Torres del Paine, Puerto Natales, Tierra del Fuego o Argentina con atención personalizada y soporte por WhatsApp durante tu viaje.</p>
         <div class="hero-actions">
-          <a href="#buscador" class="btn btn-accent">Cotizar mi vehículo</a>
-          <a href="https://wa.me/56983335924?text=Hola%2C%20quiero%20consultar%20disponibilidad%20de%20un%20veh%C3%ADculo." target="_blank" rel="noopener" class="btn btn-whatsapp" data-track="whatsapp-hero">Hablar por WhatsApp</a>
+          <a href="https://wa.me/56983335924?text=Hola%2C%20quiero%20cotizar%20un%20veh%C3%ADculo.%0AFechas%3A%20%0ALugar%20de%20retiro%3A%20" target="_blank" rel="noopener" class="btn btn-whatsapp" data-track="whatsapp-hero">Cotizar por WhatsApp en 1 minuto</a>
+          <a href="#buscador" class="btn btn-accent">Cotización detallada en línea</a>
         </div>
       </div>
       <div class="hero-carousel" id="heroCarousel">
@@ -433,7 +441,7 @@
     <div class="hero-mini-trust">
       <span><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 2v20M2 12h20"/></svg>Kilometraje libre en la Región de Magallanes</span>
       <span><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="8" r="4"/><path d="M4 21c0-4 3.6-7 8-7s8 3 8 7"/></svg>Atención personalizada</span>
-      <span><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 2 3 6v6c0 5 4 8.5 9 10 5-1.5 9-5 9-10V6l-9-4Z"/></svg>Asistencia durante tu viaje</span>
+      <span><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 2 3 6v6c0 5 4 8.5 9 10 5-1.5 9-5 9-10V6l-9-4Z"/></svg>Soporte por WhatsApp durante tu viaje</span>
       <span><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="4" width="18" height="16" rx="2"/><path d="M3 10h18M8 2v4M16 2v4"/></svg>Permiso para Argentina con costo adicional</span>
     </div>
   </div>
@@ -441,14 +449,6 @@
     <svg viewBox="0 0 1440 90" width="100%" height="80" preserveAspectRatio="none"><path fill="#ffffff" d="M0,32 C240,90 480,0 720,24 C960,48 1200,96 1440,40 L1440,100 L0,100 Z"/></svg>
   </div>
 </section>
-
-<!-- ===================== BANNER PROMOCIÓN 4x3 ===================== -->
-<div class="promo-banner-wrap">
-  <a href="#buscador" class="promo-banner-link" aria-label="Ver promoción: arrienda 4 días y paga 3. Cotizar ahora.">
-    <img src="https://glaciaresrentacar.cl/promocion/promo-4x3.webp" srcset="https://glaciaresrentacar.cl/promocion/promo-4x3-800.webp 800w, https://glaciaresrentacar.cl/promocion/promo-4x3.webp 1400w" sizes="(max-width: 1180px) 100vw, 1140px" alt="Promoción exclusiva: arrienda 4 días y paga 3 — Glaciares Rent a Car" width="1400" height="781" loading="lazy" decoding="async" onerror="this.closest('.promo-banner-wrap').style.display='none'">
-  </a>
-  <p class="promo-banner-note"><strong>Arrienda 4 días y paga 3.</strong> No acumulable con el 15&nbsp;% por reserva anticipada: aplicamos la opción que más te convenga. Sujeta a disponibilidad; se aplica al confirmar tu reserva por WhatsApp.</p>
-</div>
 
 <!-- ===================== COTIZADOR (etapa 1: criterios de búsqueda) ===================== -->
 <div id="buscador" class="booking-bar-wrap">
@@ -523,6 +523,26 @@
   </form>
 </div>
 
+<!-- ===================== BANNER PROMOCIÓN 4x3 ===================== -->
+<div class="promo-banner-wrap">
+  <a href="#buscador" class="promo-banner-link" aria-label="Ver promoción: arrienda 4 días y paga 3. Cotizar ahora.">
+    <img src="https://glaciaresrentacar.cl/promocion/promo-4x3.webp" srcset="https://glaciaresrentacar.cl/promocion/promo-4x3-800.webp 800w, https://glaciaresrentacar.cl/promocion/promo-4x3.webp 1400w" sizes="(max-width: 1180px) 100vw, 1140px" alt="Promoción exclusiva: arrienda 4 días y paga 3 — Glaciares Rent a Car" width="1400" height="781" loading="lazy" decoding="async" onerror="this.closest('.promo-banner-wrap').style.display='none'">
+  </a>
+  <div class="promo-4x3-info">
+    <p class="promo-4x3-title"><strong>Arrienda 4 días y paga 3</strong></p>
+    <ul>
+      <li><strong>Vigencia:</strong> <span id="promo4x3Vigencia">por tiempo limitado, sujeta a modificación sin previo aviso</span>.</li>
+      <li><strong>Vehículos:</strong> <span id="promo4x3Vehiculos">sujeta a disponibilidad; consulta los vehículos participantes por WhatsApp</span>.</li>
+      <li><strong>Fechas excluidas:</strong> <span id="promo4x3Excluidas">consúltalas por WhatsApp</span>.</li>
+      <li><strong>Pago:</strong> no acumulable con el 15&nbsp;% por pago anticipado: aplicamos la opción que más te convenga.</li>
+      <li><strong>Cómo solicitarla:</strong> escríbenos por WhatsApp o cotiza en línea; se aplica al confirmar tu reserva.</li>
+    </ul>
+    <a href="https://wa.me/56983335924?text=Hola%2C%20quiero%20cotizar%20la%20promoci%C3%B3n%204x3.%0AFechas%3A%20%0AVeh%C3%ADculo%3A%20" target="_blank" rel="noopener" class="btn btn-whatsapp" data-track="whatsapp-promo4x3">Cotizar promoción 4×3 por WhatsApp</a>
+  </div>
+</div>
+
+
+
 <!-- ===================== FRANJA DE CONFIANZA ===================== -->
 <section class="trust-strip">
   <div class="container">
@@ -537,7 +557,7 @@
       </div>
       <div class="trust-item">
         <span class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 2 3 6v6c0 5 4 8.5 9 10 5-1.5 9-5 9-10V6l-9-4Z"/></svg></span>
-        <div><strong>Asistencia</strong>durante tu viaje</div>
+        <div><strong>Soporte por WhatsApp</strong>durante tu viaje</div>
       </div>
       <div class="trust-item">
         <span class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 12h18M3 6h18M3 18h18"/></svg></span>
@@ -652,7 +672,7 @@
       <div class="adv">
         <div class="adv-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 2 3 6v6c0 5 4 8.5 9 10 5-1.5 9-5 9-10V6l-9-4Z"/></svg></div>
         <h3>Seguridad y confianza</h3>
-        <p>Vehículos mantenidos para enfrentar los desafíos de la Patagonia, con asistencia durante tu viaje.</p>
+        <p>Vehículos mantenidos para enfrentar los desafíos de la Patagonia, con orientación y soporte por WhatsApp durante tu viaje. La asistencia mecánica en ruta se contrata por separado.</p>
       </div>
       <div class="adv">
         <div class="adv-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="6" width="20" height="14" rx="2"/><path d="M2 10h20"/></svg></div>
@@ -706,7 +726,7 @@
         <ul class="promo-list">
           <li>15% de descuento en el valor del arriendo</li>
           <li>Kilometraje libre en la Región de Magallanes</li>
-          <li>Asistencia durante tu viaje</li>
+          <li>Soporte por WhatsApp durante tu viaje</li>
           <li>Asesoría para planificar tu recorrido</li>
         </ul>
         <p class="label">Condiciones</p>
@@ -738,7 +758,9 @@
       <svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 2l3.1 6.3 6.9 1-5 4.9 1.2 6.8L12 17.8 5.8 21l1.2-6.8-5-4.9 6.9-1L12 2z"/></svg>
       <svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 2l3.1 6.3 6.9 1-5 4.9 1.2 6.8L12 17.8 5.8 21l1.2-6.8-5-4.9 6.9-1L12 2z"/></svg>
     </div>
-    <p>Nos importa lo que dicen nuestros clientes. Revisa las reseñas reales de Glaciares Rent a Car en Google antes de reservar.</p>
+    <p class="reviews-summary" id="reviewsSummary" hidden></p>
+    <div class="reviews-list" id="reviewsList" hidden></div>
+    <p id="reviewsDefault">Nos importa lo que dicen nuestros clientes. Revisa las reseñas reales de Glaciares Rent a Car en Google antes de reservar.</p>
     <a href="https://www.google.com/maps/search/?api=1&query=Glaciares%20Rent%20a%20Car%20Av.%20Francisco%20Javier%20Reyna%200473%20Punta%20Arenas" target="_blank" rel="noopener" class="btn btn-outline" style="display:inline-block;padding:12px 22px;">Ver opiniones en Google</a>
   </div>
 </section>
@@ -770,7 +792,7 @@
     </details>
     <details class="faq-item">
       <summary>¿Qué incluye la tarifa base?<span class="faq-toggle">+</span></summary>
-      <p>Kilometraje libre en la Región de Magallanes, sujeto a las condiciones del contrato de arriendo, y asistencia durante tu viaje.</p>
+      <p>Kilometraje libre en la Región de Magallanes, sujeto a las condiciones del contrato de arriendo, y orientación y soporte por WhatsApp durante tu viaje. La asistencia mecánica en ruta (grúa, rescate, traslado) no está incluida y se contrata por separado.</p>
     </details>
     <details class="faq-item">
       <summary>¿Necesito dejar una garantía?<span class="faq-toggle">+</span></summary>
@@ -1048,13 +1070,51 @@ const mapFrame = document.getElementById('mapFrame');
 const mapSkeleton = document.getElementById('mapSkeleton');
 const mapFallback = document.getElementById('mapFallback');
 let mapLoaded = false;
-mapFrame.addEventListener('load', () => { mapLoaded = true; mapSkeleton.classList.add('hidden'); });
-setTimeout(() => {
-  if (!mapLoaded) {
-    mapSkeleton.classList.add('hidden');
-    mapFallback.classList.remove('hidden');
+// El iframe usa loading="lazy": solo empieza a cargar cuando el cliente llega
+// a esta sección. Antes el plazo de 6 s corría desde que abría la portada, y
+// si no había bajado hasta el mapa se mostraba "No pudimos cargar el mapa".
+mapFrame.addEventListener('load', () => { mapLoaded = true; mapSkeleton.classList.add('hidden'); mapFallback.classList.add('hidden'); });
+function startMapTimer() {
+  setTimeout(() => {
+    if (!mapLoaded) { mapSkeleton.classList.add('hidden'); mapFallback.classList.remove('hidden'); }
+  }, 10000);
+}
+if ('IntersectionObserver' in window) {
+  const mo = new IntersectionObserver((entries) => {
+    if (entries.some(en => en.isIntersecting)) { mo.disconnect(); startMapTimer(); }
+  }, { rootMargin: '200px' });
+  mo.observe(mapFrame);
+} else { startMapTimer(); }
+
+/* ---- Reseñas de Google: se muestran solo si hay datos reales en config.js ---- */
+(function renderReviews(){
+  const rv = (window.GLACIARES_CONFIG || {}).GOOGLE_REVIEWS || {};
+  const sum = document.getElementById('reviewsSummary');
+  if (rv.rating && rv.count) {
+    sum.innerHTML = `<strong>${String(rv.rating).replace('.', ',')} de 5</strong> basado en ${rv.count} opiniones en Google`;
+    sum.hidden = false;
   }
-}, 6000);
+  const items = (rv.items || []).filter(it => it && it.text && it.name).slice(0, 3);
+  if (items.length) {
+    const esc = t => String(t).replace(/[&<>"]/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]));
+    const list = document.getElementById('reviewsList');
+    list.innerHTML = items.map(it => `<div class="review-item">“${esc(it.text)}”<div class="who">${esc(it.name)}${it.date ? ' · ' + esc(it.date) : ''}</div></div>`).join('');
+    list.hidden = false;
+    document.getElementById('reviewsDefault').hidden = true;
+  }
+})();
+
+/* ---- Promo 4x3: condiciones desde config.js (si están definidas) ---- */
+(function(){
+  const p = (window.GLACIARES_CONFIG || {}).PROMO_4X3 || {};
+  if (p.vigencia) document.getElementById('promo4x3Vigencia').textContent = p.vigencia;
+  if (p.vehiculos) document.getElementById('promo4x3Vehiculos').textContent = p.vehiculos;
+  if (p.fechasExcluidas) document.getElementById('promo4x3Excluidas').textContent = p.fechasExcluidas;
+})();
+
+/* ---- Despertar el servidor de reservas apenas se abre la portada, para que
+   el cotizador responda rápido cuando el cliente busque. ---- */
+try { fetch('https://glaciares-reservas-backend.onrender.com/api/extras', { mode: 'no-cors', cache: 'no-store' }).catch(() => {}); } catch (e) {}
 
 /* ---- Fleet data (datos confirmados: nombre, categoría, precio, imagen) ---- */
 const IMG_BASE = 'https://glaciaresrentacar.cl/flota/';
@@ -1275,6 +1335,7 @@ const ADS_CONVERSION_TRACKS = [
   'whatsapp-float',
   'whatsapp-hero',
   'whatsapp-promocion',
+  'whatsapp-promo4x3',
   'whatsapp-faq',
   'cotizar-vehiculo',
   'mobile-cta-cotizar',

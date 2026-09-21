@@ -186,6 +186,7 @@
   @keyframes shimmer{0%{background-position:100% 0;}100%{background-position:0 0;}}
   @media (prefers-reduced-motion: reduce){ .skeleton-card::after{animation:none;} }
   .loading-msg{text-align:center;color:var(--slate-500);font-size:13.5px;margin-bottom:14px;}
+  .loading-wa{display:inline-block;background:#25D366;color:#fff;font-weight:800;font-size:13px;padding:9px 14px;border-radius:10px;text-decoration:none;}
 
   .empty-state{text-align:center;background:#fff;border:1px solid var(--slate-100);border-radius:16px;padding:44px 24px;}
   .empty-state h3{font-size:17px;font-weight:800;margin-bottom:8px;}
@@ -418,7 +419,10 @@
           <button class="cat-tab" data-cat="citycar">Citycar</button>
           <button class="cat-tab" data-cat="suv">SUV</button>
         </div>
-        <p class="loading-msg" id="loadingMsg">Preparando opciones…</p>
+        <div class="loading-msg" id="loadingMsg">
+          <p style="margin:0 0 8px;">Estamos buscando los vehículos disponibles. Esto puede tardar unos segundos.</p>
+          <a class="loading-wa" id="loadingWa" href="https://wa.me/56983335924?text=Hola%2C%20quiero%20cotizar%20un%20veh%C3%ADculo." target="_blank" rel="noopener" data-track="whatsapp-espera">¿No quieres esperar? Cotiza directamente por WhatsApp</a>
+        </div>
         <div class="urgency-banner" id="urgencyBanner" style="display:none">
           <svg class="urgency-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 3"/></svg>
           <div>
@@ -746,19 +750,11 @@ async function loadResults() {
   }
   document.getElementById('resultsCount').textContent = 'Buscando…';
 
-  let backendById = {};
-  try {
-    const r = await fetch(`${API_BASE}/api/availability?from=${state.pickUpDate}&to=${state.dropOffDate}&category=todos`);
-    if (r.ok) {
-      const data = await r.json();
-      (data.results || []).forEach(v => { backendById[v.id] = v; });
-    }
-  } catch (e) { /* backend no disponible: seguimos con cálculo local */ }
+  // Mensaje de WhatsApp de espera con las fechas de la búsqueda.
+  const waWait = document.getElementById('loadingWa');
+  if (waWait) waWait.href = `https://wa.me/${WA_NUMBER}?text=${encodeURIComponent(`Hola, quiero cotizar un vehículo del ${state.pickUpDate} al ${state.dropOffDate}.`)}`;
 
-  const minDelay = new Promise(res => setTimeout(res, 450));
-  await minDelay;
-
-  merged = FLEET.map(v => {
+  const buildMerged = (backendById) => FLEET.map(v => {
     const b = backendById[v.id];
     return {
       ...v,
@@ -771,8 +767,30 @@ async function loadResults() {
     };
   });
 
-  document.getElementById('loadingMsg').style.display = 'none';
-  renderResults();
+  // El servidor de reservas puede tardar si estaba "dormido". No hacemos
+  // esperar al cliente: si en 2,5 s no responde, mostramos la flota con
+  // precios de tarifa y la actualizamos apenas llegue la respuesta real.
+  const backendPromise = fetch(`${API_BASE}/api/availability?from=${state.pickUpDate}&to=${state.dropOffDate}&category=todos`)
+    .then(r => r.ok ? r.json() : null)
+    .then(data => { const map = {}; ((data && data.results) || []).forEach(v => { map[v.id] = v; }); return map; })
+    .catch(() => ({}));
+  const TIMEOUT = Symbol('timeout');
+  const first = await Promise.race([backendPromise, new Promise(res => setTimeout(() => res(TIMEOUT), 2500))]);
+
+  if (first === TIMEOUT) {
+    merged = buildMerged({});
+    renderResults();
+    const lm = document.getElementById('loadingMsg');
+    if (lm) lm.querySelector('p').textContent = 'Mostrando tarifas de referencia. Estamos confirmando la disponibilidad…';
+    backendPromise.then(map => {
+      if (Object.keys(map).length) { merged = buildMerged(map); renderResults(); }
+      if (lm) lm.style.display = 'none';
+    });
+  } else {
+    merged = buildMerged(first);
+  }
+
+  if (first !== TIMEOUT) { document.getElementById('loadingMsg').style.display = 'none'; renderResults(); }
 
   // ViewContent: el usuario vio la lista de vehículos (una vez por búsqueda,
   // no en cada cambio de filtro u orden).
@@ -949,7 +967,7 @@ document.getElementById('catTabs').addEventListener('click', (e) => {
   renderResults();
 });
 /* ---- Medición de clics de conversión (mismo mecanismo que la portada) ---- */
-const ADS_CONVERSION_TRACKS = ['whatsapp-float', 'whatsapp-sin-resultados'];
+const ADS_CONVERSION_TRACKS = ['whatsapp-float', 'whatsapp-sin-resultados', 'whatsapp-espera'];
 document.addEventListener('click', (e) => {
   const el = e.target.closest('[data-track]');
   if (el && window.trackEvent) window.trackEvent(el.dataset.track);
