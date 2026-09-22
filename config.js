@@ -82,4 +82,28 @@ window.GLACIARES_CONFIG = {
     chileGuaranteeMinimum: 500000,
     argentinaGuarantee: 750000,     // Confirmado por el dueño (2026-09-17)
   },
+
+  /* ---------------------------------------------------------------------
+     RESEÑAS DE GOOGLE (portada). Completar SOLO con datos reales copiados
+     del perfil de Google. Mientras queden vacíos, la portada muestra el
+     texto genérico y el botón "Ver opiniones en Google".
+     Ejemplo: rating: 4.8, count: 86,
+       items: [{ name: 'María P.', date: 'agosto 2026', text: '...' }]
+     --------------------------------------------------------------------- */
+  GOOGLE_REVIEWS: {
+    rating: null,
+    count: null,
+    items: [
+      { name: 'Javo P.R.', date: 'agosto 2026', text: 'Excelente el servicio, super confiables, condiciones claras, personal amable y atentas. Recomendando al 100%' },
+      { name: 'Esteban M.', date: 'agosto 2026', text: 'Excelente servicio de principio a fin. Arrendé un auto en Punta Arenas y no tuve ningún tipo de problema.' },
+      { name: 'Brianna P.', date: 'agosto 2026', text: 'I loved having unlimited miles during my trip. It gave me the flexibility to explore more places without any restrictions.' },
+    ],
+  },
+
+  /* PROMOCIÓN 4x3: si se dejan vacíos, se muestran textos neutros. */
+  PROMO_4X3: {
+    vigencia: 'hasta el 15 de octubre de 2026', // ej.: 'hasta el 31 de diciembre de 2026'
+    vehiculos: 'toda la flota', // ej.: 'toda la flota' o 'solo Citycar'
+    fechasExcluidas: 'ninguna', // ej.: 'del 20/12 al 5/01'
+  },
 };
