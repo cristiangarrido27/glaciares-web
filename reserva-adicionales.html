@@ -73,6 +73,7 @@
 
   .adicionales-grid{display:grid;grid-template-columns:1fr 380px;gap:24px;align-items:start;}
   @media (max-width:980px){ .adicionales-grid{grid-template-columns:1fr;} }
+  .adicionales-grid > *{min-width:0;} /* evita que un texto largo ensanche la página en celular */
 
   .card{background:#fff;border:1px solid var(--slate-200);border-radius:16px;padding:18px 20px;margin-bottom:16px;}
   .card h2{font-size:15px;font-weight:800;margin-bottom:4px;}
@@ -121,7 +122,7 @@
 
   /* Columna resumen (sticky en desktop) */
   .summary-col{position:relative;}
-  @media (min-width:981px){ .summary-col{position:sticky;top:92px;} }
+  @media (min-width:981px){ .summary-col{position:sticky;top:92px;max-height:calc(100vh - 104px);overflow-y:auto;overscroll-behavior:contain;padding-right:2px;} }
   .summary-panel{background:#fff;border:1px solid var(--slate-200);border-radius:16px;padding:20px;margin-bottom:16px;}
   .summary-panel h2{font-size:15px;font-weight:800;margin-bottom:12px;}
   .summary-row{display:flex;justify-content:space-between;gap:10px;font-size:13px;color:var(--slate-600);padding:4px 0;}
@@ -180,6 +181,48 @@
   .modal-confirm{background:#25D366;color:#fff;}
   .modal-confirm:hover{background:#1fb959;}
 
+
+  /* Mejoras de conversión 2026-10 */
+  .summary-row .sr-sub{display:block;font-size:11.5px;color:var(--slate-400);font-weight:500;}
+  .summary-row > span:last-child{white-space:nowrap;}
+  .summary-row > span:first-child{min-width:0;}
+  .pay-split{border:1px solid var(--slate-200);border-radius:12px;padding:10px 12px;margin-top:12px;font-size:12.5px;color:var(--slate-600);}
+  .pay-split .ps-title{font-weight:800;color:var(--navy);font-size:12.5px;margin-bottom:6px;}
+  .pay-split .ps-row{display:flex;justify-content:space-between;gap:10px;padding:3px 0;}
+  .pay-split .ps-row strong{color:var(--navy);white-space:nowrap;}
+  .pay-split .ps-now{background:#f0fdf4;color:#166534;font-weight:700;border-radius:8px;padding:6px 8px;margin-bottom:6px;}
+  .pay-split .ps-opt{border-top:1px dashed var(--slate-200);margin-top:6px;padding-top:6px;}
+  .pay-split .ps-hint{font-size:11.5px;color:var(--slate-500);margin-top:2px;}
+  .promo-hint{background:#f0fdf4;border:1px solid #bbf7d0;color:#166534;border-radius:10px;padding:8px 10px;font-size:12px;font-weight:600;margin-top:8px;}
+  .promo-hint.muted-hint{background:var(--slate-50);border-color:var(--slate-200);color:var(--slate-600);font-weight:500;}
+  .conditions-card h2{margin-bottom:8px;}
+  .cond-list{list-style:disc;padding-left:18px;font-size:12.5px;color:var(--slate-600);line-height:1.5;margin-bottom:8px;}
+  .cond-list li{margin-bottom:5px;}
+  .cond-list strong{color:var(--navy);}
+  .next-steps{background:#fff;border:1px solid var(--slate-200);border-radius:14px;padding:12px 14px;margin-bottom:12px;font-size:12.5px;color:var(--slate-600);}
+  .next-steps .ns-title{font-weight:800;color:var(--navy);font-size:13px;margin-bottom:6px;}
+  .next-steps ol{padding-left:18px;line-height:1.5;}
+  .next-steps li{margin-bottom:3px;}
+  .next-steps .ns-time{margin-top:6px;font-weight:600;color:var(--navy);}
+  .request-sent{border:2px solid #f59e0b;background:#fffbeb;border-radius:12px;padding:12px 14px;margin:-4px 0 12px;font-size:13px;color:#78350f;}
+  .request-sent .rs-title{font-weight:800;font-size:14px;margin-bottom:4px;}
+  .request-sent p{margin-bottom:4px;}
+  .request-sent .small{font-size:12px;}
+  .wa-fb-text{width:100%;margin-top:8px;border:1px solid var(--slate-200);border-radius:8px;padding:8px;font:12px/1.4 ui-monospace,Menlo,Consolas,monospace;color:var(--navy);background:#fff;resize:vertical;}
+  .locked-pay-row .btn-pay{opacity:.75;}
+  .lock-note{color:var(--slate-500);}
+  .modal-text{font-size:14px;color:var(--slate-600);margin:-6px 0 16px;line-height:1.5;}
+  .mobile-total-bar{display:none;}
+  @media (max-width:980px){
+    .mobile-total-bar:not([hidden]){display:flex;position:fixed;left:0;right:0;bottom:0;z-index:70;background:#fff;border-top:1px solid var(--slate-200);box-shadow:0 -6px 18px rgba(10,37,64,.12);padding:10px 16px calc(10px + env(safe-area-inset-bottom));gap:12px;align-items:center;justify-content:space-between;}
+    .mtb-text{display:flex;flex-direction:column;line-height:1.2;min-width:0;}
+    .mtb-text span{font-size:11px;font-weight:700;color:var(--slate-500);text-transform:uppercase;letter-spacing:.03em;}
+    .mtb-text strong{font-size:19px;font-weight:800;color:var(--navy);}
+    .mtb-text small{font-size:11.5px;color:var(--green);font-weight:700;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;}
+    .mtb-btn{background:#25D366;color:#fff;font-weight:800;font-size:14px;padding:12px 16px;border-radius:12px;min-height:48px;flex-shrink:0;}
+    body.has-mtb .wa-float-wrap{bottom:84px;}
+    body.has-mtb .page-main{padding-bottom:110px;}
+  }
   @media (prefers-reduced-motion: reduce){ *{animation-duration:.001ms !important;animation-iteration-count:1 !important;transition-duration:.001ms !important;} }
 </style>
 </head>
@@ -284,22 +327,49 @@
       <!-- Columna derecha: resumen y pago -->
       <div class="summary-col" id="summaryCol">
         <div class="summary-panel" id="summaryPanel" aria-live="polite">
-          <h2>Resumen de tu reserva</h2>
-          <div id="summaryBody"></div>
+          <h2>Total de tu arriendo</h2>
+          <div id="summaryBody"><p class="summary-note">Calculando total…</p></div>
           <p class="summary-updating" id="summaryUpdating" style="display:none;">Actualizando total…</p>
+          <div class="pay-split" id="paySplit"></div>
           <div class="guarantee-note" id="guaranteeNote"></div>
-          <p class="summary-legal">Valor sujeto a confirmación de disponibilidad y condiciones del contrato.</p>
+          <p class="summary-legal">Total estimado con las tarifas vigentes (impuestos incluidos, salvo los ítems marcados “+ IVA”, que ya aparecen sumados). El monto final te lo confirmamos por WhatsApp junto con la disponibilidad, antes de cualquier pago.</p>
+        </div>
+
+        <div class="card conditions-card" id="conditionsCard">
+          <h2>Antes de solicitar, revisa las condiciones</h2>
+          <ul class="cond-list">
+            <li><strong>Seguro incluido (CDW):</strong> deducible 15 UF + IVA; 25 UF + IVA por volcamiento, choque con responsabilidad, robo o pérdida total. No cubre cristales, neumáticos, accesorios ni asistencia en ruta.</li>
+            <li><strong>Conductor:</strong> entre 21 y 75 años, licencia vigente (chilena o extranjera) y cédula o pasaporte vigente. Lo mismo para el conductor adicional.</li>
+            <li><strong>Garantía:</strong> tarjeta de crédito bancaria (no de casas comerciales ni prepago), vigente 3 meses después del arriendo.</li>
+            <li><strong>Cancelación sin costo</strong> con 72 h de anticipación · kilometraje libre en Magallanes · estanque lleno.</li>
+          </ul>
+          <a href="/condiciones" target="_blank" rel="noopener" class="link-btn">Ver condiciones completas</a>
         </div>
 
         <div id="preConfirmActions">
-          <button type="button" class="btn-cta-main" id="btnRequestConfirmation">CONFIRMAR DISPONIBILIDAD POR WHATSAPP</button>
+          <div class="next-steps" id="nextSteps">
+            <p class="ns-title">Esto es una solicitud: todavía no reserva el vehículo</p>
+            <ol>
+              <li>Nos envías esta cotización por WhatsApp. No pagas nada.</li>
+              <li>Revisamos la disponibilidad real y te respondemos por WhatsApp con el monto final.</li>
+              <li>Si hay disponibilidad, te enviamos un enlace de pago<span id="nsLinkHours"></span>. La reserva queda confirmada al pagar el abono o el total.</li>
+            </ol>
+            <p class="ns-time" id="responseTimeText" hidden></p>
+          </div>
+          <button type="button" class="btn-cta-main" id="btnRequestConfirmation">SOLICITAR DISPONIBILIDAD POR WHATSAPP</button>
+          <div class="request-sent" id="requestSent" hidden role="status">
+            <p class="rs-title">Solicitud enviada · pendiente de confirmación</p>
+            <p>Código de tu cotización: <strong id="rsCode"></strong></p>
+            <p class="small">El vehículo aún no está reservado. Te confirmaremos la disponibilidad por WhatsApp; no necesitas volver a escribir tus datos. Si cierras esta página, tu cotización queda guardada en este dispositivo.</p>
+          </div>
           <div class="wa-fallback" id="waFallback" hidden>
             <p><strong>¿No se abrió WhatsApp?</strong> Elige una de estas opciones:</p>
             <a class="wa-fb-btn" id="waFbWeb" href="#" target="_blank" rel="noopener">Abrir WhatsApp Web</a>
-            <button type="button" class="wa-fb-btn secondary" id="waFbCopy">Copiar mensaje</button>
-            <p class="muted small">También puedes escribirnos al <strong>+56 9 8333 5924</strong>.</p>
+            <button type="button" class="wa-fb-btn secondary" id="waFbCopy">Copiar cotización</button>
+            <p class="muted small">También puedes escribirnos al <strong>+56 9 8333 5924</strong> y pegar la cotización.</p>
+            <textarea id="waFbText" class="wa-fb-text" readonly rows="6" aria-label="Texto de la cotización para copiar"></textarea>
           </div>
-          <p class="lock-note">Una vez confirmada la disponibilidad podrás pagar en línea:</p>
+          <p class="lock-note">Pago en línea: se habilita cuando confirmemos la disponibilidad.</p>
           <div class="locked-pay-row">
             <button type="button" class="btn-pay btn-pay-special locked" id="btnPayFullLocked">PAGO TOTAL</button>
             <button type="button" class="btn-pay btn-pay-deposit locked" id="btnPayDepositLocked">ABONO</button>
@@ -341,18 +411,26 @@
   </a>
 </div>
 
+<!-- Barra fija en celular: total siempre visible mientras se eligen adicionales -->
+<div class="mobile-total-bar" id="mobileTotalBar" hidden>
+  <div class="mtb-text"><span>Total estimado</span><strong id="mtbTotal">—</strong><small id="mtbSub"></small></div>
+  <button type="button" class="mtb-btn" id="mtbBtn">Revisar y solicitar</button>
+</div>
+
 <!-- Modal: intento de pago sin confirmación (sección 19) -->
 <div id="payBlockedModal" class="modal-overlay hidden" role="dialog" aria-modal="true" aria-labelledby="payBlockedTitle">
   <div class="modal-box">
-    <h3 id="payBlockedTitle">Antes de pagar, consulta por WhatsApp y confirma, si ya confirmaste el vehiculo procede al pago</h3>
+    <h3 id="payBlockedTitle">El pago en línea se habilita después de confirmar la disponibilidad</h3>
+    <p class="modal-text">Primero envíanos tu solicitud por WhatsApp. Si ya te confirmamos, usa el enlace de pago que te enviamos por WhatsApp.</p>
     <div class="modal-actions">
-      <button type="button" class="modal-confirm" id="payBlockedWhatsapp">CONSULTAR DISPONIBILIDAD POR WHATSAPP</button>
+      <button type="button" class="modal-confirm" id="payBlockedWhatsapp">SOLICITAR DISPONIBILIDAD POR WHATSAPP</button>
       <button type="button" class="modal-cancel" id="payBlockedClose">CERRAR</button>
     </div>
   </div>
 </div>
 
 <script src="/config.js"></script>
+<script src="/cotizacion.js"></script>
 <script src="/analytics-config.js"></script>
 <script>
 document.getElementById('year').textContent = new Date().getFullYear();
@@ -447,19 +525,25 @@ const state = {
 const vehicleId = Number(qp.get('vehicleId'));
 const confirmCode = qp.get('confirmCode');
 const linkToken = qp.get('token');
-const days = daysBetween(state.pickUpDate, state.pickUpTime, state.dropOffDate, state.dropOffTime);
+// Días con la misma regla en todo el sitio (24 h + 1 h de tolerancia, ver cotizacion.js).
+const days = window.GlaciaresCotizacion
+  ? GlaciaresCotizacion.rentalDays(state.pickUpDate, state.pickUpTime, state.dropOffDate, state.dropOffTime)
+  : daysBetween(state.pickUpDate, state.pickUpTime, state.dropOffDate, state.dropOffTime);
 
 const IMG_BASE = 'https://glaciaresrentacar.cl/flota/';
 const FLEET = [
   { id: 1, name: 'Suzuki Swift', price: 35000, cat: 'citycar', catLabel: 'Citycar', img: IMG_BASE + 'suzuki-swift.webp', deposit: 500000 },
   { id: 2, name: 'Suzuki Dzire', price: 38000, cat: 'citycar', catLabel: 'Citycar', img: IMG_BASE + 'suzuki-dzire.webp', deposit: 500000 },
-  { id: 3, name: 'Chevrolet Captiva', price: 50000, cat: 'suv', catLabel: 'SUV', img: IMG_BASE + 'chevrolet-captiva.webp', deposit: 600000 },
-  { id: 6, name: 'Kia Sorento', price: 40000, cat: 'suv', catLabel: 'SUV', img: IMG_BASE + 'kia-sorento.webp', deposit: 600000 },
-  { id: 7, name: 'Hyundai Tucson', price: 48000, cat: 'suv', catLabel: 'SUV', img: IMG_BASE + 'hyundai-tucson.webp', deposit: 600000 },
-  { id: 8, name: 'Peugeot 3008', price: 59000, cat: 'suv', catLabel: 'SUV', img: IMG_BASE + 'peugeot-3008.webp', deposit: 600000 },
+  { id: 3, name: 'Chevrolet Captiva', price: 50000, cat: 'suv', catLabel: 'SUV', img: IMG_BASE + 'chevrolet-captiva.webp', deposit: 500000 },
+  { id: 6, name: 'Kia Sorento', price: 40000, cat: 'suv', catLabel: 'SUV', img: IMG_BASE + 'kia-sorento.webp', deposit: 500000 },
+  { id: 7, name: 'Hyundai Tucson', price: 48000, cat: 'suv', catLabel: 'SUV', img: IMG_BASE + 'hyundai-tucson.webp', deposit: 500000 },
+  { id: 8, name: 'Peugeot 3008', price: 59000, cat: 'suv', catLabel: 'SUV', img: IMG_BASE + 'peugeot-3008.webp', deposit: 500000 },
 ];
 const vehicle = FLEET.find(v => v.id === vehicleId);
 
+/* El arranque se ejecuta al final del script (boot), cuando todas las
+   variables ya están declaradas. */
+function boot() {
 if (confirmCode && linkToken) {
   // Enlace seguro (viene del panel de administración o de un "Generar enlace
   // de pago"): la disponibilidad, el vehículo y los precios ya quedaron
@@ -489,6 +573,7 @@ if (confirmCode && linkToken) {
   document.getElementById('adicionalesGrid').style.display = 'grid';
   initPage();
 }
+}
 
 function buildBackToBuscarUrl() {
   const params = new URLSearchParams();
@@ -504,6 +589,14 @@ const EXTRAS_STORAGE_KEY = 'glaciares_extras_selection';
 let extrasStore = {};
 try { extrasStore = JSON.parse(sessionStorage.getItem(EXTRAS_STORAGE_KEY) || '{}'); } catch (e) { extrasStore = {}; }
 let selectedExtras = extrasStore[vehicleId] || [];
+/* Retomar cotización guardada (volver desde WhatsApp en otra pestaña o días
+   después): si el vehículo y las fechas coinciden, se recuperan adicionales y vuelo. */
+const GQ = window.GlaciaresCotizacion || null;
+const savedDraft = GQ ? GQ.loadDraft() : null;
+const draftMatches = !!(savedDraft && savedDraft.vehicleId === vehicleId && savedDraft.state &&
+  savedDraft.state.pickUpDate === state.pickUpDate && savedDraft.state.dropOffDate === state.dropOffDate &&
+  savedDraft.state.pickUpTime === state.pickUpTime && savedDraft.state.dropOffTime === state.dropOffTime);
+if (!extrasStore[vehicleId] && draftMatches && Array.isArray(savedDraft.extras)) selectedExtras = savedDraft.extras.slice();
 function saveSelection() {
   extrasStore[vehicleId] = selectedExtras;
   try { sessionStorage.setItem(EXTRAS_STORAGE_KEY, JSON.stringify(extrasStore)); } catch (e) { /* sin almacenamiento disponible */ }
@@ -582,16 +675,38 @@ function wireArgentinaToggle() {
 }
 
 async function loadExtrasAndQuote() {
+  // Total inmediato con el catálogo de respaldo, sin esperar al servidor
+  // (que puede tardar varios segundos si estaba "dormido").
+  extrasCatalog = (cfg.EXTRAS_FALLBACK || []).slice();
+  catalogSource = 'fallback';
+  afterCatalogLoaded();
   try {
-    const r = await fetch(`${API_BASE}/api/extras?vehicleId=${vehicleId}`);
-    extrasCatalog = r.ok ? await r.json() : [];
-  } catch (e) { extrasCatalog = []; }
+    const ctrl = (typeof AbortController === 'function') ? new AbortController() : null;
+    const timer = ctrl ? setTimeout(() => ctrl.abort(), 8000) : null;
+    const r = await fetch(`${API_BASE}/api/extras?vehicleId=${vehicleId}`, { signal: ctrl ? ctrl.signal : undefined });
+    if (timer) clearTimeout(timer);
+    const data = r.ok ? await r.json() : null;
+    if (Array.isArray(data) && data.length) { extrasCatalog = data; catalogSource = 'backend'; afterCatalogLoaded(); }
+  } catch (e) { /* se mantiene el catálogo de respaldo */ }
+  refreshQuote();
+}
+let catalogSource = 'fallback';
+function afterCatalogLoaded() {
   argentinaExtra = extrasCatalog.find(e => e.isArgentinaPermit) || null;
   if (argentinaExtra && state.argentina === 'si' && !getExtraSel(argentinaExtra.id)) {
     setExtraQty(argentinaExtra.id, 1);
   }
   renderAddonLists();
-  refreshQuote();
+  restoreFlightFields();
+  renderSummary();
+}
+function restoreFlightFields() {
+  if (!draftMatches || !savedDraft.flight || restoreFlightFields.done) return;
+  restoreFlightFields.done = true;
+  const f = savedDraft.flight;
+  if (f.airline) document.getElementById('fAirline').value = f.airline;
+  if (f.number) document.getElementById('fFlightNumber').value = f.number;
+  if (f.eta) document.getElementById('fFlightEta').value = f.eta;
 }
 
 function extraByNameIncludes(text) {
@@ -687,8 +802,8 @@ function renderAddonLists() {
 }
 
 function scheduleQuote() {
+  renderSummary(); // el total cambia al instante con el cálculo local
   clearTimeout(quoteTimer);
-  document.getElementById('summaryUpdating').style.display = 'block';
   quoteTimer = setTimeout(refreshQuote, 300);
 }
 
@@ -706,101 +821,192 @@ async function refreshQuote() {
       currentQuote = await r.json();
       renderSummary();
     }
-  } catch (e) { /* si falla, se mantiene el último resumen calculado */ }
+  } catch (e) { /* si falla, se mantiene el cálculo local */ }
   document.getElementById('summaryUpdating').style.display = 'none';
 }
 
-function renderSummary() {
-  const q = currentQuote;
-  if (!q) return;
-  const rows = [];
-  rows.push(`<div class="summary-row"><span>Arriendo (${q.days} × ${money(vehicle.price)})</span><span>${money(q.rental.base)}</span></div>`);
-  (q.extras || []).forEach(e => {
-    const label = e.vat > 0 ? `${e.name} (neto ${money(e.net)} + IVA ${money(e.vat)})` : `${e.name}${e.qty > 1 ? ` x${e.qty}` : ''}`;
-    rows.push(`<div class="summary-row"><span>${esc(label)}</span><span>${money(e.cost)}</span></div>`);
+let lastCalc = null;
+function calcNow() {
+  if (!GQ || !vehicle) return null;
+  const backendPct = currentQuote && currentQuote.rental && typeof currentQuote.rental.discountPct === 'number'
+    ? currentQuote.rental.discountPct : undefined;
+  return GQ.compute({
+    vehicle, pickUpDate: state.pickUpDate, pickUpTime: state.pickUpTime,
+    dropOffDate: state.dropOffDate, dropOffTime: state.dropOffTime,
+    pickUpPlace: state.pickUpPlace, dropOffPlace: state.dropOffPlace,
+    argentina: state.argentina, extras: selectedExtras, catalog: extrasCatalog,
+    backendDiscountPct: backendPct,
+    // Si esta cotización ya se envió, cuenta la fecha de la solicitud: la promo
+    // 4×3 se respeta aunque el abono se pague después del plazo.
+    today: requestDateISO(),
   });
-  if (q.airportFee > 0) {
-    const label = q.airportServiceType === 'airport_roundtrip' ? 'Servicio en aeropuerto (retiro y devolución)' : q.airportServiceType === 'airport_pickup_only' ? 'Servicio en aeropuerto (retiro)' : 'Servicio en aeropuerto (devolución)';
-    rows.push(`<div class="summary-row"><span>${label}</span><span>${money(q.airportFee)}</span></div>`);
-  }
-  if (days >= 4) rows.push(`<div class="summary-row discount"><span>Promo 4×3: al confirmar te aplicamos la opción más conveniente</span><span></span></div>`);
-  rows.push(`<div class="summary-row total-row"><span>Total estimado</span><span>${money(q.totalPriceNormal)}</span></div>`);
-  if (q.depositAmount && q.depositAmount < q.totalPriceNormal) {
-    rows.push(`<div class="summary-row total-row small"><span>Para reservar (abono)</span><span>${money(q.depositAmount)}</span></div>`);
-    rows.push(`<p class="summary-note">El saldo (${money(q.balanceDue)}) se paga al retirar el vehículo.</p>`);
-  } else {
-    rows.push(`<div class="summary-row total-row small"><span>Para reservar</span><span>${money(q.totalPriceNormal)}</span></div>`);
-  }
-  if (q.rental.discountPct && q.totalPriceFull < q.totalPriceNormal) {
-    rows.push(`<p class="summary-note">Si pagas el total por adelantado: <strong>${money(q.totalPriceFull)}</strong> (${q.rental.discountPct}% de descuento en el arriendo, no acumulable con la promo 4×3).</p>`);
-  }
-  rows.push(`<p class="summary-note">La disponibilidad debe confirmarse antes de pagar.</p>`);
-  document.getElementById('summaryBody').innerHTML = rows.join('');
-  document.getElementById('guaranteeNote').textContent = state.argentina === 'si'
-    ? `Garantía requerida para viajar a Argentina: ${money(cfg.ARGENTINA_GUARANTEE || 750000)} en tarjeta de crédito. No se cobra ahora.`
-    : `Garantía requerida: ${money(q.guaranteeAmount)}, dependiendo del vehículo. No se cobra ahora.`;
+}
+function requestDateISO() {
+  if (!savedDraft || !draftMatches || !savedDraft.sentAt) return undefined;
+  const curSig = GQ.signature({ vehicleId, state, extras: selectedExtras });
+  return savedDraft.sig === curSig ? GQ.localISO(new Date(savedDraft.sentAt)) : undefined;
+}
 
-  const discountAmount = q.rental.discountPct ? Math.round(q.rental.base * q.rental.discountPct / 100) : 0;
-  const cargosAdicionales = q.totalPriceFull - q.rental.base + discountAmount;
-  document.getElementById('altFullBody').innerHTML = `
-    ${q.rental.discountPct ? `<div class="alt-row old"><span>Precio normal (arriendo)</span><span>${money(q.rental.base)}</span></div>
-    <div class="alt-row"><span>Descuento validado</span><span>-${q.rental.discountPct}%</span></div>` : ''}
-    <div class="alt-row"><span>Cargos adicionales</span><span>${money(cargosAdicionales)}</span></div>
-    <div class="alt-charge">${money(q.totalPriceFull)}</div>`;
-  document.getElementById('altDepositBody').innerHTML = `
-    <div class="alt-row"><span>Total del arriendo</span><span>${money(q.totalPriceNormal)}</span></div>
-    <div class="alt-row"><span>Saldo a pagar al retiro</span><span>${money(q.balanceDue)}</span></div>
-    <div class="alt-charge">${money(q.depositAmount)}</div>`;
-  document.getElementById('btnPayFullLocked').innerHTML = `PAGO TOTAL`;
-  document.getElementById('btnPayDepositLocked').innerHTML = `ABONO`;
+function renderSummary() {
+  const c = calcNow();
+  if (!c) return;
+  lastCalc = c;
+  const rows = [];
+  rows.push(`<div class="summary-row"><span>Arriendo: ${c.days} día${c.days > 1 ? 's' : ''} × ${money(c.pricePerDay)}</span><span>${money(c.base)}</span></div>`);
+  if (c.applied) {
+    rows.push(`<div class="summary-row discount"><span>${esc(c.applied.label)}<span class="sr-sub">Aplicada automáticamente${(cfg.PROMO_4X3 || {}).fechaLimiteTexto ? ' · para solicitudes enviadas hasta el ' + esc(cfg.PROMO_4X3.fechaLimiteTexto) : ''}</span></span><span>−${money(c.applied.savings)}</span></div>`);
+  }
+  if (c.airport.amount > 0) rows.push(`<div class="summary-row"><span>${esc(c.airport.label)}</span><span>${money(c.airport.amount)}</span></div>`);
+  c.extras.forEach(e => {
+    const qty = e.qty > 1 ? ` ×${e.qty}` : '';
+    const per = e.perDay ? ` (${c.days} día${c.days > 1 ? 's' : ''})` : '';
+    const sub = e.vat > 0 ? `<span class="sr-sub">Neto ${money(e.net)} + IVA ${money(e.vat)}</span>` : '';
+    rows.push(`<div class="summary-row"><span>${esc(e.name)}${qty}${per}${sub}</span><span>${money(e.cost)}</span></div>`);
+  });
+  rows.push(`<div class="summary-row total-row"><span>Total estimado</span><span id="totalAmount">${money(c.total)}</span></div>`);
+  if (c.applied) rows.push(`<p class="summary-note" style="color:var(--green);font-weight:700;">Ahorras ${money(c.applied.savings)} con la promo 4×3.</p>`);
+  // Explicación de promociones que NO aplican (para no generar expectativas falsas).
+  const p4 = c.promo4x3;
+  if (!p4.eligible && p4.reason === 'dias' && (cfg.PROMO_4X3 || {}).activa && c.days === 3) {
+    rows.push(`<p class="promo-hint muted-hint">Con 1 día más (4 días) recibes 1 día gratis con la promo 4×3${(cfg.PROMO_4X3 || {}).vigencia ? ', ' + esc(cfg.PROMO_4X3.vigencia) : ''}.</p>`);
+  } else if (!p4.eligible && p4.reason === 'vigencia' && c.days >= ((cfg.PROMO_4X3 || {}).diasMinimos || 4)) {
+    rows.push(`<p class="promo-hint muted-hint">La promo 4×3 terminó: era ${esc((cfg.PROMO_4X3 || {}).vigencia || '')}.</p>`);
+  } else if (!p4.eligible && p4.reason === 'periodo') {
+    rows.push(`<p class="promo-hint muted-hint">La promo 4×3 no aplica a este período de viaje.</p>`);
+  }
+  document.getElementById('summaryBody').innerHTML = rows.join('');
+
+  // Cuánto se paga ahora y después.
+  const split = [];
+  split.push(`<div class="ps-now">Hoy no pagas nada: primero confirmamos la disponibilidad.</div>`);
+  split.push(`<p class="ps-title">Después de la confirmación, eliges cómo pagar:</p>`);
+  split.push(`<div class="ps-row"><span>Abono para reservar (1 día de arriendo)</span><strong>${money(c.deposit)}</strong></div>`);
+  split.push(`<div class="ps-row"><span>Saldo al retirar el vehículo</span><strong>${money(c.balance)}</strong></div>`);
+  if (c.prepay) {
+    split.push(`<div class="ps-opt"><div class="ps-row"><span>O pagando el 100 % por adelantado (−${c.prepay.pct}% en el arriendo${c.applied ? ', en lugar de la promo 4×3' : ''})</span><strong>${money(c.prepay.total)}</strong></div><p class="ps-hint">Ahorras ${money(c.prepay.extraSavings)} más. Descuento no acumulable con otras promociones.</p></div>`);
+  } else if (c.applied && c.early.eligible) {
+    split.push(`<p class="ps-hint">La promo 4×3 te conviene más que el ${c.early.pct}% por pago anticipado (no son acumulables).</p>`);
+  }
+  document.getElementById('paySplit').innerHTML = split.join('');
+
+  document.getElementById('guaranteeNote').innerHTML = c.argentinaGuarantee
+    ? `<strong>Garantía (aparte del precio): ${money(c.guarantee)}</strong> para viajar a Argentina. Se deja con tarjeta de crédito; no es un pago del arriendo, no se cobra al reservar y se libera al recibir el vehículo conforme.`
+    : `<strong>Garantía (aparte del precio): ${money(c.guarantee)}</strong> con tarjeta de crédito. No es un pago del arriendo, no se cobra al reservar y se libera al recibir el vehículo conforme.`;
 
   const conductorNote = document.getElementById('conductorVatBreakdown');
   if (conductorNote) {
-    const conductorExtra = (q.extras || []).find(e => e.name.toLowerCase().includes('conductor adicional'));
-    if (conductorExtra) conductorNote.textContent = `Neto ${money(conductorExtra.net)} + IVA ${money(conductorExtra.vat)} = ${money(conductorExtra.cost)}.`;
+    const ce = c.extras.find(e => e.name.toLowerCase().includes('conductor adicional'));
+    if (ce) conductorNote.textContent = `${c.days} día${c.days > 1 ? 's' : ''}: neto ${money(ce.net)} + IVA ${money(ce.vat)} = ${money(ce.cost)}.`;
   }
+
+  // Barra fija del celular
+  document.getElementById('mtbTotal').textContent = money(c.total);
+  document.getElementById('mtbSub').textContent = c.applied ? `${c.days} días · ahorras ${money(c.applied.savings)}` : `${c.days} día${c.days > 1 ? 's' : ''} · hoy no pagas nada`;
+
+  persistDraft();
 }
+
+function persistDraft(extra) {
+  if (!GQ || !lastCalc) return;
+  const prev = GQ.loadDraft();
+  const d = {
+    vehicleId, vehicleName: vehicle.name, state: { ...state }, extras: selectedExtras.slice(),
+    flight: readFlight(), total: lastCalc.total,
+    summaryDates: `${fechaCorta(state.pickUpDate)} → ${fechaCorta(state.dropOffDate)}`,
+    resumeUrl: location.pathname + '?' + resumeParams(),
+  };
+  const sig = GQ.signature(d);
+  // Conserva el código y la marca de "solicitud enviada" solo si es la misma cotización.
+  if (prev && prev.sig === sig) { d.requestCode = prev.requestCode; d.quoteCode = prev.quoteCode; d.sentAt = prev.sentAt; }
+  d.sig = sig;
+  Object.assign(d, extra || {});
+  GQ.saveDraft(d);
+  return d;
+}
+function readFlight() {
+  return {
+    airline: (document.getElementById('fAirline') || {}).value || '',
+    number: (document.getElementById('fFlightNumber') || {}).value || '',
+    eta: (document.getElementById('fFlightEta') || {}).value || '',
+  };
+}
+function resumeParams() {
+  const params = new URLSearchParams();
+  params.set('vehicleId', vehicleId);
+  Object.entries(state).forEach(([k, v]) => { if (v) params.set(k, v); });
+  return params.toString();
+}
+function fechaCorta(d) { const p = String(d || '').split('-'); return p.length === 3 ? `${p[2]}/${p[1]}` : d; }
+['fAirline', 'fFlightNumber', 'fFlightEta'].forEach(id => {
+  const el = document.getElementById(id);
+  if (el) el.addEventListener('change', () => persistDraft());
+});
 
 /* =====================================================================
    MENSAJE DE WHATSAPP Y REGISTRO DE LA SOLICITUD (sección 20)
    ===================================================================== */
-function buildWhatsappMessage(requestCode) {
-  const q = currentQuote;
-  const fecha = (d, t) => { const p = String(d || '').split('-'); return (p.length === 3 ? `${p[2]}/${p[1]}/${p[0]}` : d) + (t ? ` a las ${t}` : ''); };
-  const extras = (q && q.extras && q.extras.length) ? q.extras.map(e => `${e.name}${e.qty > 1 ? ` x${e.qty}` : ''}`).join(', ') : '';
+function buildWhatsappMessage(code) {
+  const c = lastCalc || calcNow();
+  const fecha = (d, t) => { const p = String(d || '').split('-'); return (p.length === 3 ? `${p[2]}/${p[1]}/${p[0]}` : d) + (t ? ` ${t} h` : ''); };
   const lugarRetiro = placeLabel(state.pickUpPlace);
   const lugarDevol = placeLabel(state.dropOffPlace, state.dropOffOther);
+  const f = readFlight();
   const lines = [
-    'Hola, quiero confirmar disponibilidad para esta cotización:',
+    'Hola, solicito disponibilidad para esta cotización:',
     '',
+    `Código de cotización: ${code}`,
     `Vehículo: ${vehicle.name}`,
-    `Retiro: ${fecha(state.pickUpDate, state.pickUpTime)}`,
-    `Devolución: ${fecha(state.dropOffDate, state.dropOffTime)}`,
-    lugarRetiro === lugarDevol ? `Lugar: ${lugarRetiro}` : `Lugar: retiro en ${lugarRetiro}, devolución en ${lugarDevol}`,
-    ...(extras ? [`Adicionales: ${extras}`] : []),
-    ...(state.argentina === 'si' ? ['Viajo a Argentina: sí'] : []),
-    `Total estimado: ${money(q ? q.totalPriceNormal : 0)}`,
-    ...(requestCode ? [`Código: ${requestCode}`] : []),
+    `Retiro: ${fecha(state.pickUpDate, state.pickUpTime)} · ${lugarRetiro}`,
+    `Devolución: ${fecha(state.dropOffDate, state.dropOffTime)} · ${lugarDevol}`,
+    `Pasajeros: ${state.passengers || '1'}${state.destination ? ' · Destino: ' + destinationLabel(state) : ''}${state.argentina === 'si' ? ' · Viaje a Argentina: sí' : ''}`,
+    ...((f.airline || f.number || f.eta) ? [`Vuelo: ${[f.airline, f.number, f.eta ? 'llega ' + f.eta : ''].filter(Boolean).join(' ')}`] : []),
     '',
-    '¿Está disponible?',
+    `Arriendo: ${c.days} día${c.days > 1 ? 's' : ''} × ${money(c.pricePerDay)} = ${money(c.base)}`,
+    ...(c.applied ? [`${c.applied.label}: −${money(c.applied.savings)}`] : []),
+    ...(c.airport.amount > 0 ? [`${c.airport.label}: ${money(c.airport.amount)}`] : []),
+    ...c.extras.map(e => `${e.name}${e.qty > 1 ? ' ×' + e.qty : ''}: ${money(e.cost)}${e.vat > 0 ? ' (IVA incl.)' : ''}`),
+    `TOTAL ESTIMADO: ${money(c.total)}`,
+    `Abono para reservar: ${money(c.deposit)} · saldo al retiro: ${money(c.balance)}`,
+    ...(c.prepay ? [`Pagando el 100 % por adelantado (−${c.prepay.pct}%): ${money(c.prepay.total)}`] : []),
+    `Garantía (aparte, en tarjeta de crédito): ${money(c.guarantee)}`,
+    ...(state.promoCode ? [`Código promocional ingresado: ${state.promoCode}`] : []),
+    '',
+    'Entiendo que esta solicitud aún no reserva el vehículo. ¿Está disponible?',
   ];
   return lines.join('\n');
+}
+
+function localQuoteCode() {
+  // Código propio cuando el servidor no alcanzó a registrar la solicitud: así el
+  // mensaje y la cotización guardada siempre tienen una referencia.
+  return 'WEB-' + Date.now().toString(36).toUpperCase().slice(-6);
 }
 
 function showWaFallback(msg) {
   const box = document.getElementById('waFallback');
   if (!box) return;
   document.getElementById('waFbWeb').href = `https://web.whatsapp.com/send?phone=${WA_NUMBER}&text=${encodeURIComponent(msg)}`;
+  const ta = document.getElementById('waFbText');
+  if (ta) ta.value = msg;
   const copyBtn = document.getElementById('waFbCopy');
   copyBtn.onclick = async () => {
-    try { await navigator.clipboard.writeText(msg); copyBtn.textContent = '¡Mensaje copiado!'; }
-    catch (e) { window.prompt('Copia este mensaje:', msg); }
+    try { await navigator.clipboard.writeText(msg); copyBtn.textContent = '¡Cotización copiada!'; }
+    catch (e) { if (ta) { ta.focus(); ta.select(); } copyBtn.textContent = 'Selecciona y copia el texto de abajo'; }
   };
   box.hidden = false;
 }
 
+function showRequestSent(code) {
+  const box = document.getElementById('requestSent');
+  document.getElementById('rsCode').textContent = code;
+  box.hidden = false;
+  const btn = document.getElementById('btnRequestConfirmation');
+  btn.textContent = 'VOLVER A ABRIR WHATSAPP CON MI SOLICITUD';
+  const steps = document.getElementById('nextSteps');
+  if (steps) steps.querySelector('.ns-title').textContent = 'Solicitud enviada: aún no es una reserva confirmada';
+}
+
 async function requestConfirmationViaWhatsapp() {
-  let requestCode = null;
   // Safari (iPhone) bloquea ventanas abiertas después de un await: abrimos la
   // pestaña de inmediato, dentro del clic, y le asignamos el enlace al final.
   let waWindow = null;
@@ -808,29 +1014,40 @@ async function requestConfirmationViaWhatsapp() {
   if (waWindow) {
     try { waWindow.opener = null; waWindow.document.title = 'Abriendo WhatsApp…'; waWindow.document.body.innerHTML = '<p style="font-family:sans-serif;padding:24px">Abriendo WhatsApp…</p>'; } catch (e) {}
   }
-  try {
-    const payload = {
-      vehicleId, from: state.pickUpDate, to: state.dropOffDate,
-      pickupTime: state.pickUpTime, returnTime: state.dropOffTime,
-      pickupPlace: state.pickUpPlace, dropoffPlace: state.dropOffPlace, dropoffOther: state.dropOffOther,
-      passengers: state.passengers, destination: state.destination, destinationOther: state.destinationOther,
-      argentina: state.argentina, extras: selectedExtras,
-      airlineName: (document.getElementById('fAirline') || {}).value || '',
-      flightNumber: (document.getElementById('fFlightNumber') || {}).value || '',
-      flightEta: (document.getElementById('fFlightEta') || {}).value || '',
-      notes: state.promoCode ? `Código promocional ingresado: ${state.promoCode} (a validar por el equipo)` : '',
-    };
-    // Si el servidor tarda (arranque en frío), no dejamos al cliente esperando.
-    const ctrl = (typeof AbortController === 'function') ? new AbortController() : null;
-    const timer = ctrl ? setTimeout(() => ctrl.abort(), 4000) : null;
-    const r = await fetch(`${API_BASE}/api/requests`, {
-      method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify(payload),
-      signal: ctrl ? ctrl.signal : undefined,
-    });
-    if (timer) clearTimeout(timer);
-    if (r.ok) { const data = await r.json(); requestCode = data.bookingCode; }
-  } catch (e) { /* igual se abre WhatsApp aunque falle el registro */ }
-  const msg = buildWhatsappMessage(requestCode);
+  if (!lastCalc) renderSummary();
+  const draft = persistDraft() || {};
+  // Misma cotización ya enviada desde este navegador: reutilizamos el código,
+  // no creamos otra solicitud en el panel y no repetimos la conversión.
+  const alreadySent = !!(draft.sentAt && (draft.requestCode || draft.quoteCode));
+  let requestCode = alreadySent ? (draft.requestCode || null) : null;
+  if (!alreadySent) {
+    try {
+      const f = readFlight();
+      const c = lastCalc;
+      const promoNote = c && c.applied ? `Promo 4×3 estimada en la web: −${money(c.applied.savings)} (total estimado ${money(c.total)}).` : '';
+      const payload = {
+        vehicleId, from: state.pickUpDate, to: state.dropOffDate,
+        pickupTime: state.pickUpTime, returnTime: state.dropOffTime,
+        pickupPlace: state.pickUpPlace, dropoffPlace: state.dropOffPlace, dropoffOther: state.dropOffOther,
+        passengers: state.passengers, destination: state.destination, destinationOther: state.destinationOther,
+        argentina: state.argentina, extras: selectedExtras,
+        airlineName: f.airline, flightNumber: f.number, flightEta: f.eta,
+        notes: [state.promoCode ? `Código promocional ingresado: ${state.promoCode} (a validar por el equipo)` : '', promoNote].filter(Boolean).join(' '),
+      };
+      // Si el servidor tarda (arranque en frío), no dejamos al cliente esperando.
+      const ctrl = (typeof AbortController === 'function') ? new AbortController() : null;
+      const timer = ctrl ? setTimeout(() => ctrl.abort(), 4000) : null;
+      const r = await fetch(`${API_BASE}/api/requests`, {
+        method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify(payload),
+        signal: ctrl ? ctrl.signal : undefined,
+      });
+      if (timer) clearTimeout(timer);
+      if (r.ok) { const data = await r.json(); requestCode = data.bookingCode; }
+    } catch (e) { /* igual se abre WhatsApp aunque falle el registro */ }
+  }
+  const code = requestCode || draft.quoteCode || localQuoteCode();
+  persistDraft({ requestCode: requestCode || null, quoteCode: code, sentAt: draft.sentAt || Date.now() });
+  const msg = buildWhatsappMessage(code);
   const waUrl = `https://wa.me/${WA_NUMBER}?text=${encodeURIComponent(msg)}`;
   if (waWindow && !waWindow.closed) {
     waWindow.location.href = waUrl;
@@ -838,14 +1055,18 @@ async function requestConfirmationViaWhatsapp() {
     // Si el navegador bloqueó la pestaña nueva, abrimos WhatsApp en la misma.
     window.location.href = waUrl;
   }
+  showRequestSent(code);
   // Respaldo visible: en computadores sin la app de WhatsApp, el cliente
-  // puede seguir por WhatsApp Web o copiar el mensaje.
+  // puede seguir por WhatsApp Web o copiar la cotización.
   setTimeout(() => showWaFallback(msg), 1200);
-  // Lead (Meta) + conversión "WhatsApp" (Google Ads): es el punto más
-  // profundo del embudo, el cliente abre WhatsApp con su solicitud armada.
-  if (window.trackEvent) window.trackEvent('solicitar_confirmacion', { requestCode });
-  if (window.reportAdsConversion) window.reportAdsConversion();
-  return requestCode;
+  // Lead (Meta) + conversión "WhatsApp" (Google Ads): solicitud de
+  // disponibilidad enviada (NO es una reserva confirmada). Se mide una sola
+  // vez por cotización para no duplicar conversiones si vuelve a pulsar.
+  if (!alreadySent) {
+    if (window.trackEvent) window.trackEvent('solicitar_confirmacion', { requestCode: code });
+    if (window.reportAdsConversion) window.reportAdsConversion();
+  }
+  return code;
 }
 
 /* ---- Medición de clics de conversión (mismo mecanismo que la portada) ---- */
@@ -855,7 +1076,40 @@ document.addEventListener('click', (e) => {
   if (el && el.dataset.track === 'whatsapp-float' && window.reportAdsConversion) window.reportAdsConversion();
 });
 
+function wireMobileBar() {
+  const bar = document.getElementById('mobileTotalBar');
+  const target = document.getElementById('summaryCol');
+  if (!bar || !target) return;
+  bar.hidden = false;
+  document.body.classList.add('has-mtb');
+  document.getElementById('mtbBtn').addEventListener('click', () => {
+    target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+  });
+  // Se oculta cuando el resumen (con el botón principal) ya está en pantalla:
+  // así nunca hay dos acciones principales visibles a la vez.
+  if ('IntersectionObserver' in window) {
+    new IntersectionObserver((entries) => {
+      entries.forEach(en => { bar.style.display = en.isIntersecting ? 'none' : ''; });
+    }, { threshold: 0.15 }).observe(target);
+  }
+}
+
+function wireInfoTexts() {
+  const h = cfg.PAYMENT_LINK_VALID_HOURS;
+  const el = document.getElementById('nsLinkHours');
+  if (el && h) el.textContent = ` (válido por ${h} horas)`;
+  const rt = document.getElementById('responseTimeText');
+  if (rt && cfg.RESPONSE_TIME_TEXT) { rt.textContent = cfg.RESPONSE_TIME_TEXT; rt.hidden = false; }
+  // Si esta misma cotización ya se envió desde este navegador, se muestra su estado.
+  if (savedDraft && draftMatches && savedDraft.sentAt && (savedDraft.quoteCode || savedDraft.requestCode)) {
+    const curSig = GQ.signature({ vehicleId, state, extras: selectedExtras });
+    if (savedDraft.sig === curSig) showRequestSent(savedDraft.requestCode || savedDraft.quoteCode);
+  }
+}
+
 function wireMainCta() {
+  wireMobileBar();
+  wireInfoTexts();
   const btn = document.getElementById('btnRequestConfirmation');
   btn.addEventListener('click', async () => {
     if (btn.disabled) return;
@@ -932,6 +1186,7 @@ function showConfirmedState() {
 
   document.getElementById('preConfirmActions').style.display = 'none';
   document.getElementById('confirmedActions').style.display = 'block';
+  const mtb = document.getElementById('mobileTotalBar'); if (mtb) { mtb.hidden = true; document.body.classList.remove('has-mtb'); }
   const balanceDue = Math.max(0, (b.totalPriceNormal || 0) - (b.depositAmount || 0));
   document.getElementById('confirmedSub').textContent = `Reserva ${b.bookingCode} · ${b.vehicleName} · ${b.from} → ${b.to} (${b.days} día${b.days > 1 ? 's' : ''})`;
   document.getElementById('confirmedFullBody').innerHTML = `
@@ -983,6 +1238,8 @@ async function payConfirmed(mode) {
     btnFull.disabled = false; btnDeposit.disabled = false;
   }
 }
+
+boot();
 </script>
 </body>
 </html>

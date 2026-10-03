@@ -150,9 +150,16 @@
   .promo-banner-link img{display:block;width:100%;height:auto;}
   .promo-banner-note{text-align:center;color:var(--slate-500);font-size:12px;margin-top:10px;}
   .promo-4x3-info{max-width:760px;margin:14px auto 0;background:#fff;border:1px solid var(--slate-100);border-radius:16px;padding:16px 18px;text-align:center;}
-  .promo-4x3-title{font-size:17px;color:var(--navy);margin:0 0 8px;}
+  .promo-4x3-title{font-size:17px;color:var(--navy);margin:0 0 8px;text-wrap:balance;}
   .promo-4x3-info ul{list-style:none;padding:0;margin:0 0 14px;text-align:left;font-size:13px;color:var(--slate-600);display:grid;gap:4px;}
   .promo-4x3-info .btn{display:inline-block;}
+  .promo-4x3-lead{font-size:14.5px;color:var(--navy);margin:0 0 10px;font-weight:600;}
+  .promo-4x3-sub{font-size:13px;color:var(--slate-600);margin:0 0 6px;}
+  .promo-4x3-info ul.promo-4x3-list{display:inline-grid;font-size:14px;color:var(--navy);font-weight:700;margin:0 0 14px;}
+  .promo-4x3-list li::before{content:'✓';color:var(--green,#2E7D5B);margin-right:8px;font-weight:800;}
+  .promo-4x3-cta{min-height:44px;}
+  .promo-4x3-wa{display:block;margin-top:8px;font-size:13px;font-weight:700;color:var(--accent-dark,#00AFD6);text-decoration:underline;}
+  .promo-4x3-legal{font-size:11.5px;line-height:1.5;color:var(--slate-500);margin:12px auto 0;max-width:620px;}
   .reviews-summary{font-size:15px;color:var(--navy);margin-bottom:16px;}
   .reviews-list{display:grid;gap:12px;text-align:left;margin:0 0 20px;}
   .review-item{border:1px solid var(--slate-100);border-radius:12px;padding:12px 14px;font-size:14px;color:var(--slate-600);}
@@ -439,6 +446,7 @@
       </div>
     </div>
     <div class="hero-mini-trust">
+      <span><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M2 16l20-6-3-3-7 3-5-4-2 1 3 5-4 2z"/><path d="M3 21h18"/></svg>Retiro y devolución en el Aeropuerto de Punta Arenas</span>
       <span><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 2v20M2 12h20"/></svg>Kilometraje libre en la Región de Magallanes</span>
       <span><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="8" r="4"/><path d="M4 21c0-4 3.6-7 8-7s8 3 8 7"/></svg>Atención personalizada</span>
       <span><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 2 3 6v6c0 5 4 8.5 9 10 5-1.5 9-5 9-10V6l-9-4Z"/></svg>Soporte por WhatsApp durante tu viaje</span>
@@ -529,15 +537,17 @@
     <img src="https://glaciaresrentacar.cl/promocion/promo-4x3.webp" srcset="https://glaciaresrentacar.cl/promocion/promo-4x3-800.webp 800w, https://glaciaresrentacar.cl/promocion/promo-4x3.webp 1400w" sizes="(max-width: 1180px) 100vw, 1140px" alt="Promoción exclusiva: arrienda 4 días y paga 3 — Glaciares Rent a Car" width="1400" height="781" loading="lazy" decoding="async" onerror="this.closest('.promo-banner-wrap').style.display='none'">
   </a>
   <div class="promo-4x3-info">
-    <p class="promo-4x3-title"><strong>Arrienda 4 días y paga 3</strong></p>
-    <ul>
-      <li><strong>Vigencia:</strong> <span id="promo4x3Vigencia">por tiempo limitado, sujeta a modificación sin previo aviso</span>.</li>
-      <li><strong>Vehículos:</strong> <span id="promo4x3Vehiculos">sujeta a disponibilidad; consulta los vehículos participantes por WhatsApp</span>.</li>
-      <li><strong>Fechas excluidas:</strong> <span id="promo4x3Excluidas">consúltalas por WhatsApp</span>.</li>
-      <li><strong>Pago:</strong> no acumulable con el 15&nbsp;% por pago anticipado: aplicamos la opción que más te convenga.</li>
-      <li><strong>Cómo solicitarla:</strong> escríbenos por WhatsApp o cotiza en línea; se aplica al confirmar tu reserva.</li>
+    <p class="promo-4x3-title"><strong>Reserva 4 días o más y recibe 1 día gratis</strong></p>
+    <p class="promo-4x3-lead">Solicita tu reserva hasta el <span id="promo4x3Limite">31 de octubre de 2026</span> y disfruta el beneficio también en temporada alta.</p>
+    <p class="promo-4x3-sub">El día gratis está incluido en la duración elegida:</p>
+    <ul class="promo-4x3-list">
+      <li>Reserva 4 días y paga 3.</li>
+      <li>Reserva 5 días y paga 4.</li>
+      <li>Reserva 7 días y paga 6.</li>
     </ul>
-    <a href="https://wa.me/56983335924?text=Hola%2C%20quiero%20cotizar%20la%20promoci%C3%B3n%204x3.%0AFechas%3A%20%0AVeh%C3%ADculo%3A%20" target="_blank" rel="noopener" class="btn btn-whatsapp" data-track="whatsapp-promo4x3">Cotizar promoción 4×3 por WhatsApp</a>
+    <a href="#buscador" class="btn btn-accent promo-4x3-cta" data-track="promo4x3-consultar">Consultar disponibilidad</a>
+    <a href="https://wa.me/56983335924?text=Hola%2C%20quiero%20cotizar%20la%20promoci%C3%B3n%204x3.%0AFechas%3A%20%0AVeh%C3%ADculo%3A%20" target="_blank" rel="noopener" class="promo-4x3-wa" data-track="whatsapp-promo4x3">o consúltala por WhatsApp</a>
+    <p class="promo-4x3-legal">Válido para solicitudes de reserva enviadas hasta el <span id="promo4x3Limite2">31 de octubre de 2026</span>, para viajar en cualquier fecha y sujeto a disponibilidad. El abono puede pagarse después de esa fecha. Un solo día gratis por arriendo. No acumulable con otros descuentos. El beneficio se aplica al arriendo del vehículo; aeropuerto y adicionales se cobran aparte.</p>
   </div>
 </div>
 
@@ -776,7 +786,7 @@
   <div class="faq-list">
     <details class="faq-item">
       <summary>¿Cuál es la edad permitida para arrendar un vehículo?<span class="faq-toggle">+</span></summary>
-      <p>Debes tener 22 años o más, con licencia de conducir vigente (chilena o extranjera) y cédula de identidad o pasaporte vigente. Consulta el detalle completo en nuestras <a href="condiciones.html" style="color:var(--accent-dark);font-weight:700;">condiciones de arriendo</a>.</p>
+      <p>Debes tener entre 21 y 75 años, con licencia de conducir vigente (chilena o extranjera) y cédula de identidad o pasaporte vigente. Consulta el detalle completo en nuestras <a href="condiciones.html" style="color:var(--accent-dark);font-weight:700;">condiciones de arriendo</a>.</p>
     </details>
     <details class="faq-item">
       <summary>¿Hay cargo por conductor adicional?<span class="faq-toggle">+</span></summary>
@@ -784,7 +794,7 @@
     </details>
     <details class="faq-item">
       <summary>¿Qué pasa si no me presento a retirar el vehículo?<span class="faq-toggle">+</span></summary>
-      <p>Esperamos hasta 2 horas desde la hora reservada. Pasado ese plazo se cobra un 50% del valor total del arriendo por no presentación (No Show). Si avisas con 48 horas de anticipación, no se cobra.</p>
+      <p>Esperamos hasta 2 horas desde la hora reservada. Pasado ese plazo se cobra un 50% del valor total del arriendo por no presentación (No Show). Si avisas con 72 horas de anticipación, no se cobra.</p>
     </details>
     <details class="faq-item">
       <summary>¿Puedo cruzar a Argentina con el vehículo arrendado?<span class="faq-toggle">+</span></summary>
@@ -796,7 +806,7 @@
     </details>
     <details class="faq-item">
       <summary>¿Necesito dejar una garantía?<span class="faq-toggle">+</span></summary>
-      <p>Sí, en tarjeta de crédito: desde $500.000 hasta $800.000 dentro de Chile, y $750.000 si viajas a Argentina. Se libera una vez revisado y recibido el vehículo conforme.</p>
+      <p>Sí, en tarjeta de crédito: $500.000 dentro de Chile y $750.000 si viajas a Argentina. Se libera una vez revisado y recibido el vehículo conforme.</p>
     </details>
     <details class="faq-item">
       <summary>¿Cómo pago mi reserva?<span class="faq-toggle">+</span></summary>
@@ -808,7 +818,7 @@
     </details>
     <details class="faq-item">
       <summary>¿Cuánto necesito abonar para reservar y cómo cancelo?<span class="faq-toggle">+</span></summary>
-      <p>La reserva se confirma con un abono equivalente a un día de arriendo. Cancelando con 48 horas de anticipación o más, se devuelve el 100%; con menos de 48 horas, se descuentan 2 días de arriendo del monto a devolver.</p>
+      <p>La reserva se confirma con un abono equivalente a un día de arriendo. Cancelando con 72 horas de anticipación o más, se devuelve el 100%; con menos de 72 horas, se descuentan 2 días de arriendo del monto a devolver.</p>
     </details>
   </div>
   <p class="center" style="margin-top:26px;">
@@ -970,6 +980,7 @@
 </div>
 
 <script src="config.js"></script>
+<script src="cotizacion.js"></script>
 <script src="analytics-config.js"></script>
 <script>
 document.getElementById('year').textContent = new Date().getFullYear();
@@ -1107,10 +1118,17 @@ if ('IntersectionObserver' in window) {
 /* ---- Promo 4x3: condiciones desde config.js (si están definidas) ---- */
 (function(){
   const p = (window.GLACIARES_CONFIG || {}).PROMO_4X3 || {};
-  if (p.vigencia) document.getElementById('promo4x3Vigencia').textContent = p.vigencia;
-  if (p.vehiculos) document.getElementById('promo4x3Vehiculos').textContent = p.vehiculos;
-  if (p.fechasExcluidas) document.getElementById('promo4x3Excluidas').textContent = p.fechasExcluidas;
+  if (p.fechaLimiteTexto) ['promo4x3Limite', 'promo4x3Limite2'].forEach(id => { const el = document.getElementById(id); if (el) el.textContent = p.fechaLimiteTexto; });
+  // Promo vencida o desactivada: se oculta sola (no se anuncia algo que ya no aplica).
+  const G = window.GlaciaresCotizacion;
+  const hoy = G ? G.localISO() : new Date().toISOString().slice(0, 10);
+  if (p.activa === false || (p.validaHasta && hoy > p.validaHasta)) {
+    const w = document.querySelector('.promo-banner-wrap'); if (w) w.style.display = 'none';
+  }
 })();
+
+/* ---- Cotización guardada: permite retomarla al volver al sitio ---- */
+if (window.GlaciaresCotizacion) window.GlaciaresCotizacion.renderResumeBanner({ insertBefore: document.getElementById('buscador'), offsetTop: 0 });
 
 /* ---- Despertar el servidor de reservas apenas se abre la portada, para que
    el cotizador responda rápido cuando el cliente busque. ---- */
@@ -1201,8 +1219,10 @@ const PLACE_LABELS = {
   hotel: 'Hotel o alojamiento en Punta Arenas — sujeto a confirmación',
 };
 
-const todayISO = new Date().toISOString().slice(0, 10);
-const tomorrowISO = new Date(Date.now() + 86400000).toISOString().slice(0, 10);
+// Fecha LOCAL (antes se usaba UTC: después de las 21:00 en Chile se bloqueaba el día actual).
+const GQ = window.GlaciaresCotizacion || null;
+const todayISO = GQ ? GQ.localISO() : new Date().toISOString().slice(0, 10);
+const tomorrowISO = GQ ? GQ.addDaysISO(todayISO, 1) : new Date(Date.now() + 86400000).toISOString().slice(0, 10);
 const fromDateEl = document.getElementById('fromDate');
 const toDateEl = document.getElementById('toDate');
 const fromTimeEl = document.getElementById('fromTime');
@@ -1213,7 +1233,7 @@ toDateEl.value = tomorrowISO;
 toDateEl.min = tomorrowISO;
 fromDateEl.addEventListener('change', () => {
   if (!fromDateEl.value) return;
-  const min = new Date(new Date(fromDateEl.value).getTime() + 86400000).toISOString().slice(0, 10);
+  const min = GQ ? GQ.addDaysISO(fromDateEl.value, 1) : new Date(new Date(fromDateEl.value).getTime() + 86400000).toISOString().slice(0, 10);
   toDateEl.min = min;
   if (toDateEl.value < min) toDateEl.value = min;
 });
@@ -1259,6 +1279,19 @@ function updateDropoffVisibility(){
 pickupPlaceEl.addEventListener('change', () => { updateSameLugarText(); updateAirportNote(); });
 sameLugarEl.addEventListener('change', () => { updateDropoffVisibility(); updateAirportNote(); });
 dropoffPlaceEl.addEventListener('change', () => { updateDropoffVisibility(); updateAirportNote(); });
+/* Enlaces de anuncios: ?retiro=aeropuerto (o pickUpPlace=aeropuerto) deja el
+   aeropuerto preseleccionado, para que quien buscó "rent a car aeropuerto
+   Punta Arenas" no tenga que cambiarlo a mano. También acepta fechas
+   (pickUpDate / dropOffDate) si el anuncio las trae. */
+(function applyLandingParams(){
+  const qp = new URLSearchParams(location.search);
+  const place = qp.get('retiro') || qp.get('pickUpPlace');
+  if (place && ['agencia','aeropuerto','hotel'].includes(place)) pickupPlaceEl.value = place;
+  const d1 = qp.get('pickUpDate'), d2 = qp.get('dropOffDate');
+  if (d1 && /^\d{4}-\d{2}-\d{2}$/.test(d1) && d1 >= todayISO) { fromDateEl.value = d1; toDateEl.min = GQ ? GQ.addDaysISO(d1, 1) : d1; }
+  if (d2 && /^\d{4}-\d{2}-\d{2}$/.test(d2) && d2 > fromDateEl.value) toDateEl.value = d2;
+  else if (d1 && toDateEl.value <= fromDateEl.value) toDateEl.value = GQ ? GQ.addDaysISO(fromDateEl.value, 4) : toDateEl.value;
+})();
 updateSameLugarText();
 updateDropoffVisibility();
 updateAirportNote();
@@ -1289,7 +1322,7 @@ searchForm.addEventListener('submit', (e) => {
   const from = fromDateEl.value, to = toDateEl.value;
   const fromTime = fromTimeEl.value, toTime = toTimeEl.value;
   const dropoffOtherVal = dropoffOtherText.value.trim();
-  const todayStr = new Date().toISOString().slice(0, 10);
+  const todayStr = todayISO;
 
   const errors = [];
   if (!pickupPlaceEl.value) { errors.push('pickupPlace'); }

@@ -20,7 +20,7 @@ window.GLACIARES_CONFIG = {
   AIRPORT_FEE_LEG: 20000,        // un tramo: solo retiro O solo devolución en aeropuerto
   AIRPORT_FEE_ROUNDTRIP: 30000,  // retiro Y devolución en aeropuerto (nunca $40.000)
   ARGENTINA_PERMIT_FEE: 120000, // Permiso para viaje a Argentina
-  MIN_DEPOSIT: 500000,       // Garantía referencial mínima ("desde")
+  MIN_DEPOSIT: 500000,       // Garantía con tarjeta, todos los vehículos (confirmado 2026-10-03)
   ARGENTINA_GUARANTEE: 750000, // Garantía para viajes a Argentina (confirmado 2026-09-17)
 
   PICKUP_PLACES: [
@@ -72,8 +72,9 @@ window.GLACIARES_CONFIG = {
      no se inventan, se dejan pendientes.
      --------------------------------------------------------------------- */
   RENTAL_POLICIES: {
-    minimumAge: 22,                 // Confirmado por el dueño (2026-08-18)
-    cancellationHours: 48,          // Confirmado por el dueño (2026-08-18)
+    minimumAge: 21,                 // Confirmado por el dueño (2026-10-03): 21 a 75 años
+    maximumAge: 75,
+    cancellationHours: 72,          // Confirmado por el dueño (2026-10-03)
     airportFeeLeg: 20000,           // un tramo (solo retiro o solo devolución)
     airportFeeRoundtrip: 30000,     // retiro y devolución en aeropuerto (nunca $40.000)
     argentinaPermitFee: 120000,
@@ -102,8 +103,58 @@ window.GLACIARES_CONFIG = {
 
   /* PROMOCIÓN 4x3: si se dejan vacíos, se muestran textos neutros. */
   PROMO_4X3: {
-    vigencia: 'hasta el 15 de octubre de 2026', // ej.: 'hasta el 31 de diciembre de 2026'
-    vehiculos: 'toda la flota', // ej.: 'toda la flota' o 'solo Citycar'
-    fechasExcluidas: 'ninguna', // ej.: 'del 20/12 al 5/01'
+    // Textos visibles (confirmados por el dueño el 2026-10-03).
+    vigencia: 'para solicitudes de reserva enviadas hasta el 31 de octubre de 2026',
+    fechaLimiteTexto: '31 de octubre de 2026',
+    vehiculos: 'toda la flota',
+    fechasExcluidas: 'ninguna',
+
+    /* --- Reglas del cálculo automático (cotizador) ---
+       Confirmado 2026-10-03: el 31/10 es el plazo para CONFIRMAR la reserva
+       (con abono), no el último día de viaje; se puede viajar después, también
+       en temporada alta. Un solo día gratis por arriendo de 4 días o más
+       (4→paga 3, 5→paga 4, 7→paga 6). Solo sobre el arriendo del vehículo;
+       aeropuerto y adicionales aparte. No acumulable con otros descuentos. */
+    activa: true,
+    validaHasta: '2026-10-31',      // último día para confirmar la reserva (incluido)
+    vigenciaSegun: 'reserva',       // la fecha que cuenta es la de la reserva, no la del viaje
+    diasMinimos: 4,
+    diasGratis: 1,
+    repetir: false,                 // un solo día gratis por arriendo
+    acumulableConPagoAnticipado: false,
+    // Período de viaje: cualquier fecha (confirmado 2026-10-03). La solicitud enviada hasta el 31/10
+    // mantiene la promo aunque el abono se pague después.
+    viajeDesde: '',                 // ej.: '2026-11-01'
+    viajeHasta: '',                 // ej.: '2027-03-31'
   },
+
+
+  /* Descuento por pago total anticipado. El backend (GET /api/config) responde
+     hoy 15 % con 3 días de anticipación mínima; la portada dice 5 días (PENDIENTE
+     de confirmar cuál es el correcto). Si el backend responde la cotización, su
+     porcentaje manda; estos valores son solo el respaldo si el servidor no responde. */
+  EARLY_BOOKING: {
+    pct: 15,
+    minDaysAhead: 5,              // confirmado 2026-10-03 (el backend debe cambiarse a 5 en el panel)
+    minRentalDays: 3,
+  },
+
+  /* Atención y plazo de respuesta a solicitudes. Dejar en '' hasta tener un dato
+     que se pueda cumplir siempre: si está vacío, el sitio NO promete un plazo. */
+  RESPONSE_TIME_TEXT: 'Respondemos tu solicitud en menos de 2 horas, todos los días entre 8:00 y 22:00. Si escribes de noche, te respondemos antes de las 9:00 del día siguiente.', // confirmado 2026-10-03
+  PAYMENT_LINK_VALID_HOURS: 72, // vigencia real del enlace de pago que genera el panel (backend)
+
+  /* Catálogo de adicionales de respaldo (copiado de GET /api/extras el 2026-10-03).
+     Se usa solo si el servidor de reservas no responde, para que el cliente igual
+     vea el total. El backend sigue siendo la fuente del monto que se cobra. */
+  EXTRAS_FALLBACK: [
+    { id: 1, name: 'Silla infantil', description: 'De 2 a 18 kg. Sujeta a disponibilidad. $5.000 por día, máximo $50.000 por silla.', price: 5000, chargeType: 'day', cap: 50000, kind: 'qty', maxQty: 2, stock: 2, vatIncluded: true, active: true, conditions: 'La silla se entrega y retira junto con el vehículo. Sujeta a disponibilidad real al momento de confirmar.' },
+    { id: 2, name: 'Protección de cristales', description: 'Cubre pérdida total, piquete o frisadura de parabrisas, luneta y espejos.', price: 5000, chargeType: 'day', kind: 'checkbox', vatIncluded: true, active: true, conditions: 'Se contrata al inicio del arriendo. No tiene descuento por reserva anticipada.' },
+    { id: 3, name: 'Protección de neumáticos', description: 'Cubre pérdida total o reventón de neumáticos.', price: 5000, chargeType: 'day', kind: 'checkbox', vatIncluded: true, active: true, conditions: 'No cubre pinchazos, tren delantero ni amortiguadores. Se contrata al inicio del arriendo. No tiene descuento por reserva anticipada.' },
+    { id: 6, name: 'Conductor adicional', description: '$5.000 + IVA por día. Autoriza a una segunda persona a conducir el vehículo durante el arriendo.', price: 5000, chargeType: 'day', kind: 'checkbox', vatIncluded: false, active: true },
+    { id: 7, name: 'Entrega o devolución fuera de horario', description: 'Retiro o devolución del vehículo fuera del horario habitual de atención.', price: 15000, chargeType: 'flat', kind: 'checkbox', vatIncluded: true, active: true },
+    { id: 5, name: 'Permiso para viaje a Argentina', description: 'Cargo único por reserva, previa autorización y con anticipación.', price: 120000, chargeType: 'flat', kind: 'checkbox', vatIncluded: true, isArgentinaPermit: true, active: true },
+  ],
+  VAT_RATE: 0.19,
+  RETURN_TOLERANCE_MINUTES: 60, // condiciones.html: tolerancia de devolución de 1 hora
 };

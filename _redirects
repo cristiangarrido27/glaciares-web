@@ -4,3 +4,6 @@
 
 # Archivos internos: nunca públicos
 /PENDIENTES_POR_CONFIRMAR.md  /404.html  404!
+
+# Archivo interno subido por error: no debe ser público
+/cambios.patch  /404.html  404!

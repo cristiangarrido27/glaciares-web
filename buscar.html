@@ -57,6 +57,8 @@
   .buscar-main{padding-top:92px;padding-bottom:60px;min-height:70vh;}
   .buscar-grid{display:grid;grid-template-columns:340px 1fr;gap:28px;align-items:start;}
   @media (max-width:980px){ .buscar-grid{grid-template-columns:1fr;} }
+  /* En celular el resumen de la búsqueda ya aparece arriba (barra con "Modificar búsqueda"): no se repite, así los vehículos y sus totales quedan más arriba. */
+  @media (max-width:980px){ #searchSummary{display:none;} }
 
   /* Panel de búsqueda (sticky en desktop) */
   .search-panel{background:#fff;border:1px solid var(--slate-200);border-radius:16px;padding:20px;box-shadow:0 1px 3px rgba(10,37,64,.06);}
@@ -124,6 +126,7 @@
   .price-box .pamount{font-size:19px;font-weight:800;color:var(--navy);}
   .price-box .pamount-old{display:block;font-size:12.5px;color:var(--slate-400);text-decoration:line-through;font-weight:600;}
   .price-box .psave{display:block;font-size:10.5px;color:var(--green);font-weight:800;margin-top:2px;}
+  .price-box .pbreak{display:block;font-size:11px;color:var(--slate-500);font-weight:600;margin-top:2px;line-height:1.35;}
   .price-note{font-size:10.5px;color:var(--slate-400);text-align:right;}
   .deposit-note{font-size:11px;color:var(--slate-500);text-align:right;}
   .rcard-actions{display:flex;flex-direction:column;gap:8px;}
@@ -450,6 +453,7 @@
 </div>
 
 <script src="config.js"></script>
+<script src="cotizacion.js"></script>
 <script src="analytics-config.js"></script>
 <script>
 document.getElementById('year').textContent = new Date().getFullYear();
@@ -544,8 +548,9 @@ function readSearchState() {
   let saved = {};
   try { saved = JSON.parse(sessionStorage.getItem(SEARCH_STORAGE_KEY) || '{}'); } catch (err) { saved = {}; }
 
-  const todayISO = new Date().toISOString().slice(0, 10);
-  const tomorrowISO = new Date(Date.now() + 86400000).toISOString().slice(0, 10);
+  // Fecha LOCAL (antes UTC: después de las 21:00 en Chile bloqueaba el día actual).
+  const todayISO = window.GlaciaresCotizacion ? GlaciaresCotizacion.localISO() : new Date().toISOString().slice(0, 10);
+  const tomorrowISO = window.GlaciaresCotizacion ? GlaciaresCotizacion.addDaysISO(todayISO, 1) : new Date(Date.now() + 86400000).toISOString().slice(0, 10);
 
   function pick(key, fallback) {
     const fromUrl = p.get(key);
@@ -590,6 +595,8 @@ let state = readSearchState();
    (fechas iguales/anteriores, hora igual/anterior el mismo día) devuelve 0
    y el llamador debe mostrar un estado de error, no seguir calculando. */
 function daysBetween(dateFrom, timeFrom, dateTo, timeTo) {
+  // Misma regla en todo el sitio: períodos de 24 h con 1 h de tolerancia.
+  if (window.GlaciaresCotizacion) return GlaciaresCotizacion.rentalDays(dateFrom, timeFrom, dateTo, timeTo);
   const start = new Date(`${dateFrom}T${timeFrom || '00:00'}:00`);
   const end = new Date(`${dateTo}T${timeTo || '00:00'}:00`);
   if (isNaN(start) || isNaN(end)) return 0;
@@ -694,7 +701,7 @@ document.getElementById('updateForm').addEventListener('submit', (e) => {
   e.preventDefault();
   document.querySelectorAll('.sfield').forEach(f => f.classList.remove('has-error'));
   const errors = [];
-  const todayStr = new Date().toISOString().slice(0, 10);
+  const todayStr = window.GlaciaresCotizacion ? GlaciaresCotizacion.localISO() : new Date().toISOString().slice(0, 10);
   if (!uFromDate.value || uFromDate.value < todayStr) errors.push('fromDate');
   if (!uToDate.value || uToDate.value < uFromDate.value) errors.push('toDate');
   if (uToDate.value === uFromDate.value && uToTime.value <= uFromTime.value) errors.push('toTime');
@@ -728,10 +735,10 @@ const IMG_BASE = 'https://glaciaresrentacar.cl/flota/';
 const FLEET = [
   { id: 1, name: 'Suzuki Swift', price: 35000, cat: 'citycar', catLabel: 'Citycar', img: IMG_BASE + 'suzuki-swift.webp', deposit: 500000 },
   { id: 2, name: 'Suzuki Dzire', price: 38000, cat: 'citycar', catLabel: 'Citycar', img: IMG_BASE + 'suzuki-dzire.webp', deposit: 500000 },
-  { id: 3, name: 'Chevrolet Captiva', price: 50000, cat: 'suv', catLabel: 'SUV', img: IMG_BASE + 'chevrolet-captiva.webp', deposit: 600000 },
-  { id: 6, name: 'Kia Sorento', price: 40000, cat: 'suv', catLabel: 'SUV', img: IMG_BASE + 'kia-sorento.webp', deposit: 600000 },
-  { id: 7, name: 'Hyundai Tucson', price: 48000, cat: 'suv', catLabel: 'SUV', img: IMG_BASE + 'hyundai-tucson.webp', deposit: 600000 },
-  { id: 8, name: 'Peugeot 3008', price: 59000, cat: 'suv', catLabel: 'SUV', img: IMG_BASE + 'peugeot-3008.webp', deposit: 600000 },
+  { id: 3, name: 'Chevrolet Captiva', price: 50000, cat: 'suv', catLabel: 'SUV', img: IMG_BASE + 'chevrolet-captiva.webp', deposit: 500000 },
+  { id: 6, name: 'Kia Sorento', price: 40000, cat: 'suv', catLabel: 'SUV', img: IMG_BASE + 'kia-sorento.webp', deposit: 500000 },
+  { id: 7, name: 'Hyundai Tucson', price: 48000, cat: 'suv', catLabel: 'SUV', img: IMG_BASE + 'hyundai-tucson.webp', deposit: 500000 },
+  { id: 8, name: 'Peugeot 3008', price: 59000, cat: 'suv', catLabel: 'SUV', img: IMG_BASE + 'peugeot-3008.webp', deposit: 500000 },
 ];
 
 const API_BASE = 'https://glaciares-reservas-backend.onrender.com';
@@ -834,7 +841,23 @@ function argentinaApplies() {
 // eligen acá: eso pasa a la pantalla "Personaliza tu reserva" del paso
 // siguiente (/reserva/adicionales), donde el backend vuelve a calcular todo.
 function computeCardSubtotal(v) {
-  return v.confirmedAvailability ? v.totalPrice : v.subtotal;
+  return cardQuote(v).total;
+}
+// Total estimado de la tarjeta con el MISMO cálculo que el paso siguiente:
+// arriendo + aeropuerto (+ permiso Argentina) − promo que corresponda.
+// Los adicionales opcionales se eligen en el paso siguiente.
+function cardQuote(v) {
+  if (!window.GlaciaresCotizacion) {
+    const t = v.confirmedAvailability ? v.totalPrice : v.subtotal;
+    return { total: t, base: v.subtotal, days: v.days, airport: { amount: 0 }, extras: [], applied: null, prepay: null, guarantee: v.deposit };
+  }
+  return GlaciaresCotizacion.compute({
+    vehicle: v, pickUpDate: state.pickUpDate, pickUpTime: state.pickUpTime,
+    dropOffDate: state.dropOffDate, dropOffTime: state.dropOffTime,
+    pickUpPlace: state.pickUpPlace, dropOffPlace: state.dropOffPlace,
+    argentina: state.argentina, extras: [],
+    backendDiscountPct: v.confirmedAvailability && v.discountPct > 0 ? v.discountPct : undefined,
+  });
 }
 
 // Arma la URL de la siguiente etapa (/reserva/adicionales) con el vehículo
@@ -908,15 +931,26 @@ function renderResults() {
     return;
   }
 
-  if (urgencyBanner) urgencyBanner.style.display = list.some(v => v.discountPct) ? 'flex' : 'none';
+  const quotes = {};
+  list.forEach(v => { quotes[v.id] = cardQuote(v); });
+  if (urgencyBanner) {
+    const any4x3 = list.some(v => quotes[v.id].applied);
+    const anyPrepay = list.some(v => quotes[v.id].prepay);
+    const p = cfg.PROMO_4X3 || {};
+    let html = '';
+    if (any4x3) html = `<strong>Promo 4×3 aplicada</strong><p>Arriendas ${days} días y pagas ${days - quotes[list[0].id].promo4x3.freeDays}: el ahorro ya está descontado en cada total${p.vigencia ? ', ' + p.vigencia : ''}. Un solo día gratis por arriendo; aeropuerto y adicionales aparte.${anyPrepay ? ' Si pagas el 100 % por adelantado y el 15 % te conviene más, te lo mostramos en el detalle.' : ''}</p>`;
+    else if (anyPrepay) html = `<strong>Pagando el 100 % por adelantado ahorras ${quotes[list[0].id].prepay.pct}% en el arriendo</strong><p>El pago se habilita después de confirmar la disponibilidad. No acumulable con otras promociones.</p>`;
+    urgencyBanner.querySelector('div').innerHTML = html;
+    urgencyBanner.style.display = html ? 'flex' : 'none';
+  }
 
   resultsList.innerHTML = list.map((v, i) => {
-    const subtotal = computeCardSubtotal(v);
-    // Precio "normal" (sin descuento) para mostrar el ahorro real de pagar el
-    // total por adelantado — el descuento SOLO aplica al arriendo, nunca a
-    // adicionales, aeropuerto, Argentina o garantía (esos se calculan en el
-    // paso siguiente, ya con el vehículo elegido).
-    const showDiscount = v.confirmedAvailability && v.discountPct > 0 && v.subtotal > subtotal;
+    const q = quotes[v.id];
+    const parts = [`${q.days} día${q.days > 1 ? 's' : ''} × $${v.pricePerDay.toLocaleString('es-CL')}`];
+    if (q.applied) parts.push(`promo 4×3 −$${q.applied.savings.toLocaleString('es-CL')}`);
+    if (q.airport.amount) parts.push(`aeropuerto $${q.airport.amount.toLocaleString('es-CL')}`);
+    q.extras.forEach(e => parts.push(`${e.name.toLowerCase()} $${e.cost.toLocaleString('es-CL')}`));
+    const oldTotal = q.applied ? q.normal : null;
     return `
     <div class="rcard" style="animation-delay:${prefersReducedMotion ? 0 : Math.min(i, 6) * 70}ms;">
       <img src="${v.img}" alt="${v.name}" loading="lazy" onerror="this.onerror=null;this.src='https://glaciaresrentacar.cl/img/logo-glaciares.webp';this.style.objectFit='contain';this.style.background='#f1f5f9';this.style.padding='20px';">
@@ -925,16 +959,17 @@ function renderResults() {
         <h3>${v.name}</h3>
         <p class="rcard-meta">${v.days} día${v.days > 1 ? 's' : ''} · $${v.pricePerDay.toLocaleString('es-CL')}/día</p>
         <p class="rcard-avail"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20 6 9 17l-5-5"/></svg>Disponibilidad sujeta a confirmación</p>
-        ${v.discountPct ? `<div class="rcard-breakdown"><div><span>Descuento reserva anticipada</span><span>-${v.discountPct}%</span></div></div>` : ''}
       </div>
       <div class="rcard-price">
         <div class="price-box">
-          <span class="plabel">SUBTOTAL ESTIMADO</span>
-          ${showDiscount ? `<span class="pamount-old">$${v.subtotal.toLocaleString('es-CL')}</span>` : ''}
-          <span class="pamount">$${subtotal.toLocaleString('es-CL')}</span>
-          ${showDiscount ? `<span class="psave">Ahorras -${v.discountPct}% pagando el total ahora</span>` : ''}
+          <span class="plabel">TOTAL ESTIMADO · ${q.days} DÍA${q.days > 1 ? 'S' : ''}</span>
+          ${oldTotal ? `<span class="pamount-old">$${oldTotal.toLocaleString('es-CL')}</span>` : ''}
+          <span class="pamount">$${q.total.toLocaleString('es-CL')}</span>
+          <span class="pbreak">${parts.map(x => `<span style="white-space:nowrap">${x}</span>`).join(' · ')}</span>
+          ${q.applied ? `<span class="psave">Ahorras $${q.applied.savings.toLocaleString('es-CL')} con la promo 4×3</span>` : ''}
+          ${q.prepay ? `<span class="psave">o $${q.prepay.total.toLocaleString('es-CL')} pagando el 100 % por adelantado (−${q.prepay.pct}%)</span>` : ''}
         </div>
-        <p class="deposit-note">${state.argentina === 'si' ? `Garantía requerida para viajar a Argentina: $${(cfg.ARGENTINA_GUARANTEE || 750000).toLocaleString('es-CL')}` : `Garantía requerida: desde $${(v.deposit || cfg.MIN_DEPOSIT || 500000).toLocaleString('es-CL')}, dependiendo del vehículo`}. No se cobra ahora.</p>
+        <p class="deposit-note">Garantía aparte: $${q.guarantee.toLocaleString('es-CL')}${state.argentina === 'si' ? ' (viaje a Argentina)' : ''} en tarjeta de crédito. No es parte del precio y no se cobra al reservar.</p>
         <div class="rcard-actions">
           <button type="button" class="btn-confirm" data-vid="${v.id}">ELEGIR VEHÍCULO Y PERSONALIZAR</button>
         </div>
@@ -951,7 +986,7 @@ function renderResults() {
         vehicle: v.name || v.title || ('Vehículo ' + v.id),
         id: v.id,
         category: v.catLabel || v.cat || '',
-        value: computeCardSubtotal(v),
+        value: v.confirmedAvailability ? v.totalPrice : v.subtotal, // mismo valor que antes (medición sin cambios)
       });
       window.location.href = buildAdicionalesUrl(v);
     });
