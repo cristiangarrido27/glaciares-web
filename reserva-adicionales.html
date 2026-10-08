@@ -192,10 +192,10 @@
   .pay-split .ps-hint{font-size:11.5px;color:var(--slate-500);margin-top:2px;}
   .promo-hint{background:#f0fdf4;border:1px solid #bbf7d0;color:#166534;border-radius:10px;padding:8px 10px;font-size:12px;font-weight:600;margin-top:8px;}
   .promo-hint.muted-hint{background:var(--slate-50);border-color:var(--slate-200);color:var(--slate-600);font-weight:500;}
-  .conditions-card h2{margin-bottom:8px;}
-  .cond-list{list-style:disc;padding-left:18px;font-size:12.5px;color:var(--slate-600);line-height:1.5;margin-bottom:8px;}
-  .cond-list li{margin-bottom:5px;}
-  .cond-list strong{color:var(--navy);}
+  .next-steps p{margin:0;line-height:1.45;}
+  .next-steps .ns-title{margin-bottom:3px;}
+  .qs-links{font-size:12.5px;margin:6px 0 0 !important;}
+  .qs-links a,.qs-links .link-btn{color:#92400e;font-weight:700;text-decoration:underline;font-size:12.5px;}
   .next-steps{background:#fff;border:1px solid var(--slate-200);border-radius:14px;padding:12px 14px;margin-bottom:12px;font-size:12.5px;color:var(--slate-600);}
   .next-steps .ns-title{font-weight:800;color:var(--navy);font-size:13px;margin-bottom:6px;}
   .next-steps ol{padding-left:18px;line-height:1.5;}
@@ -357,29 +357,13 @@
           <p class="summary-updating" id="summaryUpdating" style="display:none;">Actualizando total…</p>
           <div class="pay-split" id="paySplit"></div>
           <div class="guarantee-note" id="guaranteeNote"></div>
-          <p class="summary-legal">Total estimado con las tarifas vigentes (impuestos incluidos, salvo los ítems marcados “+ IVA”, que ya aparecen sumados). El monto final te lo confirmamos por WhatsApp junto con la disponibilidad, antes de cualquier pago.</p>
-        </div>
-
-        <div class="card conditions-card" id="conditionsCard">
-          <h2>Antes de solicitar, revisa las condiciones</h2>
-          <ul class="cond-list">
-            <li><strong>Seguro incluido (CDW):</strong> deducible 15 UF + IVA; 25 UF + IVA por volcamiento, choque con responsabilidad, robo o pérdida total. No cubre cristales, neumáticos, accesorios ni asistencia en ruta.</li>
-            <li><strong>Conductor:</strong> entre 21 y 75 años, licencia vigente (chilena o extranjera) y cédula o pasaporte vigente. Lo mismo para el conductor adicional.</li>
-            <li><strong>Garantía:</strong> tarjeta de crédito bancaria (no de casas comerciales ni prepago), vigente 3 meses después del arriendo.</li>
-            <li><strong>Cancelación sin costo</strong> con 72 h de anticipación · kilometraje libre en Magallanes · estanque lleno.</li>
-          </ul>
-          <a href="/condiciones" target="_blank" rel="noopener" class="link-btn">Ver condiciones completas</a>
+          <p class="summary-legal">Total estimado con impuestos incluidos. El monto final te lo confirmamos antes de cualquier pago.</p>
         </div>
 
         <div id="preConfirmActions">
           <div class="next-steps" id="nextSteps">
-            <p class="ns-title">Esto es una solicitud: todavía no reserva el vehículo</p>
-            <ol>
-              <li>Nos envías esta cotización por WhatsApp. No pagas nada.</li>
-              <li>Revisamos la disponibilidad real y te respondemos por WhatsApp con el monto final.</li>
-              <li>Si hay disponibilidad, te enviamos un enlace de pago<span id="nsLinkHours"></span>. La reserva queda confirmada al pagar el abono o el total.</li>
-            </ol>
-            <p class="ns-time" id="responseTimeText" hidden></p>
+            <p class="ns-title">Esto es una solicitud, no una reserva</p>
+            <p>Te confirmamos disponibilidad y precio final por WhatsApp<span id="responseTimeText"></span>. La reserva queda lista al pagar el abono.</p>
           </div>
           <div class="cta-pair">
             <button type="button" class="btn-cta-main" id="btnRequestConfirmation">SOLICITAR DISPONIBILIDAD POR WHATSAPP</button>
@@ -390,16 +374,9 @@
                no puede saber si el cliente presionó "Enviar" dentro de WhatsApp. -->
           <div class="quote-status" id="quoteStatus" hidden role="status" aria-live="polite">
             <p class="qs-title" id="qsTitle">Cotización creada — falta enviarla por WhatsApp</p>
-            <p>Tu código de cotización es <strong id="qsCode"></strong>. La cotización quedó guardada en este dispositivo, aunque WhatsApp no se abra. Todavía no existe una reserva confirmada.</p>
+            <p>Código <strong id="qsCode"></strong> · guardada en este dispositivo. Aún no es una reserva.</p>
             <p class="qs-state" id="qsState"></p>
-            <div class="qs-actions">
-              <button type="button" class="wa-fb-btn" id="qsWa">Abrir WhatsApp</button>
-              <a class="wa-fb-btn" id="qsWaWeb" href="#" target="_blank" rel="noopener">Abrir WhatsApp Web</a>
-              <button type="button" class="wa-fb-btn secondary" id="qsEmail">Recibir por correo</button>
-              <button type="button" class="wa-fb-btn secondary" id="qsCopy">Copiar cotización</button>
-              <a class="wa-fb-btn secondary" id="qsResume" href="#">Retomar la cotización guardada</a>
-            </div>
-            <p class="small">También puedes escribirnos al <strong>+56 9 8333 5924</strong> y pegar la cotización.</p>
+            <p class="qs-links"><a id="qsWaWeb" href="#" target="_blank" rel="noopener">Abrir WhatsApp Web</a><span aria-hidden="true"> · </span><button type="button" class="link-btn" id="qsCopy">Copiar cotización</button></p>
             <textarea id="qsText" class="wa-fb-text" readonly rows="8" hidden aria-label="Texto de la cotización para copiar"></textarea>
           </div>
 
@@ -1158,14 +1135,14 @@ function showQuoteStatus(opts) {
   const box = document.getElementById('quoteStatus');
   document.getElementById('qsCode').textContent = q.code;
   document.getElementById('qsWaWeb').href = waWebUrl(q.code);
-  document.getElementById('qsResume').href = location.pathname + '?' + resumeParams();
   const parts = [];
   if (q.waOpenedAt) parts.push(opts.waOpened
-    ? 'WhatsApp abierto: la cotización está preparada para enviar. Presiona «Enviar» dentro de WhatsApp para que la recibamos.'
-    : 'Cotización preparada para enviar por WhatsApp. Si no alcanzaste a enviarla, vuelve a abrir WhatsApp.');
-  if (q.emailSentTo && q.emailSentTo.length) parts.push('También la enviamos a tu correo.');
+    ? 'WhatsApp abierto: presiona «Enviar» en WhatsApp para que la recibamos.'
+    : 'Si no alcanzaste a enviarla, vuelve a abrir WhatsApp.');
+  if (q.emailSentTo && q.emailSentTo.length) parts.push('También te la enviamos por correo.');
   document.getElementById('qsState').textContent = parts.join(' ');
   document.getElementById('btnRequestConfirmation').textContent = 'ENVIAR COTIZACIÓN POR WHATSAPP';
+  document.getElementById('nextSteps').hidden = true; // el estado ya lo explica
   box.hidden = false;
 }
 function hideQuoteStatusIfStale() {
@@ -1173,6 +1150,7 @@ function hideQuoteStatusIfStale() {
   const q = currentEntry();
   if (q) { showQuoteStatus(); return; }
   document.getElementById('quoteStatus').hidden = true;
+  document.getElementById('nextSteps').hidden = false;
   document.getElementById('emailOk').hidden = true;
   document.getElementById('emailFail').hidden = true;
   document.getElementById('btnRequestConfirmation').textContent = 'SOLICITAR DISPONIBILIDAD POR WHATSAPP';
@@ -1302,7 +1280,6 @@ async function sendEmail(f, opts) {
 function wireEmail() {
   const form = document.getElementById('emailForm');
   document.getElementById('btnEmailQuote').addEventListener('click', openEmailForm);
-  document.getElementById('qsEmail').addEventListener('click', openEmailForm);
   document.getElementById('efCancel').addEventListener('click', () => { form.hidden = true; });
   ['efEmail', 'efEmail2'].forEach(id => document.getElementById(id).addEventListener('input', () => {
     document.getElementById('efNote').textContent = ''; delete form.dataset.confirmResend;
@@ -1356,11 +1333,9 @@ function wireMobileBar() {
 }
 
 function wireInfoTexts() {
-  const h = cfg.PAYMENT_LINK_VALID_HOURS;
-  const el = document.getElementById('nsLinkHours');
-  if (el && h) el.textContent = ` (válido por ${h} horas)`;
+  // Versión corta del plazo de respuesta (el texto completo sigue en config.js y en /condiciones).
   const rt = document.getElementById('responseTimeText');
-  if (rt && cfg.RESPONSE_TIME_TEXT) { rt.textContent = cfg.RESPONSE_TIME_TEXT; rt.hidden = false; }
+  if (rt && cfg.RESPONSE_TIME_TEXT) rt.textContent = ', normalmente en menos de 2 horas (8:00–22:00)';
   // Si esta combinación ya tiene código (volvió desde WhatsApp o recargó), se muestra su estado.
   if (currentEntry()) showQuoteStatus();
 }
@@ -1378,7 +1353,6 @@ function wireMainCta() {
     try { await openWhatsapp('app'); }
     finally { btn.disabled = false; if (btn.textContent === 'PREPARANDO COTIZACIÓN…') btn.textContent = label; }
   });
-  document.getElementById('qsWa').addEventListener('click', () => openWhatsapp('app'));
   document.getElementById('qsWaWeb').addEventListener('click', (e) => {
     // El enlace abre WhatsApp Web por sí solo; aquí solo se registra el intento.
     const q = currentEntry();
