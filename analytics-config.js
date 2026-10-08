@@ -16,7 +16,15 @@
      - whatsapp-espera       (clic en "¿No quieres esperar?" mientras carga /buscar) [Google Ads: conversión "WhatsApp"]
      - ver_vehiculos         (se mostró la lista de resultados) [Meta: ViewContent]
      - elegir_vehiculo       (eligió un vehículo en los resultados) [Meta: AddToCart]
-     - solicitar_confirmacion (pidió confirmación por WhatsApp) [Meta: Lead] [Google Ads: conversión "WhatsApp"]
+     - cotizacion_generada   (se creó y guardó el código de cotización, 1 vez por código) [Meta: Lead]
+     - whatsapp_intento_apertura (pulsó un botón que abre WhatsApp con la cotización, 1 vez por código)
+                              [Meta: Contact] [Google Ads: conversión "WhatsApp", con transaction_id = código]
+     - cotizacion_email_enviada (el SERVIDOR confirmó el envío del correo, 1 vez por código y correo)
+     - reserva_confirmada    NUNCA se envía desde el navegador: debe enviarlo el backend
+                              cuando la reserva tenga pago real registrado.
+     (El antiguo evento "solicitar_confirmacion" se dejó de enviar el 2026-10-07:
+      mezclaba "generó un código" con "abrió WhatsApp" y se leía como solicitud enviada.
+      Ver docs/medicion-conversiones.md.)
      - mobile-cta-cotizar    (clic en barra fija móvil "Cotizar ahora")
      - cotizador_buscar      (uso del buscador de disponibilidad)
      - cotizar-vehiculo      (clic en "Cotizar este vehículo" por auto)
@@ -45,15 +53,38 @@ window.META_STANDARD_EVENTS = {
   cotizador_buscar: 'Search',          // busco disponibilidad
   ver_vehiculos: 'ViewContent',        // vio la lista de vehiculos disponibles
   elegir_vehiculo: 'AddToCart',        // eligio un vehiculo y pasa a personalizar
-  solicitar_confirmacion: 'Lead',      // pidio confirmacion por WhatsApp
+  cotizacion_generada: 'Lead',         // cotizacion creada y guardada (1 vez por codigo)
+  whatsapp_intento_apertura: 'Contact', // intento de abrir WhatsApp (no prueba que se envio)
   contacto_whatsapp: 'Lead',           // envio el formulario de contacto
   reserva_creada: 'InitiateCheckout',  // reserva generada antes de pagar
+};
+
+/* Eventos del sitio que además disparan una acción de conversión de Google Ads
+   (etiqueta directa). Para no DUPLICAR: un mismo evento se mide en Google Ads
+   O por esta etiqueta O importándolo desde GA4, nunca de las dos formas.
+   - whatsapp_intento_apertura: usa la acción "WhatsApp" existente (secundaria recomendada).
+   - cotizacion_generada / cotizacion_email_enviada: dejar en null e importarlos
+     desde GA4 como eventos clave; o crear la acción en Google Ads y pegar aquí la
+     etiqueta (y NO importarlos desde GA4).
+   Siempre se envía transaction_id = código de cotización: Google Ads descarta
+   conversiones repetidas con el mismo código. */
+window.ADS_EVENT_LABELS = {
+  whatsapp_intento_apertura: 'AxklCK-F9IoaEJu7ieM9', // acción "WhatsApp"
+  cotizacion_generada: null,
+  cotizacion_email_enviada: null,
 };
 
 window.trackEvent = function (eventName, data) {
   try {
     if (window.ANALYTICS_CONFIG.GOOGLE_ANALYTICS_ID && typeof gtag === 'function') {
       gtag('event', eventName, data || {});
+    }
+    var adsLabel = window.ADS_EVENT_LABELS && window.ADS_EVENT_LABELS[eventName];
+    if (adsLabel && window.ANALYTICS_CONFIG.GOOGLE_ADS_ID && typeof gtag === 'function') {
+      var conv = { send_to: window.ANALYTICS_CONFIG.GOOGLE_ADS_ID + '/' + adsLabel };
+      if (data && typeof data.value === 'number') { conv.value = data.value; conv.currency = data.currency || 'CLP'; }
+      if (data && data.transaction_id) conv.transaction_id = data.transaction_id;
+      gtag('event', 'conversion', conv);
     }
     if (window.ANALYTICS_CONFIG.META_PIXEL_ID && typeof fbq === 'function') {
       var stdName = window.META_STANDARD_EVENTS[eventName];

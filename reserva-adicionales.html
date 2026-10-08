@@ -146,9 +146,6 @@
   .lock-note{font-size:10.5px;color:#9a3412;text-align:center;margin-top:6px;line-height:1.4;font-weight:700;}
   .btn-cta-main{width:100%;background:#25D366;color:#fff;font-weight:800;padding:14px;border-radius:12px;font-size:14px;text-align:center;margin-bottom:14px;min-height:48px;}
   .btn-cta-main:hover{background:#1fb959;}
-  .wa-fallback{border:1px solid #25D366;background:#f0fdf4;border-radius:12px;padding:12px 14px;margin:-4px 0 14px;font-size:13px;color:var(--slate-600);}
-  .wa-fallback p{margin:0 0 8px;}
-  .wa-fallback .small{font-size:12px;margin:8px 0 0;}
   .wa-fb-btn{display:inline-block;background:#25D366;color:#fff;font-weight:800;font-size:13px;padding:9px 12px;border-radius:10px;margin:0 6px 6px 0;text-decoration:none;border:0;cursor:pointer;}
   .wa-fb-btn.secondary{background:#fff;color:var(--navy);border:1px solid var(--slate-200);}
   .locked-pay-row{display:grid;grid-template-columns:1fr 1fr;gap:8px;}
@@ -204,10 +201,6 @@
   .next-steps ol{padding-left:18px;line-height:1.5;}
   .next-steps li{margin-bottom:3px;}
   .next-steps .ns-time{margin-top:6px;font-weight:600;color:var(--navy);}
-  .request-sent{border:2px solid #f59e0b;background:#fffbeb;border-radius:12px;padding:12px 14px;margin:-4px 0 12px;font-size:13px;color:#78350f;}
-  .request-sent .rs-title{font-weight:800;font-size:14px;margin-bottom:4px;}
-  .request-sent p{margin-bottom:4px;}
-  .request-sent .small{font-size:12px;}
   .wa-fb-text{width:100%;margin-top:8px;border:1px solid var(--slate-200);border-radius:8px;padding:8px;font:12px/1.4 ui-monospace,Menlo,Consolas,monospace;color:var(--navy);background:#fff;resize:vertical;}
   .locked-pay-row .btn-pay{opacity:.75;}
   .lock-note{color:var(--slate-500);}
@@ -223,6 +216,38 @@
     body.has-mtb .wa-float-wrap{bottom:84px;}
     body.has-mtb .page-main{padding-bottom:110px;}
   }
+  /* Cotización por correo y estado de la cotización (2026-10-07) */
+  .cta-pair{display:flex;flex-direction:column;gap:8px;margin-bottom:14px;}
+  .cta-pair .btn-cta-main{margin-bottom:0;}
+  .btn-cta-email{width:100%;background:#fff;color:var(--navy);border:1.5px solid var(--navy);font-weight:800;padding:12px;border-radius:12px;font-size:14px;text-align:center;min-height:48px;}
+  .btn-cta-email:hover{background:var(--slate-50);}
+  .btn-cta-email.solid{background:var(--navy);color:#fff;}
+  .btn-cta-email:disabled,.btn-cta-main:disabled{opacity:.6;cursor:wait;}
+  .quote-status{border:2px solid #f59e0b;background:#fffbeb;border-radius:12px;padding:12px 14px;margin:0 0 12px;font-size:13px;color:#78350f;}
+  .quote-status .qs-title{font-weight:800;font-size:14.5px;margin-bottom:4px;}
+  .quote-status p{margin-bottom:6px;line-height:1.45;}
+  .quote-status .qs-state{font-weight:700;color:#166534;}
+  .quote-status .qs-state:empty{display:none;}
+  .qs-actions{display:flex;flex-wrap:wrap;gap:6px;margin:8px 0 4px;}
+  .qs-actions .wa-fb-btn{margin:0;min-height:40px;display:inline-flex;align-items:center;}
+  .quote-status .small{font-size:12px;}
+  .email-form{background:#fff;border:1px solid var(--slate-200);border-radius:14px;padding:14px;margin:0 0 12px;}
+  .email-form .ef-title{font-weight:800;font-size:14px;margin-bottom:8px;color:var(--navy);}
+  .email-form .ef-field{display:flex;flex-direction:column;gap:4px;margin-bottom:10px;font-size:12px;font-weight:700;color:var(--slate-600);}
+  .email-form input[type=text],.email-form input[type=email]{border:1px solid var(--slate-200);border-radius:10px;padding:10px 11px;font-size:16px;font-family:inherit;min-height:44px;color:var(--navy);}
+  .email-form input[aria-invalid=true]{border-color:#dc2626;}
+  .email-form .ef-check{display:flex;gap:9px;align-items:flex-start;font-size:12.5px;color:var(--slate-600);margin:2px 0 10px;cursor:pointer;}
+  .email-form .ef-check input{width:20px;height:20px;flex-shrink:0;margin-top:1px;}
+  .email-form .ef-error{color:#b91c1c;font-size:12.5px;font-weight:600;margin-bottom:8px;}
+  .email-form .ef-error:empty{display:none;}
+  .email-form .ef-note{font-size:12.5px;color:#92400e;font-weight:600;margin-bottom:8px;}
+  .email-form .ef-note:empty{display:none;}
+  .email-form .link-btn{display:block;margin:10px auto 0;}
+  .hp-field{position:absolute;left:-9999px;width:1px;height:1px;overflow:hidden;}
+  .email-result{border-radius:12px;padding:12px 14px;margin:0 0 12px;font-size:13px;line-height:1.45;}
+  .email-result.ok{background:#f0fdf4;border:2px solid var(--green);color:#166534;font-weight:700;}
+  .email-result.fail{background:#fef2f2;border:2px solid #fecaca;color:#7f1d1d;}
+  .email-result.fail .qs-actions .wa-fb-btn{min-height:40px;}
   @media (prefers-reduced-motion: reduce){ *{animation-duration:.001ms !important;animation-iteration-count:1 !important;transition-duration:.001ms !important;} }
 </style>
 </head>
@@ -356,18 +381,58 @@
             </ol>
             <p class="ns-time" id="responseTimeText" hidden></p>
           </div>
-          <button type="button" class="btn-cta-main" id="btnRequestConfirmation">SOLICITAR DISPONIBILIDAD POR WHATSAPP</button>
-          <div class="request-sent" id="requestSent" hidden role="status">
-            <p class="rs-title">Solicitud enviada · pendiente de confirmación</p>
-            <p>Código de tu cotización: <strong id="rsCode"></strong></p>
-            <p class="small">El vehículo aún no está reservado. Te confirmaremos la disponibilidad por WhatsApp; no necesitas volver a escribir tus datos. Si cierras esta página, tu cotización queda guardada en este dispositivo.</p>
+          <div class="cta-pair">
+            <button type="button" class="btn-cta-main" id="btnRequestConfirmation">SOLICITAR DISPONIBILIDAD POR WHATSAPP</button>
+            <button type="button" class="btn-cta-email" id="btnEmailQuote">Recibir cotización por correo</button>
           </div>
-          <div class="wa-fallback" id="waFallback" hidden>
-            <p><strong>¿No se abrió WhatsApp?</strong> Elige una de estas opciones:</p>
-            <a class="wa-fb-btn" id="waFbWeb" href="#" target="_blank" rel="noopener">Abrir WhatsApp Web</a>
-            <button type="button" class="wa-fb-btn secondary" id="waFbCopy">Copiar cotización</button>
-            <p class="muted small">También puedes escribirnos al <strong>+56 9 8333 5924</strong> y pegar la cotización.</p>
-            <textarea id="waFbText" class="wa-fb-text" readonly rows="6" aria-label="Texto de la cotización para copiar"></textarea>
+
+          <!-- Estado de la cotización: nunca afirma que la solicitud llegó, porque el sitio
+               no puede saber si el cliente presionó "Enviar" dentro de WhatsApp. -->
+          <div class="quote-status" id="quoteStatus" hidden role="status" aria-live="polite">
+            <p class="qs-title" id="qsTitle">Cotización creada — falta enviarla por WhatsApp</p>
+            <p>Tu código de cotización es <strong id="qsCode"></strong>. La cotización quedó guardada en este dispositivo, aunque WhatsApp no se abra. Todavía no existe una reserva confirmada.</p>
+            <p class="qs-state" id="qsState"></p>
+            <div class="qs-actions">
+              <button type="button" class="wa-fb-btn" id="qsWa">Abrir WhatsApp</button>
+              <a class="wa-fb-btn" id="qsWaWeb" href="#" target="_blank" rel="noopener">Abrir WhatsApp Web</a>
+              <button type="button" class="wa-fb-btn secondary" id="qsEmail">Recibir por correo</button>
+              <button type="button" class="wa-fb-btn secondary" id="qsCopy">Copiar cotización</button>
+              <a class="wa-fb-btn secondary" id="qsResume" href="#">Retomar la cotización guardada</a>
+            </div>
+            <p class="small">También puedes escribirnos al <strong>+56 9 8333 5924</strong> y pegar la cotización.</p>
+            <textarea id="qsText" class="wa-fb-text" readonly rows="8" hidden aria-label="Texto de la cotización para copiar"></textarea>
+          </div>
+
+          <form class="email-form" id="emailForm" hidden novalidate aria-labelledby="efTitle">
+            <p class="ef-title" id="efTitle">Recibir cotización por correo</p>
+            <label class="ef-field" for="efName">Nombre
+              <input type="text" id="efName" name="name" autocomplete="name" maxlength="60" required>
+            </label>
+            <label class="ef-field" for="efEmail">Correo electrónico
+              <input type="email" id="efEmail" name="email" autocomplete="email" inputmode="email" maxlength="120" required>
+            </label>
+            <label class="ef-field" for="efEmail2">Confirma tu correo
+              <input type="email" id="efEmail2" name="email2" autocomplete="off" inputmode="email" maxlength="120" required>
+            </label>
+            <label class="ef-check" for="efConsent">
+              <input type="checkbox" id="efConsent" name="consent">
+              <span>Acepto recibir esta cotización en mi correo. No es una suscripción: no te enviaremos publicidad.</span>
+            </label>
+            <div class="hp-field" aria-hidden="true"><label for="efWebsite">No completar</label><input type="text" id="efWebsite" name="website" tabindex="-1" autocomplete="off"></div>
+            <p class="ef-note" id="efNote"></p>
+            <p class="ef-error" id="efError" role="alert"></p>
+            <button type="submit" class="btn-cta-email solid" id="efSubmit">Enviar cotización a mi correo</button>
+            <button type="button" class="link-btn" id="efCancel">Cancelar</button>
+          </form>
+
+          <div class="email-result ok" id="emailOk" hidden role="status"></div>
+          <div class="email-result fail" id="emailFail" hidden role="alert">
+            <p><strong>No pudimos enviar el correo.</strong> <span id="emailFailMsg"></span> Tu cotización sigue guardada en este dispositivo<span id="emailFailCode"></span>.</p>
+            <div class="qs-actions">
+              <button type="button" class="wa-fb-btn secondary" id="efRetry">Reintentar el correo</button>
+              <button type="button" class="wa-fb-btn" id="efFailWa">Enviar por WhatsApp</button>
+              <button type="button" class="wa-fb-btn secondary" id="efFailCopy">Copiar el texto</button>
+            </div>
           </div>
           <p class="lock-note">Pago en línea: se habilita cuando confirmemos la disponibilidad.</p>
           <div class="locked-pay-row">
@@ -531,14 +596,8 @@ const days = window.GlaciaresCotizacion
   : daysBetween(state.pickUpDate, state.pickUpTime, state.dropOffDate, state.dropOffTime);
 
 const IMG_BASE = 'https://glaciaresrentacar.cl/flota/';
-const FLEET = [
-  { id: 1, name: 'Suzuki Swift', price: 35000, cat: 'citycar', catLabel: 'Citycar', img: IMG_BASE + 'suzuki-swift.webp', deposit: 500000 },
-  { id: 2, name: 'Suzuki Dzire', price: 38000, cat: 'citycar', catLabel: 'Citycar', img: IMG_BASE + 'suzuki-dzire.webp', deposit: 500000 },
-  { id: 3, name: 'Chevrolet Captiva', price: 50000, cat: 'suv', catLabel: 'SUV', img: IMG_BASE + 'chevrolet-captiva.webp', deposit: 500000 },
-  { id: 6, name: 'Kia Sorento', price: 40000, cat: 'suv', catLabel: 'SUV', img: IMG_BASE + 'kia-sorento.webp', deposit: 500000 },
-  { id: 7, name: 'Hyundai Tucson', price: 48000, cat: 'suv', catLabel: 'SUV', img: IMG_BASE + 'hyundai-tucson.webp', deposit: 500000 },
-  { id: 8, name: 'Peugeot 3008', price: 59000, cat: 'suv', catLabel: 'SUV', img: IMG_BASE + 'peugeot-3008.webp', deposit: 500000 },
-];
+// Flota y tarifas desde config.js (misma fuente que usa el servidor del correo).
+const FLEET = (cfg.FLEET || []).map(v => ({ ...v, img: IMG_BASE + v.img }));
 const vehicle = FLEET.find(v => v.id === vehicleId);
 
 /* El arranque se ejecuta al final del script (boot), cuando todas las
@@ -803,6 +862,7 @@ function renderAddonLists() {
 
 function scheduleQuote() {
   renderSummary(); // el total cambia al instante con el cálculo local
+  hideQuoteStatusIfStale();
   clearTimeout(quoteTimer);
   quoteTimer = setTimeout(refreshQuote, 300);
 }
@@ -842,9 +902,13 @@ function calcNow() {
   });
 }
 function requestDateISO() {
-  if (!savedDraft || !draftMatches || !savedDraft.sentAt) return undefined;
-  const curSig = GQ.signature({ vehicleId, state, extras: selectedExtras });
-  return savedDraft.sig === curSig ? GQ.localISO(new Date(savedDraft.sentAt)) : undefined;
+  // Si esta combinación ya tiene código, cuenta la fecha en que se creó la
+  // cotización: la promo 4×3 se respeta aunque el abono se pague después.
+  if (!GQ) return undefined;
+  const d = GQ.loadDraft();
+  const sig = GQ.signature({ vehicleId, state, extras: selectedExtras });
+  const q = d && d.quotes ? d.quotes[sig] : null;
+  return q && q.createdAt ? GQ.localISO(new Date(q.createdAt)) : undefined;
 }
 
 function renderSummary() {
@@ -906,22 +970,35 @@ function renderSummary() {
   persistDraft();
 }
 
-function persistDraft(extra) {
-  if (!GQ || !lastCalc) return;
+const memQuotes = {};
+function persistDraft() {
+  if (!GQ || !lastCalc) return null;
   const prev = GQ.loadDraft();
   const d = {
     vehicleId, vehicleName: vehicle.name, state: { ...state }, extras: selectedExtras.slice(),
     flight: readFlight(), total: lastCalc.total,
     summaryDates: `${fechaCorta(state.pickUpDate)} → ${fechaCorta(state.dropOffDate)}`,
     resumeUrl: location.pathname + '?' + resumeParams(),
+    // memQuotes: respaldo en memoria si el navegador no permite guardar
+    // (modo privado): así tampoco se duplican códigos en esta visita.
+    quotes: Object.assign({}, memQuotes, (prev && prev.quotes) || {}),
   };
-  const sig = GQ.signature(d);
-  // Conserva el código y la marca de "solicitud enviada" solo si es la misma cotización.
-  if (prev && prev.sig === sig) { d.requestCode = prev.requestCode; d.quoteCode = prev.quoteCode; d.sentAt = prev.sentAt; }
-  d.sig = sig;
-  Object.assign(d, extra || {});
+  d.sig = GQ.signature(d);
+  // Cada combinación conserva su código: quitar y volver a poner un adicional,
+  // recargar o volver desde WhatsApp NO crea otro código.
+  const q = d.quotes[d.sig];
+  if (q) q.total = lastCalc.total;
   GQ.saveDraft(d);
   return d;
+}
+/* Cotización con código de la combinación actual (o null). */
+function currentEntry() { return GQ ? GQ.currentQuote(persistDraft()) : null; }
+/* Modifica y guarda la cotización actual. */
+function updateEntry(fn) {
+  const d = persistDraft();
+  const q = d ? GQ.currentQuote(d) : null;
+  if (q) { fn(q); GQ.saveDraft(d); }
+  return q;
 }
 function readFlight() {
   return {
@@ -943,84 +1020,54 @@ function fechaCorta(d) { const p = String(d || '').split('-'); return p.length =
 });
 
 /* =====================================================================
-   MENSAJE DE WHATSAPP Y REGISTRO DE LA SOLICITUD (sección 20)
+   COTIZACIÓN: código, WhatsApp, correo y medición
+   ---------------------------------------------------------------------
+   Eventos (ver docs/medicion-conversiones.md):
+   - cotizacion_generada       al crear y guardar el código (1 vez por código)
+   - whatsapp_intento_apertura al pulsar un botón que abre WhatsApp (1 vez por código)
+   - cotizacion_email_enviada  solo cuando el SERVIDOR confirma el envío (1 vez por código y correo)
+   - reserva_confirmada        NUNCA desde el navegador (lo debe enviar el backend al registrar el pago)
    ===================================================================== */
-function buildWhatsappMessage(code) {
-  const c = lastCalc || calcNow();
-  const fecha = (d, t) => { const p = String(d || '').split('-'); return (p.length === 3 ? `${p[2]}/${p[1]}/${p[0]}` : d) + (t ? ` ${t} h` : ''); };
-  const lugarRetiro = placeLabel(state.pickUpPlace);
-  const lugarDevol = placeLabel(state.dropOffPlace, state.dropOffOther);
-  const f = readFlight();
-  const lines = [
-    'Hola, solicito disponibilidad para esta cotización:',
-    '',
-    `Código de cotización: ${code}`,
-    `Vehículo: ${vehicle.name}`,
-    `Retiro: ${fecha(state.pickUpDate, state.pickUpTime)} · ${lugarRetiro}`,
-    `Devolución: ${fecha(state.dropOffDate, state.dropOffTime)} · ${lugarDevol}`,
-    `Pasajeros: ${state.passengers || '1'}${state.destination ? ' · Destino: ' + destinationLabel(state) : ''}${state.argentina === 'si' ? ' · Viaje a Argentina: sí' : ''}`,
-    ...((f.airline || f.number || f.eta) ? [`Vuelo: ${[f.airline, f.number, f.eta ? 'llega ' + f.eta : ''].filter(Boolean).join(' ')}`] : []),
-    '',
-    `Arriendo: ${c.days} día${c.days > 1 ? 's' : ''} × ${money(c.pricePerDay)} = ${money(c.base)}`,
-    ...(c.applied ? [`${c.applied.label}: −${money(c.applied.savings)}`] : []),
-    ...(c.airport.amount > 0 ? [`${c.airport.label}: ${money(c.airport.amount)}`] : []),
-    ...c.extras.map(e => `${e.name}${e.qty > 1 ? ' ×' + e.qty : ''}: ${money(e.cost)}${e.vat > 0 ? ' (IVA incl.)' : ''}`),
-    `TOTAL ESTIMADO: ${money(c.total)}`,
-    `Abono para reservar: ${money(c.deposit)} · saldo al retiro: ${money(c.balance)}`,
-    ...(c.prepay ? [`Pagando el 100 % por adelantado (−${c.prepay.pct}%): ${money(c.prepay.total)}`] : []),
-    `Garantía (aparte, en tarjeta de crédito): ${money(c.guarantee)}`,
-    ...(state.promoCode ? [`Código promocional ingresado: ${state.promoCode}`] : []),
-    '',
-    'Entiendo que esta solicitud aún no reserva el vehículo. ¿Está disponible?',
-  ];
-  return lines.join('\n');
-}
+function quoteForText() { return { vehicleName: vehicle.name, state, catalog: extrasCatalog }; }
+function buildWhatsappMessage(code) { return GQ.whatsappMessage(quoteForText(), lastCalc || calcNow(), code); }
+function buildQuoteText(code) { return GQ.quoteText(quoteForText(), lastCalc || calcNow(), code); }
+function waAppUrl(code) { return `https://wa.me/${WA_NUMBER}?text=${encodeURIComponent(buildWhatsappMessage(code))}`; }
+function waWebUrl(code) { return `https://web.whatsapp.com/send?phone=${WA_NUMBER}&text=${encodeURIComponent(buildWhatsappMessage(code))}`; }
 
 function localQuoteCode() {
-  // Código propio cuando el servidor no alcanzó a registrar la solicitud: así el
-  // mensaje y la cotización guardada siempre tienen una referencia.
-  return 'WEB-' + Date.now().toString(36).toUpperCase().slice(-6);
+  // Código propio cuando el servidor de reservas no alcanzó a registrar la
+  // solicitud. La "W" indica que se generó en la web (no está en el panel).
+  const abc = 'ABCDEFGHJKLMNPQRSTUVWXYZ23456789';
+  let r = '';
+  try { const a = new Uint32Array(4); crypto.getRandomValues(a); a.forEach(n => { r += abc[n % abc.length]; }); }
+  catch (e) { r = Date.now().toString(36).toUpperCase().slice(-4); }
+  return `GR-${new Date().getFullYear()}-W${r}`;
+}
+/* Huella corta del correo: en el dispositivo no se guarda el correo en claro. */
+function emailKey(email) {
+  let h = 5381; const s = String(email).toLowerCase();
+  for (let i = 0; i < s.length; i++) h = ((h << 5) + h + s.charCodeAt(i)) >>> 0;
+  return h.toString(36);
+}
+function track(name, q, extra) {
+  if (!window.trackEvent) return;
+  window.trackEvent(name, Object.assign({
+    quote_code: q.code, transaction_id: q.code, vehicle: vehicle.name, id: vehicle.id,
+    value: q.total || (lastCalc ? lastCalc.total : 0), currency: 'CLP', days: lastCalc ? lastCalc.days : undefined,
+  }, extra || {}));
 }
 
-function showWaFallback(msg) {
-  const box = document.getElementById('waFallback');
-  if (!box) return;
-  document.getElementById('waFbWeb').href = `https://web.whatsapp.com/send?phone=${WA_NUMBER}&text=${encodeURIComponent(msg)}`;
-  const ta = document.getElementById('waFbText');
-  if (ta) ta.value = msg;
-  const copyBtn = document.getElementById('waFbCopy');
-  copyBtn.onclick = async () => {
-    try { await navigator.clipboard.writeText(msg); copyBtn.textContent = '¡Cotización copiada!'; }
-    catch (e) { if (ta) { ta.focus(); ta.select(); } copyBtn.textContent = 'Selecciona y copia el texto de abajo'; }
-  };
-  box.hidden = false;
-}
-
-function showRequestSent(code) {
-  const box = document.getElementById('requestSent');
-  document.getElementById('rsCode').textContent = code;
-  box.hidden = false;
-  const btn = document.getElementById('btnRequestConfirmation');
-  btn.textContent = 'VOLVER A ABRIR WHATSAPP CON MI SOLICITUD';
-  const steps = document.getElementById('nextSteps');
-  if (steps) steps.querySelector('.ns-title').textContent = 'Solicitud enviada: aún no es una reserva confirmada';
-}
-
-async function requestConfirmationViaWhatsapp() {
-  // Safari (iPhone) bloquea ventanas abiertas después de un await: abrimos la
-  // pestaña de inmediato, dentro del clic, y le asignamos el enlace al final.
-  let waWindow = null;
-  try { waWindow = window.open('', '_blank'); } catch (e) { waWindow = null; }
-  if (waWindow) {
-    try { waWindow.opener = null; waWindow.document.title = 'Abriendo WhatsApp…'; waWindow.document.body.innerHTML = '<p style="font-family:sans-serif;padding:24px">Abriendo WhatsApp…</p>'; } catch (e) {}
-  }
-  if (!lastCalc) renderSummary();
-  const draft = persistDraft() || {};
-  // Misma cotización ya enviada desde este navegador: reutilizamos el código,
-  // no creamos otra solicitud en el panel y no repetimos la conversión.
-  const alreadySent = !!(draft.sentAt && (draft.requestCode || draft.quoteCode));
-  let requestCode = alreadySent ? (draft.requestCode || null) : null;
-  if (!alreadySent) {
+/* Crea el código UNA sola vez por combinación y lo guarda en el dispositivo.
+   Se registra en el panel de reservas (si responde en 4 s); si no, se usa un
+   código local. Llamadas simultáneas comparten la misma promesa. */
+let ensuring = null;
+function ensureQuote() {
+  if (ensuring) return ensuring;
+  ensuring = (async () => {
+    if (!lastCalc) renderSummary();
+    const existing = currentEntry();
+    if (existing) return existing;
+    let requestCode = null;
     try {
       const f = readFlight();
       const c = lastCalc;
@@ -1034,7 +1081,6 @@ async function requestConfirmationViaWhatsapp() {
         airlineName: f.airline, flightNumber: f.number, flightEta: f.eta,
         notes: [state.promoCode ? `Código promocional ingresado: ${state.promoCode} (a validar por el equipo)` : '', promoNote].filter(Boolean).join(' '),
       };
-      // Si el servidor tarda (arranque en frío), no dejamos al cliente esperando.
       const ctrl = (typeof AbortController === 'function') ? new AbortController() : null;
       const timer = ctrl ? setTimeout(() => ctrl.abort(), 4000) : null;
       const r = await fetch(`${API_BASE}/api/requests`, {
@@ -1042,31 +1088,246 @@ async function requestConfirmationViaWhatsapp() {
         signal: ctrl ? ctrl.signal : undefined,
       });
       if (timer) clearTimeout(timer);
-      if (r.ok) { const data = await r.json(); requestCode = data.bookingCode; }
-    } catch (e) { /* igual se abre WhatsApp aunque falle el registro */ }
+      if (r.ok) { const data = await r.json(); if (data && data.bookingCode) requestCode = String(data.bookingCode); }
+    } catch (e) { /* sin servidor: igual se crea la cotización con código local */ }
+    // Otra pestaña pudo crear el código mientras esperábamos.
+    const again = currentEntry();
+    if (again) return again;
+    const d = persistDraft();
+    const q = {
+      code: requestCode || localQuoteCode(), requestCode, registered: !!requestCode,
+      createdAt: Date.now(), total: lastCalc.total, waOpenedAt: null,
+      emailSentTo: [], emailResends: 0, tracked: { generada: false, whatsapp: false, email: [] },
+    };
+    d.quotes[d.sig] = q;
+    memQuotes[d.sig] = q;
+    GQ.saveDraft(d);
+    // Evento solo cuando la cotización quedó creada y guardada.
+    const stored = !!GQ.currentQuote(GQ.loadDraft());
+    if (stored || currentEntry()) {
+      track('cotizacion_generada', q, { registered: q.registered, stored_on_device: stored });
+      updateEntry(x => { x.tracked.generada = true; });
+    }
+    return currentEntry() || q;
+  })();
+  const p = ensuring;
+  p.then(() => { ensuring = null; }, () => { ensuring = null; });
+  return p;
+}
+
+/* ---------------- WhatsApp ---------------- */
+function markWhatsappAttempt(q, channel) {
+  // Solo es un INTENTO: el sitio no puede saber si el cliente presionó "Enviar".
+  let first = false;
+  updateEntry(x => { first = !x.tracked.whatsapp; x.waOpenedAt = Date.now(); x.tracked.whatsapp = true; });
+  if (first) track('whatsapp_intento_apertura', q, { channel });
+  showQuoteStatus({ waOpened: true });
+}
+async function openWhatsapp(channel) {
+  const web = channel === 'web';
+  const ready = currentEntry();
+  if (ready) {
+    // Ya hay código: se abre directo dentro del clic (sin esperas).
+    const url = web ? waWebUrl(ready.code) : waAppUrl(ready.code);
+    let w = null;
+    try { w = window.open(url, '_blank'); } catch (e) { w = null; }
+    if (w) { try { w.opener = null; } catch (e) {} } else { window.location.href = url; }
+    markWhatsappAttempt(ready, channel);
+    return ready.code;
   }
-  const code = requestCode || draft.quoteCode || localQuoteCode();
-  persistDraft({ requestCode: requestCode || null, quoteCode: code, sentAt: draft.sentAt || Date.now() });
-  const msg = buildWhatsappMessage(code);
-  const waUrl = `https://wa.me/${WA_NUMBER}?text=${encodeURIComponent(msg)}`;
-  if (waWindow && !waWindow.closed) {
-    waWindow.location.href = waUrl;
-  } else {
-    // Si el navegador bloqueó la pestaña nueva, abrimos WhatsApp en la misma.
-    window.location.href = waUrl;
+  // Safari (iPhone) bloquea ventanas abiertas después de un await: abrimos la
+  // pestaña de inmediato, dentro del clic, y le asignamos el enlace al final.
+  let waWindow = null;
+  try { waWindow = window.open('', '_blank'); } catch (e) { waWindow = null; }
+  if (waWindow) {
+    try { waWindow.opener = null; waWindow.document.title = 'Abriendo WhatsApp…'; waWindow.document.body.innerHTML = '<p style="font-family:sans-serif;padding:24px">Abriendo WhatsApp…</p>'; } catch (e) {}
   }
-  showRequestSent(code);
-  // Respaldo visible: en computadores sin la app de WhatsApp, el cliente
-  // puede seguir por WhatsApp Web o copiar la cotización.
-  setTimeout(() => showWaFallback(msg), 1200);
-  // Lead (Meta) + conversión "WhatsApp" (Google Ads): solicitud de
-  // disponibilidad enviada (NO es una reserva confirmada). Se mide una sola
-  // vez por cotización para no duplicar conversiones si vuelve a pulsar.
-  if (!alreadySent) {
-    if (window.trackEvent) window.trackEvent('solicitar_confirmacion', { requestCode: code });
-    if (window.reportAdsConversion) window.reportAdsConversion();
+  const q = await ensureQuote();
+  const url = web ? waWebUrl(q.code) : waAppUrl(q.code);
+  if (waWindow && !waWindow.closed) waWindow.location.href = url;
+  else window.location.href = url; // si el navegador bloqueó la pestaña nueva
+  markWhatsappAttempt(q, channel);
+  return q.code;
+}
+
+/* ---------------- Estado visible de la cotización ---------------- */
+function showQuoteStatus(opts) {
+  const q = currentEntry();
+  if (!q) return;
+  opts = opts || {};
+  const box = document.getElementById('quoteStatus');
+  document.getElementById('qsCode').textContent = q.code;
+  document.getElementById('qsWaWeb').href = waWebUrl(q.code);
+  document.getElementById('qsResume').href = location.pathname + '?' + resumeParams();
+  const parts = [];
+  if (q.waOpenedAt) parts.push(opts.waOpened
+    ? 'WhatsApp abierto: la cotización está preparada para enviar. Presiona «Enviar» dentro de WhatsApp para que la recibamos.'
+    : 'Cotización preparada para enviar por WhatsApp. Si no alcanzaste a enviarla, vuelve a abrir WhatsApp.');
+  if (q.emailSentTo && q.emailSentTo.length) parts.push('También la enviamos a tu correo.');
+  document.getElementById('qsState').textContent = parts.join(' ');
+  document.getElementById('btnRequestConfirmation').textContent = 'ENVIAR COTIZACIÓN POR WHATSAPP';
+  box.hidden = false;
+}
+function hideQuoteStatusIfStale() {
+  // Si el cliente cambia adicionales, la cotización es otra (otro código).
+  const q = currentEntry();
+  if (q) { showQuoteStatus(); return; }
+  document.getElementById('quoteStatus').hidden = true;
+  document.getElementById('emailOk').hidden = true;
+  document.getElementById('emailFail').hidden = true;
+  document.getElementById('btnRequestConfirmation').textContent = 'SOLICITAR DISPONIBILIDAD POR WHATSAPP';
+}
+
+async function copyQuote(btn) {
+  const q = currentEntry() || await ensureQuote();
+  const text = buildQuoteText(q.code);
+  const ta = document.getElementById('qsText');
+  ta.value = text;
+  showQuoteStatus();
+  const original = btn.dataset.label || (btn.dataset.label = btn.textContent);
+  try { await navigator.clipboard.writeText(text); btn.textContent = '¡Cotización copiada!'; }
+  catch (e) { ta.hidden = false; ta.focus(); ta.select(); btn.textContent = 'Selecciona y copia el texto de abajo'; }
+  setTimeout(() => { btn.textContent = original; }, 4000);
+}
+
+/* ---------------- Correo ---------------- */
+const EMAIL_ENDPOINT = '/.netlify/functions/enviar-cotizacion';
+const RE_EMAIL = /^[^\s@<>()[\]\\,;:"]{1,64}@[A-Za-z0-9](?:[A-Za-z0-9-]{0,61}[A-Za-z0-9])?(?:\.[A-Za-z0-9](?:[A-Za-z0-9-]{0,61}[A-Za-z0-9])?)+$/;
+const RE_NAME = /^[\p{L}\p{M}' .-]{2,60}$/u;
+let lastEmailData = null;
+
+function openEmailForm() {
+  const form = document.getElementById('emailForm');
+  form.hidden = false;
+  document.getElementById('emailOk').hidden = true;
+  document.getElementById('emailFail').hidden = true;
+  form.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+  setTimeout(() => document.getElementById('efName').focus(), 150);
+}
+function readEmailForm() {
+  const val = id => document.getElementById(id).value.replace(/\s+/g, ' ').trim();
+  return {
+    name: val('efName'), email: val('efEmail').toLowerCase(), emailConfirm: val('efEmail2').toLowerCase(),
+    consent: document.getElementById('efConsent').checked, website: document.getElementById('efWebsite').value,
+  };
+}
+function validateEmailForm(f) {
+  const bad = [];
+  if (!RE_NAME.test(f.name)) bad.push(['efName', 'Escribe tu nombre (solo letras, 2 a 60 caracteres).']);
+  if (!RE_EMAIL.test(f.email) || f.email.length > 120) bad.push(['efEmail', 'Revisa tu correo electrónico.']);
+  else if (f.email !== f.emailConfirm) bad.push(['efEmail2', 'Los dos correos no coinciden.']);
+  if (!f.consent) bad.push(['efConsent', 'Debes aceptar recibir esta cotización en tu correo.']);
+  ['efName', 'efEmail', 'efEmail2', 'efConsent'].forEach(id => document.getElementById(id).removeAttribute('aria-invalid'));
+  bad.forEach(([id]) => document.getElementById(id).setAttribute('aria-invalid', 'true'));
+  document.getElementById('efError').textContent = bad.map(b => b[1]).join(' ');
+  if (bad.length) document.getElementById(bad[0][0]).focus();
+  return !bad.length;
+}
+
+async function sendEmail(f, opts) {
+  opts = opts || {};
+  const btn = document.getElementById('efSubmit');
+  const okBox = document.getElementById('emailOk');
+  const failBox = document.getElementById('emailFail');
+  okBox.hidden = true; failBox.hidden = true;
+  btn.disabled = true; btn.textContent = 'Enviando…';
+  let q = null;
+  try {
+    q = await ensureQuote();
+    showQuoteStatus();
+    const key = emailKey(f.email);
+    const already = (q.emailSentTo || []).includes(key);
+    const resendCount = already ? (q.emailResends || 0) + 1 : 0;
+    lastEmailData = f;
+    const ctrl = (typeof AbortController === 'function') ? new AbortController() : null;
+    const timer = ctrl ? setTimeout(() => ctrl.abort(), 20000) : null;
+    let r, data = null;
+    try {
+      r = await fetch(EMAIL_ENDPOINT, {
+        method: 'POST', headers: { 'Content-Type': 'application/json' }, signal: ctrl ? ctrl.signal : undefined,
+        body: JSON.stringify({
+          code: q.code, registered: !!q.registered, createdAt: q.createdAt, resendCount,
+          clientTotal: lastCalc ? lastCalc.total : null,
+          customer: { name: f.name, email: f.email, emailConfirm: f.emailConfirm },
+          consent: f.consent === true, website: f.website,
+          quote: {
+            vehicleId, pickUpDate: state.pickUpDate, pickUpTime: state.pickUpTime,
+            dropOffDate: state.dropOffDate, dropOffTime: state.dropOffTime,
+            pickUpPlace: state.pickUpPlace, dropOffPlace: state.dropOffPlace, dropOffOther: state.dropOffOther,
+            passengers: state.passengers, destination: state.destination, destinationOther: state.destinationOther,
+            argentina: state.argentina, extras: selectedExtras,
+          },
+        }),
+      });
+      try { data = await r.json(); } catch (e) { data = null; }
+    } finally { if (timer) clearTimeout(timer); }
+
+    if (r.ok && data && data.ok) {
+      // Éxito confirmado por el servidor: recién aquí se mide.
+      const firstForThisEmail = !(q.tracked.email || []).includes(key);
+      updateEntry(x => {
+        if (!x.emailSentTo.includes(key)) x.emailSentTo.push(key);
+        if (already) x.emailResends = (x.emailResends || 0) + 1;
+        x.tracked.email = x.tracked.email || [];
+        if (!x.tracked.email.includes(key)) x.tracked.email.push(key);
+      });
+      if (firstForThisEmail) track('cotizacion_email_enviada', q);
+      document.getElementById('emailForm').hidden = true;
+      okBox.textContent = 'Cotización enviada a tu correo. Revisa también la carpeta de spam. Esto todavía no confirma la reserva.' +
+        (data.testMode ? ' (Modo de prueba: el correo se desvió a la casilla de pruebas de Glaciares.)' : '');
+      okBox.hidden = false;
+      showQuoteStatus();
+      okBox.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+      return true;
+    }
+    if (r.status === 422 && data && data.fields) {
+      document.getElementById('efError').textContent = 'Revisa los datos del formulario e intenta de nuevo.';
+      return false;
+    }
+    throw new Error(r.status === 429 ? 'rate' : 'send');
+  } catch (e) {
+    document.getElementById('emailFailMsg').textContent = e && e.message === 'rate'
+      ? 'Hiciste varios intentos seguidos; espera unos minutos.'
+      : 'Puede ser un problema momentáneo de conexión o del servicio de correo.';
+    document.getElementById('emailFailCode').textContent = q ? ` (código ${q.code})` : '';
+    failBox.hidden = false;
+    if (q) showQuoteStatus();
+    failBox.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+    return false;
+  } finally {
+    btn.disabled = false; btn.textContent = 'Enviar cotización a mi correo';
   }
-  return code;
+}
+
+function wireEmail() {
+  const form = document.getElementById('emailForm');
+  document.getElementById('btnEmailQuote').addEventListener('click', openEmailForm);
+  document.getElementById('qsEmail').addEventListener('click', openEmailForm);
+  document.getElementById('efCancel').addEventListener('click', () => { form.hidden = true; });
+  ['efEmail', 'efEmail2'].forEach(id => document.getElementById(id).addEventListener('input', () => {
+    document.getElementById('efNote').textContent = ''; delete form.dataset.confirmResend;
+  }));
+  form.addEventListener('submit', async (ev) => {
+    ev.preventDefault();
+    if (document.getElementById('efSubmit').disabled) return;
+    const f = readEmailForm();
+    if (!validateEmailForm(f)) return;
+    // Si esta cotización ya se envió a ese correo, se pide confirmar el reenvío.
+    const q = currentEntry();
+    if (q && (q.emailSentTo || []).includes(emailKey(f.email)) && !form.dataset.confirmResend) {
+      document.getElementById('efNote').textContent = 'Ya enviamos esta cotización a ese correo. Revisa también spam. Si igual quieres recibirla otra vez, presiona de nuevo «Enviar».';
+      form.dataset.confirmResend = '1';
+      return;
+    }
+    delete form.dataset.confirmResend;
+    document.getElementById('efNote').textContent = '';
+    await sendEmail(f);
+  });
+  document.getElementById('efRetry').addEventListener('click', () => {
+    if (lastEmailData) sendEmail(lastEmailData); else openEmailForm();
+  });
+  document.getElementById('efFailWa').addEventListener('click', () => openWhatsapp('app'));
+  document.getElementById('efFailCopy').addEventListener('click', (e) => copyQuote(e.currentTarget));
 }
 
 /* ---- Medición de clics de conversión (mismo mecanismo que la portada) ---- */
@@ -1100,25 +1361,30 @@ function wireInfoTexts() {
   if (el && h) el.textContent = ` (válido por ${h} horas)`;
   const rt = document.getElementById('responseTimeText');
   if (rt && cfg.RESPONSE_TIME_TEXT) { rt.textContent = cfg.RESPONSE_TIME_TEXT; rt.hidden = false; }
-  // Si esta misma cotización ya se envió desde este navegador, se muestra su estado.
-  if (savedDraft && draftMatches && savedDraft.sentAt && (savedDraft.quoteCode || savedDraft.requestCode)) {
-    const curSig = GQ.signature({ vehicleId, state, extras: selectedExtras });
-    if (savedDraft.sig === curSig) showRequestSent(savedDraft.requestCode || savedDraft.quoteCode);
-  }
+  // Si esta combinación ya tiene código (volvió desde WhatsApp o recargó), se muestra su estado.
+  if (currentEntry()) showQuoteStatus();
 }
 
 function wireMainCta() {
   wireMobileBar();
   wireInfoTexts();
+  wireEmail();
   const btn = document.getElementById('btnRequestConfirmation');
   btn.addEventListener('click', async () => {
     if (btn.disabled) return;
-    const label = btn.textContent;
     btn.disabled = true;
-    btn.textContent = 'ABRIENDO WHATSAPP…';
-    try { await requestConfirmationViaWhatsapp(); }
-    finally { btn.disabled = false; btn.textContent = label; }
+    const label = btn.textContent;
+    if (!currentEntry()) btn.textContent = 'PREPARANDO COTIZACIÓN…';
+    try { await openWhatsapp('app'); }
+    finally { btn.disabled = false; if (btn.textContent === 'PREPARANDO COTIZACIÓN…') btn.textContent = label; }
   });
+  document.getElementById('qsWa').addEventListener('click', () => openWhatsapp('app'));
+  document.getElementById('qsWaWeb').addEventListener('click', (e) => {
+    // El enlace abre WhatsApp Web por sí solo; aquí solo se registra el intento.
+    const q = currentEntry();
+    if (q) { e.currentTarget.href = waWebUrl(q.code); markWhatsappAttempt(q, 'web'); }
+  });
+  document.getElementById('qsCopy').addEventListener('click', (e) => copyQuote(e.currentTarget));
 }
 
 /* =====================================================================
@@ -1142,7 +1408,7 @@ function wirePayBlockedModal() {
   document.getElementById('payBlockedClose').addEventListener('click', closePayBlockedModal);
   document.getElementById('payBlockedWhatsapp').addEventListener('click', async () => {
     closePayBlockedModal();
-    await requestConfirmationViaWhatsapp();
+    await openWhatsapp('app');
   });
   document.addEventListener('keydown', (e) => {
     if (e.key === 'Escape' && !document.getElementById('payBlockedModal').classList.contains('hidden')) closePayBlockedModal();

@@ -155,6 +155,18 @@ window.GLACIARES_CONFIG = {
     { id: 7, name: 'Entrega o devolución fuera de horario', description: 'Retiro o devolución del vehículo fuera del horario habitual de atención.', price: 15000, chargeType: 'flat', kind: 'checkbox', vatIncluded: true, active: true },
     { id: 5, name: 'Permiso para viaje a Argentina', description: 'Cargo único por reserva, previa autorización y con anticipación.', price: 120000, chargeType: 'flat', kind: 'checkbox', vatIncluded: true, isArgentinaPermit: true, active: true },
   ],
+  /* Flota con tarifa diaria. La usan /reserva/adicionales y la función del
+     servidor que envía la cotización por correo (recalcula el total con estos
+     valores; nunca confía en el precio que llega desde el navegador).
+     Mantener igual a la lista de index.html y buscar.html. */
+  FLEET: [
+    { id: 1, name: 'Suzuki Swift', price: 35000, cat: 'citycar', catLabel: 'Citycar', img: 'suzuki-swift.webp', deposit: 500000 },
+    { id: 2, name: 'Suzuki Dzire', price: 38000, cat: 'citycar', catLabel: 'Citycar', img: 'suzuki-dzire.webp', deposit: 500000 },
+    { id: 3, name: 'Chevrolet Captiva', price: 50000, cat: 'suv', catLabel: 'SUV', img: 'chevrolet-captiva.webp', deposit: 500000 },
+    { id: 6, name: 'Kia Sorento', price: 40000, cat: 'suv', catLabel: 'SUV', img: 'kia-sorento.webp', deposit: 500000 },
+    { id: 7, name: 'Hyundai Tucson', price: 48000, cat: 'suv', catLabel: 'SUV', img: 'hyundai-tucson.webp', deposit: 500000 },
+    { id: 8, name: 'Peugeot 3008', price: 59000, cat: 'suv', catLabel: 'SUV', img: 'peugeot-3008.webp', deposit: 500000 },
+  ],
   VAT_RATE: 0.19,
   RETURN_TOLERANCE_MINUTES: 60, // condiciones.html: tolerancia de devolución de 1 hora
 };

@@ -156,10 +156,43 @@
     };
   }
 
-  /* ---------------- Cotización guardada (retomar) ---------------- */
+  /* ---------------- Cotización guardada (retomar) ----------------
+     Formato en localStorage (clave `glaciares_cotizacion`):
+       { vehicleId, vehicleName, state, extras, flight, total, summaryDates,
+         resumeUrl, sig, savedAt,
+         quotes: { [firma]: { code, requestCode, registered, createdAt, total,
+                              waOpenedAt, emailSentTo:[...], tracked:{...} } } }
+     `quotes` guarda el código de CADA combinación (vehículo + fechas + lugares
+     + adicionales). Si el cliente quita un adicional y lo vuelve a poner, o
+     vuelve desde WhatsApp, o recarga, se reutiliza el mismo código: nunca se
+     crea otro registro ni se repiten los eventos de medición. */
   var DRAFT_KEY = 'glaciares_cotizacion';
+  var MAX_QUOTES = 8;
+  function migrateDraft(d) {
+    if (!d) return d;
+    if (!d.quotes) d.quotes = {};
+    // Versión anterior (oct 2026): quoteCode/requestCode/sentAt sueltos.
+    if (d.sig && (d.quoteCode || d.requestCode) && !d.quotes[d.sig]) {
+      d.quotes[d.sig] = {
+        code: d.requestCode || d.quoteCode, requestCode: d.requestCode || null,
+        registered: !!d.requestCode, createdAt: d.sentAt || d.savedAt || Date.now(),
+        total: d.total, waOpenedAt: d.sentAt || null, emailSentTo: [],
+        tracked: { generada: true, whatsapp: !!d.sentAt, email: [] },
+      };
+    }
+    delete d.quoteCode; delete d.requestCode; delete d.sentAt;
+    return d;
+  }
   function saveDraft(d) {
-    try { d.savedAt = Date.now(); localStorage.setItem(DRAFT_KEY, JSON.stringify(d)); } catch (e) { /* sin almacenamiento */ }
+    try {
+      d.savedAt = Date.now();
+      var keys = Object.keys(d.quotes || {});
+      if (keys.length > MAX_QUOTES) {
+        keys.sort(function (a, b) { return (d.quotes[a].createdAt || 0) - (d.quotes[b].createdAt || 0); })
+          .slice(0, keys.length - MAX_QUOTES).forEach(function (k) { if (k !== d.sig) delete d.quotes[k]; });
+      }
+      localStorage.setItem(DRAFT_KEY, JSON.stringify(d));
+    } catch (e) { /* sin almacenamiento */ }
   }
   function loadDraft() {
     try {
@@ -167,10 +200,138 @@
       if (!d || !d.state || !d.state.pickUpDate) return null;
       if (d.state.pickUpDate < localISO()) return null; // ya pasó la fecha de retiro
       if (Date.now() - (d.savedAt || 0) > 30 * MS_DAY) return null;
-      return d;
+      return migrateDraft(d);
     } catch (e) { return null; }
   }
   function clearDraft() { try { localStorage.removeItem(DRAFT_KEY); } catch (e) {} }
+  /* Cotización (con código) de la combinación actual, o null si aún no se generó. */
+  function currentQuote(d) { return d && d.quotes && d.sig ? (d.quotes[d.sig] || null) : null; }
+
+  /* ---------------- Textos compartidos (página, WhatsApp, correo) ----------------
+     Se usan en el navegador y también en la función del servidor que envía el
+     correo, para que el cliente vea exactamente los mismos datos en todas partes. */
+  var PLACE_LABELS = {
+    agency_punta_arenas: 'Agencia en Punta Arenas (ciudad)',
+    punta_arenas_airport: 'Aeropuerto Presidente Carlos Ibáñez del Campo',
+    hotel_punta_arenas: 'Hotel o alojamiento en Punta Arenas (sujeto a confirmación)',
+    custom_location: 'Otro lugar (sujeto a evaluación)',
+  };
+  var PLACE_SHORT = {
+    agency_punta_arenas: 'Agencia (Punta Arenas)',
+    punta_arenas_airport: 'Aeropuerto de Punta Arenas',
+    hotel_punta_arenas: 'Hotel en Punta Arenas',
+    custom_location: 'Otro lugar',
+  };
+  function placeLabel(id, other, short) {
+    var n = normPlace(id);
+    if (n === 'custom_location') return other ? String(other) : (short ? 'Otro lugar' : 'Otro lugar (sin especificar)');
+    return (short ? PLACE_SHORT[n] : PLACE_LABELS[n]) || String(id || '');
+  }
+  function destinationLabel(st) {
+    if (!st || !st.destination) return '';
+    if (st.destination === 'otro') return st.destinationOther || 'Otro destino';
+    var found = (cfg.DESTINATIONS || []).find(function (x) { return x.id === st.destination; });
+    return found ? found.label : st.destination;
+  }
+  /* "20/10/2026 a las 09:00" */
+  function fechaHora(dateStr, timeStr) {
+    var p = String(dateStr || '').split('-');
+    var f = p.length === 3 ? p[2] + '/' + p[1] + '/' + p[0] : String(dateStr || '');
+    return f + (timeStr ? ' a las ' + timeStr : '');
+  }
+  function isArgentinaLine(line, catalog) {
+    var def = (catalog || cfg.EXTRAS_FALLBACK || []).find(function (c) { return c.id === line.id; });
+    return def ? !!def.isArgentinaPermit : /argentina/i.test(line.name || '');
+  }
+  /* Adicionales elegidos por el cliente (sin el permiso de Argentina, que se informa aparte). */
+  function extrasNames(c, catalog) {
+    return c.extras.filter(function (l) { return !isArgentinaLine(l, catalog); })
+      .map(function (l) { return l.name + (l.qty > 1 ? ' ×' + l.qty : ''); });
+  }
+  /* ¿Se informan los lugares en el mensaje corto? Solo si son distintos entre sí
+     o si alguno es el aeropuerto o un hotel. */
+  function placesWorthMentioning(st) {
+    var p = normPlace(st.pickUpPlace), d = normPlace(st.dropOffPlace);
+    var special = { punta_arenas_airport: 1, hotel_punta_arenas: 1 };
+    return p !== d || !!special[p] || !!special[d] || p === 'custom_location';
+  }
+
+  /* Mensaje BREVE de WhatsApp. Sin conceptos vacíos, sin garantía, sin abonos ni
+     totales repetidos: ese detalle queda en la página y en el correo.
+     q = { vehicleName, state, catalog? } · c = compute(...) · code = código */
+  function whatsappMessage(q, c, code) {
+    var st = q.state || {};
+    var lines = ['Hola, quiero confirmar disponibilidad:'];
+    if (code) lines.push('Cotización: ' + code);
+    lines.push('Vehículo: ' + q.vehicleName);
+    lines.push('Retiro: ' + fechaHora(st.pickUpDate, st.pickUpTime));
+    lines.push('Devolución: ' + fechaHora(st.dropOffDate, st.dropOffTime));
+    if (placesWorthMentioning(st)) {
+      lines.push('Lugar de retiro: ' + placeLabel(st.pickUpPlace, '', true));
+      lines.push('Lugar de devolución: ' + placeLabel(st.dropOffPlace, st.dropOffOther, true));
+    }
+    if (st.argentina === 'si') lines.push('Viaje a Argentina: sí');
+    var ex = extrasNames(c, q.catalog);
+    if (ex.length) lines.push('Adicionales: ' + ex.join(', '));
+    lines.push('Total estimado: ' + money(c.total));
+    lines.push('¿Está disponible?');
+    return lines.join('\n');
+  }
+
+  var PENDING_NOTICE = 'Esta cotización está pendiente de confirmación. El vehículo queda reservado solamente después de que Glaciares Rent a Car confirme la disponibilidad y se pague el abono o el total correspondiente.';
+
+  /* Detalle completo como filas [etiqueta, valor] (correo y "Copiar cotización"). */
+  function detailRows(q, c, code) {
+    var st = q.state || {};
+    var rows = [];
+    if (code) rows.push(['Código de cotización', code]);
+    rows.push(['Vehículo', q.vehicleName]);
+    rows.push(['Retiro', fechaHora(st.pickUpDate, st.pickUpTime) + ' · ' + placeLabel(st.pickUpPlace)]);
+    rows.push(['Devolución', fechaHora(st.dropOffDate, st.dropOffTime) + ' · ' + placeLabel(st.dropOffPlace, st.dropOffOther)]);
+    rows.push(['Duración', c.days + ' día' + (c.days > 1 ? 's' : '')]);
+    if (st.passengers) rows.push(['Pasajeros', String(st.passengers)]);
+    var dest = destinationLabel(st);
+    if (dest) rows.push(['Destino', dest]);
+    if (st.argentina === 'si') rows.push(['Viaje a Argentina', 'Sí']);
+    return rows;
+  }
+  /* Desglose de precio como filas [concepto, monto, nota?]. */
+  function priceRows(c) {
+    var rows = [['Arriendo: ' + c.days + ' día' + (c.days > 1 ? 's' : '') + ' × ' + money(c.pricePerDay), money(c.base)]];
+    if (c.applied) rows.push([c.applied.label, '−' + money(c.applied.savings)]);
+    if (c.airport.amount > 0) rows.push([c.airport.label, money(c.airport.amount)]);
+    c.extras.forEach(function (e) {
+      rows.push([e.name + (e.qty > 1 ? ' ×' + e.qty : '') + (e.perDay ? ' (' + c.days + ' día' + (c.days > 1 ? 's' : '') + ')' : ''),
+        money(e.cost), e.vat > 0 ? 'Neto ' + money(e.net) + ' + IVA ' + money(e.vat) : '']);
+    });
+    return rows;
+  }
+  function promoText(c) {
+    return c.applied ? c.applied.label + ': −' + money(c.applied.savings) : 'Ninguna';
+  }
+  function guaranteeText(c) {
+    return money(c.guarantee) + ' con tarjeta de crédito' + (c.argentinaGuarantee ? ' (viaje a Argentina)' : '') +
+      '. No es un pago del arriendo, no se cobra al reservar y se libera al recibir el vehículo conforme.';
+  }
+
+  /* Texto plano completo (botón "Copiar cotización" y versión de texto del correo). */
+  function quoteText(q, c, code) {
+    var out = ['Cotización Glaciares Rent a Car', ''];
+    detailRows(q, c, code).forEach(function (r) { out.push(r[0] + ': ' + r[1]); });
+    var ex = extrasNames(c, q.catalog);
+    out.push('Servicios adicionales: ' + (ex.length ? ex.join(', ') : 'ninguno'));
+    out.push('');
+    priceRows(c).forEach(function (r) { out.push(r[0] + ': ' + r[1] + (r[2] ? ' (' + r[2] + ')' : '')); });
+    out.push('Promoción aplicada: ' + promoText(c));
+    out.push('TOTAL ESTIMADO: ' + money(c.total));
+    out.push('Abono necesario para reservar: ' + money(c.deposit));
+    out.push('Saldo pendiente (al retirar): ' + money(c.balance));
+    if (c.prepay) out.push('Alternativa pagando el 100 % por adelantado (−' + c.prepay.pct + '% en el arriendo): ' + money(c.prepay.total));
+    out.push('Garantía (informativa, aparte del precio): ' + guaranteeText(c));
+    out.push('');
+    out.push(PENDING_NOTICE);
+    return out.join('\n');
+  }
 
   /* Firma de la cotización: si el cliente vuelve a pulsar el botón con la
      misma cotización, se reutiliza el código y NO se vuelve a medir la
@@ -186,20 +347,25 @@
     opts = opts || {};
     var d = loadDraft();
     if (!d || !d.resumeUrl) return;
+    var q = currentQuote(d);
+    var code = q ? q.code : '';
+    var line = [d.vehicleName || '', d.summaryDates || '', money(q && q.total ? q.total : d.total)].filter(Boolean).join(' · ');
     var host = document.createElement('div');
     host.className = 'gq-resume';
     host.setAttribute('role', 'region');
     host.setAttribute('aria-label', 'Cotización guardada');
-    var status = d.requestCode ? ('Solicitud ' + d.requestCode + ' · pendiente de confirmación') : 'Aún no enviada';
     host.innerHTML =
       '<div class="gq-resume-in"><div><strong>Tienes una cotización guardada</strong>' +
-      '<span>' + escapeHtml(d.vehicleName || '') + ' · ' + escapeHtml(d.summaryDates || '') + ' · ' + money(d.total) + ' · ' + escapeHtml(status) + '</span></div>' +
+      (code ? '<span>Código: <b>' + escapeHtml(code) + '</b></span>' : '') +
+      '<span>' + escapeHtml(line) + '</span>' +
+      '<span class="gq-resume-st">Estado: Pendiente de envío o confirmación</span></div>' +
       '<div class="gq-resume-actions"><a class="gq-resume-go" href="' + escapeHtml(d.resumeUrl) + '">Retomar cotización</a>' +
       '<button type="button" class="gq-resume-x" aria-label="Descartar cotización guardada">✕</button></div></div>';
     var css = document.createElement('style');
     css.textContent = '.gq-resume{position:relative;z-index:40;background:#eff9ff;border-bottom:1px solid #bfe9f7;margin-top:' + (opts.offsetTop || 68) + 'px}' +
       '.gq-resume-in{max-width:1180px;margin:0 auto;padding:10px 20px;display:flex;gap:12px;align-items:center;justify-content:space-between;flex-wrap:wrap;font-size:13px;color:#0A2540}' +
       '.gq-resume-in span{display:block;color:#475569;font-size:12.5px;margin-top:2px}' +
+      '.gq-resume-in .gq-resume-st{color:#92400e;font-weight:700}' +
       '.gq-resume-actions{display:flex;gap:8px;align-items:center}' +
       '.gq-resume-go{background:#0A2540;color:#fff;font-weight:700;padding:10px 14px;border-radius:10px;min-height:44px;display:inline-flex;align-items:center}' +
       '.gq-resume-x{width:44px;height:44px;border-radius:10px;color:#475569;font-size:16px}';
@@ -218,6 +384,10 @@
     daysAhead: daysAhead, airport: airport, extraLine: extraLine, compute: compute,
     promo4x3Info: promo4x3Info, saveDraft: saveDraft, loadDraft: loadDraft,
     clearDraft: clearDraft, signature: signature, renderResumeBanner: renderResumeBanner,
-    escapeHtml: escapeHtml,
+    escapeHtml: escapeHtml, currentQuote: currentQuote, placeLabel: placeLabel,
+    destinationLabel: destinationLabel, fechaHora: fechaHora, extrasNames: extrasNames,
+    whatsappMessage: whatsappMessage, quoteText: quoteText, detailRows: detailRows,
+    priceRows: priceRows, promoText: promoText, guaranteeText: guaranteeText,
+    PENDING_NOTICE: PENDING_NOTICE,
   };
 })();

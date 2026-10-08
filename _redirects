@@ -7,3 +7,7 @@
 
 # Archivo interno subido por error: no debe ser público
 /cambios.patch  /404.html  404!
+
+# Código de la función del servidor y documentación interna: no se publican como archivos
+/netlify/*  /404.html  404!
+/docs/*     /404.html  404!
