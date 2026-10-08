@@ -1,0 +1,1485 @@
+<!DOCTYPE html>
+<html lang="es-CL">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Personaliza tu reserva | Glaciares Rent a Car</title>
+<meta name="description" content="Elige los servicios adicionales de tu arriendo y revisa el total antes de solicitar confirmación por WhatsApp.">
+<meta name="robots" content="noindex, follow">
+<link rel="icon" href="https://glaciaresrentacar.cl/img/logo-glaciares-192.png">
+<link rel="apple-touch-icon" href="https://glaciaresrentacar.cl/img/logo-glaciares-192.png">
+
+<style>
+  *{box-sizing:border-box;margin:0;padding:0;}
+  html{scroll-behavior:smooth;scroll-padding-top:92px;}
+  body{font-family:-apple-system,'Segoe UI',Roboto,'Helvetica Neue',Arial,sans-serif;color:#0A2540;background:#f8fafc;-webkit-font-smoothing:antialiased;}
+  img{display:block;max-width:100%;}
+  a{text-decoration:none;color:inherit;}
+  ul{list-style:none;}
+  button{font-family:inherit;cursor:pointer;border:none;background:none;}
+  :focus-visible{outline:3px solid var(--accent-dark);outline-offset:2px;}
+
+  :root{
+    --navy:#0A2540; --navy-dark:#071B30;
+    --accent:#00D4FF; --accent-dark:#00AFD6;
+    --green:#2E7D5B;
+    --slate-50:#f8fafc; --slate-100:#f1f5f9; --slate-200:#e2e8f0;
+    --slate-400:#94a3b8; --slate-500:#64748b; --slate-600:#475569;
+  }
+  .container{max-width:1180px;margin:0 auto;padding:0 20px;}
+  .btn{display:inline-flex;align-items:center;justify-content:center;gap:8px;font-weight:700;padding:13px 22px;border-radius:12px;transition:.2s;font-size:14.5px;min-height:44px;}
+  .btn-whatsapp{background:#25D366;color:#fff;}
+  .btn-whatsapp:hover{background:#1fb959;}
+  .btn-outline{border:1.5px solid var(--navy);color:var(--navy);font-weight:700;padding:11px 20px;border-radius:10px;min-height:44px;display:inline-flex;align-items:center;justify-content:center;}
+  .btn-outline:hover{background:var(--navy);color:#fff;}
+  .sr-only{position:absolute;width:1px;height:1px;padding:0;margin:-1px;overflow:hidden;clip:rect(0,0,0,0);white-space:nowrap;border:0;}
+
+  /* Header (idéntico al resto del sitio) */
+  header{position:fixed;top:0;left:0;right:0;z-index:50;background:rgba(255,255,255,.97);backdrop-filter:blur(6px);border-bottom:1px solid var(--slate-100);}
+  .header-inner{max-width:1180px;margin:0 auto;padding:12px 20px;display:flex;align-items:center;justify-content:space-between;}
+  .brand{display:flex;align-items:center;gap:10px;}
+  .brand img{height:44px;width:44px;border-radius:50%;object-fit:cover;}
+  .brand-text{font-weight:800;font-size:13px;line-height:1.25;}
+  .brand-text small{display:block;font-weight:600;font-size:10px;letter-spacing:.15em;color:var(--slate-500);}
+  nav.main-nav{display:flex;gap:22px;font-weight:600;font-size:13.5px;}
+  nav.main-nav a:hover{color:var(--accent-dark);}
+  .header-cta{background:var(--accent);color:var(--navy);font-weight:700;font-size:13.5px;padding:10px 18px;border-radius:10px;}
+  .menu-btn{display:none;background:none;border:none;font-size:24px;line-height:1;padding:4px;}
+  @media (max-width:900px){ nav.main-nav, .header-cta{display:none;} .menu-btn{display:block;} }
+  #mobileMenu{display:none;background:#fff;border-top:1px solid var(--slate-100);padding:16px 20px 20px;flex-direction:column;gap:2px;font-weight:600;font-size:15px;}
+  #mobileMenu a{padding:10px 4px;border-bottom:1px solid var(--slate-100);}
+  #mobileMenu.open{display:flex;}
+
+  .page-main{padding-top:92px;padding-bottom:80px;min-height:70vh;}
+
+  /* Indicador de pasos (igual que /buscar) */
+  .steps-bar{display:flex;align-items:center;gap:0;margin-bottom:18px;overflow-x:auto;padding-bottom:2px;}
+  .steps-bar .step{display:flex;align-items:center;gap:8px;flex-shrink:0;}
+  .steps-bar .step-num{width:26px;height:26px;border-radius:50%;background:var(--slate-200);color:var(--slate-500);font-weight:800;font-size:12.5px;display:flex;align-items:center;justify-content:center;flex-shrink:0;}
+  .steps-bar .step-label{font-size:12px;font-weight:700;color:var(--slate-500);white-space:nowrap;}
+  .steps-bar .step.done .step-num{background:var(--green);color:#fff;}
+  .steps-bar .step.done .step-label{color:var(--navy);}
+  .steps-bar .step.active .step-num{background:var(--navy);color:#fff;}
+  .steps-bar .step.active .step-label{color:var(--navy);font-weight:800;}
+  .steps-bar .step-sep{width:22px;height:2px;background:var(--slate-200);margin:0 6px;flex-shrink:0;}
+  .steps-bar .step-sep.done{background:var(--green);}
+  @media (max-width:640px){ .steps-bar .step-label{display:none;} .steps-bar .step.active .step-label{display:block;} }
+
+  .error-banner{background:#fef2f2;border:1px solid #fecaca;color:#b91c1c;border-radius:12px;padding:14px 16px;margin-bottom:16px;font-size:13.5px;font-weight:600;display:none;}
+  .error-banner.show{display:block;}
+  .page-error{text-align:center;background:#fff;border:1px solid var(--slate-100);border-radius:16px;padding:44px 24px;}
+  .page-error h2{font-size:18px;font-weight:800;margin-bottom:8px;}
+  .page-error p{color:var(--slate-500);margin-bottom:18px;}
+
+  .adicionales-grid{display:grid;grid-template-columns:1fr 380px;gap:24px;align-items:start;}
+  @media (max-width:980px){ .adicionales-grid{grid-template-columns:1fr;} }
+  .adicionales-grid > *{min-width:0;} /* evita que un texto largo ensanche la página en celular */
+
+  .card{background:#fff;border:1px solid var(--slate-200);border-radius:16px;padding:18px 20px;margin-bottom:16px;}
+  .card h2{font-size:15px;font-weight:800;margin-bottom:4px;}
+  .card .muted{color:var(--slate-500);font-size:12.5px;}
+
+  /* Resumen del vehículo elegido */
+  .vehicle-card{display:grid;grid-template-columns:120px 1fr;gap:16px;}
+  @media (max-width:520px){ .vehicle-card{grid-template-columns:1fr;} }
+  .vehicle-card img{width:100%;height:88px;object-fit:cover;border-radius:12px;}
+  .vehicle-card h2{font-size:17px;}
+  .vehicle-meta{display:grid;grid-template-columns:repeat(auto-fill,minmax(150px,1fr));gap:6px 16px;margin-top:10px;font-size:12.5px;color:var(--slate-600);}
+  .vehicle-meta dt{font-weight:700;color:var(--slate-500);font-size:10.5px;text-transform:uppercase;letter-spacing:.03em;}
+  .vehicle-meta dd{font-weight:700;color:var(--navy);margin-top:1px;}
+  .avail-note{margin-top:10px;color:var(--slate-500);font-size:12px;font-weight:600;display:flex;align-items:center;gap:5px;}
+  .avail-note svg{width:13px;height:13px;color:var(--green);flex-shrink:0;}
+  .vehicle-actions{margin-top:12px;}
+
+  /* Ítems de adicionales */
+  .addon-item{display:flex;align-items:flex-start;justify-content:space-between;gap:12px;padding:12px 0;border-top:1px solid var(--slate-100);}
+  .addon-item:first-of-type{border-top:none;padding-top:6px;}
+  .addon-info{flex:1;min-width:0;}
+  .addon-info label{display:flex;align-items:flex-start;gap:9px;font-weight:700;font-size:13.5px;cursor:pointer;}
+  .addon-info input[type=checkbox]{width:20px;height:20px;margin-top:1px;flex-shrink:0;}
+  .addon-info .addon-desc{display:block;font-weight:500;color:var(--slate-500);font-size:12px;margin-top:3px;margin-left:29px;}
+  .addon-info details{margin-top:6px;margin-left:29px;}
+  .addon-info summary{cursor:pointer;font-size:12px;font-weight:700;color:var(--accent-dark);list-style:none;}
+  .addon-info summary::-webkit-details-marker{display:none;}
+  .addon-info summary:before{content:'Ver condiciones ▸';}
+  .addon-info details[open] summary:before{content:'Ocultar condiciones ▾';}
+  .addon-info .addon-conditions{font-size:11.5px;color:var(--slate-500);margin-top:6px;line-height:1.5;}
+  .addon-vat-note{font-size:11.5px;color:var(--slate-500);margin-top:6px;margin-left:29px;}
+  .qty-stepper{display:flex;align-items:center;gap:8px;flex-shrink:0;}
+  .qty-stepper button{width:32px;height:32px;min-height:32px;border-radius:9px;background:var(--slate-100);font-weight:800;color:var(--navy);font-size:16px;}
+  .qty-stepper button:disabled{opacity:.4;cursor:not-allowed;}
+  .qty-stepper span{min-width:18px;text-align:center;font-weight:700;}
+  .addon-price{flex-shrink:0;font-size:12.5px;font-weight:800;color:var(--navy);white-space:nowrap;text-align:right;}
+
+  .locked-note{background:#eff9ff;border:1px solid #bfe9f7;color:var(--navy);font-size:11.5px;font-weight:600;border-radius:8px;padding:8px 10px;margin-top:8px;}
+  .link-btn{color:var(--accent-dark);font-weight:700;font-size:12.5px;text-decoration:underline;background:none;padding:0;min-height:auto;}
+
+  .flight-fields{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-top:8px;}
+  @media (max-width:520px){ .flight-fields{grid-template-columns:1fr;} }
+  .flight-fields .field{display:flex;flex-direction:column;gap:4px;}
+  .flight-fields label{font-size:11px;font-weight:700;color:var(--slate-500);text-transform:uppercase;letter-spacing:.03em;}
+  .flight-fields input{border:1px solid var(--slate-200);border-radius:10px;padding:10px 11px;font-size:13.5px;font-family:inherit;min-height:44px;}
+
+  /* Columna resumen (sticky en desktop) */
+  .summary-col{position:relative;}
+  @media (min-width:981px){ .summary-col{position:sticky;top:92px;max-height:calc(100vh - 104px);overflow-y:auto;overscroll-behavior:contain;padding-right:2px;} }
+  .summary-panel{background:#fff;border:1px solid var(--slate-200);border-radius:16px;padding:20px;margin-bottom:16px;}
+  .summary-panel h2{font-size:15px;font-weight:800;margin-bottom:12px;}
+  .summary-row{display:flex;justify-content:space-between;gap:10px;font-size:13px;color:var(--slate-600);padding:4px 0;}
+  .summary-row.discount{color:var(--green);font-weight:700;}
+  .summary-row.total-row{font-size:17px;font-weight:800;color:var(--navy);border-top:1px solid var(--slate-200);margin-top:8px;padding-top:10px;}
+  .summary-row.total-row.small{font-size:14px;border-top:none;margin-top:0;padding-top:4px;}
+  .summary-legal{font-size:11px;color:var(--slate-400);margin-top:10px;line-height:1.5;}
+  .summary-updating{font-size:11.5px;color:var(--slate-400);font-style:italic;margin-top:6px;}
+  .guarantee-note{background:#fffbeb;border:1px solid #fde68a;border-radius:10px;padding:10px 12px;font-size:12px;color:#92400e;font-weight:600;margin-top:10px;}
+
+  .alt-panel{border:1px solid var(--slate-200);border-radius:14px;padding:14px;margin-bottom:12px;}
+  .alt-panel .alt-label{font-size:11.5px;font-weight:800;letter-spacing:.03em;text-transform:uppercase;color:var(--slate-500);display:block;margin-bottom:6px;}
+  .alt-panel .alt-row{display:flex;justify-content:space-between;font-size:12.5px;padding:2px 0;color:var(--slate-600);}
+  .alt-panel .alt-row.old{text-decoration:line-through;color:var(--slate-400);}
+  .alt-charge{font-size:20px;font-weight:800;color:var(--navy);margin:8px 0;}
+  .btn-pay{width:100%;background:var(--accent);color:var(--navy);font-weight:700;padding:12px;border-radius:10px;font-size:13.5px;text-align:center;min-height:44px;}
+  .btn-pay.btn-pay-special{background:linear-gradient(180deg,#e0b940,#a9821c);color:#fff;}
+  .btn-pay.btn-pay-deposit{background:#fff;border:1.5px solid var(--navy);color:var(--navy);}
+  .btn-pay.locked{opacity:.92;position:relative;}
+  .btn-pay.locked::after{content:'🔒';position:absolute;margin-left:8px;}
+  .lock-note{font-size:10.5px;color:#9a3412;text-align:center;margin-top:6px;line-height:1.4;font-weight:700;}
+  .btn-cta-main{width:100%;background:#25D366;color:#fff;font-weight:800;padding:14px;border-radius:12px;font-size:14px;text-align:center;margin-bottom:14px;min-height:48px;}
+  .btn-cta-main:hover{background:#1fb959;}
+  .wa-fb-btn{display:inline-block;background:#25D366;color:#fff;font-weight:800;font-size:13px;padding:9px 12px;border-radius:10px;margin:0 6px 6px 0;text-decoration:none;border:0;cursor:pointer;}
+  .wa-fb-btn.secondary{background:#fff;color:var(--navy);border:1px solid var(--slate-200);}
+  .locked-pay-row{display:grid;grid-template-columns:1fr 1fr;gap:8px;}
+  .locked-pay-row .btn-pay{font-size:12.5px;min-height:44px;margin:0;}
+  .summary-note{font-size:12.5px;color:var(--slate-500);margin:8px 0 0;}
+
+  .confirmed-banner{background:#f0fdf4;border:2px solid var(--green);border-radius:14px;padding:14px 16px;margin-bottom:14px;}
+  .confirmed-banner h2{font-size:14.5px;font-weight:800;color:#166534;margin-bottom:2px;}
+  .cc-error{color:#b91c1c;font-size:12.5px;font-weight:600;margin-top:8px;display:none;}
+
+  footer{background:var(--navy);color:#cbd5e1;padding-top:44px;padding-bottom:24px;margin-top:20px;}
+  .footer-inner{text-align:center;font-size:12px;color:#94a3b8;}
+  .footer-inner a{color:var(--accent);font-weight:600;}
+
+  .wa-float-wrap{position:fixed;right:20px;bottom:20px;z-index:60;display:flex;align-items:center;}
+  .wa-float{position:relative;background:radial-gradient(circle at 32% 28%, #4be08a 0%, #25D366 42%, #1fa855 100%);color:#fff;height:56px;width:56px;border-radius:50%;display:flex;align-items:center;justify-content:center;box-shadow:0 8px 22px rgba(0,0,0,.32), inset 0 -3px 5px rgba(0,0,0,.25), inset 0 2px 3px rgba(255,255,255,.5);border:2.5px solid rgba(255,255,255,.85);opacity:0;transform:translateY(16px) scale(.9);animation:waEnter .5s ease .3s forwards;}
+  .wa-float:focus-visible{outline:3px solid var(--navy-dark);outline-offset:3px;}
+  @keyframes waEnter{to{opacity:1;transform:translateY(0) scale(1);}}
+  @media (prefers-reduced-motion: reduce){ .wa-float{animation:none !important;opacity:1;transform:none;} }
+  @media (max-width:640px){ .wa-float-wrap{right:16px;bottom:16px;} .wa-float{height:52px;width:52px;} }
+
+  /* Modal: intento de pago sin confirmación */
+  .modal-overlay{position:fixed;inset:0;background:rgba(10,37,64,.6);z-index:100;display:flex;align-items:center;justify-content:center;padding:20px;}
+  .modal-overlay.hidden{display:none;}
+  .modal-box{background:#fff;border-radius:18px;padding:28px;max-width:420px;width:100%;max-height:88vh;overflow-y:auto;}
+  .modal-box h3{font-size:17px;font-weight:800;margin-bottom:16px;line-height:1.4;}
+  .modal-box .modal-actions{display:flex;flex-direction:column;gap:10px;margin-top:6px;}
+  .modal-box .modal-actions button{padding:13px;border-radius:10px;font-weight:700;font-size:14px;min-height:44px;}
+  .modal-cancel{background:var(--slate-100);color:var(--navy);}
+  .modal-confirm{background:#25D366;color:#fff;}
+  .modal-confirm:hover{background:#1fb959;}
+
+
+  /* Mejoras de conversión 2026-10 */
+  .summary-row .sr-sub{display:block;font-size:11.5px;color:var(--slate-400);font-weight:500;}
+  .summary-row > span:last-child{white-space:nowrap;}
+  .summary-row > span:first-child{min-width:0;}
+  .pay-split{border:1px solid var(--slate-200);border-radius:12px;padding:10px 12px;margin-top:12px;font-size:12.5px;color:var(--slate-600);}
+  .pay-split .ps-title{font-weight:800;color:var(--navy);font-size:12.5px;margin-bottom:6px;}
+  .pay-split .ps-row{display:flex;justify-content:space-between;gap:10px;padding:3px 0;}
+  .pay-split .ps-row strong{color:var(--navy);white-space:nowrap;}
+  .pay-split .ps-now{background:#f0fdf4;color:#166534;font-weight:700;border-radius:8px;padding:6px 8px;margin-bottom:6px;}
+  .pay-split .ps-opt{border-top:1px dashed var(--slate-200);margin-top:6px;padding-top:6px;}
+  .pay-split .ps-hint{font-size:11.5px;color:var(--slate-500);margin-top:2px;}
+  .promo-hint{background:#f0fdf4;border:1px solid #bbf7d0;color:#166534;border-radius:10px;padding:8px 10px;font-size:12px;font-weight:600;margin-top:8px;}
+  .promo-hint.muted-hint{background:var(--slate-50);border-color:var(--slate-200);color:var(--slate-600);font-weight:500;}
+  .next-steps p{margin:0;line-height:1.45;}
+  .next-steps .ns-title{margin-bottom:3px;}
+  .qs-links{font-size:12.5px;margin:6px 0 0 !important;}
+  .qs-links a,.qs-links .link-btn{color:#92400e;font-weight:700;text-decoration:underline;font-size:12.5px;}
+  .next-steps{background:#fff;border:1px solid var(--slate-200);border-radius:14px;padding:12px 14px;margin-bottom:12px;font-size:12.5px;color:var(--slate-600);}
+  .next-steps .ns-title{font-weight:800;color:var(--navy);font-size:13px;margin-bottom:6px;}
+  .next-steps ol{padding-left:18px;line-height:1.5;}
+  .next-steps li{margin-bottom:3px;}
+  .next-steps .ns-time{margin-top:6px;font-weight:600;color:var(--navy);}
+  .wa-fb-text{width:100%;margin-top:8px;border:1px solid var(--slate-200);border-radius:8px;padding:8px;font:12px/1.4 ui-monospace,Menlo,Consolas,monospace;color:var(--navy);background:#fff;resize:vertical;}
+  .locked-pay-row .btn-pay{opacity:.75;}
+  .lock-note{color:var(--slate-500);}
+  .modal-text{font-size:14px;color:var(--slate-600);margin:-6px 0 16px;line-height:1.5;}
+  .mobile-total-bar{display:none;}
+  @media (max-width:980px){
+    .mobile-total-bar:not([hidden]){display:flex;position:fixed;left:0;right:0;bottom:0;z-index:70;background:#fff;border-top:1px solid var(--slate-200);box-shadow:0 -6px 18px rgba(10,37,64,.12);padding:10px 16px calc(10px + env(safe-area-inset-bottom));gap:12px;align-items:center;justify-content:space-between;}
+    .mtb-text{display:flex;flex-direction:column;line-height:1.2;min-width:0;}
+    .mtb-text span{font-size:11px;font-weight:700;color:var(--slate-500);text-transform:uppercase;letter-spacing:.03em;}
+    .mtb-text strong{font-size:19px;font-weight:800;color:var(--navy);}
+    .mtb-text small{font-size:11.5px;color:var(--green);font-weight:700;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;}
+    .mtb-btn{background:#25D366;color:#fff;font-weight:800;font-size:14px;padding:12px 16px;border-radius:12px;min-height:48px;flex-shrink:0;}
+    body.has-mtb .wa-float-wrap{bottom:84px;}
+    body.has-mtb .page-main{padding-bottom:110px;}
+  }
+  /* Cotización por correo y estado de la cotización (2026-10-07) */
+  .cta-pair{display:flex;flex-direction:column;gap:8px;margin-bottom:14px;}
+  .cta-pair .btn-cta-main{margin-bottom:0;}
+  .btn-cta-email{width:100%;background:#fff;color:var(--navy);border:1.5px solid var(--navy);font-weight:800;padding:12px;border-radius:12px;font-size:14px;text-align:center;min-height:48px;}
+  .btn-cta-email:hover{background:var(--slate-50);}
+  .btn-cta-email.solid{background:var(--navy);color:#fff;}
+  .btn-cta-email:disabled,.btn-cta-main:disabled{opacity:.6;cursor:wait;}
+  .quote-status{border:2px solid #f59e0b;background:#fffbeb;border-radius:12px;padding:12px 14px;margin:0 0 12px;font-size:13px;color:#78350f;}
+  .quote-status .qs-title{font-weight:800;font-size:14.5px;margin-bottom:4px;}
+  .quote-status p{margin-bottom:6px;line-height:1.45;}
+  .quote-status .qs-state{font-weight:700;color:#166534;}
+  .quote-status .qs-state:empty{display:none;}
+  .qs-actions{display:flex;flex-wrap:wrap;gap:6px;margin:8px 0 4px;}
+  .qs-actions .wa-fb-btn{margin:0;min-height:40px;display:inline-flex;align-items:center;}
+  .quote-status .small{font-size:12px;}
+  .email-form{background:#fff;border:1px solid var(--slate-200);border-radius:14px;padding:14px;margin:0 0 12px;}
+  .email-form .ef-title{font-weight:800;font-size:14px;margin-bottom:8px;color:var(--navy);}
+  .email-form .ef-field{display:flex;flex-direction:column;gap:4px;margin-bottom:10px;font-size:12px;font-weight:700;color:var(--slate-600);}
+  .email-form input[type=text],.email-form input[type=email]{border:1px solid var(--slate-200);border-radius:10px;padding:10px 11px;font-size:16px;font-family:inherit;min-height:44px;color:var(--navy);}
+  .email-form input[aria-invalid=true]{border-color:#dc2626;}
+  .email-form .ef-check{display:flex;gap:9px;align-items:flex-start;font-size:12.5px;color:var(--slate-600);margin:2px 0 10px;cursor:pointer;}
+  .email-form .ef-check input{width:20px;height:20px;flex-shrink:0;margin-top:1px;}
+  .email-form .ef-error{color:#b91c1c;font-size:12.5px;font-weight:600;margin-bottom:8px;}
+  .email-form .ef-error:empty{display:none;}
+  .email-form .ef-note{font-size:12.5px;color:#92400e;font-weight:600;margin-bottom:8px;}
+  .email-form .ef-note:empty{display:none;}
+  .email-form .link-btn{display:block;margin:10px auto 0;}
+  .hp-field{position:absolute;left:-9999px;width:1px;height:1px;overflow:hidden;}
+  .email-result{border-radius:12px;padding:12px 14px;margin:0 0 12px;font-size:13px;line-height:1.45;}
+  .email-result.ok{background:#f0fdf4;border:2px solid var(--green);color:#166534;font-weight:700;}
+  .email-result.fail{background:#fef2f2;border:2px solid #fecaca;color:#7f1d1d;}
+  .email-result.fail .qs-actions .wa-fb-btn{min-height:40px;}
+  @media (prefers-reduced-motion: reduce){ *{animation-duration:.001ms !important;animation-iteration-count:1 !important;transition-duration:.001ms !important;} }
+</style>
+</head>
+<body>
+
+<a href="#adicionales-main" class="sr-only">Saltar al contenido</a>
+
+<header>
+  <div class="header-inner">
+    <a href="index.html" class="brand">
+      <img src="https://glaciaresrentacar.cl/img/logo-glaciares.webp" alt="Logo Glaciares Rent a Car" width="44" height="44">
+      <span class="brand-text">GLACIARES<small>RENT A CAR</small></span>
+    </a>
+    <nav class="main-nav" aria-label="Navegación principal">
+      <a href="index.html#inicio">Inicio</a>
+      <a href="index.html#buscador">Cotizar</a>
+      <a href="index.html#flota">Flota</a>
+      <a href="index.html#servicios">Servicios</a>
+      <a href="index.html#preguntas">Preguntas frecuentes</a>
+      <a href="index.html#contacto">Contacto</a>
+      <a href="condiciones.html">Condiciones</a>
+    </nav>
+    <a href="index.html#buscador" class="header-cta">Nueva búsqueda</a>
+    <button id="menuBtn" class="menu-btn" aria-label="Abrir menú" aria-expanded="false" aria-controls="mobileMenu">☰</button>
+  </div>
+  <div id="mobileMenu">
+    <a href="index.html#inicio">Inicio</a><a href="index.html#buscador">Cotizar</a><a href="index.html#flota">Flota</a>
+    <a href="index.html#servicios">Servicios</a><a href="index.html#preguntas">Preguntas frecuentes</a>
+    <a href="index.html#contacto">Contacto</a><a href="condiciones.html">Condiciones de arriendo</a>
+  </div>
+</header>
+
+<main class="page-main">
+  <div class="container" id="adicionales-main">
+    <nav class="steps-bar" aria-label="Progreso de la reserva" id="stepsBar">
+      <div class="step done"><span class="step-num">✓</span><span class="step-label">Búsqueda</span></div>
+      <div class="step-sep done"></div>
+      <div class="step done"><span class="step-num">✓</span><span class="step-label">Vehículo</span></div>
+      <div class="step-sep" id="sep23"></div>
+      <div class="step active" id="step3"><span class="step-num">3</span><span class="step-label">Adicionales</span></div>
+      <div class="step-sep" id="sep34"></div>
+      <div class="step" id="step4"><span class="step-num">4</span><span class="step-label">Confirmación y pago</span></div>
+    </nav>
+
+    <p class="error-banner" id="linkErrorBanner" role="alert"></p>
+
+    <div id="pageErrorBox" style="display:none;">
+      <div class="page-error">
+        <h2>No encontramos el vehículo de tu búsqueda.</h2>
+        <p>Vuelve a los resultados para elegir un vehículo disponible.</p>
+        <a href="/buscar" class="btn-outline">VOLVER A BUSCAR</a>
+      </div>
+    </div>
+
+    <div class="adicionales-grid" id="adicionalesGrid" style="display:none;">
+      <!-- Columna izquierda -->
+      <div id="leftCol">
+        <div class="card vehicle-card">
+          <img id="vImg" src="" alt="">
+          <div>
+            <span class="rcard-cat muted" id="vCat" style="text-transform:uppercase;font-size:11px;font-weight:800;color:var(--accent-dark);"></span>
+            <h2 id="vName"></h2>
+            <dl class="vehicle-meta" id="vMeta"></dl>
+            <p class="avail-note"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M20 6 9 17l-5-5"/></svg>Disponibilidad sujeta a confirmación.</p>
+            <div class="vehicle-actions"><button type="button" class="btn-outline" id="btnChangeVehicle">CAMBIAR VEHÍCULO</button></div>
+          </div>
+        </div>
+
+        <div class="card" id="protectionsCard" style="display:none;">
+          <h2>Protecciones</h2>
+          <p class="muted">Se cobran por día, sin descuento por reserva anticipada.</p>
+          <div id="protectionsList"></div>
+        </div>
+
+        <div class="card" id="equipmentCard" style="display:none;">
+          <h2>Equipamiento</h2>
+          <div id="equipmentList"></div>
+        </div>
+
+        <div class="card" id="otherServicesCard" style="display:none;">
+          <h2>Servicios adicionales</h2>
+          <div id="otherServicesList"></div>
+        </div>
+
+        <div class="card" id="flightDataCard" style="display:none;">
+          <h2>Datos de tu vuelo (opcional)</h2>
+          <p class="muted">Nos ayuda a coordinar mejor el retiro o la devolución en el aeropuerto.</p>
+          <div class="flight-fields">
+            <div class="field"><label for="fAirline">Aerolínea</label><input type="text" id="fAirline" autocomplete="off"></div>
+            <div class="field"><label for="fFlightNumber">Número de vuelo</label><input type="text" id="fFlightNumber" autocomplete="off"></div>
+            <div class="field"><label for="fFlightEta">Hora estimada de llegada</label><input type="time" id="fFlightEta"></div>
+          </div>
+        </div>
+
+        <div class="card" id="argentinaCard" style="display:none;">
+          <h2>Permiso para viaje a Argentina</h2>
+          <p id="argentinaText" class="muted"></p>
+          <button type="button" class="link-btn" id="btnNoArgentina" style="display:none;">No viajaré a Argentina</button>
+        </div>
+      </div>
+
+      <!-- Columna derecha: resumen y pago -->
+      <div class="summary-col" id="summaryCol">
+        <div class="summary-panel" id="summaryPanel" aria-live="polite">
+          <h2>Total de tu arriendo</h2>
+          <div id="summaryBody"><p class="summary-note">Calculando total…</p></div>
+          <p class="summary-updating" id="summaryUpdating" style="display:none;">Actualizando total…</p>
+          <div class="pay-split" id="paySplit"></div>
+          <div class="guarantee-note" id="guaranteeNote"></div>
+          <p class="summary-legal">Total estimado con impuestos incluidos. El monto final te lo confirmamos antes de cualquier pago.</p>
+        </div>
+
+        <div id="preConfirmActions">
+          <div class="next-steps" id="nextSteps">
+            <p class="ns-title">Esto es una solicitud, no una reserva</p>
+            <p>Te confirmamos disponibilidad y precio final por WhatsApp<span id="responseTimeText"></span>. La reserva queda lista al pagar el abono.</p>
+          </div>
+          <div class="cta-pair">
+            <button type="button" class="btn-cta-main" id="btnRequestConfirmation">SOLICITAR DISPONIBILIDAD POR WHATSAPP</button>
+            <button type="button" class="btn-cta-email" id="btnEmailQuote">Recibir cotización por correo</button>
+          </div>
+
+          <!-- Estado de la cotización: nunca afirma que la solicitud llegó, porque el sitio
+               no puede saber si el cliente presionó "Enviar" dentro de WhatsApp. -->
+          <div class="quote-status" id="quoteStatus" hidden role="status" aria-live="polite">
+            <p class="qs-title" id="qsTitle">Cotización creada — falta enviarla por WhatsApp</p>
+            <p>Código <strong id="qsCode"></strong> · guardada en este dispositivo. Aún no es una reserva.</p>
+            <p class="qs-state" id="qsState"></p>
+            <p class="qs-links"><a id="qsWaWeb" href="#" target="_blank" rel="noopener">Abrir WhatsApp Web</a><span aria-hidden="true"> · </span><button type="button" class="link-btn" id="qsCopy">Copiar cotización</button></p>
+            <textarea id="qsText" class="wa-fb-text" readonly rows="8" hidden aria-label="Texto de la cotización para copiar"></textarea>
+          </div>
+
+          <form class="email-form" id="emailForm" hidden novalidate aria-labelledby="efTitle">
+            <p class="ef-title" id="efTitle">Recibir cotización por correo</p>
+            <label class="ef-field" for="efName">Nombre
+              <input type="text" id="efName" name="name" autocomplete="name" maxlength="60" required>
+            </label>
+            <label class="ef-field" for="efEmail">Correo electrónico
+              <input type="email" id="efEmail" name="email" autocomplete="email" inputmode="email" maxlength="120" required>
+            </label>
+            <label class="ef-field" for="efEmail2">Confirma tu correo
+              <input type="email" id="efEmail2" name="email2" autocomplete="off" inputmode="email" maxlength="120" required>
+            </label>
+            <label class="ef-check" for="efConsent">
+              <input type="checkbox" id="efConsent" name="consent">
+              <span>Acepto recibir esta cotización en mi correo. No es una suscripción: no te enviaremos publicidad.</span>
+            </label>
+            <div class="hp-field" aria-hidden="true"><label for="efWebsite">No completar</label><input type="text" id="efWebsite" name="website" tabindex="-1" autocomplete="off"></div>
+            <p class="ef-note" id="efNote"></p>
+            <p class="ef-error" id="efError" role="alert"></p>
+            <button type="submit" class="btn-cta-email solid" id="efSubmit">Enviar cotización a mi correo</button>
+            <button type="button" class="link-btn" id="efCancel">Cancelar</button>
+          </form>
+
+          <div class="email-result ok" id="emailOk" hidden role="status"></div>
+          <div class="email-result fail" id="emailFail" hidden role="alert">
+            <p><strong>No pudimos enviar el correo.</strong> <span id="emailFailMsg"></span> Tu cotización sigue guardada en este dispositivo<span id="emailFailCode"></span>.</p>
+            <div class="qs-actions">
+              <button type="button" class="wa-fb-btn secondary" id="efRetry">Reintentar el correo</button>
+              <button type="button" class="wa-fb-btn" id="efFailWa">Enviar por WhatsApp</button>
+              <button type="button" class="wa-fb-btn secondary" id="efFailCopy">Copiar el texto</button>
+            </div>
+          </div>
+          <p class="lock-note">Pago en línea: se habilita cuando confirmemos la disponibilidad.</p>
+          <div class="locked-pay-row">
+            <button type="button" class="btn-pay btn-pay-special locked" id="btnPayFullLocked">PAGO TOTAL</button>
+            <button type="button" class="btn-pay btn-pay-deposit locked" id="btnPayDepositLocked">ABONO</button>
+          </div>
+          <div id="altFullBody" hidden></div><div id="altDepositBody" hidden></div>
+        </div>
+
+        <div id="confirmedActions" style="display:none;">
+          <div class="confirmed-banner">
+            <h2>Disponibilidad confirmada para tu solicitud.</h2>
+            <p class="muted" id="confirmedSub"></p>
+          </div>
+          <div class="alt-panel">
+            <span class="alt-label">Precio especial — pago total anticipado</span>
+            <div id="confirmedFullBody"></div>
+            <button type="button" class="btn-pay btn-pay-special" id="btnPayFullReal">PAGAR TOTAL</button>
+          </div>
+          <div class="alt-panel">
+            <span class="alt-label">Precio normal — abono mínimo</span>
+            <div id="confirmedDepositBody"></div>
+            <button type="button" class="btn-pay btn-pay-deposit" id="btnPayDepositReal">PAGAR ABONO</button>
+          </div>
+          <p class="cc-error" id="ccPayError"></p>
+        </div>
+      </div>
+    </div>
+  </div>
+</main>
+
+<footer>
+  <div class="container footer-inner">
+    <p>© <span id="year"></span> Glaciares Rent a Car — <a href="index.html">Volver al inicio</a> · <a href="condiciones.html">Condiciones de arriendo</a></p>
+  </div>
+</footer>
+
+<div class="wa-float-wrap">
+  <a href="https://wa.me/56983335924?text=Hola%2C%20necesito%20ayuda%20para%20cotizar%20un%20veh%C3%ADculo%20en%20Glaciares%20Rent%20a%20Car." target="_blank" rel="noopener" class="wa-float" id="waFloat" aria-label="Consultar por WhatsApp" data-track="whatsapp-float">
+    <svg xmlns="http://www.w3.org/2000/svg" width="26" height="26" viewBox="0 0 24 24" fill="currentColor"><path d="M12.04 2c-5.5 0-9.96 4.46-9.96 9.96 0 1.76.46 3.48 1.34 5L2 22l5.2-1.36a9.94 9.94 0 004.84 1.23h.01c5.5 0 9.96-4.46 9.96-9.96S17.54 2 12.04 2z"/></svg>
+  </a>
+</div>
+
+<!-- Barra fija en celular: total siempre visible mientras se eligen adicionales -->
+<div class="mobile-total-bar" id="mobileTotalBar" hidden>
+  <div class="mtb-text"><span>Total estimado</span><strong id="mtbTotal">—</strong><small id="mtbSub"></small></div>
+  <button type="button" class="mtb-btn" id="mtbBtn">Revisar y solicitar</button>
+</div>
+
+<!-- Modal: intento de pago sin confirmación (sección 19) -->
+<div id="payBlockedModal" class="modal-overlay hidden" role="dialog" aria-modal="true" aria-labelledby="payBlockedTitle">
+  <div class="modal-box">
+    <h3 id="payBlockedTitle">El pago en línea se habilita después de confirmar la disponibilidad</h3>
+    <p class="modal-text">Primero envíanos tu solicitud por WhatsApp. Si ya te confirmamos, usa el enlace de pago que te enviamos por WhatsApp.</p>
+    <div class="modal-actions">
+      <button type="button" class="modal-confirm" id="payBlockedWhatsapp">SOLICITAR DISPONIBILIDAD POR WHATSAPP</button>
+      <button type="button" class="modal-cancel" id="payBlockedClose">CERRAR</button>
+    </div>
+  </div>
+</div>
+
+<script src="/config.js"></script>
+<script src="/cotizacion.js"></script>
+<script src="/analytics-config.js"></script>
+<script>
+document.getElementById('year').textContent = new Date().getFullYear();
+const menuBtn = document.getElementById('menuBtn');
+const mobileMenu = document.getElementById('mobileMenu');
+menuBtn.addEventListener('click', () => {
+  const open = mobileMenu.classList.toggle('open');
+  menuBtn.setAttribute('aria-expanded', open ? 'true' : 'false');
+});
+mobileMenu.querySelectorAll('a').forEach(a => a.addEventListener('click', () => mobileMenu.classList.remove('open')));
+
+const cfg = window.GLACIARES_CONFIG || { WHATSAPP_NUMBER: '56983335924', MIN_DEPOSIT: 500000 };
+const WA_NUMBER = cfg.WHATSAPP_NUMBER || '56983335924';
+const API_BASE = 'https://glaciares-reservas-backend.onrender.com';
+
+function esc(s) {
+  return String(s ?? '').replace(/[&<>"']/g, c => ({ '&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;' }[c]));
+}
+function money(n) { return `$${Math.round(n || 0).toLocaleString('es-CL')}`; }
+
+/* Identificadores internos estables de lugar — igual que en /buscar. El
+   nombre visible nunca se usa para calcular cargos. */
+const LEGACY_PLACE_ID_MAP = { agencia: 'agency_punta_arenas', aeropuerto: 'punta_arenas_airport', hotel: 'hotel_punta_arenas', otro: 'custom_location' };
+function normalizePlaceId(raw) { return LEGACY_PLACE_ID_MAP[raw] || raw; }
+const PLACE_LABELS = {
+  agency_punta_arenas: 'Agencia en Punta Arenas (ciudad)',
+  punta_arenas_airport: 'Aeropuerto Presidente Carlos Ibáñez del Campo',
+  hotel_punta_arenas: 'Hotel o alojamiento en Punta Arenas (sujeto a confirmación)',
+  custom_location: 'Otro lugar (sujeto a evaluación)',
+};
+const DESTINATION_LABELS = {};
+(cfg.DESTINATIONS || []).forEach(d => { DESTINATION_LABELS[d.id] = d.label; });
+if (!Object.keys(DESTINATION_LABELS).length) {
+  Object.assign(DESTINATION_LABELS, {
+    'punta-arenas': 'Punta Arenas', 'puerto-natales': 'Puerto Natales', 'torres-del-paine': 'Torres del Paine',
+    porvenir: 'Porvenir', 'tierra-del-fuego': 'Tierra del Fuego', 'el-calafate': 'El Calafate',
+    ushuaia: 'Ushuaia', otro: 'Otro destino',
+  });
+}
+const MESES_ES = ['enero','febrero','marzo','abril','mayo','junio','julio','agosto','septiembre','octubre','noviembre','diciembre'];
+function fechaHoraLarga(dateStr, timeStr) {
+  if (!dateStr) return '—';
+  const [y, m, d] = dateStr.split('-').map(Number);
+  if (!y || !m || !d) return dateStr;
+  return `${d} de ${MESES_ES[m - 1]} de ${y}${timeStr ? ' a las ' + timeStr : ''}`;
+}
+function destinationLabel(st) {
+  if (!st.destination) return '—';
+  if (st.destination === 'otro') return st.destinationOther || 'Otro destino (sin especificar)';
+  return DESTINATION_LABELS[st.destination] || st.destination;
+}
+function placeLabel(id, other) {
+  const norm = normalizePlaceId(id);
+  return norm === 'custom_location' ? (other || 'Otro lugar (sin especificar)') : (PLACE_LABELS[norm] || id);
+}
+function daysBetween(dateFrom, timeFrom, dateTo, timeTo) {
+  const start = new Date(`${dateFrom}T${timeFrom || '00:00'}:00`);
+  const end = new Date(`${dateTo}T${timeTo || '00:00'}:00`);
+  if (isNaN(start) || isNaN(end)) return 0;
+  const diffMs = end - start;
+  if (diffMs <= 0) return 0;
+  return Math.ceil(diffMs / 86400000);
+}
+
+/* =====================================================================
+   LEER EL ESTADO: siempre desde la URL (esta página se llega por enlace
+   desde /buscar o desde el enlace seguro de WhatsApp), con sessionStorage
+   como respaldo si algún parámetro faltara.
+   ===================================================================== */
+const SEARCH_STORAGE_KEY = 'glaciares_last_search';
+const qp = new URLSearchParams(window.location.search);
+let saved = {};
+try { saved = JSON.parse(sessionStorage.getItem(SEARCH_STORAGE_KEY) || '{}'); } catch (e) { saved = {}; }
+function pick(key, fallback) {
+  const v = qp.get(key);
+  if (v !== null && v !== '') return v;
+  if (saved[key] !== undefined && saved[key] !== null && saved[key] !== '') return saved[key];
+  return fallback;
+}
+const state = {
+  pickUpDate: pick('pickUpDate', ''), pickUpTime: pick('pickUpTime', '09:00'),
+  dropOffDate: pick('dropOffDate', ''), dropOffTime: pick('dropOffTime', '09:00'),
+  pickUpPlace: normalizePlaceId(pick('pickUpPlace', 'agency_punta_arenas')),
+  dropOffPlace: normalizePlaceId(pick('dropOffPlace', 'agency_punta_arenas')),
+  dropOffOther: pick('dropOffOther', ''),
+  passengers: pick('passengers', '1'),
+  destination: pick('destination', ''),
+  destinationOther: pick('destinationOther', ''),
+  argentina: pick('argentina', 'no'),
+  promoCode: pick('promoCode', ''),
+};
+const vehicleId = Number(qp.get('vehicleId'));
+const confirmCode = qp.get('confirmCode');
+const linkToken = qp.get('token');
+// Días con la misma regla en todo el sitio (24 h + 1 h de tolerancia, ver cotizacion.js).
+const days = window.GlaciaresCotizacion
+  ? GlaciaresCotizacion.rentalDays(state.pickUpDate, state.pickUpTime, state.dropOffDate, state.dropOffTime)
+  : daysBetween(state.pickUpDate, state.pickUpTime, state.dropOffDate, state.dropOffTime);
+
+const IMG_BASE = 'https://glaciaresrentacar.cl/flota/';
+// Flota y tarifas desde config.js (misma fuente que usa el servidor del correo).
+const FLEET = (cfg.FLEET || []).map(v => ({ ...v, img: IMG_BASE + v.img }));
+const vehicle = FLEET.find(v => v.id === vehicleId);
+
+/* El arranque se ejecuta al final del script (boot), cuando todas las
+   variables ya están declaradas. */
+function boot() {
+if (confirmCode && linkToken) {
+  // Enlace seguro (viene del panel de administración o de un "Generar enlace
+  // de pago"): la disponibilidad, el vehículo y los precios ya quedaron
+  // fijados al confirmar y se validan siempre contra el backend — la página
+  // NUNCA debe depender de que la URL traiga vehicleId/fechas para funcionar,
+  // porque el enlace que arma el panel (reservas/routes/admin.js) solo incluye
+  // confirmCode y token.
+  document.getElementById('adicionalesGrid').style.display = 'grid';
+  if (vehicle && days > 0) {
+    // Si además la URL trae los datos de búsqueda (por ejemplo, un enlace
+    // armado desde esta misma página), se muestra también la columna de
+    // adicionales editable antes de validar.
+    initPage();
+  } else {
+    document.getElementById('leftCol').style.display = 'none';
+    document.getElementById('summaryPanel').style.display = 'none';
+    // Sin datos de vehículo/fechas en la URL no hay nada útil que ofrecer
+    // todavía en el bloque "antes de confirmar" (no hay cotización que
+    // mostrar); si el enlace resulta inválido, el aviso de error de abajo
+    // queda como el único contenido, en vez de dejar paneles de pago vacíos.
+    document.getElementById('preConfirmActions').style.display = 'none';
+    validateSecureLink();
+  }
+} else if (!vehicle || days <= 0) {
+  document.getElementById('pageErrorBox').style.display = 'block';
+} else {
+  document.getElementById('adicionalesGrid').style.display = 'grid';
+  initPage();
+}
+}
+
+function buildBackToBuscarUrl() {
+  const params = new URLSearchParams();
+  Object.entries(state).forEach(([k, v]) => { if (v) params.set(k, v); });
+  return '/buscar?' + params.toString();
+}
+
+/* =====================================================================
+   ESTADO DE ADICIONALES (persistido por vehículo en sessionStorage para
+   que "CAMBIAR VEHÍCULO" y volver no pierda lo ya elegido).
+   ===================================================================== */
+const EXTRAS_STORAGE_KEY = 'glaciares_extras_selection';
+let extrasStore = {};
+try { extrasStore = JSON.parse(sessionStorage.getItem(EXTRAS_STORAGE_KEY) || '{}'); } catch (e) { extrasStore = {}; }
+let selectedExtras = extrasStore[vehicleId] || [];
+/* Retomar cotización guardada (volver desde WhatsApp en otra pestaña o días
+   después): si el vehículo y las fechas coinciden, se recuperan adicionales y vuelo. */
+const GQ = window.GlaciaresCotizacion || null;
+const savedDraft = GQ ? GQ.loadDraft() : null;
+const draftMatches = !!(savedDraft && savedDraft.vehicleId === vehicleId && savedDraft.state &&
+  savedDraft.state.pickUpDate === state.pickUpDate && savedDraft.state.dropOffDate === state.dropOffDate &&
+  savedDraft.state.pickUpTime === state.pickUpTime && savedDraft.state.dropOffTime === state.dropOffTime);
+if (!extrasStore[vehicleId] && draftMatches && Array.isArray(savedDraft.extras)) selectedExtras = savedDraft.extras.slice();
+function saveSelection() {
+  extrasStore[vehicleId] = selectedExtras;
+  try { sessionStorage.setItem(EXTRAS_STORAGE_KEY, JSON.stringify(extrasStore)); } catch (e) { /* sin almacenamiento disponible */ }
+}
+function getExtraSel(id) { return selectedExtras.find(s => s.id === id); }
+function setExtraQty(id, qty) {
+  selectedExtras = selectedExtras.filter(s => s.id !== id);
+  if (qty > 0) selectedExtras.push({ id, qty });
+  saveSelection();
+}
+
+let extrasCatalog = [];
+let argentinaExtra = null;
+let currentQuote = null;
+let quoteTimer = null;
+
+function initPage() {
+  renderVehicleCard();
+  wireArgentinaToggle();
+  loadExtrasAndQuote();
+  wirePayBlockedModal();
+  wireMainCta();
+  if (confirmCode && linkToken) validateSecureLink();
+}
+
+function renderVehicleCard() {
+  document.getElementById('vImg').src = vehicle.img;
+  document.getElementById('vImg').alt = vehicle.name;
+  document.getElementById('vCat').textContent = vehicle.catLabel;
+  document.getElementById('vName').textContent = vehicle.name;
+  document.getElementById('vMeta').innerHTML = [
+    ['Precio por día', money(vehicle.price)],
+    ['Duración', `${days} día${days > 1 ? 's' : ''}`],
+    ['Retiro', `${placeLabel(state.pickUpPlace)} · ${fechaHoraLarga(state.pickUpDate, state.pickUpTime)}`],
+    ['Devolución', `${placeLabel(state.dropOffPlace, state.dropOffOther)} · ${fechaHoraLarga(state.dropOffDate, state.dropOffTime)}`],
+    ['Pasajeros', state.passengers || '1'],
+    ['Destino', destinationLabel(state)],
+    ['Argentina', state.argentina === 'si' ? 'Sí' : 'No'],
+  ].map(([k, v]) => `<div><dt>${esc(k)}</dt><dd>${esc(v)}</dd></div>`).join('');
+  document.getElementById('btnChangeVehicle').addEventListener('click', () => {
+    window.location.href = buildBackToBuscarUrl();
+  });
+}
+
+function airportServiceType() {
+  const p = normalizePlaceId(state.pickUpPlace) === 'punta_arenas_airport';
+  const d = normalizePlaceId(state.dropOffPlace) === 'punta_arenas_airport';
+  if (p && d) return 'airport_roundtrip';
+  if (p) return 'airport_pickup_only';
+  if (d) return 'airport_dropoff_only';
+  return 'no_airport_service';
+}
+
+function wireArgentinaToggle() {
+  const card = document.getElementById('argentinaCard');
+  const text = document.getElementById('argentinaText');
+  const btn = document.getElementById('btnNoArgentina');
+  card.style.display = 'block';
+  function render() {
+    if (state.argentina === 'si') {
+      text.textContent = 'Indicaste que viajarás a Argentina: el permiso ($120.000, cargo único por reserva) queda incluido automáticamente y no se puede quitar mientras esta opción esté seleccionada.';
+      btn.style.display = 'inline-flex';
+    } else {
+      text.textContent = 'No indicaste viaje a Argentina, así que no se incluye el permiso.';
+      btn.style.display = 'none';
+    }
+  }
+  btn.addEventListener('click', () => {
+    state.argentina = 'no';
+    if (argentinaExtra) setExtraQty(argentinaExtra.id, 0);
+    render();
+    renderAddonLists();
+    scheduleQuote();
+  });
+  render();
+}
+
+async function loadExtrasAndQuote() {
+  // Total inmediato con el catálogo de respaldo, sin esperar al servidor
+  // (que puede tardar varios segundos si estaba "dormido").
+  extrasCatalog = (cfg.EXTRAS_FALLBACK || []).slice();
+  catalogSource = 'fallback';
+  afterCatalogLoaded();
+  try {
+    const ctrl = (typeof AbortController === 'function') ? new AbortController() : null;
+    const timer = ctrl ? setTimeout(() => ctrl.abort(), 8000) : null;
+    const r = await fetch(`${API_BASE}/api/extras?vehicleId=${vehicleId}`, { signal: ctrl ? ctrl.signal : undefined });
+    if (timer) clearTimeout(timer);
+    const data = r.ok ? await r.json() : null;
+    if (Array.isArray(data) && data.length) { extrasCatalog = data; catalogSource = 'backend'; afterCatalogLoaded(); }
+  } catch (e) { /* se mantiene el catálogo de respaldo */ }
+  refreshQuote();
+}
+let catalogSource = 'fallback';
+function afterCatalogLoaded() {
+  argentinaExtra = extrasCatalog.find(e => e.isArgentinaPermit) || null;
+  if (argentinaExtra && state.argentina === 'si' && !getExtraSel(argentinaExtra.id)) {
+    setExtraQty(argentinaExtra.id, 1);
+  }
+  renderAddonLists();
+  restoreFlightFields();
+  renderSummary();
+}
+function restoreFlightFields() {
+  if (!draftMatches || !savedDraft.flight || restoreFlightFields.done) return;
+  restoreFlightFields.done = true;
+  const f = savedDraft.flight;
+  if (f.airline) document.getElementById('fAirline').value = f.airline;
+  if (f.number) document.getElementById('fFlightNumber').value = f.number;
+  if (f.eta) document.getElementById('fFlightEta').value = f.eta;
+}
+
+function extraByNameIncludes(text) {
+  return extrasCatalog.find(e => e.name.toLowerCase().includes(text));
+}
+
+function priceText(def) {
+  const chargeType = def.chargeType || def.unit;
+  const vatSuffix = def.vatIncluded === false ? ' + IVA' : '';
+  if (chargeType === 'day') return `${money(def.price)}${vatSuffix} por día${def.cap ? `, máximo ${money(def.cap)} por unidad` : ''}`;
+  return `${money(def.price)}${vatSuffix} único`;
+}
+
+function renderAddonLists() {
+  const silla = extraByNameIncludes('silla');
+  const cristales = extraByNameIncludes('cristales');
+  const neumaticos = extraByNameIncludes('neumátic') || extraByNameIncludes('neumatic');
+  const conductor = extraByNameIncludes('conductor adicional');
+  const horario = extraByNameIncludes('fuera de horario');
+
+  // --- Protecciones (cristales, neumáticos): checkbox + "Ver condiciones" ---
+  const protections = [cristales, neumaticos].filter(Boolean);
+  document.getElementById('protectionsCard').style.display = protections.length ? 'block' : 'none';
+  document.getElementById('protectionsList').innerHTML = protections.map(def => {
+    const checked = !!getExtraSel(def.id);
+    return `
+    <div class="addon-item">
+      <div class="addon-info">
+        <label>
+          <input type="checkbox" data-extra-id="${def.id}" data-kind="checkbox" ${checked ? 'checked' : ''} ${def.active === false ? 'disabled' : ''}>
+          <span>${esc(def.name)}<span class="addon-desc">${esc(def.description || '')}</span></span>
+        </label>
+        <details><summary></summary><p class="addon-conditions">${esc(def.conditions || '')}</p></details>
+      </div>
+      <span class="addon-price">${priceText(def)}</span>
+    </div>`;
+  }).join('') || '<p class="muted">Sin protecciones disponibles por ahora.</p>';
+
+  // --- Equipamiento (silla infantil): stepper con tope de stock/maxQty ---
+  document.getElementById('equipmentCard').style.display = silla ? 'block' : 'none';
+  if (silla) {
+    const entry = getExtraSel(silla.id);
+    const qty = entry ? entry.qty : 0;
+    const max = Math.min(silla.maxQty || 9, typeof silla.stock === 'number' ? silla.stock : 99);
+    document.getElementById('equipmentList').innerHTML = `
+      <div class="addon-item">
+        <div class="addon-info">
+          <label style="cursor:default;">
+            <span style="width:0;"></span>
+            <span>${esc(silla.name)}<span class="addon-desc">${esc(silla.description || '')}</span></span>
+          </label>
+        </div>
+        <div class="qty-stepper">
+          <button type="button" id="sillaMinus" ${qty <= 0 ? 'disabled' : ''} aria-label="Quitar una silla">−</button>
+          <span id="sillaQty">${qty}</span>
+          <button type="button" id="sillaPlus" ${qty >= max ? 'disabled' : ''} aria-label="Agregar una silla">+</button>
+        </div>
+      </div>`;
+    document.getElementById('sillaMinus').addEventListener('click', () => { setExtraQty(silla.id, Math.max(0, qty - 1)); renderAddonLists(); scheduleQuote(); });
+    document.getElementById('sillaPlus').addEventListener('click', () => { setExtraQty(silla.id, Math.min(max, qty + 1)); renderAddonLists(); scheduleQuote(); });
+  }
+
+  // --- Otros servicios (conductor adicional con IVA, entrega fuera de horario) ---
+  const others = [conductor, horario].filter(Boolean);
+  document.getElementById('otherServicesCard').style.display = others.length ? 'block' : 'none';
+  document.getElementById('otherServicesList').innerHTML = others.map(def => {
+    const checked = !!getExtraSel(def.id);
+    const isConductor = def === conductor;
+    return `
+    <div class="addon-item">
+      <div class="addon-info">
+        <label>
+          <input type="checkbox" data-extra-id="${def.id}" data-kind="checkbox" ${checked ? 'checked' : ''} ${def.active === false ? 'disabled' : ''}>
+          <span>${esc(def.name)}<span class="addon-desc">${esc(def.description || '')}</span></span>
+        </label>
+        ${isConductor ? `<p class="addon-vat-note">El segundo conductor debe cumplir los mismos requisitos que el conductor titular (edad mínima y licencia vigente).</p>` : ''}
+        ${isConductor && checked ? `<p class="addon-vat-note" id="conductorVatBreakdown">Calculando neto, IVA y total…</p>` : ''}
+      </div>
+      <span class="addon-price">${priceText(def)}</span>
+    </div>`;
+  }).join('') || '<p class="muted">Sin servicios adicionales disponibles por ahora.</p>';
+
+  // Campos de vuelo: solo si aplica servicio de aeropuerto.
+  document.getElementById('flightDataCard').style.display = airportServiceType() !== 'no_airport_service' ? 'block' : 'none';
+
+  document.querySelectorAll('input[data-kind="checkbox"]').forEach(cb => {
+    cb.addEventListener('change', () => {
+      setExtraQty(Number(cb.dataset.extraId), cb.checked ? 1 : 0);
+      renderAddonLists();
+      scheduleQuote();
+    });
+  });
+}
+
+function scheduleQuote() {
+  renderSummary(); // el total cambia al instante con el cálculo local
+  hideQuoteStatusIfStale();
+  clearTimeout(quoteTimer);
+  quoteTimer = setTimeout(refreshQuote, 300);
+}
+
+async function refreshQuote() {
+  try {
+    const r = await fetch(`${API_BASE}/api/quote`, {
+      method: 'POST', headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({
+        vehicleId, from: state.pickUpDate, to: state.dropOffDate,
+        pickupPlace: state.pickUpPlace, dropoffPlace: state.dropOffPlace,
+        extras: selectedExtras, argentina: state.argentina,
+      }),
+    });
+    if (r.ok) {
+      currentQuote = await r.json();
+      renderSummary();
+    }
+  } catch (e) { /* si falla, se mantiene el cálculo local */ }
+  document.getElementById('summaryUpdating').style.display = 'none';
+}
+
+let lastCalc = null;
+function calcNow() {
+  if (!GQ || !vehicle) return null;
+  const backendPct = currentQuote && currentQuote.rental && typeof currentQuote.rental.discountPct === 'number'
+    ? currentQuote.rental.discountPct : undefined;
+  return GQ.compute({
+    vehicle, pickUpDate: state.pickUpDate, pickUpTime: state.pickUpTime,
+    dropOffDate: state.dropOffDate, dropOffTime: state.dropOffTime,
+    pickUpPlace: state.pickUpPlace, dropOffPlace: state.dropOffPlace,
+    argentina: state.argentina, extras: selectedExtras, catalog: extrasCatalog,
+    backendDiscountPct: backendPct,
+    // Si esta cotización ya se envió, cuenta la fecha de la solicitud: la promo
+    // 4×3 se respeta aunque el abono se pague después del plazo.
+    today: requestDateISO(),
+  });
+}
+function requestDateISO() {
+  // Si esta combinación ya tiene código, cuenta la fecha en que se creó la
+  // cotización: la promo 4×3 se respeta aunque el abono se pague después.
+  if (!GQ) return undefined;
+  const d = GQ.loadDraft();
+  const sig = GQ.signature({ vehicleId, state, extras: selectedExtras });
+  const q = d && d.quotes ? d.quotes[sig] : null;
+  return q && q.createdAt ? GQ.localISO(new Date(q.createdAt)) : undefined;
+}
+
+function renderSummary() {
+  const c = calcNow();
+  if (!c) return;
+  lastCalc = c;
+  const rows = [];
+  rows.push(`<div class="summary-row"><span>Arriendo: ${c.days} día${c.days > 1 ? 's' : ''} × ${money(c.pricePerDay)}</span><span>${money(c.base)}</span></div>`);
+  if (c.applied) {
+    rows.push(`<div class="summary-row discount"><span>${esc(c.applied.label)}<span class="sr-sub">Aplicada automáticamente${(cfg.PROMO_4X3 || {}).fechaLimiteTexto ? ' · para solicitudes enviadas hasta el ' + esc(cfg.PROMO_4X3.fechaLimiteTexto) : ''}</span></span><span>−${money(c.applied.savings)}</span></div>`);
+  }
+  if (c.airport.amount > 0) rows.push(`<div class="summary-row"><span>${esc(c.airport.label)}</span><span>${money(c.airport.amount)}</span></div>`);
+  c.extras.forEach(e => {
+    const qty = e.qty > 1 ? ` ×${e.qty}` : '';
+    const per = e.perDay ? ` (${c.days} día${c.days > 1 ? 's' : ''})` : '';
+    const sub = e.vat > 0 ? `<span class="sr-sub">Neto ${money(e.net)} + IVA ${money(e.vat)}</span>` : '';
+    rows.push(`<div class="summary-row"><span>${esc(e.name)}${qty}${per}${sub}</span><span>${money(e.cost)}</span></div>`);
+  });
+  rows.push(`<div class="summary-row total-row"><span>Total estimado</span><span id="totalAmount">${money(c.total)}</span></div>`);
+  if (c.applied) rows.push(`<p class="summary-note" style="color:var(--green);font-weight:700;">Ahorras ${money(c.applied.savings)} con la promo 4×3.</p>`);
+  // Explicación de promociones que NO aplican (para no generar expectativas falsas).
+  const p4 = c.promo4x3;
+  if (!p4.eligible && p4.reason === 'dias' && (cfg.PROMO_4X3 || {}).activa && c.days === 3) {
+    rows.push(`<p class="promo-hint muted-hint">Con 1 día más (4 días) recibes 1 día gratis con la promo 4×3${(cfg.PROMO_4X3 || {}).vigencia ? ', ' + esc(cfg.PROMO_4X3.vigencia) : ''}.</p>`);
+  } else if (!p4.eligible && p4.reason === 'vigencia' && c.days >= ((cfg.PROMO_4X3 || {}).diasMinimos || 4)) {
+    rows.push(`<p class="promo-hint muted-hint">La promo 4×3 terminó: era ${esc((cfg.PROMO_4X3 || {}).vigencia || '')}.</p>`);
+  } else if (!p4.eligible && p4.reason === 'periodo') {
+    rows.push(`<p class="promo-hint muted-hint">La promo 4×3 no aplica a este período de viaje.</p>`);
+  }
+  document.getElementById('summaryBody').innerHTML = rows.join('');
+
+  // Cuánto se paga ahora y después.
+  const split = [];
+  split.push(`<div class="ps-now">Hoy no pagas nada: primero confirmamos la disponibilidad.</div>`);
+  split.push(`<p class="ps-title">Después de la confirmación, eliges cómo pagar:</p>`);
+  split.push(`<div class="ps-row"><span>Abono para reservar (1 día de arriendo)</span><strong>${money(c.deposit)}</strong></div>`);
+  split.push(`<div class="ps-row"><span>Saldo al retirar el vehículo</span><strong>${money(c.balance)}</strong></div>`);
+  if (c.prepay) {
+    split.push(`<div class="ps-opt"><div class="ps-row"><span>O pagando el 100 % por adelantado (−${c.prepay.pct}% en el arriendo${c.applied ? ', en lugar de la promo 4×3' : ''})</span><strong>${money(c.prepay.total)}</strong></div><p class="ps-hint">Ahorras ${money(c.prepay.extraSavings)} más. Descuento no acumulable con otras promociones.</p></div>`);
+  } else if (c.applied && c.early.eligible) {
+    split.push(`<p class="ps-hint">La promo 4×3 te conviene más que el ${c.early.pct}% por pago anticipado (no son acumulables).</p>`);
+  }
+  document.getElementById('paySplit').innerHTML = split.join('');
+
+  document.getElementById('guaranteeNote').innerHTML = c.argentinaGuarantee
+    ? `<strong>Garantía (aparte del precio): ${money(c.guarantee)}</strong> para viajar a Argentina. Se deja con tarjeta de crédito; no es un pago del arriendo, no se cobra al reservar y se libera al recibir el vehículo conforme.`
+    : `<strong>Garantía (aparte del precio): ${money(c.guarantee)}</strong> con tarjeta de crédito. No es un pago del arriendo, no se cobra al reservar y se libera al recibir el vehículo conforme.`;
+
+  const conductorNote = document.getElementById('conductorVatBreakdown');
+  if (conductorNote) {
+    const ce = c.extras.find(e => e.name.toLowerCase().includes('conductor adicional'));
+    if (ce) conductorNote.textContent = `${c.days} día${c.days > 1 ? 's' : ''}: neto ${money(ce.net)} + IVA ${money(ce.vat)} = ${money(ce.cost)}.`;
+  }
+
+  // Barra fija del celular
+  document.getElementById('mtbTotal').textContent = money(c.total);
+  document.getElementById('mtbSub').textContent = c.applied ? `${c.days} días · ahorras ${money(c.applied.savings)}` : `${c.days} día${c.days > 1 ? 's' : ''} · hoy no pagas nada`;
+
+  persistDraft();
+}
+
+const memQuotes = {};
+function persistDraft() {
+  if (!GQ || !lastCalc) return null;
+  const prev = GQ.loadDraft();
+  const d = {
+    vehicleId, vehicleName: vehicle.name, state: { ...state }, extras: selectedExtras.slice(),
+    flight: readFlight(), total: lastCalc.total,
+    summaryDates: `${fechaCorta(state.pickUpDate)} → ${fechaCorta(state.dropOffDate)}`,
+    resumeUrl: location.pathname + '?' + resumeParams(),
+    // memQuotes: respaldo en memoria si el navegador no permite guardar
+    // (modo privado): así tampoco se duplican códigos en esta visita.
+    quotes: Object.assign({}, memQuotes, (prev && prev.quotes) || {}),
+  };
+  d.sig = GQ.signature(d);
+  // Cada combinación conserva su código: quitar y volver a poner un adicional,
+  // recargar o volver desde WhatsApp NO crea otro código.
+  const q = d.quotes[d.sig];
+  if (q) q.total = lastCalc.total;
+  GQ.saveDraft(d);
+  return d;
+}
+/* Cotización con código de la combinación actual (o null). */
+function currentEntry() { return GQ ? GQ.currentQuote(persistDraft()) : null; }
+/* Modifica y guarda la cotización actual. */
+function updateEntry(fn) {
+  const d = persistDraft();
+  const q = d ? GQ.currentQuote(d) : null;
+  if (q) { fn(q); GQ.saveDraft(d); }
+  return q;
+}
+function readFlight() {
+  return {
+    airline: (document.getElementById('fAirline') || {}).value || '',
+    number: (document.getElementById('fFlightNumber') || {}).value || '',
+    eta: (document.getElementById('fFlightEta') || {}).value || '',
+  };
+}
+function resumeParams() {
+  const params = new URLSearchParams();
+  params.set('vehicleId', vehicleId);
+  Object.entries(state).forEach(([k, v]) => { if (v) params.set(k, v); });
+  return params.toString();
+}
+function fechaCorta(d) { const p = String(d || '').split('-'); return p.length === 3 ? `${p[2]}/${p[1]}` : d; }
+['fAirline', 'fFlightNumber', 'fFlightEta'].forEach(id => {
+  const el = document.getElementById(id);
+  if (el) el.addEventListener('change', () => persistDraft());
+});
+
+/* =====================================================================
+   COTIZACIÓN: código, WhatsApp, correo y medición
+   ---------------------------------------------------------------------
+   Eventos (ver docs/medicion-conversiones.md):
+   - cotizacion_generada       al crear y guardar el código (1 vez por código)
+   - whatsapp_intento_apertura al pulsar un botón que abre WhatsApp (1 vez por código)
+   - cotizacion_email_enviada  solo cuando el SERVIDOR confirma el envío (1 vez por código y correo)
+   - reserva_confirmada        NUNCA desde el navegador (lo debe enviar el backend al registrar el pago)
+   ===================================================================== */
+function quoteForText() { return { vehicleName: vehicle.name, state, catalog: extrasCatalog }; }
+function buildWhatsappMessage(code) { return GQ.whatsappMessage(quoteForText(), lastCalc || calcNow(), code); }
+function buildQuoteText(code) { return GQ.quoteText(quoteForText(), lastCalc || calcNow(), code); }
+function waAppUrl(code) { return `https://wa.me/${WA_NUMBER}?text=${encodeURIComponent(buildWhatsappMessage(code))}`; }
+function waWebUrl(code) { return `https://web.whatsapp.com/send?phone=${WA_NUMBER}&text=${encodeURIComponent(buildWhatsappMessage(code))}`; }
+
+function localQuoteCode() {
+  // Código propio cuando el servidor de reservas no alcanzó a registrar la
+  // solicitud. La "W" indica que se generó en la web (no está en el panel).
+  const abc = 'ABCDEFGHJKLMNPQRSTUVWXYZ23456789';
+  let r = '';
+  try { const a = new Uint32Array(4); crypto.getRandomValues(a); a.forEach(n => { r += abc[n % abc.length]; }); }
+  catch (e) { r = Date.now().toString(36).toUpperCase().slice(-4); }
+  return `GR-${new Date().getFullYear()}-W${r}`;
+}
+/* Huella corta del correo: en el dispositivo no se guarda el correo en claro. */
+function emailKey(email) {
+  let h = 5381; const s = String(email).toLowerCase();
+  for (let i = 0; i < s.length; i++) h = ((h << 5) + h + s.charCodeAt(i)) >>> 0;
+  return h.toString(36);
+}
+function track(name, q, extra) {
+  if (!window.trackEvent) return;
+  window.trackEvent(name, Object.assign({
+    quote_code: q.code, transaction_id: q.code, vehicle: vehicle.name, id: vehicle.id,
+    value: q.total || (lastCalc ? lastCalc.total : 0), currency: 'CLP', days: lastCalc ? lastCalc.days : undefined,
+  }, extra || {}));
+}
+
+/* Crea el código UNA sola vez por combinación y lo guarda en el dispositivo.
+   Se registra en el panel de reservas (si responde en 4 s); si no, se usa un
+   código local. Llamadas simultáneas comparten la misma promesa. */
+let ensuring = null;
+function ensureQuote() {
+  if (ensuring) return ensuring;
+  ensuring = (async () => {
+    if (!lastCalc) renderSummary();
+    const existing = currentEntry();
+    if (existing) return existing;
+    let requestCode = null;
+    try {
+      const f = readFlight();
+      const c = lastCalc;
+      const promoNote = c && c.applied ? `Promo 4×3 estimada en la web: −${money(c.applied.savings)} (total estimado ${money(c.total)}).` : '';
+      const payload = {
+        vehicleId, from: state.pickUpDate, to: state.dropOffDate,
+        pickupTime: state.pickUpTime, returnTime: state.dropOffTime,
+        pickupPlace: state.pickUpPlace, dropoffPlace: state.dropOffPlace, dropoffOther: state.dropOffOther,
+        passengers: state.passengers, destination: state.destination, destinationOther: state.destinationOther,
+        argentina: state.argentina, extras: selectedExtras,
+        airlineName: f.airline, flightNumber: f.number, flightEta: f.eta,
+        notes: [state.promoCode ? `Código promocional ingresado: ${state.promoCode} (a validar por el equipo)` : '', promoNote].filter(Boolean).join(' '),
+      };
+      const ctrl = (typeof AbortController === 'function') ? new AbortController() : null;
+      const timer = ctrl ? setTimeout(() => ctrl.abort(), 4000) : null;
+      const r = await fetch(`${API_BASE}/api/requests`, {
+        method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify(payload),
+        signal: ctrl ? ctrl.signal : undefined,
+      });
+      if (timer) clearTimeout(timer);
+      if (r.ok) { const data = await r.json(); if (data && data.bookingCode) requestCode = String(data.bookingCode); }
+    } catch (e) { /* sin servidor: igual se crea la cotización con código local */ }
+    // Otra pestaña pudo crear el código mientras esperábamos.
+    const again = currentEntry();
+    if (again) return again;
+    const d = persistDraft();
+    const q = {
+      code: requestCode || localQuoteCode(), requestCode, registered: !!requestCode,
+      createdAt: Date.now(), total: lastCalc.total, waOpenedAt: null,
+      emailSentTo: [], emailResends: 0, tracked: { generada: false, whatsapp: false, email: [] },
+    };
+    d.quotes[d.sig] = q;
+    memQuotes[d.sig] = q;
+    GQ.saveDraft(d);
+    // Evento solo cuando la cotización quedó creada y guardada.
+    const stored = !!GQ.currentQuote(GQ.loadDraft());
+    if (stored || currentEntry()) {
+      track('cotizacion_generada', q, { registered: q.registered, stored_on_device: stored });
+      updateEntry(x => { x.tracked.generada = true; });
+    }
+    return currentEntry() || q;
+  })();
+  const p = ensuring;
+  p.then(() => { ensuring = null; }, () => { ensuring = null; });
+  return p;
+}
+
+/* ---------------- WhatsApp ---------------- */
+function markWhatsappAttempt(q, channel) {
+  // Solo es un INTENTO: el sitio no puede saber si el cliente presionó "Enviar".
+  let first = false;
+  updateEntry(x => { first = !x.tracked.whatsapp; x.waOpenedAt = Date.now(); x.tracked.whatsapp = true; });
+  if (first) track('whatsapp_intento_apertura', q, { channel });
+  showQuoteStatus({ waOpened: true });
+}
+async function openWhatsapp(channel) {
+  const web = channel === 'web';
+  const ready = currentEntry();
+  if (ready) {
+    // Ya hay código: se abre directo dentro del clic (sin esperas).
+    const url = web ? waWebUrl(ready.code) : waAppUrl(ready.code);
+    let w = null;
+    try { w = window.open(url, '_blank'); } catch (e) { w = null; }
+    if (w) { try { w.opener = null; } catch (e) {} } else { window.location.href = url; }
+    markWhatsappAttempt(ready, channel);
+    return ready.code;
+  }
+  // Safari (iPhone) bloquea ventanas abiertas después de un await: abrimos la
+  // pestaña de inmediato, dentro del clic, y le asignamos el enlace al final.
+  let waWindow = null;
+  try { waWindow = window.open('', '_blank'); } catch (e) { waWindow = null; }
+  if (waWindow) {
+    try { waWindow.opener = null; waWindow.document.title = 'Abriendo WhatsApp…'; waWindow.document.body.innerHTML = '<p style="font-family:sans-serif;padding:24px">Abriendo WhatsApp…</p>'; } catch (e) {}
+  }
+  const q = await ensureQuote();
+  const url = web ? waWebUrl(q.code) : waAppUrl(q.code);
+  if (waWindow && !waWindow.closed) waWindow.location.href = url;
+  else window.location.href = url; // si el navegador bloqueó la pestaña nueva
+  markWhatsappAttempt(q, channel);
+  return q.code;
+}
+
+/* ---------------- Estado visible de la cotización ---------------- */
+function showQuoteStatus(opts) {
+  const q = currentEntry();
+  if (!q) return;
+  opts = opts || {};
+  const box = document.getElementById('quoteStatus');
+  document.getElementById('qsCode').textContent = q.code;
+  document.getElementById('qsWaWeb').href = waWebUrl(q.code);
+  const parts = [];
+  if (q.waOpenedAt) parts.push(opts.waOpened
+    ? 'WhatsApp abierto: presiona «Enviar» en WhatsApp para que la recibamos.'
+    : 'Si no alcanzaste a enviarla, vuelve a abrir WhatsApp.');
+  if (q.emailSentTo && q.emailSentTo.length) parts.push('También te la enviamos por correo.');
+  document.getElementById('qsState').textContent = parts.join(' ');
+  document.getElementById('btnRequestConfirmation').textContent = 'ENVIAR COTIZACIÓN POR WHATSAPP';
+  document.getElementById('nextSteps').hidden = true; // el estado ya lo explica
+  box.hidden = false;
+}
+function hideQuoteStatusIfStale() {
+  // Si el cliente cambia adicionales, la cotización es otra (otro código).
+  const q = currentEntry();
+  if (q) { showQuoteStatus(); return; }
+  document.getElementById('quoteStatus').hidden = true;
+  document.getElementById('nextSteps').hidden = false;
+  document.getElementById('emailOk').hidden = true;
+  document.getElementById('emailFail').hidden = true;
+  document.getElementById('btnRequestConfirmation').textContent = 'SOLICITAR DISPONIBILIDAD POR WHATSAPP';
+}
+
+async function copyQuote(btn) {
+  const q = currentEntry() || await ensureQuote();
+  const text = buildQuoteText(q.code);
+  const ta = document.getElementById('qsText');
+  ta.value = text;
+  showQuoteStatus();
+  const original = btn.dataset.label || (btn.dataset.label = btn.textContent);
+  try { await navigator.clipboard.writeText(text); btn.textContent = '¡Cotización copiada!'; }
+  catch (e) { ta.hidden = false; ta.focus(); ta.select(); btn.textContent = 'Selecciona y copia el texto de abajo'; }
+  setTimeout(() => { btn.textContent = original; }, 4000);
+}
+
+/* ---------------- Correo ---------------- */
+const EMAIL_ENDPOINT = '/.netlify/functions/enviar-cotizacion';
+const RE_EMAIL = /^[^\s@<>()[\]\\,;:"]{1,64}@[A-Za-z0-9](?:[A-Za-z0-9-]{0,61}[A-Za-z0-9])?(?:\.[A-Za-z0-9](?:[A-Za-z0-9-]{0,61}[A-Za-z0-9])?)+$/;
+const RE_NAME = /^[\p{L}\p{M}' .-]{2,60}$/u;
+let lastEmailData = null;
+
+function openEmailForm() {
+  const form = document.getElementById('emailForm');
+  form.hidden = false;
+  document.getElementById('emailOk').hidden = true;
+  document.getElementById('emailFail').hidden = true;
+  form.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+  setTimeout(() => document.getElementById('efName').focus(), 150);
+}
+function readEmailForm() {
+  const val = id => document.getElementById(id).value.replace(/\s+/g, ' ').trim();
+  return {
+    name: val('efName'), email: val('efEmail').toLowerCase(), emailConfirm: val('efEmail2').toLowerCase(),
+    consent: document.getElementById('efConsent').checked, website: document.getElementById('efWebsite').value,
+  };
+}
+function validateEmailForm(f) {
+  const bad = [];
+  if (!RE_NAME.test(f.name)) bad.push(['efName', 'Escribe tu nombre (solo letras, 2 a 60 caracteres).']);
+  if (!RE_EMAIL.test(f.email) || f.email.length > 120) bad.push(['efEmail', 'Revisa tu correo electrónico.']);
+  else if (f.email !== f.emailConfirm) bad.push(['efEmail2', 'Los dos correos no coinciden.']);
+  if (!f.consent) bad.push(['efConsent', 'Debes aceptar recibir esta cotización en tu correo.']);
+  ['efName', 'efEmail', 'efEmail2', 'efConsent'].forEach(id => document.getElementById(id).removeAttribute('aria-invalid'));
+  bad.forEach(([id]) => document.getElementById(id).setAttribute('aria-invalid', 'true'));
+  document.getElementById('efError').textContent = bad.map(b => b[1]).join(' ');
+  if (bad.length) document.getElementById(bad[0][0]).focus();
+  return !bad.length;
+}
+
+async function sendEmail(f, opts) {
+  opts = opts || {};
+  const btn = document.getElementById('efSubmit');
+  const okBox = document.getElementById('emailOk');
+  const failBox = document.getElementById('emailFail');
+  okBox.hidden = true; failBox.hidden = true;
+  btn.disabled = true; btn.textContent = 'Enviando…';
+  let q = null;
+  try {
+    q = await ensureQuote();
+    showQuoteStatus();
+    const key = emailKey(f.email);
+    const already = (q.emailSentTo || []).includes(key);
+    const resendCount = already ? (q.emailResends || 0) + 1 : 0;
+    lastEmailData = f;
+    const ctrl = (typeof AbortController === 'function') ? new AbortController() : null;
+    const timer = ctrl ? setTimeout(() => ctrl.abort(), 20000) : null;
+    let r, data = null;
+    try {
+      r = await fetch(EMAIL_ENDPOINT, {
+        method: 'POST', headers: { 'Content-Type': 'application/json' }, signal: ctrl ? ctrl.signal : undefined,
+        body: JSON.stringify({
+          code: q.code, registered: !!q.registered, createdAt: q.createdAt, resendCount,
+          clientTotal: lastCalc ? lastCalc.total : null,
+          customer: { name: f.name, email: f.email, emailConfirm: f.emailConfirm },
+          consent: f.consent === true, website: f.website,
+          quote: {
+            vehicleId, pickUpDate: state.pickUpDate, pickUpTime: state.pickUpTime,
+            dropOffDate: state.dropOffDate, dropOffTime: state.dropOffTime,
+            pickUpPlace: state.pickUpPlace, dropOffPlace: state.dropOffPlace, dropOffOther: state.dropOffOther,
+            passengers: state.passengers, destination: state.destination, destinationOther: state.destinationOther,
+            argentina: state.argentina, extras: selectedExtras,
+          },
+        }),
+      });
+      try { data = await r.json(); } catch (e) { data = null; }
+    } finally { if (timer) clearTimeout(timer); }
+
+    if (r.ok && data && data.ok) {
+      // Éxito confirmado por el servidor: recién aquí se mide.
+      const firstForThisEmail = !(q.tracked.email || []).includes(key);
+      updateEntry(x => {
+        if (!x.emailSentTo.includes(key)) x.emailSentTo.push(key);
+        if (already) x.emailResends = (x.emailResends || 0) + 1;
+        x.tracked.email = x.tracked.email || [];
+        if (!x.tracked.email.includes(key)) x.tracked.email.push(key);
+      });
+      if (firstForThisEmail) track('cotizacion_email_enviada', q);
+      document.getElementById('emailForm').hidden = true;
+      okBox.textContent = 'Cotización enviada a tu correo. Revisa también la carpeta de spam. Esto todavía no confirma la reserva.' +
+        (data.testMode ? ' (Modo de prueba: el correo se desvió a la casilla de pruebas de Glaciares.)' : '');
+      okBox.hidden = false;
+      showQuoteStatus();
+      okBox.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+      return true;
+    }
+    if (r.status === 422 && data && data.fields) {
+      document.getElementById('efError').textContent = 'Revisa los datos del formulario e intenta de nuevo.';
+      return false;
+    }
+    throw new Error(r.status === 429 ? 'rate' : 'send');
+  } catch (e) {
+    document.getElementById('emailFailMsg').textContent = e && e.message === 'rate'
+      ? 'Hiciste varios intentos seguidos; espera unos minutos.'
+      : 'Puede ser un problema momentáneo de conexión o del servicio de correo.';
+    document.getElementById('emailFailCode').textContent = q ? ` (código ${q.code})` : '';
+    failBox.hidden = false;
+    if (q) showQuoteStatus();
+    failBox.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+    return false;
+  } finally {
+    btn.disabled = false; btn.textContent = 'Enviar cotización a mi correo';
+  }
+}
+
+function wireEmail() {
+  const form = document.getElementById('emailForm');
+  document.getElementById('btnEmailQuote').addEventListener('click', openEmailForm);
+  document.getElementById('efCancel').addEventListener('click', () => { form.hidden = true; });
+  ['efEmail', 'efEmail2'].forEach(id => document.getElementById(id).addEventListener('input', () => {
+    document.getElementById('efNote').textContent = ''; delete form.dataset.confirmResend;
+  }));
+  form.addEventListener('submit', async (ev) => {
+    ev.preventDefault();
+    if (document.getElementById('efSubmit').disabled) return;
+    const f = readEmailForm();
+    if (!validateEmailForm(f)) return;
+    // Si esta cotización ya se envió a ese correo, se pide confirmar el reenvío.
+    const q = currentEntry();
+    if (q && (q.emailSentTo || []).includes(emailKey(f.email)) && !form.dataset.confirmResend) {
+      document.getElementById('efNote').textContent = 'Ya enviamos esta cotización a ese correo. Revisa también spam. Si igual quieres recibirla otra vez, presiona de nuevo «Enviar».';
+      form.dataset.confirmResend = '1';
+      return;
+    }
+    delete form.dataset.confirmResend;
+    document.getElementById('efNote').textContent = '';
+    await sendEmail(f);
+  });
+  document.getElementById('efRetry').addEventListener('click', () => {
+    if (lastEmailData) sendEmail(lastEmailData); else openEmailForm();
+  });
+  document.getElementById('efFailWa').addEventListener('click', () => openWhatsapp('app'));
+  document.getElementById('efFailCopy').addEventListener('click', (e) => copyQuote(e.currentTarget));
+}
+
+/* ---- Medición de clics de conversión (mismo mecanismo que la portada) ---- */
+document.addEventListener('click', (e) => {
+  const el = e.target.closest('[data-track]');
+  if (el && window.trackEvent) window.trackEvent(el.dataset.track);
+  if (el && el.dataset.track === 'whatsapp-float' && window.reportAdsConversion) window.reportAdsConversion();
+});
+
+function wireMobileBar() {
+  const bar = document.getElementById('mobileTotalBar');
+  const target = document.getElementById('summaryCol');
+  if (!bar || !target) return;
+  bar.hidden = false;
+  document.body.classList.add('has-mtb');
+  document.getElementById('mtbBtn').addEventListener('click', () => {
+    target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+  });
+  // Se oculta cuando el resumen (con el botón principal) ya está en pantalla:
+  // así nunca hay dos acciones principales visibles a la vez.
+  if ('IntersectionObserver' in window) {
+    new IntersectionObserver((entries) => {
+      entries.forEach(en => { bar.style.display = en.isIntersecting ? 'none' : ''; });
+    }, { threshold: 0.15 }).observe(target);
+  }
+}
+
+function wireInfoTexts() {
+  // Versión corta del plazo de respuesta (el texto completo sigue en config.js y en /condiciones).
+  const rt = document.getElementById('responseTimeText');
+  if (rt && cfg.RESPONSE_TIME_TEXT) rt.textContent = ', normalmente en menos de 2 horas (8:00–22:00)';
+  // Si esta combinación ya tiene código (volvió desde WhatsApp o recargó), se muestra su estado.
+  if (currentEntry()) showQuoteStatus();
+}
+
+function wireMainCta() {
+  wireMobileBar();
+  wireInfoTexts();
+  wireEmail();
+  const btn = document.getElementById('btnRequestConfirmation');
+  btn.addEventListener('click', async () => {
+    if (btn.disabled) return;
+    btn.disabled = true;
+    const label = btn.textContent;
+    if (!currentEntry()) btn.textContent = 'PREPARANDO COTIZACIÓN…';
+    try { await openWhatsapp('app'); }
+    finally { btn.disabled = false; if (btn.textContent === 'PREPARANDO COTIZACIÓN…') btn.textContent = label; }
+  });
+  document.getElementById('qsWaWeb').addEventListener('click', (e) => {
+    // El enlace abre WhatsApp Web por sí solo; aquí solo se registra el intento.
+    const q = currentEntry();
+    if (q) { e.currentTarget.href = waWebUrl(q.code); markWhatsappAttempt(q, 'web'); }
+  });
+  document.getElementById('qsCopy').addEventListener('click', (e) => copyQuote(e.currentTarget));
+}
+
+/* =====================================================================
+   MODAL: intento de pago sin confirmación (sección 19)
+   ===================================================================== */
+let payBlockedTrigger = null;
+function openPayBlockedModal(trigger) {
+  payBlockedTrigger = trigger || null;
+  const modal = document.getElementById('payBlockedModal');
+  modal.classList.remove('hidden');
+  document.getElementById('payBlockedWhatsapp').focus();
+}
+function closePayBlockedModal() {
+  document.getElementById('payBlockedModal').classList.add('hidden');
+  if (payBlockedTrigger) payBlockedTrigger.focus();
+  payBlockedTrigger = null;
+}
+function wirePayBlockedModal() {
+  document.getElementById('btnPayFullLocked').addEventListener('click', (e) => openPayBlockedModal(e.currentTarget));
+  document.getElementById('btnPayDepositLocked').addEventListener('click', (e) => openPayBlockedModal(e.currentTarget));
+  document.getElementById('payBlockedClose').addEventListener('click', closePayBlockedModal);
+  document.getElementById('payBlockedWhatsapp').addEventListener('click', async () => {
+    closePayBlockedModal();
+    await openWhatsapp('app');
+  });
+  document.addEventListener('keydown', (e) => {
+    if (e.key === 'Escape' && !document.getElementById('payBlockedModal').classList.contains('hidden')) closePayBlockedModal();
+  });
+}
+
+/* =====================================================================
+   CAMINO A: enlace seguro (?confirmCode=...&token=...). Nunca confía en el
+   precio del navegador: todo se relee y valida en el servidor. El código
+   visible nunca funciona por sí solo como credencial de pago.
+   ===================================================================== */
+let confirmedBooking = null;
+async function validateSecureLink() {
+  try {
+    const r = await fetch(`${API_BASE}/api/requests/${encodeURIComponent(confirmCode.trim())}/validate`, {
+      method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify({ token: linkToken }),
+    });
+    const data = await r.json();
+    if (!r.ok || !data.ok) {
+      const banner = document.getElementById('linkErrorBanner');
+      banner.textContent = `${data.error || 'No se pudo validar el enlace.'} Escríbenos por WhatsApp para generar uno nuevo.`;
+      banner.classList.add('show');
+      return;
+    }
+    confirmedBooking = { ...data.booking, token: data.token };
+    showConfirmedState();
+  } catch (e) {
+    const banner = document.getElementById('linkErrorBanner');
+    banner.textContent = 'No pudimos validar el enlace. Revisa tu conexión e intenta de nuevo, o escríbenos por WhatsApp.';
+    banner.classList.add('show');
+  }
+}
+
+function showConfirmedState() {
+  const b = confirmedBooking;
+  // Paso 4 activo: la selección de adicionales ya quedó fija al confirmar.
+  document.getElementById('step3').classList.remove('active'); document.getElementById('step3').classList.add('done');
+  document.getElementById('step3').querySelector('.step-num').textContent = '✓';
+  document.getElementById('sep34').classList.add('done');
+  document.getElementById('step4').classList.add('active');
+
+  document.getElementById('preConfirmActions').style.display = 'none';
+  document.getElementById('confirmedActions').style.display = 'block';
+  const mtb = document.getElementById('mobileTotalBar'); if (mtb) { mtb.hidden = true; document.body.classList.remove('has-mtb'); }
+  const balanceDue = Math.max(0, (b.totalPriceNormal || 0) - (b.depositAmount || 0));
+  document.getElementById('confirmedSub').textContent = `Reserva ${b.bookingCode} · ${b.vehicleName} · ${b.from} → ${b.to} (${b.days} día${b.days > 1 ? 's' : ''})`;
+  document.getElementById('confirmedFullBody').innerHTML = `
+    ${b.discountPct ? `<div class="alt-row old"><span>Precio normal</span><span>${money(b.totalPriceNormal)}</span></div>
+    <div class="alt-row"><span>Descuento reserva anticipada</span><span>-${b.discountPct}%</span></div>` : ''}
+    <div class="alt-charge">${money(b.totalPriceFull)}</div>`;
+  document.getElementById('confirmedDepositBody').innerHTML = `
+    <div class="alt-row"><span>Total del arriendo</span><span>${money(b.totalPriceNormal)}</span></div>
+    <div class="alt-row"><span>Saldo a pagar al retiro</span><span>${money(balanceDue)}</span></div>
+    <div class="alt-charge">${money(b.depositAmount)}</div>`;
+  document.getElementById('btnPayFullReal').textContent = `PAGAR TOTAL DE ${money(b.totalPriceFull)}`;
+  document.getElementById('btnPayDepositReal').textContent = `PAGAR ABONO DE ${money(b.depositAmount)}`;
+  document.getElementById('btnPayFullReal').addEventListener('click', () => payConfirmed('full'));
+  document.getElementById('btnPayDepositReal').addEventListener('click', () => payConfirmed('deposit'));
+}
+
+async function payConfirmed(mode) {
+  if (!confirmedBooking) return;
+  const errBox = document.getElementById('ccPayError');
+  const btnFull = document.getElementById('btnPayFullReal');
+  const btnDeposit = document.getElementById('btnPayDepositReal');
+  errBox.style.display = 'none';
+  btnFull.disabled = true; btnDeposit.disabled = true;
+  try {
+    const r1 = await fetch(`${API_BASE}/api/requests/${encodeURIComponent(confirmedBooking.bookingCode)}/choose-payment`, {
+      method: 'POST', headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ token: confirmedBooking.token, paymentMode: mode }),
+    });
+    const chosen = await r1.json();
+    if (!r1.ok || !chosen.ok) throw new Error(chosen.error || 'No se pudo fijar la modalidad de pago.');
+
+    const r2 = await fetch(`${API_BASE}/api/webpay/init/${confirmedBooking.id}`, {
+      method: 'POST', headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ token: confirmedBooking.token }),
+    });
+    const webpay = await r2.json();
+    if (!r2.ok) throw new Error(webpay.error || 'No se pudo iniciar el pago.');
+
+    const form = document.createElement('form');
+    form.method = 'POST'; form.action = webpay.url;
+    const input = document.createElement('input');
+    input.type = 'hidden'; input.name = 'token_ws'; input.value = webpay.token;
+    form.appendChild(input);
+    document.body.appendChild(form);
+    form.submit();
+  } catch (err) {
+    errBox.textContent = err.message || 'Ocurrió un error. Intenta nuevamente o escríbenos por WhatsApp.';
+    errBox.style.display = 'block';
+    btnFull.disabled = false; btnDeposit.disabled = false;
+  }
+}
+
+boot();
+</script>
+</body>
+</html>
