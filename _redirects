@@ -1,6 +1,8 @@
 /buscar               /buscar.html               200
 /condiciones          /condiciones.html          200
 /reserva/adicionales  /reserva-adicionales.html  200
+/rent-a-car-aeropuerto-punta-arenas  /rent-a-car-aeropuerto-punta-arenas.html  200
+/arriendo-de-auto-torres-del-paine   /arriendo-de-auto-torres-del-paine.html   200
 
 # Archivos internos: nunca públicos
 /PENDIENTES_POR_CONFIRMAR.md  /404.html  404!

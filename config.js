@@ -92,8 +92,8 @@ window.GLACIARES_CONFIG = {
        items: [{ name: 'María P.', date: 'agosto 2026', text: '...' }]
      --------------------------------------------------------------------- */
   GOOGLE_REVIEWS: {
-    rating: null,
-    count: null,
+    rating: 4.5,   // Perfil de Google, revisado 9 oct 2026
+    count: 69,
     items: [
       { name: 'Javo P.R.', date: 'agosto 2026', text: 'Excelente el servicio, super confiables, condiciones claras, personal amable y atentas. Recomendando al 100%' },
       { name: 'Esteban M.', date: 'agosto 2026', text: 'Excelente servicio de principio a fin. Arrendé un auto en Punta Arenas y no tuve ningún tipo de problema.' },
