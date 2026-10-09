@@ -180,7 +180,7 @@ ${banner}
 <table role="presentation" width="100%" cellpadding="0" cellspacing="0">${rowsHtml(detail)}</table></td></tr>
 <tr><td style="padding:14px 24px 0"><h2 style="margin:0 0 6px;font-size:15px;color:#0A2540">Detalle del precio</h2>
 <table role="presentation" width="100%" cellpadding="0" cellspacing="0">${rowsHtml(G.priceRows(c))}
-<tr><td style="padding:10px 0 4px;border-top:2px solid #0A2540;font-size:16px;font-weight:800;color:#0A2540">Total estimado</td><td style="padding:10px 0 4px;border-top:2px solid #0A2540;font-size:18px;font-weight:800;color:#0A2540;text-align:right">${esc(G.money(c.total))}</td></tr>
+<tr><td style="padding:10px 0 4px;border-top:2px solid #0A2540;font-size:16px;font-weight:800;color:#0A2540">Total estimado<br><span style="font-size:12px;font-weight:600;color:#64748b">IVA incluido</span></td><td style="padding:10px 0 4px;border-top:2px solid #0A2540;font-size:18px;font-weight:800;color:#0A2540;text-align:right">${esc(G.money(c.total))}</td></tr>
 ${rowsHtml(pay)}</table></td></tr>
 <tr><td style="padding:14px 24px 0"><div style="background:#f8fafc;border:1px solid #e2e8f0;border-radius:10px;padding:12px 14px;font-size:12.5px;color:#475569;line-height:1.5"><strong style="color:#0A2540">Garantía (informativa, aparte del precio):</strong> ${esc(G.guaranteeText(c))}</div></td></tr>
 <tr><td align="center" style="padding:22px 24px 8px">
