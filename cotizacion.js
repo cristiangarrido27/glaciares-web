@@ -323,7 +323,7 @@
     out.push('');
     priceRows(c).forEach(function (r) { out.push(r[0] + ': ' + r[1] + (r[2] ? ' (' + r[2] + ')' : '')); });
     out.push('Promoción aplicada: ' + promoText(c));
-    out.push('TOTAL ESTIMADO: ' + money(c.total));
+    out.push('TOTAL ESTIMADO (IVA incluido): ' + money(c.total));
     out.push('Abono necesario para reservar: ' + money(c.deposit));
     out.push('Saldo pendiente (al retirar): ' + money(c.balance));
     if (c.prepay) out.push('Alternativa pagando el 100 % por adelantado (−' + c.prepay.pct + '% en el arriendo): ' + money(c.prepay.total));

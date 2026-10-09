@@ -735,10 +735,10 @@ const IMG_BASE = 'https://glaciaresrentacar.cl/flota/';
 const FLEET = [
   { id: 1, name: 'Suzuki Swift', price: 35000, cat: 'citycar', catLabel: 'Citycar', img: IMG_BASE + 'suzuki-swift.webp', deposit: 500000 },
   { id: 2, name: 'Suzuki Dzire', price: 38000, cat: 'citycar', catLabel: 'Citycar', img: IMG_BASE + 'suzuki-dzire.webp', deposit: 500000 },
-  { id: 3, name: 'Chevrolet Captiva', price: 50000, cat: 'suv', catLabel: 'SUV', img: IMG_BASE + 'chevrolet-captiva.webp', deposit: 500000 },
-  { id: 6, name: 'Kia Sorento', price: 40000, cat: 'suv', catLabel: 'SUV', img: IMG_BASE + 'kia-sorento.webp', deposit: 500000 },
-  { id: 7, name: 'Hyundai Tucson', price: 48000, cat: 'suv', catLabel: 'SUV', img: IMG_BASE + 'hyundai-tucson.webp', deposit: 500000 },
-  { id: 8, name: 'Peugeot 3008', price: 59000, cat: 'suv', catLabel: 'SUV', img: IMG_BASE + 'peugeot-3008.webp', deposit: 500000 },
+  { id: 3, name: 'Chevrolet Captiva', price: 48000, cat: 'suv', catLabel: 'SUV', img: IMG_BASE + 'chevrolet-captiva.webp', deposit: 500000 },
+  { id: 6, name: 'Kia Sorento', price: 43000, cat: 'suv', catLabel: 'SUV', img: IMG_BASE + 'kia-sorento.webp', deposit: 500000 },
+  { id: 7, name: 'Hyundai Tucson', price: 49000, cat: 'suv', catLabel: 'SUV', img: IMG_BASE + 'hyundai-tucson.webp', deposit: 500000 },
+  { id: 8, name: 'Peugeot 3008', price: 54000, cat: 'suv', catLabel: 'SUV', img: IMG_BASE + 'peugeot-3008.webp', deposit: 500000 },
 ];
 
 const API_BASE = 'https://glaciares-reservas-backend.onrender.com';
@@ -962,7 +962,7 @@ function renderResults() {
       </div>
       <div class="rcard-price">
         <div class="price-box">
-          <span class="plabel">TOTAL ESTIMADO · ${q.days} DÍA${q.days > 1 ? 'S' : ''}</span>
+          <span class="plabel">TOTAL ESTIMADO · ${q.days} DÍA${q.days > 1 ? 'S' : ''} · IVA INCLUIDO</span>
           ${oldTotal ? `<span class="pamount-old">$${oldTotal.toLocaleString('es-CL')}</span>` : ''}
           <span class="pamount">$${q.total.toLocaleString('es-CL')}</span>
           <span class="pbreak">${parts.map(x => `<span style="white-space:nowrap">${x}</span>`).join(' · ')}</span>

@@ -357,7 +357,7 @@
           <p class="summary-updating" id="summaryUpdating" style="display:none;">Actualizando total…</p>
           <div class="pay-split" id="paySplit"></div>
           <div class="guarantee-note" id="guaranteeNote"></div>
-          <p class="summary-legal">Total estimado con impuestos incluidos. El monto final te lo confirmamos antes de cualquier pago.</p>
+          <p class="summary-legal">Total estimado, IVA incluido. El monto final te lo confirmamos antes de cualquier pago.</p>
         </div>
 
         <div id="preConfirmActions">
@@ -904,7 +904,7 @@ function renderSummary() {
     const sub = e.vat > 0 ? `<span class="sr-sub">Neto ${money(e.net)} + IVA ${money(e.vat)}</span>` : '';
     rows.push(`<div class="summary-row"><span>${esc(e.name)}${qty}${per}${sub}</span><span>${money(e.cost)}</span></div>`);
   });
-  rows.push(`<div class="summary-row total-row"><span>Total estimado</span><span id="totalAmount">${money(c.total)}</span></div>`);
+  rows.push(`<div class="summary-row total-row"><span>Total estimado <span class="sr-sub" style="display:inline;font-weight:600;">IVA incluido</span></span><span id="totalAmount">${money(c.total)}</span></div>`);
   if (c.applied) rows.push(`<p class="summary-note" style="color:var(--green);font-weight:700;">Ahorras ${money(c.applied.savings)} con la promo 4×3.</p>`);
   // Explicación de promociones que NO aplican (para no generar expectativas falsas).
   const p4 = c.promo4x3;
