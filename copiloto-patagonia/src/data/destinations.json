@@ -1,0 +1,432 @@
+[
+  {
+    "slug": "punta-arenas",
+    "name": "Punta Arenas",
+    "shortDescription": {
+      "es": "Capital de la Región de Magallanes, a orillas del Estrecho de Magallanes. Punto de partida de tu aventura patagónica, con historia, museos y la mejor gastronomía austral.",
+      "en": "The capital of the Magallanes Region, on the shores of the Strait of Magellan. The starting point of your Patagonian adventure, with history, museums and the best southern Chilean cuisine.",
+      "pt": "Capital da Região de Magalhães, às margens do Estreito de Magalhães. Ponto de partida da sua aventura patagônica, com história, museus e a melhor gastronomia austral."
+    },
+    "image": "/images/destinations/punta-arenas.jpg",
+    "imageAlt": {
+      "es": "Costanera de Punta Arenas junto al Estrecho de Magallanes",
+      "en": "Punta Arenas waterfront along the Strait of Magellan",
+      "pt": "Orla de Punta Arenas às margens do Estreito de Magalhães"
+    },
+    "placeholderImage": true,
+    "distanceFromPuntaArenasKm": 0,
+    "approxDrivingTime": {
+      "es": "Punto de partida",
+      "en": "Starting point",
+      "pt": "Ponto de partida"
+    },
+    "roadType": "pavimentado",
+    "bestSeason": {
+      "es": "Todo el año",
+      "en": "Year-round",
+      "pt": "Ano todo"
+    },
+    "fuelAvailable": true,
+    "difficulty": "facil",
+    "recommendedVehicle": {
+      "es": "Cualquier vehículo",
+      "en": "Any vehicle",
+      "pt": "Qualquer veículo"
+    },
+    "googleMapsUrl": "https://www.google.com/maps/search/?api=1&query=Punta+Arenas+Chile",
+    "routeSlug": null,
+    "tripTypes": [
+      "historia",
+      "gastronomia",
+      "familia"
+    ],
+    "lastReviewed": "2026-08-15"
+  },
+  {
+    "slug": "puerto-natales",
+    "name": "Puerto Natales",
+    "shortDescription": {
+      "es": "Ciudad costera junto al Seno Última Esperanza, puerta de entrada a Torres del Paine. Ambiente de montaña, cafeterías y vistas a los fiordos patagónicos.",
+      "en": "A coastal town on the Última Esperanza Sound, the gateway to Torres del Paine. A mountain-town atmosphere, cafés, and views of Patagonian fjords.",
+      "pt": "Cidade costeira à beira do Seno Última Esperanza, porta de entrada para Torres del Paine. Ambiente de montanha, cafeterias e vistas dos fiordes patagônicos."
+    },
+    "image": "/images/destinations/puerto-natales.jpg",
+    "imageAlt": {
+      "es": "Seno Última Esperanza junto a Puerto Natales",
+      "en": "Última Esperanza Sound next to Puerto Natales",
+      "pt": "Seno Última Esperanza ao lado de Puerto Natales"
+    },
+    "placeholderImage": true,
+    "distanceFromPuntaArenasKm": 247,
+    "approxDrivingTime": {
+      "es": "Aproximadamente 3 horas",
+      "en": "About 3 hours",
+      "pt": "Aproximadamente 3 horas"
+    },
+    "roadType": "pavimentado",
+    "bestSeason": {
+      "es": "Octubre a abril",
+      "en": "October to April",
+      "pt": "Outubro a abril"
+    },
+    "fuelAvailable": true,
+    "difficulty": "facil",
+    "recommendedVehicle": {
+      "es": "SUV o sedán",
+      "en": "SUV or sedan",
+      "pt": "SUV ou sedã"
+    },
+    "googleMapsUrl": "https://www.google.com/maps/search/?api=1&query=Puerto+Natales+Chile",
+    "routeSlug": "punta-arenas-puerto-natales",
+    "tripTypes": [
+      "naturaleza",
+      "fotografia",
+      "gastronomia"
+    ],
+    "lastReviewed": "2026-08-15"
+  },
+  {
+    "slug": "torres-del-paine",
+    "name": "Parque Nacional Torres del Paine",
+    "shortDescription": {
+      "es": "Uno de los parques nacionales más admirados del mundo: torres de granito, glaciares, lagos turquesa y fauna silvestre en estado natural.",
+      "en": "One of the most admired national parks in the world: granite towers, glaciers, turquoise lakes and wildlife in its natural state.",
+      "pt": "Um dos parques nacionais mais admirados do mundo: torres de granito, geleiras, lagos turquesa e fauna selvagem em estado natural."
+    },
+    "image": "/images/destinations/torres-del-paine.jpg",
+    "imageAlt": {
+      "es": "Torres de granito del Parque Nacional Torres del Paine",
+      "en": "Granite towers of Torres del Paine National Park",
+      "pt": "Torres de granito do Parque Nacional Torres del Paine"
+    },
+    "placeholderImage": true,
+    "distanceFromPuntaArenasKm": 310,
+    "approxDrivingTime": {
+      "es": "Aproximadamente 4,5 a 5 horas",
+      "en": "About 4.5 to 5 hours",
+      "pt": "Aproximadamente 4,5 a 5 horas"
+    },
+    "roadType": "mixto",
+    "bestSeason": {
+      "es": "Octubre a abril (temporada alta)",
+      "en": "October to April (high season)",
+      "pt": "Outubro a abril (alta temporada)"
+    },
+    "fuelAvailable": false,
+    "difficulty": "moderado",
+    "recommendedVehicle": {
+      "es": "SUV o 4x4",
+      "en": "SUV or 4x4",
+      "pt": "SUV ou 4x4"
+    },
+    "googleMapsUrl": "https://www.google.com/maps/search/?api=1&query=Parque+Nacional+Torres+del+Paine",
+    "routeSlug": "punta-arenas-torres-del-paine",
+    "tripTypes": [
+      "naturaleza",
+      "fotografia",
+      "aventura",
+      "fauna"
+    ],
+    "lastReviewed": "2026-08-15"
+  },
+  {
+    "slug": "fuerte-bulnes",
+    "name": "Fuerte Bulnes",
+    "shortDescription": {
+      "es": "Reconstrucción histórica del primer asentamiento chileno en el Estrecho de Magallanes, con miradores sobre el mar y bosque patagónico.",
+      "en": "A historical reconstruction of the first Chilean settlement on the Strait of Magellan, with sea viewpoints and Patagonian forest.",
+      "pt": "Reconstrução histórica do primeiro assentamento chileno no Estreito de Magalhães, com mirantes sobre o mar e floresta patagônica."
+    },
+    "image": "/images/destinations/fuerte-bulnes.jpg",
+    "imageAlt": {
+      "es": "Estructuras de madera de Fuerte Bulnes junto al Estrecho de Magallanes",
+      "en": "Wooden structures of Fuerte Bulnes by the Strait of Magellan",
+      "pt": "Estruturas de madeira do Fuerte Bulnes junto ao Estreito de Magalhães"
+    },
+    "placeholderImage": true,
+    "distanceFromPuntaArenasKm": 60,
+    "approxDrivingTime": {
+      "es": "Aproximadamente 1 hora",
+      "en": "About 1 hour",
+      "pt": "Aproximadamente 1 hora"
+    },
+    "roadType": "mixto",
+    "bestSeason": {
+      "es": "Todo el año",
+      "en": "Year-round",
+      "pt": "Ano todo"
+    },
+    "fuelAvailable": false,
+    "difficulty": "facil",
+    "recommendedVehicle": {
+      "es": "Cualquier vehículo",
+      "en": "Any vehicle",
+      "pt": "Qualquer veículo"
+    },
+    "googleMapsUrl": "https://www.google.com/maps/search/?api=1&query=Fuerte+Bulnes+Chile",
+    "routeSlug": "punta-arenas-fuerte-bulnes",
+    "tripTypes": [
+      "historia",
+      "fotografia",
+      "familia"
+    ],
+    "lastReviewed": "2026-08-15"
+  },
+  {
+    "slug": "reserva-nacional-magallanes",
+    "name": "Reserva Nacional Magallanes",
+    "shortDescription": {
+      "es": "Bosque subantártico a minutos del centro de Punta Arenas, con senderos, miradores panorámicos y el centro de esquí Cerro Mirador.",
+      "en": "Sub-Antarctic forest minutes from downtown Punta Arenas, with trails, panoramic viewpoints and the Cerro Mirador ski center.",
+      "pt": "Floresta subantártica a minutos do centro de Punta Arenas, com trilhas, mirantes panorâmicos e o centro de esqui Cerro Mirador."
+    },
+    "image": "/images/destinations/reserva-nacional-magallanes.jpg",
+    "imageAlt": {
+      "es": "Bosque patagónico en la Reserva Nacional Magallanes",
+      "en": "Patagonian forest in Magallanes National Reserve",
+      "pt": "Floresta patagônica na Reserva Nacional Magalhães"
+    },
+    "placeholderImage": true,
+    "distanceFromPuntaArenasKm": 8,
+    "approxDrivingTime": {
+      "es": "Aproximadamente 15 minutos",
+      "en": "About 15 minutes",
+      "pt": "Aproximadamente 15 minutos"
+    },
+    "roadType": "mixto",
+    "bestSeason": {
+      "es": "Todo el año (nieve en invierno)",
+      "en": "Year-round (snow in winter)",
+      "pt": "Ano todo (neve no inverno)"
+    },
+    "fuelAvailable": true,
+    "difficulty": "facil",
+    "recommendedVehicle": {
+      "es": "Cualquier vehículo",
+      "en": "Any vehicle",
+      "pt": "Qualquer veículo"
+    },
+    "googleMapsUrl": "https://www.google.com/maps/search/?api=1&query=Reserva+Nacional+Magallanes",
+    "routeSlug": null,
+    "tripTypes": [
+      "naturaleza",
+      "aventura",
+      "familia"
+    ],
+    "lastReviewed": "2026-08-15"
+  },
+  {
+    "slug": "laguna-parrillar",
+    "name": "Reserva Nacional Laguna Parrillar",
+    "shortDescription": {
+      "es": "Área silvestre protegida con una laguna rodeada de bosque nativo, ideal para caminatas tranquilas y observación de flora patagónica.",
+      "en": "A protected wilderness area with a lagoon surrounded by native forest, ideal for quiet walks and Patagonian flora spotting.",
+      "pt": "Área silvestre protegida com uma lagoa cercada por floresta nativa, ideal para caminhadas tranquilas e observação da flora patagônica."
+    },
+    "image": "/images/destinations/laguna-parrillar.jpg",
+    "imageAlt": {
+      "es": "Laguna rodeada de bosque en la Patagonia",
+      "en": "Lagoon surrounded by forest in Patagonia",
+      "pt": "Lagoa cercada por floresta na Patagônia"
+    },
+    "placeholderImage": true,
+    "distanceFromPuntaArenasKm": 50,
+    "approxDrivingTime": {
+      "es": "Aproximadamente 1 hora",
+      "en": "About 1 hour",
+      "pt": "Aproximadamente 1 hora"
+    },
+    "roadType": "ripio",
+    "bestSeason": {
+      "es": "Noviembre a marzo",
+      "en": "November to March",
+      "pt": "Novembro a março"
+    },
+    "fuelAvailable": false,
+    "difficulty": "moderado",
+    "recommendedVehicle": {
+      "es": "SUV o 4x4",
+      "en": "SUV or 4x4",
+      "pt": "SUV ou 4x4"
+    },
+    "googleMapsUrl": "https://www.google.com/maps/search/?api=1&query=Reserva+Nacional+Laguna+Parrillar",
+    "routeSlug": null,
+    "tripTypes": [
+      "naturaleza",
+      "aventura"
+    ],
+    "lastReviewed": "2026-08-15"
+  },
+  {
+    "slug": "isla-magdalena",
+    "name": "Isla Magdalena",
+    "shortDescription": {
+      "es": "Monumento Natural Los Pingüinos: una isla en el Estrecho de Magallanes con una de las colonias de pingüinos de Magallanes más grandes de la región. Se accede en excursión marítima, no en vehículo.",
+      "en": "Los Pingüinos Natural Monument: an island in the Strait of Magellan home to one of the largest Magellanic penguin colonies in the region. Reached by boat excursion, not by vehicle.",
+      "pt": "Monumento Natural Los Pingüinos: uma ilha no Estreito de Magalhães com uma das maiores colônias de pinguins-de-magalhães da região. O acesso é por excursão marítima, não por veículo."
+    },
+    "image": "/images/destinations/isla-magdalena.jpg",
+    "imageAlt": {
+      "es": "Colonia de pingüinos en Isla Magdalena, Estrecho de Magallanes",
+      "en": "Penguin colony on Magdalena Island, Strait of Magellan",
+      "pt": "Colônia de pinguins na Ilha Magdalena, Estreito de Magalhães"
+    },
+    "placeholderImage": true,
+    "distanceFromPuntaArenasKm": null,
+    "approxDrivingTime": {
+      "es": "Se accede en excursión marítima desde Punta Arenas",
+      "en": "Reached by boat excursion from Punta Arenas",
+      "pt": "Acesso por excursão marítima a partir de Punta Arenas"
+    },
+    "roadType": "pavimentado",
+    "bestSeason": {
+      "es": "Noviembre a marzo",
+      "en": "November to March",
+      "pt": "Novembro a março"
+    },
+    "fuelAvailable": true,
+    "difficulty": "facil",
+    "recommendedVehicle": {
+      "es": "No aplica (acceso marítimo)",
+      "en": "Not applicable (boat access)",
+      "pt": "Não aplicável (acesso marítimo)"
+    },
+    "googleMapsUrl": "https://www.google.com/maps/search/?api=1&query=Monumento+Natural+Los+Pinguinos+Isla+Magdalena",
+    "routeSlug": null,
+    "tripTypes": [
+      "fauna",
+      "fotografia",
+      "familia"
+    ],
+    "lastReviewed": "2026-08-15"
+  },
+  {
+    "slug": "porvenir-tierra-del-fuego",
+    "name": "Porvenir y Tierra del Fuego",
+    "shortDescription": {
+      "es": "Capital de la Provincia de Tierra del Fuego, con arquitectura patrimonial de la fiebre del oro y estancias ganaderas. Se accede cruzando el Estrecho de Magallanes en transbordador.",
+      "en": "Capital of the Tierra del Fuego Province, with heritage architecture from the gold rush era and sheep-farming estancias. Reached by crossing the Strait of Magellan by ferry.",
+      "pt": "Capital da Província de Tierra del Fuego, com arquitetura patrimonial da corrida do ouro e estâncias de criação de ovelhas. O acesso é cruzando o Estreito de Magalhães de balsa."
+    },
+    "image": "/images/destinations/porvenir-tierra-del-fuego.jpg",
+    "imageAlt": {
+      "es": "Estepa patagónica en Tierra del Fuego",
+      "en": "Patagonian steppe in Tierra del Fuego",
+      "pt": "Estepe patagônica em Tierra del Fuego"
+    },
+    "placeholderImage": true,
+    "distanceFromPuntaArenasKm": null,
+    "approxDrivingTime": {
+      "es": "Cruce en transbordador de aproximadamente 2 horas y media, más traslado en tierra",
+      "en": "About a 2.5-hour ferry crossing, plus overland transfer",
+      "pt": "Travessia de balsa de aproximadamente 2 horas e meia, mais deslocamento terrestre"
+    },
+    "roadType": "mixto",
+    "bestSeason": {
+      "es": "Diciembre a marzo",
+      "en": "December to March",
+      "pt": "Dezembro a março"
+    },
+    "fuelAvailable": true,
+    "difficulty": "moderado",
+    "recommendedVehicle": {
+      "es": "SUV o 4x4",
+      "en": "SUV or 4x4",
+      "pt": "SUV ou 4x4"
+    },
+    "googleMapsUrl": "https://www.google.com/maps/search/?api=1&query=Porvenir+Tierra+del+Fuego+Chile",
+    "routeSlug": "punta-arenas-porvenir",
+    "tripTypes": [
+      "aventura",
+      "historia",
+      "fauna"
+    ],
+    "lastReviewed": "2026-08-15"
+  },
+  {
+    "slug": "el-calafate",
+    "name": "El Calafate, Argentina",
+    "shortDescription": {
+      "es": "Puerta de entrada al Glaciar Perito Moreno y al Parque Nacional Los Glaciares. Requiere cruce fronterizo hacia Argentina.",
+      "en": "Gateway to the Perito Moreno Glacier and Los Glaciares National Park. Requires crossing the border into Argentina.",
+      "pt": "Porta de entrada para o Glaciar Perito Moreno e o Parque Nacional Los Glaciares. Requer travessia de fronteira para a Argentina."
+    },
+    "image": "/images/destinations/el-calafate.jpg",
+    "imageAlt": {
+      "es": "Glaciar Perito Moreno cerca de El Calafate, Argentina",
+      "en": "Perito Moreno Glacier near El Calafate, Argentina",
+      "pt": "Glaciar Perito Moreno perto de El Calafate, Argentina"
+    },
+    "placeholderImage": true,
+    "distanceFromPuntaArenasKm": 480,
+    "approxDrivingTime": {
+      "es": "Aproximadamente 7 a 8 horas, incluyendo el paso fronterizo",
+      "en": "About 7 to 8 hours, including the border crossing",
+      "pt": "Aproximadamente 7 a 8 horas, incluindo a passagem de fronteira"
+    },
+    "roadType": "mixto",
+    "bestSeason": {
+      "es": "Octubre a abril",
+      "en": "October to April",
+      "pt": "Outubro a abril"
+    },
+    "fuelAvailable": true,
+    "difficulty": "moderado",
+    "recommendedVehicle": {
+      "es": "SUV o 4x4",
+      "en": "SUV or 4x4",
+      "pt": "SUV ou 4x4"
+    },
+    "googleMapsUrl": "https://www.google.com/maps/search/?api=1&query=El+Calafate+Argentina",
+    "routeSlug": "punta-arenas-el-calafate",
+    "tripTypes": [
+      "naturaleza",
+      "fotografia",
+      "aventura"
+    ],
+    "lastReviewed": "2026-08-15"
+  },
+  {
+    "slug": "ushuaia",
+    "name": "Ushuaia, Argentina",
+    "shortDescription": {
+      "es": "La ciudad más austral del mundo, a orillas del Canal Beagle. Un viaje largo y memorable que cruza dos veces la frontera entre Chile y Argentina.",
+      "en": "The southernmost city in the world, on the shores of the Beagle Channel. A long, memorable trip that crosses the Chile-Argentina border twice.",
+      "pt": "A cidade mais austral do mundo, às margens do Canal Beagle. Uma viagem longa e memorável que cruza duas vezes a fronteira entre Chile e Argentina."
+    },
+    "image": "/images/destinations/ushuaia.jpg",
+    "imageAlt": {
+      "es": "Montañas nevadas junto al Canal Beagle en Ushuaia",
+      "en": "Snow-capped mountains by the Beagle Channel in Ushuaia",
+      "pt": "Montanhas nevadas junto ao Canal Beagle em Ushuaia"
+    },
+    "placeholderImage": true,
+    "distanceFromPuntaArenasKm": 590,
+    "approxDrivingTime": {
+      "es": "Aproximadamente 10 a 12 horas, incluyendo transbordador y pasos fronterizos",
+      "en": "About 10 to 12 hours, including the ferry crossing and border checkpoints",
+      "pt": "Aproximadamente 10 a 12 horas, incluindo balsa e passagens de fronteira"
+    },
+    "roadType": "mixto",
+    "bestSeason": {
+      "es": "Noviembre a marzo",
+      "en": "November to March",
+      "pt": "Novembro a março"
+    },
+    "fuelAvailable": true,
+    "difficulty": "exigente",
+    "recommendedVehicle": {
+      "es": "SUV o 4x4",
+      "en": "SUV or 4x4",
+      "pt": "SUV ou 4x4"
+    },
+    "googleMapsUrl": "https://www.google.com/maps/search/?api=1&query=Ushuaia+Argentina",
+    "routeSlug": "punta-arenas-ushuaia",
+    "tripTypes": [
+      "aventura",
+      "fotografia",
+      "naturaleza"
+    ],
+    "lastReviewed": "2026-08-15"
+  }
+]
