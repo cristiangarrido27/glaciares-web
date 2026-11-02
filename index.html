@@ -174,6 +174,9 @@
   .review-item{border:1px solid var(--slate-100);border-radius:12px;padding:12px 14px;font-size:14px;color:var(--slate-600);}
   .review-item .who{font-weight:800;color:var(--navy);font-size:13px;margin-top:6px;}
   @media (max-width:640px){ .promo-banner-wrap{margin-top:-18px;} .promo-banner-link{border-radius:14px;} }
+  /* Promo 6x5: separación del buscador (no se monta sobre el formulario) */
+  .promo-banner-wrap.promo-dias-wrap{margin-top:30px;}
+  @media (max-width:640px){ .promo-banner-wrap.promo-dias-wrap{margin-top:20px;} }
 
   /* Filter tabs */
   .filter-tabs{display:flex;flex-wrap:wrap;justify-content:center;gap:10px;margin-bottom:40px;}
@@ -542,6 +545,9 @@
 
 <!-- ===================== BANNER PROMOCIÓN 6x5 ===================== -->
 <div class="promo-banner-wrap promo-dias-wrap">
+  <a href="#buscador" class="promo-banner-link" aria-label="Ver promoción: arrienda 6 días o más y recibe 1 día gratis. Cotizar ahora." data-track="promo6x5-imagen">
+    <img src="/promocion/promo-6x5.webp" srcset="/promocion/promo-6x5-800.webp 800w, /promocion/promo-6x5.webp 1400w" sizes="(max-width: 1180px) 100vw, 1140px" alt="Promoción exclusiva: arrienda 6 días o más y recibe 1 día gratis — Glaciares Rent a Car" width="1400" height="782" loading="lazy" decoding="async" onerror="this.closest('.promo-banner-link').style.display='none'">
+  </a>
   <div class="promo-4x3-info">
     <p class="promo-4x3-lead">Promoción</p>
     <p class="promo-4x3-title"><strong>Arrienda 6 días y paga 5</strong></p>
