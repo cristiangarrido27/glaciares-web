@@ -2,6 +2,22 @@
 
 Este archivo es de uso interno. Ningún texto de aquí fue publicado en la web pública. Reúne los datos que el dueño del negocio debe confirmar o entregar para dejar el sitio 100% preciso.
 
+## 27. Temporadas, promo 6×5 y pago anticipado 10 % (2026-11-01)
+
+Instrucción del dueño:
+- **Temporada baja** hasta el 15 de diciembre (y desde el 21 de marzo): se mantienen las tarifas actuales.
+- **Temporada alta** del 16 de diciembre al 20 de marzo: Swift $39.000 · Dzire $45.000 · Sorento $49.000 · Tucson $57.000 · Captiva $55.000 · Peugeot 3008 $59.000.
+- Se elimina la promo 4×3 (terminó el 31/10). Nueva **promo 6×5**: un solo día gratis por arriendo de 6 días o más, en baja y alta, no acumulable con pago anticipado.
+- **Pago anticipado** baja de 15 % a **10 %** (mismas condiciones: 5 días de anticipación, arriendos desde 3 días, pago total con Webpay).
+- El cotizador calcula cada día con la tarifa de su temporada y lo indica en /buscar, en /reserva/adicionales, en el mensaje de WhatsApp y en el correo.
+
+Archivos: `config.js` (TEMPORADAS, PROMO_DIAS, EARLY_BOOKING, FLEET.priceHigh), `cotizacion.js`, `index.html`, `buscar.html`, `reserva-adicionales.html`, `analytics-config.js`, `funciones/enviar-cotizacion.js`.
+
+**Pendiente del dueño (fuera de la web)**:
+- Panel del servidor de reservas (Render): cambiar el descuento por pago anticipado a **10 %** y cargar las tarifas de temporada alta; el enlace de pago Webpay usa los valores del servidor.
+- Orlando 7 pasajeros ($65.000 temporada alta) no está en la web: falta foto y su id en el servidor de reservas.
+- Promo 6×5: un solo día gratis por arriendo (`repetir: false`, confirmado 2026-11-02).
+
 ## 26. Correcciones de la auditoría de conversión (2026-09-21)
 
 - **WhatsApp en computadores**: el sitio ya usaba `https://wa.me/`; el `whatsapp://` que vio la auditoría lo genera la propia página de WhatsApp al pulsar "Continuar al chat" en un PC. Ahora, después de abrir WhatsApp, `/reserva/adicionales` muestra un panel "¿No se abrió WhatsApp?" con **Abrir WhatsApp Web** y **Copiar mensaje**.

@@ -156,6 +156,8 @@
   .promo-banner-link:hover{transform:translateY(-3px);box-shadow:0 20px 44px rgba(10,37,64,.24);}
   .promo-banner-link img{display:block;width:100%;height:auto;}
   .promo-banner-note{text-align:center;color:var(--slate-500);font-size:12px;margin-top:10px;}
+  .price-high{font-size:12.5px;color:var(--slate-600);margin:4px 0 0;}
+  .price-high strong{color:var(--navy);}
   .promo-4x3-info{max-width:760px;margin:14px auto 0;background:#fff;border:1px solid var(--slate-100);border-radius:16px;padding:16px 18px;text-align:center;}
   .promo-4x3-title{font-size:17px;color:var(--navy);margin:0 0 8px;text-wrap:balance;}
   .promo-4x3-info ul{list-style:none;padding:0;margin:0 0 14px;text-align:left;font-size:13px;color:var(--slate-600);display:grid;gap:4px;}
@@ -538,16 +540,15 @@
   </form>
 </div>
 
-<!-- ===================== BANNER PROMOCIÓN 4x3 ===================== -->
-<div class="promo-banner-wrap">
-  <a href="#buscador" class="promo-banner-link" aria-label="Ver promoción: arrienda 4 días y paga 3. Cotizar ahora.">
-    <img src="https://glaciaresrentacar.cl/promocion/promo-4x3.webp" srcset="https://glaciaresrentacar.cl/promocion/promo-4x3-800.webp 800w, https://glaciaresrentacar.cl/promocion/promo-4x3.webp 1400w" sizes="(max-width: 1180px) 100vw, 1140px" alt="Promoción exclusiva: arrienda 4 días y paga 3 — Glaciares Rent a Car" width="1400" height="781" loading="lazy" decoding="async" onerror="this.closest('.promo-banner-wrap').style.display='none'">
-  </a>
+<!-- ===================== BANNER PROMOCIÓN 6x5 ===================== -->
+<div class="promo-banner-wrap promo-dias-wrap">
   <div class="promo-4x3-info">
-    <p class="promo-4x3-title"><strong>Reserva 4 días o más y recibe 1 día gratis</strong></p>
-    <a href="#buscador" class="btn btn-accent promo-4x3-cta" data-track="promo4x3-consultar">Consultar disponibilidad</a>
-    <a href="https://wa.me/56983335924?text=Hola%2C%20quiero%20cotizar%20la%20promoci%C3%B3n%204x3.%0AFechas%3A%20%0AVeh%C3%ADculo%3A%20" target="_blank" rel="noopener" class="promo-4x3-wa" data-track="whatsapp-promo4x3">o consúltala por WhatsApp</a>
-    <p class="promo-4x3-legal">Válido para solicitudes de reserva enviadas hasta el <span id="promo4x3Limite2">31 de octubre de 2026</span>, para viajar en cualquier fecha y sujeto a disponibilidad. El abono puede pagarse después de esa fecha. Un solo día gratis por arriendo. No acumulable con otros descuentos. El beneficio se aplica al arriendo del vehículo; aeropuerto y adicionales se cobran aparte.</p>
+    <p class="promo-4x3-lead">Promoción</p>
+    <p class="promo-4x3-title"><strong>Arrienda 6 días y paga 5</strong></p>
+    <p class="promo-4x3-sub">Arrienda 6 días o más y recibe 1 día gratis: 6 días pagas 5 · 7 días pagas 6 · 12 días pagas 11.</p>
+    <a href="#buscador" class="btn btn-accent promo-4x3-cta" data-track="promo6x5-consultar">Consultar disponibilidad</a>
+    <a href="https://wa.me/56983335924?text=Hola%2C%20quiero%20cotizar%20la%20promoci%C3%B3n%206x5.%0AFechas%3A%20%0AVeh%C3%ADculo%3A%20" target="_blank" rel="noopener" class="promo-4x3-wa" data-track="whatsapp-promo6x5">o consúltala por WhatsApp</a>
+    <p class="promo-4x3-legal">Válido en temporada baja y alta, sujeto a disponibilidad. Un solo día gratis por arriendo, descontado a la tarifa más baja del arriendo. Aplica solo al arriendo del vehículo; aeropuerto y adicionales se cobran aparte. No acumulable con el descuento por pago anticipado: el cotizador te muestra la opción más conveniente.</p>
   </div>
 </div>
 
@@ -600,7 +601,7 @@
 <section id="flota" class="section container">
   <div class="section-head">
     <h2 class="section-title">Nuestra flota</h2>
-    <p class="section-sub">Vehículos mantenidos para ofrecerte comodidad y seguridad en cada viaje. Todos los valores incluyen IVA.</p>
+    <p class="section-sub">Vehículos mantenidos para ofrecerte comodidad y seguridad en cada viaje. Todos los valores incluyen IVA. Temporada baja: hasta el 15 de diciembre y desde el 21 de marzo · Temporada alta: del 16 de diciembre al 20 de marzo. El cotizador calcula cada día con la tarifa de su temporada.</p>
   </div>
   <div class="filter-tabs" id="filterTabs">
     <button data-filter="todos" class="filter-btn active">Todos</button>
@@ -614,8 +615,9 @@
         <span class="card-cat">Citycar</span>
         <h3>Suzuki Swift</h3>
         <p class="price">$35.000<small> / día, desde · IVA incluido</small></p>
+        <p class="price-high">Temporada alta (16 dic – 20 mar): <strong>$39.000</strong> / día</p>
         <p class="avail-note"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20 6 9 17l-5-5"/></svg>Disponibilidad sujeta a confirmación</p>
-        <a href="https://wa.me/56983335924?text=Hola%2C%20quiero%20cotizar%20el%20Suzuki%20Swift%20%28%2435.000%2Fd%C3%ADa%29." target="_blank" rel="noopener" class="btn-outline" style="margin-top:14px;" data-track="cotizar-vehiculo" data-vehicle="Suzuki Swift">COTIZAR ESTE VEHÍCULO</a>
+        <a href="https://wa.me/56983335924?text=Hola%2C%20quiero%20cotizar%20el%20Suzuki%20Swift.%0AFechas%3A%20" target="_blank" rel="noopener" class="btn-outline" style="margin-top:14px;" data-track="cotizar-vehiculo" data-vehicle="Suzuki Swift">COTIZAR ESTE VEHÍCULO</a>
       </div>
     </div>
     <div class="card" data-cat="citycar">
@@ -624,8 +626,9 @@
         <span class="card-cat">Citycar</span>
         <h3>Suzuki Dzire</h3>
         <p class="price">$38.000<small> / día, desde · IVA incluido</small></p>
+        <p class="price-high">Temporada alta (16 dic – 20 mar): <strong>$45.000</strong> / día</p>
         <p class="avail-note"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20 6 9 17l-5-5"/></svg>Disponibilidad sujeta a confirmación</p>
-        <a href="https://wa.me/56983335924?text=Hola%2C%20quiero%20cotizar%20el%20Suzuki%20Dzire%20%28%2438.000%2Fd%C3%ADa%29." target="_blank" rel="noopener" class="btn-outline" style="margin-top:14px;" data-track="cotizar-vehiculo" data-vehicle="Suzuki Dzire">COTIZAR ESTE VEHÍCULO</a>
+        <a href="https://wa.me/56983335924?text=Hola%2C%20quiero%20cotizar%20el%20Suzuki%20Dzire.%0AFechas%3A%20" target="_blank" rel="noopener" class="btn-outline" style="margin-top:14px;" data-track="cotizar-vehiculo" data-vehicle="Suzuki Dzire">COTIZAR ESTE VEHÍCULO</a>
       </div>
     </div>
     <div class="card" data-cat="suv">
@@ -634,8 +637,9 @@
         <span class="card-cat">SUV</span>
         <h3>Chevrolet Captiva</h3>
         <p class="price">$48.000<small> / día, desde · IVA incluido</small></p>
+        <p class="price-high">Temporada alta (16 dic – 20 mar): <strong>$55.000</strong> / día</p>
         <p class="avail-note"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20 6 9 17l-5-5"/></svg>Disponibilidad sujeta a confirmación</p>
-        <a href="https://wa.me/56983335924?text=Hola%2C%20quiero%20cotizar%20el%20Chevrolet%20Captiva%20%28%2448.000%2Fd%C3%ADa%29." target="_blank" rel="noopener" class="btn-outline" style="margin-top:14px;" data-track="cotizar-vehiculo" data-vehicle="Chevrolet Captiva">COTIZAR ESTE VEHÍCULO</a>
+        <a href="https://wa.me/56983335924?text=Hola%2C%20quiero%20cotizar%20el%20Chevrolet%20Captiva.%0AFechas%3A%20" target="_blank" rel="noopener" class="btn-outline" style="margin-top:14px;" data-track="cotizar-vehiculo" data-vehicle="Chevrolet Captiva">COTIZAR ESTE VEHÍCULO</a>
       </div>
     </div>
     <div class="card" data-cat="suv">
@@ -644,8 +648,9 @@
         <span class="card-cat">SUV</span>
         <h3>Kia Sorento</h3>
         <p class="price">$43.000<small> / día, desde · IVA incluido</small></p>
+        <p class="price-high">Temporada alta (16 dic – 20 mar): <strong>$49.000</strong> / día</p>
         <p class="avail-note"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20 6 9 17l-5-5"/></svg>Disponibilidad sujeta a confirmación</p>
-        <a href="https://wa.me/56983335924?text=Hola%2C%20quiero%20cotizar%20el%20Kia%20Sorento%20%28%2443.000%2Fd%C3%ADa%29." target="_blank" rel="noopener" class="btn-outline" style="margin-top:14px;" data-track="cotizar-vehiculo" data-vehicle="Kia Sorento">COTIZAR ESTE VEHÍCULO</a>
+        <a href="https://wa.me/56983335924?text=Hola%2C%20quiero%20cotizar%20el%20Kia%20Sorento.%0AFechas%3A%20" target="_blank" rel="noopener" class="btn-outline" style="margin-top:14px;" data-track="cotizar-vehiculo" data-vehicle="Kia Sorento">COTIZAR ESTE VEHÍCULO</a>
       </div>
     </div>
     <div class="card" data-cat="suv">
@@ -654,8 +659,9 @@
         <span class="card-cat">SUV</span>
         <h3>Hyundai Tucson</h3>
         <p class="price">$49.000<small> / día, desde · IVA incluido</small></p>
+        <p class="price-high">Temporada alta (16 dic – 20 mar): <strong>$57.000</strong> / día</p>
         <p class="avail-note"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20 6 9 17l-5-5"/></svg>Disponibilidad sujeta a confirmación</p>
-        <a href="https://wa.me/56983335924?text=Hola%2C%20quiero%20cotizar%20el%20Hyundai%20Tucson%20%28%2449.000%2Fd%C3%ADa%29." target="_blank" rel="noopener" class="btn-outline" style="margin-top:14px;" data-track="cotizar-vehiculo" data-vehicle="Hyundai Tucson">COTIZAR ESTE VEHÍCULO</a>
+        <a href="https://wa.me/56983335924?text=Hola%2C%20quiero%20cotizar%20el%20Hyundai%20Tucson.%0AFechas%3A%20" target="_blank" rel="noopener" class="btn-outline" style="margin-top:14px;" data-track="cotizar-vehiculo" data-vehicle="Hyundai Tucson">COTIZAR ESTE VEHÍCULO</a>
       </div>
     </div>
     <div class="card" data-cat="suv">
@@ -664,8 +670,9 @@
         <span class="card-cat">SUV</span>
         <h3>Peugeot 3008</h3>
         <p class="price">$54.000<small> / día, desde · IVA incluido</small></p>
+        <p class="price-high">Temporada alta (16 dic – 20 mar): <strong>$59.000</strong> / día</p>
         <p class="avail-note"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20 6 9 17l-5-5"/></svg>Disponibilidad sujeta a confirmación</p>
-        <a href="https://wa.me/56983335924?text=Hola%2C%20quiero%20cotizar%20el%20Peugeot%203008%20%28%2454.000%2Fd%C3%ADa%29." target="_blank" rel="noopener" class="btn-outline" style="margin-top:14px;" data-track="cotizar-vehiculo" data-vehicle="Peugeot 3008">COTIZAR ESTE VEHÍCULO</a>
+        <a href="https://wa.me/56983335924?text=Hola%2C%20quiero%20cotizar%20el%20Peugeot%203008.%0AFechas%3A%20" target="_blank" rel="noopener" class="btn-outline" style="margin-top:14px;" data-track="cotizar-vehiculo" data-vehicle="Peugeot 3008">COTIZAR ESTE VEHÍCULO</a>
       </div>
     </div>
   </div>
@@ -731,10 +738,10 @@
       <img src="https://glaciaresrentacar.cl/promocion/promocion-reserva-anticipada.webp" alt="Promoción por reserva anticipada" onerror="this.src='https://glaciaresrentacar.cl/portada/portada-patagonia-01.webp'">
       <div class="promo-body">
         <h3>Reserva con anticipación</h3>
-        <p class="lead">15% de descuento en el valor del arriendo pagando el total al reservar.</p>
+        <p class="lead">10% de descuento en el valor del arriendo pagando el total al reservar.</p>
         <p class="label">¿Qué incluye?</p>
         <ul class="promo-list">
-          <li>15% de descuento en el valor del arriendo</li>
+          <li>10% de descuento en el valor del arriendo</li>
           <li>Kilometraje libre en la Región de Magallanes</li>
           <li>Soporte por WhatsApp durante tu viaje</li>
           <li>Asesoría para planificar tu recorrido</li>
@@ -744,7 +751,7 @@
           <li>Reserva con un mínimo de 5 días antes del inicio de tu arriendo</li>
           <li>Válido para arriendos desde 3 días</li>
           <li>Pagando el 100% al reservar con Webpay (no aplica con abono)</li>
-          <li>No acumulable con la promoción 4×3; los adicionales no tienen descuento</li>
+          <li>No acumulable con la promoción 6×5; los adicionales no tienen descuento</li>
         </ul>
         <p class="promo-valid" id="promoValidNote"></p>
         <a href="https://wa.me/56983335924?text=Hola%2C%20quiero%20aprovechar%20la%20promoci%C3%B3n%20de%20reserva%20anticipada." target="_blank" rel="noopener" class="btn btn-accent" style="margin-top:14px;" data-track="whatsapp-promocion">Consultar promoción</a>
@@ -1118,10 +1125,9 @@ if ('IntersectionObserver' in window) {
   }
 })();
 
-/* ---- Promo 4x3: condiciones desde config.js (si están definidas) ---- */
+/* ---- Promo 6x5 (config.js → PROMO_DIAS) ---- */
 (function(){
-  const p = (window.GLACIARES_CONFIG || {}).PROMO_4X3 || {};
-  if (p.fechaLimiteTexto) ['promo4x3Limite', 'promo4x3Limite2'].forEach(id => { const el = document.getElementById(id); if (el) el.textContent = p.fechaLimiteTexto; });
+  const p = (window.GLACIARES_CONFIG || {}).PROMO_DIAS || {};
   // Promo vencida o desactivada: se oculta sola (no se anuncia algo que ya no aplica).
   const G = window.GlaciaresCotizacion;
   const hoy = G ? G.localISO() : new Date().toISOString().slice(0, 10);
@@ -1140,12 +1146,12 @@ try { fetch('https://glaciares-reservas-backend.onrender.com/api/extras', { mode
 /* ---- Fleet data (datos confirmados: nombre, categoría, precio, imagen) ---- */
 const IMG_BASE = 'https://glaciaresrentacar.cl/flota/';
 const fleet = [
-  { id: 1, name: 'Suzuki Swift', price: 35000, cat: 'citycar', catLabel: 'Citycar', img: IMG_BASE + 'suzuki-swift.webp' },
-  { id: 2, name: 'Suzuki Dzire', price: 38000, cat: 'citycar', catLabel: 'Citycar', img: IMG_BASE + 'suzuki-dzire.webp' },
-  { id: 3, name: 'Chevrolet Captiva', price: 48000, cat: 'suv', catLabel: 'SUV', img: IMG_BASE + 'chevrolet-captiva.webp' },
-  { id: 6, name: 'Kia Sorento', price: 43000, cat: 'suv', catLabel: 'SUV', img: IMG_BASE + 'kia-sorento.webp' },
-  { id: 7, name: 'Hyundai Tucson', price: 49000, cat: 'suv', catLabel: 'SUV', img: IMG_BASE + 'hyundai-tucson.webp' },
-  { id: 8, name: 'Peugeot 3008', price: 54000, cat: 'suv', catLabel: 'SUV', img: IMG_BASE + 'peugeot-3008.webp' },
+  { id: 1, name: 'Suzuki Swift', price: 35000, priceHigh: 39000, cat: 'citycar', catLabel: 'Citycar', img: IMG_BASE + 'suzuki-swift.webp' },
+  { id: 2, name: 'Suzuki Dzire', price: 38000, priceHigh: 45000, cat: 'citycar', catLabel: 'Citycar', img: IMG_BASE + 'suzuki-dzire.webp' },
+  { id: 3, name: 'Chevrolet Captiva', price: 48000, priceHigh: 55000, cat: 'suv', catLabel: 'SUV', img: IMG_BASE + 'chevrolet-captiva.webp' },
+  { id: 6, name: 'Kia Sorento', price: 43000, priceHigh: 49000, cat: 'suv', catLabel: 'SUV', img: IMG_BASE + 'kia-sorento.webp' },
+  { id: 7, name: 'Hyundai Tucson', price: 49000, priceHigh: 57000, cat: 'suv', catLabel: 'SUV', img: IMG_BASE + 'hyundai-tucson.webp' },
+  { id: 8, name: 'Peugeot 3008', price: 54000, priceHigh: 59000, cat: 'suv', catLabel: 'SUV', img: IMG_BASE + 'peugeot-3008.webp' },
 ];
 const fleetGrid = document.getElementById('fleetGrid');
 /* Las tarjetas viven en el HTML (visibles para Google y sin depender de JS).
@@ -1371,7 +1377,7 @@ const ADS_CONVERSION_TRACKS = [
   'whatsapp-float',
   'whatsapp-hero',
   'whatsapp-promocion',
-  'whatsapp-promo4x3',
+  'whatsapp-promo6x5',
   'whatsapp-faq',
   'cotizar-vehiculo',
   'mobile-cta-cotizar',

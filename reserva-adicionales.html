@@ -664,7 +664,7 @@ function renderVehicleCard() {
   document.getElementById('vCat').textContent = vehicle.catLabel;
   document.getElementById('vName').textContent = vehicle.name;
   document.getElementById('vMeta').innerHTML = [
-    ['Precio por día', money(vehicle.price)],
+    ['Precio por día', (GQ && days > 0) ? GQ.rateText(GQ.compute({ vehicle, pickUpDate: state.pickUpDate, pickUpTime: state.pickUpTime, dropOffDate: state.dropOffDate, dropOffTime: state.dropOffTime, extras: [] })) : money(vehicle.price)],
     ['Duración', `${days} día${days > 1 ? 's' : ''}`],
     ['Retiro', `${placeLabel(state.pickUpPlace)} · ${fechaHoraLarga(state.pickUpDate, state.pickUpTime)}`],
     ['Devolución', `${placeLabel(state.dropOffPlace, state.dropOffOther)} · ${fechaHoraLarga(state.dropOffDate, state.dropOffTime)}`],
@@ -874,13 +874,13 @@ function calcNow() {
     argentina: state.argentina, extras: selectedExtras, catalog: extrasCatalog,
     backendDiscountPct: backendPct,
     // Si esta cotización ya se envió, cuenta la fecha de la solicitud: la promo
-    // 4×3 se respeta aunque el abono se pague después del plazo.
+    // se respeta aunque el abono se pague después del plazo.
     today: requestDateISO(),
   });
 }
 function requestDateISO() {
   // Si esta combinación ya tiene código, cuenta la fecha en que se creó la
-  // cotización: la promo 4×3 se respeta aunque el abono se pague después.
+  // cotización: la promo se respeta aunque el abono se pague después.
   if (!GQ) return undefined;
   const d = GQ.loadDraft();
   const sig = GQ.signature({ vehicleId, state, extras: selectedExtras });
@@ -893,9 +893,11 @@ function renderSummary() {
   if (!c) return;
   lastCalc = c;
   const rows = [];
-  rows.push(`<div class="summary-row"><span>Arriendo: ${c.days} día${c.days > 1 ? 's' : ''} × ${money(c.pricePerDay)}</span><span>${money(c.base)}</span></div>`);
+  GQ.rentalRows(c).forEach(r => {
+    rows.push(`<div class="summary-row"><span>${esc(r[0])}${r[2] ? `<span class="sr-sub">${esc(r[2])}</span>` : ''}</span><span>${esc(r[1])}</span></div>`);
+  });
   if (c.applied) {
-    rows.push(`<div class="summary-row discount"><span>${esc(c.applied.label)}<span class="sr-sub">Aplicada automáticamente${(cfg.PROMO_4X3 || {}).fechaLimiteTexto ? ' · para solicitudes enviadas hasta el ' + esc(cfg.PROMO_4X3.fechaLimiteTexto) : ''}</span></span><span>−${money(c.applied.savings)}</span></div>`);
+    rows.push(`<div class="summary-row discount"><span>${esc(c.applied.label)}<span class="sr-sub">Aplicada automáticamente · 1 día gratis por arriendo de ${(GQ.promoCfg().diasMinimos || 6)} días o más</span></span><span>−${money(c.applied.savings)}</span></div>`);
   }
   if (c.airport.amount > 0) rows.push(`<div class="summary-row"><span>${esc(c.airport.label)}</span><span>${money(c.airport.amount)}</span></div>`);
   c.extras.forEach(e => {
@@ -905,15 +907,17 @@ function renderSummary() {
     rows.push(`<div class="summary-row"><span>${esc(e.name)}${qty}${per}${sub}</span><span>${money(e.cost)}</span></div>`);
   });
   rows.push(`<div class="summary-row total-row"><span>Total estimado <span class="sr-sub" style="display:inline;font-weight:600;">IVA incluido</span></span><span id="totalAmount">${money(c.total)}</span></div>`);
-  if (c.applied) rows.push(`<p class="summary-note" style="color:var(--green);font-weight:700;">Ahorras ${money(c.applied.savings)} con la promo 4×3.</p>`);
+  const pName = GQ.promoName();
+  if (c.applied) rows.push(`<p class="summary-note" style="color:var(--green);font-weight:700;">Ahorras ${money(c.applied.savings)} con la ${esc(pName.toLowerCase())}.</p>`);
+  if (c.season && c.season.highDays) rows.push(`<p class="promo-hint muted-hint">Temporada alta (${esc(GQ.seasonText())}): ${c.season.lowDays ? 'los días que caen en ese período se cotizan con tarifa de temporada alta.' : 'tus fechas se cotizan con tarifa de temporada alta.'}</p>`);
   // Explicación de promociones que NO aplican (para no generar expectativas falsas).
   const p4 = c.promo4x3;
-  if (!p4.eligible && p4.reason === 'dias' && (cfg.PROMO_4X3 || {}).activa && c.days === 3) {
-    rows.push(`<p class="promo-hint muted-hint">Con 1 día más (4 días) recibes 1 día gratis con la promo 4×3${(cfg.PROMO_4X3 || {}).vigencia ? ', ' + esc(cfg.PROMO_4X3.vigencia) : ''}.</p>`);
-  } else if (!p4.eligible && p4.reason === 'vigencia' && c.days >= ((cfg.PROMO_4X3 || {}).diasMinimos || 4)) {
-    rows.push(`<p class="promo-hint muted-hint">La promo 4×3 terminó: era ${esc((cfg.PROMO_4X3 || {}).vigencia || '')}.</p>`);
+  const pMin = GQ.promoCfg().diasMinimos || 6;
+  if (!p4.eligible && p4.reason === 'dias' && GQ.promoCfg().activa && c.days >= pMin - 2) {
+    const falta = pMin - c.days;
+    rows.push(`<p class="promo-hint muted-hint">Con ${falta} día${falta > 1 ? 's' : ''} más (${pMin} días) recibes 1 día gratis con la ${esc(pName.toLowerCase())}.</p>`);
   } else if (!p4.eligible && p4.reason === 'periodo') {
-    rows.push(`<p class="promo-hint muted-hint">La promo 4×3 no aplica a este período de viaje.</p>`);
+    rows.push(`<p class="promo-hint muted-hint">La ${esc(pName.toLowerCase())} no aplica a este período de viaje.</p>`);
   }
   document.getElementById('summaryBody').innerHTML = rows.join('');
 
@@ -924,9 +928,9 @@ function renderSummary() {
   split.push(`<div class="ps-row"><span>Abono para reservar (1 día de arriendo)</span><strong>${money(c.deposit)}</strong></div>`);
   split.push(`<div class="ps-row"><span>Saldo al retirar el vehículo</span><strong>${money(c.balance)}</strong></div>`);
   if (c.prepay) {
-    split.push(`<div class="ps-opt"><div class="ps-row"><span>O pagando el 100 % por adelantado (−${c.prepay.pct}% en el arriendo${c.applied ? ', en lugar de la promo 4×3' : ''})</span><strong>${money(c.prepay.total)}</strong></div><p class="ps-hint">Ahorras ${money(c.prepay.extraSavings)} más. Descuento no acumulable con otras promociones.</p></div>`);
+    split.push(`<div class="ps-opt"><div class="ps-row"><span>O pagando el 100 % por adelantado (−${c.prepay.pct}% en el arriendo${c.applied ? ', en lugar de la ' + esc(pName.toLowerCase()) : ''})</span><strong>${money(c.prepay.total)}</strong></div><p class="ps-hint">Ahorras ${money(c.prepay.extraSavings)} más. Descuento no acumulable con otras promociones.</p></div>`);
   } else if (c.applied && c.early.eligible) {
-    split.push(`<p class="ps-hint">La promo 4×3 te conviene más que el ${c.early.pct}% por pago anticipado (no son acumulables).</p>`);
+    split.push(`<p class="ps-hint">La ${esc(pName.toLowerCase())} te conviene más que el ${c.early.pct}% por pago anticipado (no son acumulables).</p>`);
   }
   document.getElementById('paySplit').innerHTML = split.join('');
 
@@ -1048,7 +1052,8 @@ function ensureQuote() {
     try {
       const f = readFlight();
       const c = lastCalc;
-      const promoNote = c && c.applied ? `Promo 4×3 estimada en la web: −${money(c.applied.savings)} (total estimado ${money(c.total)}).` : '';
+      const seasonNote = c && c.season && c.season.highDays ? `Temporada alta: ${c.season.highDays} día(s) a ${money(vehicle.priceHigh)}. ` : '';
+      const promoNote = seasonNote + (c && c.applied ? `${GQ.promoName()} estimada en la web: −${money(c.applied.savings)} (total estimado ${money(c.total)}).` : (seasonNote ? `Total estimado ${money(c.total)}.` : ''));
       const payload = {
         vehicleId, from: state.pickUpDate, to: state.dropOffDate,
         pickupTime: state.pickUpTime, returnTime: state.dropOffTime,

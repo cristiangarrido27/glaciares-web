@@ -7,8 +7,10 @@
    - Todo monto sale de config.js (tarifas confirmadas) o del backend.
    - El total es ESTIMADO: el monto definitivo lo fija el equipo al
      confirmar la disponibilidad (y el backend al generar el enlace de pago).
-   - Nunca acumula la promo 4×3 con el descuento por pago anticipado:
-     calcula ambas y muestra la más conveniente para el cliente.
+   - Tarifa por TEMPORADA: cada día se cobra según la temporada en que cae
+     (config.js → TEMPORADAS y FLEET[].priceHigh).
+   - Nunca acumula la promo por días (6×5) con el descuento por pago
+     anticipado: calcula ambas y muestra la más conveniente para el cliente.
    - También guarda la cotización en el navegador (localStorage) para que
      el cliente pueda retomarla al volver de WhatsApp.
    ===================================================================== */
@@ -80,11 +82,46 @@
     return { id: def.id, name: def.name, qty: qty, net: net, vat: vat, cost: net + vat, perDay: type === 'day' };
   }
 
-  function promo4x3Info(days, pricePerDay, pickUpDate, today) {
-    var p = cfg.PROMO_4X3 || {};
+  /* ---------------- Temporadas ---------------- */
+  function highRanges() { return ((cfg.TEMPORADAS || {}).ALTA) || []; }
+  function isHighSeason(iso) {
+    return highRanges().some(function (r) { return iso >= r.desde && iso <= r.hasta; });
+  }
+  function seasonText() {
+    var r = highRanges().filter(function (x) { return x.hasta >= localISO(); })[0] || highRanges()[0];
+    return r ? (r.texto || (r.desde + ' al ' + r.hasta)) : '';
+  }
+  function dayRate(v, iso) {
+    return isHighSeason(iso) && v.priceHigh ? v.priceHigh : v.price;
+  }
+  /* Desglose del arriendo por temporada: un tramo por cada tarifa usada. */
+  function rentalBreakdown(v, pickUpDate, days) {
+    var lowDays = 0, highDays = 0, base = 0, minRate = Infinity;
+    for (var i = 0; i < days; i++) {
+      var iso = addDaysISO(pickUpDate, i);
+      var high = isHighSeason(iso) && !!v.priceHigh;
+      var rate = high ? v.priceHigh : v.price;
+      if (high) highDays++; else lowDays++;
+      base += rate;
+      if (rate < minRate) minRate = rate;
+    }
+    var segs = [];
+    if (lowDays) segs.push({ season: 'baja', label: 'Temporada baja', days: lowDays, rate: v.price, amount: lowDays * v.price });
+    if (highDays) segs.push({ season: 'alta', label: 'Temporada alta', days: highDays, rate: v.priceHigh, amount: highDays * v.priceHigh });
+    if (segs.length > 1 && isHighSeason(pickUpDate)) segs.reverse(); // en el orden del viaje
+    return { base: base, lowDays: lowDays, highDays: highDays, segments: segs,
+      minRate: minRate === Infinity ? v.price : minRate,
+      avg: days ? Math.round(base / days) : v.price };
+  }
+
+  /* Promoción por días (6×5). Antes 4×3; la clave PROMO_4X3 quedó desactivada. */
+  function promoCfg() { return cfg.PROMO_DIAS || cfg.PROMO_4X3 || {}; }
+  function promoName() { return promoCfg().nombre || 'Promo 6×5'; }
+  function promoDaysInfo(days, pricePerDay, pickUpDate, today) {
+    var p = promoCfg();
     var out = { eligible: false, savings: 0, freeDays: 0, reason: '' };
     if (!p.activa) { out.reason = 'inactiva'; return out; }
-    var min = p.diasMinimos || 4;
+    var min = p.diasMinimos || 6;
     if (days < min) { out.reason = 'dias'; return out; }
     if (p.validaHasta) {
       var ref = p.vigenciaSegun === 'reserva' ? (today || localISO()) : pickUpDate;
@@ -95,13 +132,16 @@
     out.eligible = true; out.freeDays = free; out.savings = free * pricePerDay;
     return out;
   }
+  var promo4x3Info = promoDaysInfo; // nombre anterior (compatibilidad)
 
   function earlyInfo(days, base, pickUpDate, today, backendPct) {
     var e = cfg.EARLY_BOOKING || {};
     // Reglas del sitio (confirmadas por el dueño): siempre se exigen, aunque el
     // backend todavía tenga otra anticipación configurada.
     var ok = daysAhead(pickUpDate, today) >= (e.minDaysAhead || 0) && days >= (e.minRentalDays || 1);
-    var pct = !ok ? 0 : (typeof backendPct === 'number' ? backendPct : (e.pct || 0));
+    // Manda el porcentaje publicado en config.js (10 %). El del servidor solo se
+    // usa si config.js no define uno.
+    var pct = !ok ? 0 : (typeof e.pct === 'number' ? e.pct : (typeof backendPct === 'number' ? backendPct : 0));
     return { eligible: pct > 0, pct: pct, savings: pct > 0 ? Math.round(base * pct / 100) : 0 };
   }
 
@@ -115,7 +155,8 @@
   function compute(input) {
     var v = input.vehicle;
     var days = rentalDays(input.pickUpDate, input.pickUpTime, input.dropOffDate, input.dropOffTime);
-    var base = v.price * days;
+    var season = rentalBreakdown(v, input.pickUpDate, days);
+    var base = season.base;
     var air = airport(input.pickUpPlace, input.dropOffPlace);
     var catalog = input.catalog || cfg.EXTRAS_FALLBACK || [];
     var lines = [];
@@ -130,25 +171,26 @@
     var extrasTotal = lines.reduce(function (s, l) { return s + l.cost; }, 0);
     var normal = base + air.amount + extrasTotal;
 
-    var p4 = promo4x3Info(days, v.price, input.pickUpDate, input.today);
+    // El día gratis se descuenta a la tarifa más baja del arriendo.
+    var p4 = promoDaysInfo(days, season.minRate, input.pickUpDate, input.today);
     var early = earlyInfo(days, base, input.pickUpDate, input.today, input.backendDiscountPct);
 
-    // Promo que se aplica al total principal: la 4×3 (vale con abono o pago total).
-    // El 15 % exige pagar el 100 % por adelantado, así que se ofrece como alternativa
-    // solo si ahorra MÁS que la 4×3. Nunca se suman.
+    // Promo que se aplica al total principal: la 6×5 (vale con abono o pago total).
+    // El descuento por pago anticipado exige pagar el 100 % por adelantado, así que
+    // se ofrece como alternativa solo si ahorra MÁS que la 6×5. Nunca se suman.
     var applied = null;
-    if (p4.eligible) applied = { kind: '4x3', savings: p4.savings, label: 'Promo 4×3 (' + p4.freeDays + ' día' + (p4.freeDays > 1 ? 's' : '') + ' sin costo)' };
+    if (p4.eligible) applied = { kind: 'promoDias', savings: p4.savings, label: promoName() + ' (' + p4.freeDays + ' día' + (p4.freeDays > 1 ? 's' : '') + ' sin costo)' };
     var total = normal - (applied ? applied.savings : 0);
     var prepay = null;
     if (early.eligible && early.savings > (applied ? applied.savings : 0)) {
       prepay = { pct: early.pct, savings: early.savings, total: normal - early.savings,
         extraSavings: early.savings - (applied ? applied.savings : 0) };
     }
-    var deposit = Math.min(v.price, total); // abono = 1 día de arriendo (backend)
+    var deposit = Math.min(dayRate(v, input.pickUpDate), total); // abono = 1 día de arriendo (tarifa del día de retiro)
     var guarantee = input.argentina === 'si' ? (cfg.ARGENTINA_GUARANTEE || 750000) : (v.deposit || cfg.MIN_DEPOSIT || 500000);
 
     return {
-      days: days, pricePerDay: v.price, base: base, airport: air, extras: lines,
+      days: days, pricePerDay: season.avg, season: season, base: base, airport: air, extras: lines,
       extrasTotal: extrasTotal, normal: normal, promo4x3: p4, early: early,
       applied: applied, total: total, prepay: prepay,
       deposit: deposit, balance: total - deposit, guarantee: guarantee,
@@ -273,6 +315,7 @@
     if (st.argentina === 'si') lines.push('Viaje a Argentina: sí');
     var ex = extrasNames(c, q.catalog);
     if (ex.length) lines.push('Adicionales: ' + ex.join(', '));
+    lines.push('Tarifa: ' + rateText(c));
     lines.push('Total estimado: ' + money(c.total));
     lines.push('¿Está disponible?');
     return lines.join('\n');
@@ -297,7 +340,7 @@
   }
   /* Desglose de precio como filas [concepto, monto, nota?]. */
   function priceRows(c) {
-    var rows = [['Arriendo: ' + c.days + ' día' + (c.days > 1 ? 's' : '') + ' × ' + money(c.pricePerDay), money(c.base)]];
+    var rows = rentalRows(c);
     if (c.applied) rows.push([c.applied.label, '−' + money(c.applied.savings)]);
     if (c.airport.amount > 0) rows.push([c.airport.label, money(c.airport.amount)]);
     c.extras.forEach(function (e) {
@@ -305,6 +348,23 @@
         money(e.cost), e.vat > 0 ? 'Neto ' + money(e.net) + ' + IVA ' + money(e.vat) : '']);
     });
     return rows;
+  }
+  /* Filas del arriendo: una por temporada usada, indicando la temporada alta. */
+  function rentalRows(c) {
+    var segs = (c.season && c.season.segments) || [];
+    if (!segs.length) return [['Arriendo: ' + c.days + ' día' + (c.days > 1 ? 's' : '') + ' × ' + money(c.pricePerDay), money(c.base)]];
+    return segs.map(function (sg) {
+      var lbl = 'Arriendo ' + sg.label.toLowerCase() + ': ' + sg.days + ' día' + (sg.days > 1 ? 's' : '') + ' × ' + money(sg.rate);
+      var note = sg.season === 'alta' && seasonText() ? 'Temporada alta: ' + seasonText() : '';
+      return [lbl, money(sg.amount), note];
+    });
+  }
+  /* Texto corto de la tarifa: "$57.000/día (temporada alta)" o mixto. */
+  function rateText(c) {
+    var segs = (c.season && c.season.segments) || [];
+    if (segs.length === 1) return money(segs[0].rate) + '/día' + (segs[0].season === 'alta' ? ' (temporada alta)' : '');
+    if (segs.length > 1) return segs.map(function (sg) { return sg.days + ' día' + (sg.days > 1 ? 's' : '') + ' × ' + money(sg.rate) + (sg.season === 'alta' ? ' (alta)' : ' (baja)'); }).join(' + ');
+    return money(c.pricePerDay) + '/día';
   }
   function promoText(c) {
     return c.applied ? c.applied.label + ': −' + money(c.applied.savings) : 'Ninguna';
@@ -382,7 +442,10 @@
   window.GlaciaresCotizacion = {
     money: money, localISO: localISO, addDaysISO: addDaysISO, rentalDays: rentalDays,
     daysAhead: daysAhead, airport: airport, extraLine: extraLine, compute: compute,
-    promo4x3Info: promo4x3Info, saveDraft: saveDraft, loadDraft: loadDraft,
+    promo4x3Info: promo4x3Info, promoDaysInfo: promoDaysInfo, promoName: promoName, promoCfg: promoCfg,
+    isHighSeason: isHighSeason, seasonText: seasonText, dayRate: dayRate,
+    rentalBreakdown: rentalBreakdown, rentalRows: rentalRows, rateText: rateText,
+    saveDraft: saveDraft, loadDraft: loadDraft,
     clearDraft: clearDraft, signature: signature, renderResumeBanner: renderResumeBanner,
     escapeHtml: escapeHtml, currentQuote: currentQuote, placeLabel: placeLabel,
     destinationLabel: destinationLabel, fechaHora: fechaHora, extrasNames: extrasNames,

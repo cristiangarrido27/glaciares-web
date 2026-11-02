@@ -101,40 +101,48 @@ window.GLACIARES_CONFIG = {
     ],
   },
 
-  /* PROMOCIÓN 4x3: si se dejan vacíos, se muestran textos neutros. */
-  PROMO_4X3: {
-    // Textos visibles (confirmados por el dueño el 2026-10-03).
-    vigencia: 'para solicitudes de reserva enviadas hasta el 31 de octubre de 2026',
-    fechaLimiteTexto: '31 de octubre de 2026',
-    vehiculos: 'toda la flota',
-    fechasExcluidas: 'ninguna',
-
-    /* --- Reglas del cálculo automático (cotizador) ---
-       Confirmado 2026-10-03: el 31/10 es el plazo para CONFIRMAR la reserva
-       (con abono), no el último día de viaje; se puede viajar después, también
-       en temporada alta. Un solo día gratis por arriendo de 4 días o más
-       (4→paga 3, 5→paga 4, 7→paga 6). Solo sobre el arriendo del vehículo;
-       aeropuerto y adicionales aparte. No acumulable con otros descuentos. */
-    activa: true,
-    validaHasta: '2026-10-31',      // último día para confirmar la reserva (incluido)
-    vigenciaSegun: 'reserva',       // la fecha que cuenta es la de la reserva, no la del viaje
-    diasMinimos: 4,
-    diasGratis: 1,
-    repetir: false,                 // un solo día gratis por arriendo
-    acumulableConPagoAnticipado: false,
-    // Período de viaje: cualquier fecha (confirmado 2026-10-03). La solicitud enviada hasta el 31/10
-    // mantiene la promo aunque el abono se pague después.
-    viajeDesde: '',                 // ej.: '2026-11-01'
-    viajeHasta: '',                 // ej.: '2027-03-31'
+  /* TEMPORADAS (confirmado por el dueño el 2026-11-01).
+     Temporada baja: hasta el 15 de diciembre y desde el 21 de marzo.
+     Temporada alta: del 16 de diciembre al 20 de marzo (ambos incluidos).
+     Cada día de arriendo se cobra con la tarifa de la temporada en que cae:
+     un arriendo del 14 al 18 de diciembre paga 2 días en baja y el resto en alta.
+     Para la próxima temporada basta agregar otro tramo a ALTA. */
+  TEMPORADAS: {
+    ALTA: [
+      { desde: '2026-12-16', hasta: '2027-03-20', texto: '16 de diciembre al 20 de marzo' },
+    ],
   },
 
+  /* PROMOCIÓN 4x3: TERMINADA (era para solicitudes hasta el 31/10/2026).
+     Se deja desactivada solo como historial; ya no se muestra ni se calcula. */
+  PROMO_4X3: { activa: false, validaHasta: '2026-10-31' },
 
-  /* Descuento por pago total anticipado. El backend (GET /api/config) responde
-     hoy 15 % con 3 días de anticipación mínima; la portada dice 5 días (PENDIENTE
-     de confirmar cuál es el correcto). Si el backend responde la cotización, su
-     porcentaje manda; estos valores son solo el respaldo si el servidor no responde. */
+  /* PROMOCIÓN 6x5 (confirmada por el dueño el 2026-11-01): arrienda 6 días y paga 5.
+     - Un solo día gratis por arriendo de 6 días o más (6→paga 5, 7→paga 6, 12→paga 11).
+       Confirmado por el dueño el 2026-11-02. Para dar 1 día gratis por cada 6 días, cambiar repetir a true.
+     - El día gratis se descuenta a la tarifa más baja del arriendo.
+     - Vale en temporada baja y alta, con abono o con pago total.
+     - Solo sobre el arriendo del vehículo; aeropuerto y adicionales aparte.
+     - No acumulable con el descuento por pago anticipado (se muestra el que más conviene). */
+  PROMO_DIAS: {
+    activa: true,
+    nombre: 'Promo 6×5',
+    titulo: 'Arrienda 6 días y paga 5',
+    diasMinimos: 6,
+    diasGratis: 1,
+    repetir: false,
+    validaHasta: '',               // fecha límite para solicitar (vacío = sin fecha)
+    vigenciaSegun: 'reserva',
+    viajeDesde: '',
+    viajeHasta: '',
+  },
+
+  /* Descuento por pago total anticipado: 10 % desde el 2026-11-01 (antes 15 %).
+     El sitio usa SIEMPRE este porcentaje (no el del servidor de reservas) para no
+     mostrar un descuento distinto al publicado. Cambiar también a 10 % en el panel
+     del servidor de reservas para que el enlace de pago Webpay cobre lo mismo. */
   EARLY_BOOKING: {
-    pct: 15,
+    pct: 10,
     minDaysAhead: 5,              // confirmado 2026-10-03 (el backend debe cambiarse a 5 en el panel)
     minRentalDays: 3,
   },
@@ -160,12 +168,13 @@ window.GLACIARES_CONFIG = {
      valores; nunca confía en el precio que llega desde el navegador).
      Mantener igual a la lista de index.html y buscar.html. */
   FLEET: [
-    { id: 1, name: 'Suzuki Swift', price: 35000, cat: 'citycar', catLabel: 'Citycar', img: 'suzuki-swift.webp', deposit: 500000 },
-    { id: 2, name: 'Suzuki Dzire', price: 38000, cat: 'citycar', catLabel: 'Citycar', img: 'suzuki-dzire.webp', deposit: 500000 },
-    { id: 3, name: 'Chevrolet Captiva', price: 48000, cat: 'suv', catLabel: 'SUV', img: 'chevrolet-captiva.webp', deposit: 500000 },
-    { id: 6, name: 'Kia Sorento', price: 43000, cat: 'suv', catLabel: 'SUV', img: 'kia-sorento.webp', deposit: 500000 },
-    { id: 7, name: 'Hyundai Tucson', price: 49000, cat: 'suv', catLabel: 'SUV', img: 'hyundai-tucson.webp', deposit: 500000 },
-    { id: 8, name: 'Peugeot 3008', price: 54000, cat: 'suv', catLabel: 'SUV', img: 'peugeot-3008.webp', deposit: 500000 },
+    // price = temporada baja · priceHigh = temporada alta (16 dic – 20 mar)
+    { id: 1, name: 'Suzuki Swift', price: 35000, priceHigh: 39000, cat: 'citycar', catLabel: 'Citycar', img: 'suzuki-swift.webp', deposit: 500000 },
+    { id: 2, name: 'Suzuki Dzire', price: 38000, priceHigh: 45000, cat: 'citycar', catLabel: 'Citycar', img: 'suzuki-dzire.webp', deposit: 500000 },
+    { id: 3, name: 'Chevrolet Captiva', price: 48000, priceHigh: 55000, cat: 'suv', catLabel: 'SUV', img: 'chevrolet-captiva.webp', deposit: 500000 },
+    { id: 6, name: 'Kia Sorento', price: 43000, priceHigh: 49000, cat: 'suv', catLabel: 'SUV', img: 'kia-sorento.webp', deposit: 500000 },
+    { id: 7, name: 'Hyundai Tucson', price: 49000, priceHigh: 57000, cat: 'suv', catLabel: 'SUV', img: 'hyundai-tucson.webp', deposit: 500000 },
+    { id: 8, name: 'Peugeot 3008', price: 54000, priceHigh: 59000, cat: 'suv', catLabel: 'SUV', img: 'peugeot-3008.webp', deposit: 500000 },
   ],
   VAT_RATE: 0.19,
   RETURN_TOLERANCE_MINUTES: 60, // condiciones.html: tolerancia de devolución de 1 hora

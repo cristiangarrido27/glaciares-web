@@ -430,7 +430,7 @@
           <svg class="urgency-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 3"/></svg>
           <div>
             <strong>¡Aprovecha el precio especial!</strong>
-            <p>Paga el total ahora y obtén 15% de descuento en el arriendo. Si tu arriendo es de 4 días o más, también puede aplicar la promo 4×3: te confirmamos la opción más conveniente (no son acumulables).</p>
+            <p>Paga el total ahora y obtén 10% de descuento en el arriendo. Si tu arriendo es de 6 días o más, aplica la promo 6×5: te mostramos la opción más conveniente (no son acumulables).</p>
           </div>
         </div>
         <div id="resultsList"></div>
@@ -733,12 +733,12 @@ document.getElementById('updateForm').addEventListener('submit', (e) => {
    ===================================================================== */
 const IMG_BASE = 'https://glaciaresrentacar.cl/flota/';
 const FLEET = [
-  { id: 1, name: 'Suzuki Swift', price: 35000, cat: 'citycar', catLabel: 'Citycar', img: IMG_BASE + 'suzuki-swift.webp', deposit: 500000 },
-  { id: 2, name: 'Suzuki Dzire', price: 38000, cat: 'citycar', catLabel: 'Citycar', img: IMG_BASE + 'suzuki-dzire.webp', deposit: 500000 },
-  { id: 3, name: 'Chevrolet Captiva', price: 48000, cat: 'suv', catLabel: 'SUV', img: IMG_BASE + 'chevrolet-captiva.webp', deposit: 500000 },
-  { id: 6, name: 'Kia Sorento', price: 43000, cat: 'suv', catLabel: 'SUV', img: IMG_BASE + 'kia-sorento.webp', deposit: 500000 },
-  { id: 7, name: 'Hyundai Tucson', price: 49000, cat: 'suv', catLabel: 'SUV', img: IMG_BASE + 'hyundai-tucson.webp', deposit: 500000 },
-  { id: 8, name: 'Peugeot 3008', price: 54000, cat: 'suv', catLabel: 'SUV', img: IMG_BASE + 'peugeot-3008.webp', deposit: 500000 },
+  { id: 1, name: 'Suzuki Swift', price: 35000, priceHigh: 39000, cat: 'citycar', catLabel: 'Citycar', img: IMG_BASE + 'suzuki-swift.webp', deposit: 500000 },
+  { id: 2, name: 'Suzuki Dzire', price: 38000, priceHigh: 45000, cat: 'citycar', catLabel: 'Citycar', img: IMG_BASE + 'suzuki-dzire.webp', deposit: 500000 },
+  { id: 3, name: 'Chevrolet Captiva', price: 48000, priceHigh: 55000, cat: 'suv', catLabel: 'SUV', img: IMG_BASE + 'chevrolet-captiva.webp', deposit: 500000 },
+  { id: 6, name: 'Kia Sorento', price: 43000, priceHigh: 49000, cat: 'suv', catLabel: 'SUV', img: IMG_BASE + 'kia-sorento.webp', deposit: 500000 },
+  { id: 7, name: 'Hyundai Tucson', price: 49000, priceHigh: 57000, cat: 'suv', catLabel: 'SUV', img: IMG_BASE + 'hyundai-tucson.webp', deposit: 500000 },
+  { id: 8, name: 'Peugeot 3008', price: 54000, priceHigh: 59000, cat: 'suv', catLabel: 'SUV', img: IMG_BASE + 'peugeot-3008.webp', deposit: 500000 },
 ];
 
 const API_BASE = 'https://glaciares-reservas-backend.onrender.com';
@@ -766,7 +766,8 @@ async function loadResults() {
     return {
       ...v,
       days,
-      pricePerDay: v.price,
+      // Tarifa promedio del período (cada día con la tarifa de su temporada).
+      pricePerDay: window.GlaciaresCotizacion ? GlaciaresCotizacion.rentalBreakdown(v, state.pickUpDate, days).avg : v.price,
       subtotal: b ? b.basePrice : v.price * days,
       discountPct: b ? b.discountPct : 0,
       totalPrice: b ? b.totalPrice : v.price * days,
@@ -936,18 +937,26 @@ function renderResults() {
   if (urgencyBanner) {
     const any4x3 = list.some(v => quotes[v.id].applied);
     const anyPrepay = list.some(v => quotes[v.id].prepay);
-    const p = cfg.PROMO_4X3 || {};
+    const G = window.GlaciaresCotizacion;
+    const pName = G ? G.promoName() : 'Promo 6×5';
+    const seas = quotes[list[0].id].season || {};
+    const seasonNote = seas.highDays
+      ? `<p><strong>Tus fechas ${seas.lowDays ? 'incluyen' : 'son de'} temporada alta</strong> (${G ? G.seasonText() : ''}): ${seas.lowDays ? `${seas.highDays} día${seas.highDays > 1 ? 's' : ''} se cotiza${seas.highDays > 1 ? 'n' : ''} con tarifa de temporada alta y ${seas.lowDays} con tarifa de temporada baja.` : 'los totales usan la tarifa de temporada alta.'}</p>`
+      : '';
     let html = '';
-    if (any4x3) html = `<strong>Promo 4×3 aplicada</strong><p>Arriendas ${days} días y pagas ${days - quotes[list[0].id].promo4x3.freeDays}: el ahorro ya está descontado en cada total${p.vigencia ? ', ' + p.vigencia : ''}. Un solo día gratis por arriendo; aeropuerto y adicionales aparte.${anyPrepay ? ' Si pagas el 100 % por adelantado y el 15 % te conviene más, te lo mostramos en el detalle.' : ''}</p>`;
-    else if (anyPrepay) html = `<strong>Pagando el 100 % por adelantado ahorras ${quotes[list[0].id].prepay.pct}% en el arriendo</strong><p>El pago se habilita después de confirmar la disponibilidad. No acumulable con otras promociones.</p>`;
+    if (any4x3) html = `<strong>${pName} aplicada</strong><p>Arriendas ${days} días y pagas ${days - quotes[list[0].id].promo4x3.freeDays}: el ahorro ya está descontado en cada total. Aeropuerto y adicionales aparte.</p>${seasonNote}`;
+    else if (anyPrepay) html = `<strong>Pagando el 100 % por adelantado ahorras ${quotes[list[0].id].prepay.pct}% en el arriendo</strong><p>El pago se habilita después de confirmar la disponibilidad. No acumulable con otras promociones.</p>${seasonNote}`;
+    else if (seasonNote) html = `<strong>Tarifa de temporada alta</strong>${seasonNote}`;
     urgencyBanner.querySelector('div').innerHTML = html;
     urgencyBanner.style.display = html ? 'flex' : 'none';
   }
 
   resultsList.innerHTML = list.map((v, i) => {
     const q = quotes[v.id];
-    const parts = [`${q.days} día${q.days > 1 ? 's' : ''} × $${v.pricePerDay.toLocaleString('es-CL')}`];
-    if (q.applied) parts.push(`promo 4×3 −$${q.applied.savings.toLocaleString('es-CL')}`);
+    const rateTxt = window.GlaciaresCotizacion ? GlaciaresCotizacion.rateText(q) : `$${v.pricePerDay.toLocaleString('es-CL')}/día`;
+    const parts = (q.season && q.season.segments ? q.season.segments : [{ days: q.days, rate: v.pricePerDay }])
+      .map(sg => `${sg.days} día${sg.days > 1 ? 's' : ''} × $${sg.rate.toLocaleString('es-CL')}${sg.season === 'alta' ? ' (temp. alta)' : ''}`);
+    if (q.applied) parts.push(`${window.GlaciaresCotizacion ? GlaciaresCotizacion.promoName().toLowerCase() : 'promo 6×5'} −$${q.applied.savings.toLocaleString('es-CL')}`);
     if (q.airport.amount) parts.push(`aeropuerto $${q.airport.amount.toLocaleString('es-CL')}`);
     q.extras.forEach(e => parts.push(`${e.name.toLowerCase()} $${e.cost.toLocaleString('es-CL')}`));
     const oldTotal = q.applied ? q.normal : null;
@@ -957,7 +966,7 @@ function renderResults() {
       <div>
         <span class="rcard-cat">${v.catLabel}</span>
         <h3>${v.name}</h3>
-        <p class="rcard-meta">${v.days} día${v.days > 1 ? 's' : ''} · $${v.pricePerDay.toLocaleString('es-CL')}/día</p>
+        <p class="rcard-meta">${v.days} día${v.days > 1 ? 's' : ''} · ${rateTxt}</p>
         <p class="rcard-avail"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20 6 9 17l-5-5"/></svg>Disponibilidad sujeta a confirmación</p>
       </div>
       <div class="rcard-price">
@@ -966,7 +975,7 @@ function renderResults() {
           ${oldTotal ? `<span class="pamount-old">$${oldTotal.toLocaleString('es-CL')}</span>` : ''}
           <span class="pamount">$${q.total.toLocaleString('es-CL')}</span>
           <span class="pbreak">${parts.map(x => `<span style="white-space:nowrap">${x}</span>`).join(' · ')}</span>
-          ${q.applied ? `<span class="psave">Ahorras $${q.applied.savings.toLocaleString('es-CL')} con la promo 4×3</span>` : ''}
+          ${q.applied ? `<span class="psave">Ahorras $${q.applied.savings.toLocaleString('es-CL')} con la ${window.GlaciaresCotizacion ? GlaciaresCotizacion.promoName().toLowerCase() : 'promo 6×5'}</span>` : ''}
           ${q.prepay ? `<span class="psave">o $${q.prepay.total.toLocaleString('es-CL')} pagando el 100 % por adelantado (−${q.prepay.pct}%)</span>` : ''}
         </div>
         <p class="deposit-note">Garantía aparte: $${q.guarantee.toLocaleString('es-CL')}${state.argentina === 'si' ? ' (viaje a Argentina)' : ''} en tarjeta de crédito. No es parte del precio y no se cobra al reservar.</p>
