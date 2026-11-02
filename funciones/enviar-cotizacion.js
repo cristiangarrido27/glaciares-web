@@ -30,7 +30,7 @@
    ===================================================================== */
 'use strict';
 
-process.env.TZ = 'America/Punta_Arenas'; // "hoy" con la fecha de Chile (promo 4×3, fechas)
+process.env.TZ = 'America/Punta_Arenas'; // "hoy" con la fecha de Chile (promociones, temporadas, fechas)
 // config.js y cotizacion.js son scripts del navegador: escriben en `window`.
 globalThis.window = globalThis.window || {};
 require('../config.js');
@@ -135,7 +135,7 @@ function validate(body) {
     else if (!extras.some(e => e.id === def.id)) extras.push({ id: def.id, qty });
   });
 
-  // Fecha que cuenta para la promo 4×3: la de creación de la cotización
+  // Fecha que cuenta para la promo 6×5: la de creación de la cotización
   // (como en la página), acotada a los últimos 30 días y nunca futura.
   let quoteDate = today;
   const created = Number(body.createdAt);
