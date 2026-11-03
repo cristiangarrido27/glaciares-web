@@ -175,6 +175,7 @@ window.GLACIARES_CONFIG = {
     { id: 6, name: 'Kia Sorento', price: 43000, priceHigh: 49000, cat: 'suv', catLabel: 'SUV', img: 'kia-sorento.webp', deposit: 500000 },
     { id: 7, name: 'Hyundai Tucson', price: 49000, priceHigh: 57000, cat: 'suv', catLabel: 'SUV', img: 'hyundai-tucson.webp', deposit: 500000 },
     { id: 8, name: 'Peugeot 3008', price: 54000, priceHigh: 59000, cat: 'suv', catLabel: 'SUV', img: 'peugeot-3008.webp', deposit: 500000 },
+    { id: 9, name: 'Chevrolet Orlando', price: 59000, priceHigh: 65000, cat: 'suv', catLabel: 'SUV 7 pasajeros', img: 'chevrolet-orlando.webp', deposit: 500000 },
   ],
   VAT_RATE: 0.19,
   RETURN_TOLERANCE_MINUTES: 60, // condiciones.html: tolerancia de devolución de 1 hora
