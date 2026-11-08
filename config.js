@@ -171,6 +171,7 @@ window.GLACIARES_CONFIG = {
     // price = temporada baja · priceHigh = temporada alta (16 dic – 20 mar)
     { id: 1, name: 'Suzuki Swift', price: 35000, priceHigh: 39000, cat: 'citycar', catLabel: 'Citycar', img: 'suzuki-swift.webp', deposit: 500000 },
     { id: 2, name: 'Suzuki Dzire', price: 38000, priceHigh: 45000, cat: 'citycar', catLabel: 'Citycar', img: 'suzuki-dzire.webp', deposit: 500000 },
+    { id: 10, name: 'Hyundai Tucson ix35', price: 41000, priceHigh: 47000, cat: 'suv', catLabel: 'SUV', img: 'hyundai-tucson-ix35.webp', deposit: 500000 },
     { id: 3, name: 'Chevrolet Captiva', price: 48000, priceHigh: 55000, cat: 'suv', catLabel: 'SUV', img: 'chevrolet-captiva.webp', deposit: 500000 },
     { id: 6, name: 'Kia Sorento', price: 43000, priceHigh: 49000, cat: 'suv', catLabel: 'SUV', img: 'kia-sorento.webp', deposit: 500000 },
     { id: 7, name: 'Hyundai Tucson', price: 49000, priceHigh: 57000, cat: 'suv', catLabel: 'SUV', img: 'hyundai-tucson.webp', deposit: 500000 },
